@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -19,10 +20,10 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI selectChar_Tmp;
 
-
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetInt("CharType", -1);
         btn_Pnl.SetActive(true);
         gameStart_Pnl.SetActive(false);
         charSelect_Pnl.SetActive(false);
@@ -59,6 +60,7 @@ public class UIManager : MonoBehaviour
         pickView_Img.gameObject.SetActive(true);
         pickView_Img.sprite = charPick_Img[charNum];
         selectChar_Tmp.gameObject.SetActive(false);
+        PlayerPrefs.SetInt("CharType", charNum);
     }
 
     public void OnClick_BackCharPick()
@@ -67,5 +69,11 @@ public class UIManager : MonoBehaviour
         gameStart_Pnl.SetActive(true);
         charSelect_Pnl.SetActive(false);
         selectChar_Tmp.gameObject.SetActive(false);
+        PlayerPrefs.SetInt("CharType", -1);
+    }
+
+    public void OnClick_Ingame()
+    {
+        SceneManager.LoadScene(1);
     }
 }
