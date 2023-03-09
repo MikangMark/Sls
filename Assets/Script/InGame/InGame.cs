@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class InGame : Singleton<InGame>
 {
-    Character.CharInfo charInfo;
-    Character character;
+    public Character.CharInfo charInfo;
+
     // Start is called before the first frame update
     void Start()
     {
         switch (PlayerPrefs.GetInt("CharType")) 
         {
             case 0:
-                charInfo = character.ironclead;
+                charInfo = Character.Instance.ironclead;
                 break;
             case 1:
-                charInfo = character.silence;
+                charInfo = Character.Instance.silence;
                 break;
             case 2:
-                charInfo = character.defact;
+                charInfo = Character.Instance.defact;
                 break;
             case 3:
-                charInfo = character.wacher;
+                charInfo = Character.Instance.wacher;
                 break;
         }
     }

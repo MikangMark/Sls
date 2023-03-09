@@ -26,18 +26,18 @@ public class Character : Singleton<Character>
         ironclead.money = 99;
 
         silence.charType = CharType.SILENCE;
-        silence.hp = 80;
-        silence.maxHp = 80;
+        silence.hp = 70;
+        silence.maxHp = 70;
         silence.money = 99;
 
         defact.charType = CharType.DEFACT;
-        defact.hp = 80;
-        defact.maxHp = 80;
+        defact.hp = 75;
+        defact.maxHp = 75;
         defact.money = 99;
 
         wacher.charType = CharType.WACHER;
-        wacher.hp = 80;
-        wacher.maxHp = 80;
+        wacher.hp = 72;
+        wacher.maxHp = 72;
         wacher.money = 99;
 
     }

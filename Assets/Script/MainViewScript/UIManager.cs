@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
         gameStart_Pnl.SetActive(false);
         charSelect_Pnl.SetActive(false);
         pickView_Img.gameObject.SetActive(false);
+        ingame_Btn.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -61,6 +62,7 @@ public class UIManager : MonoBehaviour
         pickView_Img.sprite = charPick_Img[charNum];
         selectChar_Tmp.gameObject.SetActive(false);
         PlayerPrefs.SetInt("CharType", charNum);
+        ingame_Btn.gameObject.SetActive(true);
     }
 
     public void OnClick_BackCharPick()
@@ -70,6 +72,7 @@ public class UIManager : MonoBehaviour
         charSelect_Pnl.SetActive(false);
         selectChar_Tmp.gameObject.SetActive(false);
         PlayerPrefs.SetInt("CharType", -1);
+        ingame_Btn.gameObject.SetActive(false);
     }
 
     public void OnClick_Ingame()
