@@ -28,7 +28,6 @@ public class MapCreate : MonoBehaviour
     public int poolSize = row * col;
     public List<GameObject> objectPool;
     public GameObject roomObj_Parents;
-    static public int seed = Environment.TickCount;
     //0층은 빈방과 일반적만나오게
     //8층은 보물 고정
     //14층은 휴식만나오도록
@@ -41,85 +40,61 @@ public class MapCreate : MonoBehaviour
      */
     void Start()
     {
-        
-        //Create_RoomObj(0, 0);
-        SetObjectPool();
-
-        UseObjectPool();
-    }
-    void UseObjectPool()
-    {
-        GameObject room = GetObjectFromPool();
-        room.SetActive(true);
-    }
-    int RandNum(int min, int max)
-    {
-        System.Random random = new System.Random(seed);
-        int randnum = random.Next(max - min) + min;
-        return randnum;
-    }
-    int[] RandNumNotSame(int min, int max, int count)
-    {
-        int[] randarr = new int[count];
-        System.Random random = new System.Random(seed);
-        int randnum = 0;
-        for (int i = 0; i < count; i++)
-        {
-            if (i == 0)
-            {
-                randarr[i] = random.Next(max - min) + min;
-            }
-            else if (i > 0)
-            {
-                
-            }
-            
-        }
-        
-        return randarr;
+        SetObject();
     }
     // Update is called once per frame
     void Update()
     {
         
     }
-    void SetObjectPool()
+    void SetObject()
     {
         objectPool = new List<GameObject>();
         for (int i = 0; i < poolSize; i++)
         {
             GameObject obj = Instantiate(room_p, Vector3.zero, Quaternion.identity);
-            obj.SetActive(false);
             obj.transform.SetParent(roomObj_Parents.transform);
             obj.name = "Room[" + createCount_Op / 7 + "][" + createCount_Op % 7 + "]";
             createCount_Op++;
             objectPool.Add(obj);
         }
     }
-    public GameObject GetObjectFromPool()
+    void SetUnableRoom(int layer)
     {
-        foreach (GameObject obj in objectPool)
+        //1.몇개의 방만 비활성화할지... 랜덤값 1~5개까지 비활성화 가능
+        //2.어느위치의 방을 비활성화 할건지... 중복안되게설정
+        //3.한층마다 이함수를 실행
+        UnityEngine.Random.InitState(CreateSeed.Instance.randomSeed);
+        int randomNumber = UnityEngine.Random.Range(1, 6);//최소,최소+최대
+        List<int> ableNum = new List<int>();
+        List<int> delRoomNum = new List<int>();
+        for(int i = 0; i < 7; i++)
         {
-            if (!obj.activeInHierarchy)
-            {
-                obj.SetActive(true);
-                return obj;
-            }
+            ableNum.Add(i);
+        }
+        for(int i = 0; i < randomNumber; i++)
+        {
+            delRoomNum.Add(GetRandomValue(ableNum));
+        }
+        for(int i = 0; i < delRoomNum.Count; i++)
+        {
+            objectPool[delRoomNum[i] + (layer * 7)].SetActive(false);
+        }
+    }
+    private int GetRandomValue(List<int> availableValues)
+    {
+        // 리스트에 값이 없으면 0을 반환
+        if (availableValues.Count == 0)
+        {
+            return -1;
         }
 
-        // 사용 가능한 객체가 없을 경우 새로 생성 / 버그아닌이상 이쪽으로는 안올듯
-        GameObject newObj = Instantiate(room_p, Vector3.zero, Quaternion.identity);
-        newObj.SetActive(true);
-        newObj.transform.SetParent(roomObj_Parents.transform);
-        newObj.name = "Room[" + createCount_Op / 7 + "][" + createCount_Op % 7 + "]";
-        createCount_Op++;
-        objectPool.Add(newObj);
-        return newObj;
-    }
+        // 리스트에서 랜덤한 인덱스를 선택하고 그 값을 반환
+        int randomIndex = UnityEngine.Random.Range(0, availableValues.Count);
+        int randomValue = availableValues[randomIndex];
 
-    // 사용이 완료된 객체를 오브젝트 풀로 반환하는 함수
-    public void ReturnObjectToPool(GameObject obj)
-    {
-        obj.SetActive(false);
+        // 리스트에서 해당 값을 제거하고 반환
+        availableValues.RemoveAt(randomIndex);
+        return randomValue;
     }
 }
