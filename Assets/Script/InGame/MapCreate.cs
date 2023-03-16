@@ -33,11 +33,6 @@ public class MapCreate : MonoBehaviour
     //14층은 휴식만나오도록
     //15층은 보스 한곳만나오도록
     //8가지의 방목록중 랜덤방은 0~5까지
-
-    /*
-     미리 최대크기의 맵(방)을 만들고 그것들을 오브젝트 풀링기법사용
-     
-     */
     void Start()
     {
         SetFloorObject();
@@ -48,6 +43,7 @@ public class MapCreate : MonoBehaviour
             SetRoomObject(i);
         }
     }
+    #region RoomCreate
     void SetFloorObject()
     {
         for (int i = 0; i < row; i++)
@@ -99,5 +95,64 @@ public class MapCreate : MonoBehaviour
         // 리스트에서 해당 값을 제거하고 반환
         availableValues.RemoveAt(randomIndex);
         return randomValue;
+    }
+    #endregion
+    
+    void CreateLine(int layer)//한층마다 실행
+    {
+        #region 선생성할 갯수 설정
+        //1.다음 층으로 넘어갈때 쓸수있는 선의갯수 최대 6개
+        //2.생성된 다음방은 어느방에서부터든 한방은 갈수있어야한다
+        //3. 1~3, 4~5 i층 j번방 i+1층 j-1~j+1까지 가능 한방에 최대 3개 최소1개의 선이생김
+        //4.방은 2개에서 6개사이로 생성됨
+
+        //생성하는방법
+        //1.현재층의 방의 개수를 저장하고 다음방의 갯수를 찾는다
+        // 
+        //  최소 = 현재방 다음방의 최대값
+        //  최대 = 최소의 방의 갯수에따라 달라짐
+        // ex) 현재방과 다음방의 갯수가 같을때 2n-1 (a-b = 0 2n-1)
+        // 2 2 = 3, 3 3 = 5, 4 4 = 7
+        // ex) 현재방과 다음방의 갯수의 차가 1일때 2n
+        // 2 3 = 4, 3 4 = 6, 4 5 = 8 
+        // ex) 현재방과 다음방의 갯수의 차가 2일때 2n + 1
+        // 2 4 = 5 3 5 = 7, 4 6 = 9
+        // 선의 최소생성개수 = 현재방과 다음방의 최대값
+        // 선의 최대 생성개수 = (현재방과 다음방중의 최대값)*2-1 + (현재방과 다음방의 갯수의 차)
+        int nowFloor_Count = 0;
+        int nextFloor_Count = 0;
+        int lineCount;
+        int lineMin = 3;
+        int lineMax = 6;
+        int nowMnext = nowFloor_Count - nextFloor_Count;//now - next = nowMnext
+
+        for(int i = 0;i< room_List[layer].Count; i++)
+        {
+            if (room_List[layer][i].activeSelf == true)
+            {
+                nowFloor_Count++;
+            }
+        }
+        for (int i = 0; i < room_List[layer+1].Count; i++)
+        {
+            if (room_List[layer + 1][i].activeSelf == true)
+            {
+                nextFloor_Count++;
+            }
+        }
+
+        if (nowMnext >= 0)
+        {
+            lineMin = nowFloor_Count;
+            lineMax = nextFloor_Count * 2 - 1 + nowMnext;
+        }
+        else
+        {
+            lineMin = nextFloor_Count;
+            lineMax = nowFloor_Count * 2 - 1 + (-nowMnext);
+        }
+        lineCount = CreateSeed.Instance.RandNum(lineMin, lineMax);
+        
+        #endregion
     }
 }
