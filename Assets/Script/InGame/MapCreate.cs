@@ -12,6 +12,8 @@ public class MapCreate : MonoBehaviour
     //0층은 일반적으로 고정, 13층은 휴식으로 고정, 14층은 보스방으로고정 1개로고정
 
     /*
+     * 처음 보상받고 넘어가는방 보이지않는 0번방
+     * 보스방 미리 랜덤설정되어있는방과 따로 존재하는 방
      1. 맵이 만들어지는 과정
         각 막에 진입하면 우선 가로 7 x 세로 15짜리 격자를 만듬. 이게 우리가 돌게 되는 맵의 뼈대.
         그 다음에 (일일도전에서 유일한 미래?? 인가 아무튼 길 일자로 만드는 옵션 켜져있는게 아니라면)
@@ -28,6 +30,10 @@ public class MapCreate : MonoBehaviour
     public List<GameObject> floor_List;
     public GameObject roomObj_Parents;
     public GameObject floorObj_Parents;
+
+    int nowFloor_Count = 0;
+    int nextFloor_Count = 0;
+
     //0층은 빈방과 일반적만나오게
     //8층은 보물 고정
     //14층은 휴식만나오도록
@@ -98,9 +104,10 @@ public class MapCreate : MonoBehaviour
     }
     #endregion
     
-    void CreateLine(int layer)//한층마다 실행
+    void CreateLine(int layer)//한층마다 실행 한층마다 생성되는 선의 갯수를 리턴
     {
         #region 선생성할 갯수 설정
+        #region 설명
         //1.다음 층으로 넘어갈때 쓸수있는 선의갯수 최대 6개
         //2.생성된 다음방은 어느방에서부터든 한방은 갈수있어야한다
         //3. 1~3, 4~5 i층 j번방 i+1층 j-1~j+1까지 가능 한방에 최대 3개 최소1개의 선이생김
@@ -119,8 +126,8 @@ public class MapCreate : MonoBehaviour
         // 2 4 = 5 3 5 = 7, 4 6 = 9
         // 선의 최소생성개수 = 현재방과 다음방의 최대값
         // 선의 최대 생성개수 = (현재방과 다음방중의 최대값)*2-1 + (현재방과 다음방의 갯수의 차)
-        int nowFloor_Count = 0;
-        int nextFloor_Count = 0;
+        #endregion
+        
         int lineCount;
         int lineMin = 3;
         int lineMax = 6;
@@ -152,7 +159,11 @@ public class MapCreate : MonoBehaviour
             lineMax = nowFloor_Count * 2 - 1 + (-nowMnext);
         }
         lineCount = CreateSeed.Instance.RandNum(lineMin, lineMax);
-        
+        SetLine(layer, lineCount);
         #endregion
+    }
+    void SetLine(int layer, int createdLine)//갯수가 설정되면 그갯수가지고 층과층사이를 연결되도록배치
+    {
+        
     }
 }
