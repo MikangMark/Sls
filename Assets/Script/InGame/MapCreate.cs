@@ -69,7 +69,8 @@ public class MapCreate : MonoBehaviour
         int randomNumber = CreateSeed.Instance.RandNum(1, 6);//최소,최소+최대
         List<int> ableNum = new List<int>();//중복안되게 랜덤값을뽑는 리스트
         List<int> delRoomNum = new List<int>();//삭제되는 방번호 리스트
-        for(int i = 0; i < col; i++)
+        int num = 0;
+        for (int i = 0; i < col; i++)
         {
             GameObject roomObj = Instantiate(room_p, Vector3.zero, Quaternion.identity);//방생성
             roomObj.transform.SetParent(floor_List[layer].transform);//방생성된것 부모설정
@@ -85,8 +86,21 @@ public class MapCreate : MonoBehaviour
         {
             room_List[layer][delRoomNum[i]].SetActive(false);
         }
+        for (int i = 0; i < room_List[layer].Count; i++)
+        {
+            if (room_List[layer][i].activeSelf)
+            {
+                room_List[layer][i].name = "Room[" + layer + "][" + num + "]";//방이름 설정
+                num++;
+            }
+            else
+            {
+                room_List[layer][i].name = "Room[" + layer + "][" + (col - num) + "]";
+            }
+            
+        }
     }
-    private int GetRandomValue(List<int> availableValues)
+    private int GetRandomValue(List<int> availableValues)//중복되지않는 랜덤설정
     {
         // 리스트에 값이 없으면 0을 반환
         if (availableValues.Count == 0)
@@ -129,8 +143,8 @@ public class MapCreate : MonoBehaviour
         #endregion
         
         int lineCount;
-        int lineMin = 3;
-        int lineMax = 6;
+        int lineMin;
+        int lineMax;
         int nowMnext = nowFloor_Count - nextFloor_Count;//now - next = nowMnext
 
         for(int i = 0;i< room_List[layer].Count; i++)
@@ -164,6 +178,12 @@ public class MapCreate : MonoBehaviour
     }
     void SetLine(int layer, int createdLine)//갯수가 설정되면 그갯수가지고 층과층사이를 연결되도록배치
     {
-        
+        /*
+        1.현재층과 다음층의 갯수가 같을경우
+            같은번수의 방끼리 연결 -> 남아있는 선갯수 확인 -> 남아있는 선갯수가 있으면 현제층부터 선을 추가로 연결할 방을 랜덤으로설정하고 한번더 연결시도(n-1 or n+1번방만 가능)
+        2.현재층과 다음층의 차가 짝수일경우
+            
+        3.현재층과 다음층의 차가 홀수일경우
+         */
     }
 }

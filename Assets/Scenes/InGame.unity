@@ -1702,7 +1702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d549b12b58911047bb307b5b3854688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room_p: {fileID: 6670531580046934124, guid: aebe88f5ebabb9e41996230f0d939a92, type: 3}
+  room_p: {fileID: 2897845389142475341, guid: aebe88f5ebabb9e41996230f0d939a92, type: 3}
   floor_p: {fileID: 4252180981887061462, guid: 319eb7dc3d67ed641b131f80b0cdef20, type: 3}
   poolSize: 105
   floor_List: []
