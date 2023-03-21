@@ -21,7 +21,7 @@ public class MapCreate : MonoBehaviour
         각 경로는 y축으로 1만큼 증가할때 x좌표는 -1부터 1까지 랜덤하게 변하면서 올라감.
         이걸 총 6번 반복한 다음에 경로상에 있는 모든 격자점들을 모은게 결과적인 맵임.
      */
-    static int row = 15;
+    static int row = 17;//0번방이랑 16번방은 1개로고정및 종류고정
     static int col = 7;
     public GameObject room_p;
     public GameObject floor_p;
@@ -75,6 +75,7 @@ public class MapCreate : MonoBehaviour
             GameObject roomObj = Instantiate(room_p, Vector3.zero, Quaternion.identity);//방생성
             roomObj.transform.SetParent(floor_List[layer].transform);//방생성된것 부모설정
             roomObj.name = "Room[" + layer + "][" + i + "]";//방이름 설정
+            roomObj.GetComponent<Room>().SettingRoom(layer, -1);
             room_List[layer].Add(roomObj);//생성된방 리스트에 저장
             ableNum.Add(i);//중복안되게 랜덤값을 뽑기위해 0~6까지 리스트에 저장
         }
@@ -181,9 +182,10 @@ public class MapCreate : MonoBehaviour
         /*
         1.현재층과 다음층의 갯수가 같을경우
             같은번수의 방끼리 연결 -> 남아있는 선갯수 확인 -> 남아있는 선갯수가 있으면 현제층부터 선을 추가로 연결할 방을 랜덤으로설정하고 한번더 연결시도(n-1 or n+1번방만 가능)
-        2.현재층과 다음층의 차가 짝수일경우
-            
-        3.현재층과 다음층의 차가 홀수일경우
+        2.현재 층과 다음층의 갯수가 다를경우
+            현재층과 다음층의 양쪽끝방끼리 이어주기 -> 남은 현재방과 다음방의 갯수를 체크
+            ->
+
          */
     }
 }
