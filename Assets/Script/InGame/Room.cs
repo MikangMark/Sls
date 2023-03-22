@@ -14,25 +14,25 @@ public class Room : MonoBehaviour
     public enum ROOMVALUE
     {
         //0.빈방, 1.일반적, 2.엘리트, 3.휴식, 4.상인, 5.미지, 6.보물, 7.보스
-        EMPTY = 0, NOMAL, ELITE, REST, SHOP, UNKNOWN, TREASURE, BOSS
+        DEFAULT = -1, EMPTY = 0, NOMAL, ELITE, REST, SHOP, UNKNOWN, TREASURE, BOSS
     }
 
     [SerializeField]
     int floor;
     [SerializeField]
-    int value;
+    ROOMVALUE value;
     List<Room> nextRoom;
     Room()
     {
         floor = -1;
-        value = -1;
+        value = ROOMVALUE.DEFAULT;
         nextRoom = new List<Room>();
     }
-    public void SettingRoom(int _floor,int _value)
+    
+    public void SettingRoom(int _floor, ROOMVALUE _value)
     {
         floor = _floor;
         value = _value;
-        nextRoom = new List<Room>();
     }
     public void SettingNextRoom(List<Room> next)
     {

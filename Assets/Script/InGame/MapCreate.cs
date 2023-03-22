@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using ROOMVALUE = Room.ROOMVALUE;
 
 public class MapCreate : MonoBehaviour
 {
@@ -70,14 +71,40 @@ public class MapCreate : MonoBehaviour
         List<int> ableNum = new List<int>();//중복안되게 랜덤값을뽑는 리스트
         List<int> delRoomNum = new List<int>();//삭제되는 방번호 리스트
         int num = 0;
+
         for (int i = 0; i < col; i++)
         {
             GameObject roomObj = Instantiate(room_p, Vector3.zero, Quaternion.identity);//방생성
             roomObj.transform.SetParent(floor_List[layer].transform);//방생성된것 부모설정
             roomObj.name = "Room[" + layer + "][" + i + "]";//방이름 설정
-            roomObj.GetComponent<Room>().SettingRoom(layer, -1);
+            switch (layer)
+            {
+                case 0:
+                    roomObj.GetComponent<Room>().SettingRoom(layer, ROOMVALUE.EMPTY);
+                    break;
+                case 1:
+                    roomObj.GetComponent<Room>().SettingRoom(layer, ROOMVALUE.NOMAL);
+                    break;
+                case 7:
+                    roomObj.GetComponent<Room>().SettingRoom(layer, ROOMVALUE.TREASURE);
+                    break;
+                case 15:
+                    roomObj.GetComponent<Room>().SettingRoom(layer, ROOMVALUE.REST);
+                    break;
+                case 16:
+                    roomObj.GetComponent<Room>().SettingRoom(layer, ROOMVALUE.BOSS);
+                    break;
+                default:
+                    roomObj.GetComponent<Room>().SettingRoom(layer, ROOMVALUE.DEFAULT);
+                    break;
+            }
+
             room_List[layer].Add(roomObj);//생성된방 리스트에 저장
             ableNum.Add(i);//중복안되게 랜덤값을 뽑기위해 0~6까지 리스트에 저장
+        }
+        if (layer == 0 || layer == 16)
+        {
+            randomNumber = 5;
         }
         for(int i = 0; i < randomNumber; i++)
         {
@@ -118,7 +145,8 @@ public class MapCreate : MonoBehaviour
         return randomValue;
     }
     #endregion
-    
+
+    #region CreateLine V1
     void CreateLine(int layer)//한층마다 실행 한층마다 생성되는 선의 갯수를 리턴
     {
         #region 선생성할 갯수 설정
@@ -188,4 +216,13 @@ public class MapCreate : MonoBehaviour
 
          */
     }
+    #endregion
+
+    #region CreateLine V2
+    void CreateLine_V2()
+    {
+
+    }
+
+    #endregion
 }
