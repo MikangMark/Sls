@@ -219,8 +219,12 @@ public class MapCreate : MonoBehaviour
     #endregion
 
     #region CreateLine V2
-    void CreateLine_V2()
+    void CreateLine_V2(int layer)
     {
+        /*
+         * 현재층의 갯수만큼만 선생성
+         * 처음생성되는 선의 범위(0 ~ +1) 
+         */
 
     }
 
