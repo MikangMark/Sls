@@ -21,9 +21,9 @@ public class CardInfo
 }
 
 
-public class ExcelDataLoader : Singleton<ExcelDataLoader>
+public class ExcelDataLoader : MonoBehaviour
 {
-    public List<CardInfo> cardInfo;
+    public List<CardInfo> cardInfo;//전체 카드목록
     public TextAsset txt;
 
     public int lineSize, rowSize;
