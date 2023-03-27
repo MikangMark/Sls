@@ -9,25 +9,23 @@ public class Battle : MonoBehaviour
     int energy;
     public Character.CharInfo stat;
     bool myTurn;
-    List<CardInfo> battleDeck;//나의덱
+    List<CardInfo> battleDeck;//전투에서 사용할 나의 덱
 
-    List<CardInfo> drawUse;//뽑을 카드모음
+    List<CardInfo> beforUse;//뽑을 카드모음
     List<CardInfo> afterUse;//사용한카드모음
     List<CardInfo> myHand;//나의 손패
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()//setactive true될때 실행
     {
         //전투시작 셋팅
         //1.덱불러오기 -> 에너지셋팅 -> 캐릭스텟 불러오기
         initData();
+        
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (myTurn)//나의 턴
         {
-            CardDivide(divideCard);
+            //CardDraw(divideCard);
         }
         else//적의 턴
         {
@@ -41,9 +39,10 @@ public class Battle : MonoBehaviour
 
         battleDeck = new List<CardInfo>(Deck.Instance.deck);
 
-        drawUse = new List<CardInfo>();
-        afterUse = new List<CardInfo>();
+        beforUse = new List<CardInfo>(battleDeck);
         myHand = new List<CardInfo>();
+        afterUse = new List<CardInfo>();
+        
 
         stat = InGame.Instance.charInfo;
         myTurn = true;
@@ -52,7 +51,15 @@ public class Battle : MonoBehaviour
         energy = maxEnergy;
     }
 
-    void CardDivide(int divide)//카드를 나눠줄때마다 실행
+    void CardDraw(int divide)//카드를 나눠줄때마다 실행
+    {
+        for(int i = 0; i < divide; i++)
+        {
+            myHand.Add(beforUse[i]);
+        }
+    }
+
+    void UseCard(CardInfo use)
     {
 
     }
