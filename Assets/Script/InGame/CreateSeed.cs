@@ -8,8 +8,13 @@ public class CreateSeed : Singleton<CreateSeed>
 {
     public int currentSeed;
     int num = 0;
+    private void Awake()
+    {
+        Init();
+    }
     private void Start()
     {
+        
         currentSeed = Random.Range(0, int.MaxValue);
     }
 

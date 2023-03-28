@@ -5,7 +5,10 @@ using UnityEngine;
 public class InGame : Singleton<InGame>
 {
     public Character.CharInfo charInfo;
-
+    private void Awake()
+    {
+        Init();
+    }
     // Start is called before the first frame update
     void Start()
     {

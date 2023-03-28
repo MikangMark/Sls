@@ -17,7 +17,10 @@ public class Character : Singleton<Character>
     public CharInfo silence;
     public CharInfo defact;
     public CharInfo wacher;
-
+    private void Awake()
+    {
+        Init();
+    }
     private void Start()
     {
         ironclead.charType = CharType.IRONCLEAD;

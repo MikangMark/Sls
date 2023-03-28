@@ -7,6 +7,7 @@ using CharType = Character.CharType;
 
 public class InGameUI : MonoBehaviour
 {
+    public Battle battle;
     public TextMeshProUGUI playerName_Tmp;
     CharType charType;
     public TextMeshProUGUI charType_Tmp;
@@ -15,15 +16,19 @@ public class InGameUI : MonoBehaviour
     public TextMeshProUGUI deckCount_Tmp;
     public GameObject battle_Img;
 
+    public TextMeshProUGUI energy_Tmp;
+
 
     private void Start()
     {
+        battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         playerName_Tmp.text = "플레이어이름";
         charType_Tmp.text = "캐릭터이름";
         hp_Tmp.text = 0 + "/" + 0;
         money_Tmp.text = 0.ToString();
         deckCount_Tmp.text = 0.ToString();
-        battle_Img.SetActive(false);
+        //battle_Img.SetActive(false);
+        energy_Tmp.text = 0 + "/" + 0;
     }
     private void FixedUpdate()
     {
@@ -31,5 +36,6 @@ public class InGameUI : MonoBehaviour
         hp_Tmp.text = InGame.Instance.charInfo.hp + "/" + InGame.Instance.charInfo.maxHp;
         money_Tmp.text = InGame.Instance.charInfo.money.ToString();
         deckCount_Tmp.text = Deck.Instance.deck.Count.ToString();
+        energy_Tmp.text = battle.energy + "/" + battle.maxEnergy;
     }
 }

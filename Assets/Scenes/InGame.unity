@@ -2698,12 +2698,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e928faf6854c640931d632974090fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battle: {fileID: 0}
   playerName_Tmp: {fileID: 1014582764}
   charType_Tmp: {fileID: 944904196}
   hp_Tmp: {fileID: 93532196}
   money_Tmp: {fileID: 939795708}
   deckCount_Tmp: {fileID: 267665}
   battle_Img: {fileID: 1293592220}
+  energy_Tmp: {fileID: 1519827104}
 --- !u!4 &1219828953
 Transform:
   m_ObjectHideFlags: 0
@@ -4115,6 +4117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6855754b815d016459e598bc6b3781aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxEnergy: 0
+  energy: 0
+  myCardParent: {fileID: 592915954}
+  cardPrf: {fileID: 8404524485185627855, guid: 274ecc3cb6c732e4d85faa89a2c1c36e, type: 3}
 --- !u!4 &2104963838
 Transform:
   m_ObjectHideFlags: 0

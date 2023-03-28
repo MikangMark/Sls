@@ -31,7 +31,7 @@ public class ExcelDataLoader : MonoBehaviour
 
     public int lineSize, rowSize;
 
-    private void Start()
+    private void Awake()
     {
         // ø¢ºø µ•¿Ã≈Õ ∆ƒ¿œ ∑ŒµÂ
         TextAsset data = txt;
@@ -59,7 +59,6 @@ public class ExcelDataLoader : MonoBehaviour
 
             CardInfo temp = new CardInfo();
             Texture2D[] cardImgs = Resources.LoadAll<Texture2D>("CardImg");
-            Debug.Log(cardImgs[0].name);
             Sprite sprite = null;
             for (int j = 0; j < cardImgs.Length; j++)
             {

@@ -16,8 +16,10 @@ public class Deck : Singleton<Deck>
 
     // Start is called before the first frame update
 
-    void Start()
+    void Awake()
     {
+        Init();
+
         cardList = new List<CardInfo>();
         for(int i = 0; i < excelData.cardInfo.Count; i++)
         {
@@ -37,11 +39,5 @@ public class Deck : Singleton<Deck>
         {
             deck.Add(cardList[2]);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
