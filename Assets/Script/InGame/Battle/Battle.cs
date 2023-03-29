@@ -74,15 +74,40 @@ public class Battle : MonoBehaviour
     {
         //Debug.Log(beforUse[0].title);
         //Debug.Log(beforUse[divide - 1].title);
-        List<GameObject> tempList = new List<GameObject>();
 
+        GameObject temp;
         for (int i = 0; i < divide; i++)
         {
             myHand.Add(beforUse[i]);                                      //드로우할카드 정보 저장
-            cardPrf.GetComponent<OneCard>().thisCard = myHand[i];       //가져온정보 카드오브젝트에넣기
-            tempList.Add(Instantiate(cardPrf));
-            tempList[i].transform.parent = myCardParent.transform;
-            myCard.Add(tempList[i]);                             //정보가들어간 카드오브젝트 내손에 넣기
+            temp = Instantiate(cardPrf);
+            temp.name = "Card[" + i + "]";
+            for(int j=0; j<temp.transform.childCount; j++)
+            {
+                switch (j)
+                {
+                    case 0:
+                        temp.transform.GetChild(j).name = "CostImg" + i;
+                        temp.transform.GetChild(j).GetChild(0).name = "CostText" + i;
+                        break;
+                    case 1:
+                        temp.transform.GetChild(j).name = "CardTitle" + i;
+                        break;
+                    case 2:
+                        temp.transform.GetChild(j).name = "CardText" + i;
+                        break;
+                    case 3:
+                        temp.transform.GetChild(j).name = "CardImg" + i;
+                        break;
+                    case 4:
+                        temp.transform.GetChild(j).name = "CardType" + i;
+                        break;
+                }
+
+                //
+            }
+            temp.GetComponent<OneCard>().thisCard = myHand[i];
+            temp.transform.parent = myCardParent.transform;
+            myCard.Add(temp);                             //정보가들어간 카드오브젝트 내손에 넣기
         }
     }
     void ReChargeEnergy(int reEnergy)
