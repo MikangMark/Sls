@@ -7,7 +7,7 @@ using CharType = Character.CharType;
 
 public class InGameUI : MonoBehaviour
 {
-    public Battle battle;
+    Battle battle;
     public TextMeshProUGUI playerName_Tmp;
     CharType charType;
     public TextMeshProUGUI charType_Tmp;
@@ -15,7 +15,7 @@ public class InGameUI : MonoBehaviour
     public TextMeshProUGUI money_Tmp;
     public TextMeshProUGUI deckCount_Tmp;
     public GameObject battle_Img;
-
+    public GameObject map;
     public TextMeshProUGUI energy_Tmp;
 
 
@@ -28,6 +28,7 @@ public class InGameUI : MonoBehaviour
         money_Tmp.text = 0.ToString();
         deckCount_Tmp.text = 0.ToString();
         //battle_Img.SetActive(false);
+        map.SetActive(false);
         energy_Tmp.text = 0 + "/" + 0;
     }
     private void FixedUpdate()

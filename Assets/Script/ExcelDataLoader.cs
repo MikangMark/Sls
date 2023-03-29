@@ -46,6 +46,17 @@ public class ExcelDataLoader : MonoBehaviour
         for(int i = 0; i < lineSize; i++)
         {
             string[] row = line[i].Split('\t');
+            
+            /*if (row[i].Contains("."))
+            {
+                string[] enter = row[i].Split(".");
+                string stemp = "";
+                for (int j = 0; j < enter.Length; j++)
+                {
+                    stemp = stemp + '\n' + enter[i];
+                }
+                row[i] = stemp;
+            }*/
             CardInfo.Type tType = CardInfo.Type.DEFAULT;
             switch (row[2])
             {

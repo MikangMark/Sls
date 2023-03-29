@@ -14,29 +14,28 @@ public class OneCard : MonoBehaviour
     public TextMeshProUGUI cText;
     public Image cImg;
     
-    /*
-    public int cost;
+    /*public int cost;
     public string title;
-    public Type type;
+    public CardInfo.Type type;
     public string text;
-    public Sprite cardImg;
-    */
+    public Sprite cardImg;*/
     private void Start()
     {
-        value++;
+        
         Debug.Log(value);
-        /*cCost = GameObject.Find("CostText").GetComponent<TextMeshProUGUI>();
-        cTitle = GameObject.Find("CardTitle").GetComponent<TextMeshProUGUI>();
-        cType = GameObject.Find("CardType").GetComponent<TextMeshProUGUI>();
-        cText = GameObject.Find("CardText").GetComponent<TextMeshProUGUI>();
-        cImg = GameObject.Find("CardImg").GetComponent<Image>();*/
+        cCost = GameObject.Find("CostText" + value).GetComponent<TextMeshProUGUI>();
+        cTitle = GameObject.Find("CardTitle" + value).GetComponent<TextMeshProUGUI>();
+        cType = GameObject.Find("CardType" + value).GetComponent<TextMeshProUGUI>();
+        cText = GameObject.Find("CardText" + value).GetComponent<TextMeshProUGUI>();
+        cImg = GameObject.Find("CardImg" + value).GetComponent<Image>();
+        value++;
     }
     private void FixedUpdate()
     {
-        /*cCost.text = thisCard.cost.ToString();
+        cCost.text = thisCard.cost.ToString();
         cTitle.text = thisCard.title.ToString();
         cType.text = thisCard.type.ToString();
         cText.text = thisCard.text.ToString();
-        cImg.sprite = thisCard.cardImg;*/
+        cImg.sprite = thisCard.cardImg;
     }
 }
