@@ -20,9 +20,6 @@ public class Character : Singleton<Character>
     private void Awake()
     {
         Init();
-    }
-    private void Start()
-    {
         ironclead.charType = CharType.IRONCLEAD;
         ironclead.hp = 80;
         ironclead.maxHp = 80;
@@ -42,6 +39,5 @@ public class Character : Singleton<Character>
         wacher.hp = 72;
         wacher.maxHp = 72;
         wacher.money = 99;
-
     }
 }

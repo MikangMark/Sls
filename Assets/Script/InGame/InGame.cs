@@ -12,6 +12,7 @@ public class InGame : Singleton<InGame>
     // Start is called before the first frame update
     void Start()
     {
+        //charInfo = Character.Instance.ironclead;
         switch (PlayerPrefs.GetInt("CharType")) //픽창에서선텍한 캐릭
         {
             case 0:

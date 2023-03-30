@@ -13,16 +13,10 @@ public class OneCard : MonoBehaviour
     public TextMeshProUGUI cType;
     public TextMeshProUGUI cText;
     public Image cImg;
-    
-    /*public int cost;
-    public string title;
-    public CardInfo.Type type;
-    public string text;
-    public Sprite cardImg;*/
     private void Start()
     {
         
-        Debug.Log(value);
+        //Debug.Log(value);
         cCost = GameObject.Find("CostText" + value).GetComponent<TextMeshProUGUI>();
         cTitle = GameObject.Find("CardTitle" + value).GetComponent<TextMeshProUGUI>();
         cType = GameObject.Find("CardType" + value).GetComponent<TextMeshProUGUI>();
