@@ -2207,6 +2207,7 @@ GameObject:
   - component: {fileID: 1135833417}
   - component: {fileID: 1135833418}
   - component: {fileID: 1135833419}
+  - component: {fileID: 1135833420}
   m_Layer: 0
   m_Name: DataObj
   m_TagString: Untagged
@@ -2297,9 +2298,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardInfo: []
-  txt: {fileID: 4900000, guid: aa3fad7df3cace344806d4045530ff29, type: 3}
+  txt:
+  - {fileID: 4900000, guid: aa3fad7df3cace344806d4045530ff29, type: 3}
+  - {fileID: 4900000, guid: 47d6cd5c14487ae4fa401a079e1c5e63, type: 3}
+  - {fileID: 4900000, guid: 4ea6846a9aa80a54e962dfaef453ff79, type: 3}
+  monsterStats: []
   lineSize: 0
   rowSize: 0
+--- !u!114 &1135833420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135833413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40c3eeb5bcffda4c961f9489fead8ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1156558022
 GameObject:
   m_ObjectHideFlags: 0
@@ -4114,6 +4131,7 @@ GameObject:
   - component: {fileID: 324571406928832416}
   - component: {fileID: 2048984680056765815}
   - component: {fileID: 5460362668639201517}
+  - component: {fileID: 5460362668639201518}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Monster
@@ -4348,6 +4366,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5460362668639201518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277829183967290980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff951ad3ade4d334e850ac4997a0acdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5762975664099127023
 GameObject:
   m_ObjectHideFlags: 0

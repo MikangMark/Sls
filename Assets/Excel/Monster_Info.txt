@@ -1,0 +1,2 @@
+Name	Hp	Atk	Def	Img
+슬라임	28	10	10	초록슬라임
