@@ -22,54 +22,19 @@ public class CardInfo
         cardImg = _img;
     }
 }
-[System.Serializable]
-public class MonsterStat
-{
-    public string name;
-    public int hp;
-    public int atk;
-    public int def;
-    public Sprite img;
-
-    public void InputInfo(string _name, int _hp, int _atk, int _def, Sprite _img)
-    {
-        name = _name;
-        hp = _hp;
-        atk = _atk;
-        def = _def;
-        img = _img;
-    }
-}
-
-public class MonsterSkill_Info
-{
-    Dictionary<string, List<Dictionary<int, string>>> skillInfo;
-    //  MonsterSkill
-    //  슬라임	
-    //  10001	10atk
-    //  10002	5atk,8def
-    //  10003	15def
-    //  10004	1dbuf
-
-}
-
-
-
 
 public class ExcelDataLoader : MonoBehaviour
 {
     public List<CardInfo> cardInfo;//전체 카드목록
-    public List<TextAsset> txt;
-    public List<MonsterStat> monsterStats;
-
+    public List<TextAsset> cardText;
     public int lineSize, rowSize;
 
     private void Awake()
     {
-        for(int f = 0; f < txt.Count; f++)
+        for(int f = 0; f < cardText.Count; f++)//파일 단위
         {
-            TextAsset data = txt[f];
-            string currentText = txt[f].text.Substring(0, txt[f].text.Length - 1);
+            TextAsset data = cardText[f];
+            string currentText = cardText[f].text.Substring(0, cardText[f].text.Length - 1);
             string[] line = currentText.Split('\n');
             lineSize = line.Length;
             rowSize = line[0].Split('\t').Length;
@@ -80,88 +45,30 @@ public class ExcelDataLoader : MonoBehaviour
             {
                 string[] row = line[i].Split('\t');
                 CardInfo.Type tType = CardInfo.Type.DEFAULT;
-
-                switch (row[0])
+                switch (row[2])
                 {
-                    #region CardInfoDataLoader
-                    case "CardInfo":
-                        if (i == 0)
-                        {
-                            continue;
-                        }
-                        else if (i == 1)
-                        {
-                            switch (row[0])
-                            {
-                                case "IronClead":
-                                    break;
-                                case "Silence":
-                                    break;
-                                case "Defact":
-                                    break;
-                                case "Wacher":
-                                    break;
-                            }
-
-                        }
-                        else
-                        {
-                            switch (row[3])
-                            {
-                                case "ATK":
-                                    tType = CardInfo.Type.ATK;
-                                    break;
-                                case "SK":
-                                    tType = CardInfo.Type.SK;
-                                    break;
-                            }
-
-                            CardInfo temp = new CardInfo();
-                            Texture2D[] cardImgs = Resources.LoadAll<Texture2D>("CardImg");
-                            Sprite sprite = null;
-                            for (int j = 0; j < cardImgs.Length; j++)
-                            {
-                                if (cardImgs[j].name.Equals(row[2]))
-                                {
-                                    //
-                                    sprite = Sprite.Create(cardImgs[j], new Rect(0, 0, cardImgs[j].width, cardImgs[j].height), Vector2.zero);
-                                    sprite.name = cardImgs[j].name;
-                                }
-                            }
-                            temp.InputInfo(int.Parse(row[1]), row[2], tType, row[4], sprite);
-                            cardInfo.Add(temp);
-                            
-                        }
+                    case "ATK":
+                        tType = CardInfo.Type.ATK;
                         break;
-                    #endregion
-                    case "Monster":
-                        if (i == 0)
-                        {
-                            continue;
-                        }
-                        MonsterStat statTemp = new MonsterStat();
-                        Texture2D[] monsterImgs = Resources.LoadAll<Texture2D>("CardImg");
-                        Sprite monsterSprite = null;
-                        for (int j = 0; j < monsterImgs.Length; j++)
-                        {
-                            if (monsterImgs[j].name.Equals(row[4]))
-                            {
-                                //
-                                monsterSprite = Sprite.Create(monsterImgs[j], new Rect(0, 0, monsterImgs[j].width, monsterImgs[j].height), Vector2.zero);
-                                monsterSprite.name = monsterImgs[j].name;
-                            }
-                        }
-                        statTemp.InputInfo(row[0],int.Parse(row[1]), int.Parse(row[2]), int.Parse(row[3]), monsterSprite);
-                        monsterStats.Add(statTemp);
-                        break;
-                    case "MonsterSkill":
-                        if (i == 0)
-                        {
-                            continue;
-                        }
+                    case "SK":
+                        tType = CardInfo.Type.SK;
                         break;
                 }
-                
+
+                CardInfo temp = new CardInfo();
+                Texture2D[] cardImgs = Resources.LoadAll<Texture2D>("CardImg");
+                Sprite sprite = null;
+                for (int j = 0; j < cardImgs.Length; j++)
+                {
+                    if (cardImgs[j].name.Equals(row[1]))
+                    {
+                        //
+                        sprite = Sprite.Create(cardImgs[j], new Rect(0, 0, cardImgs[j].width, cardImgs[j].height), Vector2.zero);
+                        sprite.name = cardImgs[j].name;
+                    }
+                }
+                temp.InputInfo(int.Parse(row[0]), row[1], tType, row[3], sprite);
+                cardInfo.Add(temp);
             }
         }
     }
