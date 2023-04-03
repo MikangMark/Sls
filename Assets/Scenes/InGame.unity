@@ -1044,7 +1044,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
   m_Value: 0.00000006301983
-  m_Size: 0.00000014784369
+  m_Size: 0.2180044
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2316,6 +2316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40c3eeb5bcffda4c961f9489fead8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterData: {fileID: 1135833421}
+  skillData: {fileID: 1135833422}
 --- !u!114 &1135833421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2328,7 +2330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9ea747d88d5ea46bf6ce0415ae2308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterInfo: []
+  monsterExelInfo: []
   monsterText: {fileID: 4900000, guid: 47d6cd5c14487ae4fa401a079e1c5e63, type: 3}
   lineSize: 0
   rowSize: 0
@@ -4409,6 +4411,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff951ad3ade4d334e850ac4997a0acdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info:
+    stat:
+      name: 
+      hp: 0
+      atk: 0
+      def: 0
+      img: {fileID: 0}
+    skill: []
 --- !u!1 &5762975664099127023
 GameObject:
   m_ObjectHideFlags: 0

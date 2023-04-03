@@ -21,7 +21,7 @@ public class MonsterStat
 }
 public class MonsterExcelDataLoader : MonoBehaviour
 {
-    public List<MonsterStat> monsterInfo;
+    public List<MonsterStat> monsterExelInfo;
     public TextAsset monsterText;
     public int lineSize, rowSize;
     private void Awake()
@@ -50,7 +50,7 @@ public class MonsterExcelDataLoader : MonoBehaviour
                 }
             }
             temp.InputInfo(row[0], int.Parse(row[1]), int.Parse(row[2]), int.Parse(row[3]), sprite);
-            monsterInfo.Add(temp);
+            monsterExelInfo.Add(temp);
         }
     }
     // Start is called before the first frame update
