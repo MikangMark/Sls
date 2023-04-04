@@ -39,7 +39,7 @@ public class MonsterExcelDataLoader : MonoBehaviour
             MonsterStat temp = new MonsterStat();
             Texture2D[] monsterImgs = Resources.LoadAll<Texture2D>("MonsterImg");
             Sprite sprite = null;
-            Debug.Log(row[4]);
+            //Debug.Log(row[4]);
             for (int j = 0; j < monsterImgs.Length; j++)
             {
                 string x = monsterImgs[j].name + '\r';

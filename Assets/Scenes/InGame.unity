@@ -4166,7 +4166,7 @@ GameObject:
   - component: {fileID: 5460362668639201517}
   - component: {fileID: 5460362668639201518}
   m_Layer: 0
-  m_Name: Monster
+  m_Name: Slime
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4411,14 +4411,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff951ad3ade4d334e850ac4997a0acdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  info:
-    stat:
-      name: 
-      hp: 0
-      atk: 0
-      def: 0
-      img: {fileID: 0}
-    skill: []
+  stat:
+    name: 
+    hp: 0
+    atk: 0
+    def: 0
+    img: {fileID: 0}
+  skill: []
+  monsterName: Slime
+  skillCord: 11270000122700001327000014270000
 --- !u!1 &5762975664099127023
 GameObject:
   m_ObjectHideFlags: 0
