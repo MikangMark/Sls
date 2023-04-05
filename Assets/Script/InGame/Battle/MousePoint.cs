@@ -38,26 +38,31 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, results);
+        Debug.Log(results.Count);
         // 마우스 클릭 이벤트가 발생한 위치를 UI 요소의 부모 객체의 좌표계로 변환합니다.
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out Vector2 localMousePosition);
+        //RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out Vector2 localMousePosition);
 
         // UI 요소의 위치를 마우스 클릭 이벤트가 발생한 위치로 이동합니다.
-        rectTransform.localPosition = localMousePosition + clickOffset;
+        /*rectTransform.localPosition = localMousePosition + clickOffset;
         canvasGroup.blocksRaycasts = true;
-        
-        RaycastHit2D[] hits = Physics2D.RaycastAll(localMousePosition, Vector2.zero);
 
-        foreach (RaycastHit2D hit in hits)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(pointerEventData.position, Vector2.zero, 100f, 6);
+
+        foreach (RaycastResult hit in results)
         {
-            if (hit.collider.CompareTag("Monster"))
+            if (hit.)
             {
                 Debug.Log("Dropped on target object: " + hit.transform.name);
                 gameObject.transform.SetParent(gameObject.transform.parent);
                 return;
             }
         }
-        Debug.Log(hits.Length);
-        Debug.Log("Did not drop on any target object");
-        rectTransform.localPosition = savePos;
+        //Debug.Log(hits.Length);
+        //Debug.Log("Did not drop on any target object");
+        rectTransform.localPosition = savePos;*/
     }
 }

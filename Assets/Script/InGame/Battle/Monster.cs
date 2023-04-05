@@ -7,13 +7,9 @@ using UnityEngine.UI;
 public class Monster : MonoBehaviour
 {
     public string monsterName;//인스펙터에서 입력되어있는 몬스터이름
-    [ReadOnly]
     public MonsterStat stat;//해당몬스터의 스텟
-    [ReadOnly]
     public List<MonsterSkill> skill;//해당몬스터가 보유중인 스킬
-    [ReadOnly]
     public List<int> skillCord;//해당 몬스터가 보유하고있는 스킬 코드
-    [ReadOnly]
     public MonsterManager monsterManager;
     private void Start()
     {

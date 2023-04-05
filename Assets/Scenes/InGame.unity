@@ -2346,7 +2346,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115cd90ddfc2e4f4ebd8d30ad6036594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterSkillInfo: []
   monsterSkillText: {fileID: 4900000, guid: 4ea6846a9aa80a54e962dfaef453ff79, type: 3}
   lineSize: 0
   rowSize: 0
@@ -4165,7 +4164,7 @@ GameObject:
   - component: {fileID: 2048984680056765815}
   - component: {fileID: 5460362668639201517}
   - component: {fileID: 5460362668639201518}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Slime
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -4411,6 +4410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff951ad3ade4d334e850ac4997a0acdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterName: Slime
   stat:
     name: 
     hp: 0
@@ -4418,8 +4418,8 @@ MonoBehaviour:
     def: 0
     img: {fileID: 0}
   skill: []
-  monsterName: Slime
   skillCord: 11270000122700001327000014270000
+  monsterManager: {fileID: 0}
 --- !u!1 &5762975664099127023
 GameObject:
   m_ObjectHideFlags: 0
