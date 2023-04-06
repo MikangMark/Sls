@@ -38,7 +38,6 @@ public class MonsterSkillExcelDataLoader : MonoBehaviour
             {
                 if (j == 0)
                 {
-                    
                     monsterSkillInfo.Add(int.Parse(row[j]), null);
                 }
                 else

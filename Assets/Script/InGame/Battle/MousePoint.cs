@@ -11,6 +11,7 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     private Vector3 savePos;
     private OneCard card;
     public Battle battle;
+    private CardValueExcelDataLoader cardData;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         canvasGroup = GetComponent<CanvasGroup>();
         card = GetComponent<OneCard>();
         battle = GameObject.Find("BattleScript").GetComponent<Battle>();
+        cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -57,7 +59,6 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
                 if (battle.energy >= gameObject.GetComponent<OneCard>().thisCard.cost)
                 {
                     battle.energy -= gameObject.GetComponent<OneCard>().thisCard.cost;
-
                 }
                 return;
             }

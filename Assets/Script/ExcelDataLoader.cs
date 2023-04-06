@@ -62,7 +62,6 @@ public class ExcelDataLoader : MonoBehaviour
                 {
                     if (cardImgs[j].name.Equals(row[1]))
                     {
-                        //
                         sprite = Sprite.Create(cardImgs[j], new Rect(0, 0, cardImgs[j].width, cardImgs[j].height), Vector2.zero);
                         sprite.name = cardImgs[j].name;
                     }

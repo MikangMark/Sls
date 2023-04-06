@@ -72,6 +72,7 @@ public class CardValueExcelDataLoader : MonoBehaviour
 
             }
             cardValueInfo.Add(temp);
+            allInfoCard.Add(excelData.cardInfo[i - 1], temp);
         }
 
 

@@ -9,7 +9,6 @@ public class OneCard : MonoBehaviour
     public static int value = 0;
     public CardInfo thisCard;
     public CardValue thisCardValue;
-    private ExcelDataLoader excelData;
     public TextMeshProUGUI cCost;
     public TextMeshProUGUI cTitle;
     public TextMeshProUGUI cType;
@@ -17,8 +16,6 @@ public class OneCard : MonoBehaviour
     public Image cImg;
     private void Start()
     {
-        excelData = GameObject.Find("ExcelData").GetComponent<ExcelDataLoader>();
-        thisCardValue = excelData.cardInfo
         cCost = GameObject.Find("CostText" + value).GetComponent<TextMeshProUGUI>();
         cTitle = GameObject.Find("CardTitle" + value).GetComponent<TextMeshProUGUI>();
         cType = GameObject.Find("CardType" + value).GetComponent<TextMeshProUGUI>();
