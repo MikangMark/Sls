@@ -72,6 +72,6 @@ public class ExcelDataLoader : MonoBehaviour
             }
         }
     }
-        // 엑셀 데이터 파일 로드
+        //public CardInfo SearchCardType(Type _)
         
 }

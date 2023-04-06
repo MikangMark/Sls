@@ -954,12 +954,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ac8cdb124911a4d9f65d030c6ee7a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  excelData: {fileID: 1135833419}
+  excelData: {fileID: 485337162}
   cardList: []
   deck: []
   attack: 5
   defence: 4
   blow: 1
+--- !u!1 &485337159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 485337164}
+  - component: {fileID: 485337163}
+  - component: {fileID: 485337162}
+  - component: {fileID: 485337161}
+  - component: {fileID: 485337160}
+  m_Layer: 0
+  m_Name: ExcelData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &485337160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115cd90ddfc2e4f4ebd8d30ad6036594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterSkillText: {fileID: 4900000, guid: 4ea6846a9aa80a54e962dfaef453ff79, type: 3}
+  lineSize: 0
+  rowSize: 0
+--- !u!114 &485337161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c9ea747d88d5ea46bf6ce0415ae2308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterExelInfo: []
+  monsterText: {fileID: 4900000, guid: 47d6cd5c14487ae4fa401a079e1c5e63, type: 3}
+  lineSize: 0
+  rowSize: 0
+--- !u!114 &485337162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9639e8a3df5a38e45a24e4becba13a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardInfo: []
+  cardText:
+  - {fileID: 4900000, guid: aa3fad7df3cace344806d4045530ff29, type: 3}
+  lineSize: 0
+  rowSize: 0
+--- !u!114 &485337163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e002c4aaf8e5b0b4ab5ad327d6882236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardValueInfo: []
+  cardValueText: {fileID: 4900000, guid: 66f5e3482e5033d4d8167d23b87d6404, type: 3}
+  lineSize: 0
+  rowSize: 0
+  excelData: {fileID: 485337162}
+--- !u!4 &485337164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 972.8476, y: 466.38904, z: 2.770894}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &554688327
 GameObject:
   m_ObjectHideFlags: 0
@@ -2206,10 +2306,7 @@ GameObject:
   - component: {fileID: 1135833414}
   - component: {fileID: 1135833417}
   - component: {fileID: 1135833418}
-  - component: {fileID: 1135833419}
   - component: {fileID: 1135833420}
-  - component: {fileID: 1135833422}
-  - component: {fileID: 1135833421}
   m_Layer: 0
   m_Name: DataObj
   m_TagString: Untagged
@@ -2287,23 +2384,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSeed: 0
---- !u!114 &1135833419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135833413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9639e8a3df5a38e45a24e4becba13a65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardInfo: []
-  cardText:
-  - {fileID: 4900000, guid: aa3fad7df3cace344806d4045530ff29, type: 3}
-  lineSize: 0
-  rowSize: 0
 --- !u!114 &1135833420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2316,39 +2396,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40c3eeb5bcffda4c961f9489fead8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterData: {fileID: 1135833421}
-  skillData: {fileID: 1135833422}
---- !u!114 &1135833421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135833413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c9ea747d88d5ea46bf6ce0415ae2308, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterExelInfo: []
-  monsterText: {fileID: 4900000, guid: 47d6cd5c14487ae4fa401a079e1c5e63, type: 3}
-  lineSize: 0
-  rowSize: 0
---- !u!114 &1135833422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135833413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115cd90ddfc2e4f4ebd8d30ad6036594, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monsterSkillText: {fileID: 4900000, guid: 4ea6846a9aa80a54e962dfaef453ff79, type: 3}
-  lineSize: 0
-  rowSize: 0
+  monsterData: {fileID: 485337161}
+  skillData: {fileID: 485337160}
 --- !u!1 &1156558022
 GameObject:
   m_ObjectHideFlags: 0

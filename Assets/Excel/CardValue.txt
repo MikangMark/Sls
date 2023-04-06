@@ -1,0 +1,4 @@
+	ATK	DEF	POW	WEAK
+1	6			
+1		5		
+2	8			2

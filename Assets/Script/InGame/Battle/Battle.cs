@@ -49,7 +49,15 @@ public class Battle : MonoBehaviour
         CardDraw(divideCard);
         ReChargeEnergy(refillEnergy);
     }
+    public void EndMyTurn()
+    {
+
+    }
     public void EnemyTurn()
+    {
+
+    }
+    public  void EndEnemyTurn()
     {
 
     }
@@ -113,10 +121,5 @@ public class Battle : MonoBehaviour
     void ReChargeEnergy(int reEnergy)
     {
         energy = reEnergy;
-    }
-
-    void UseCard(CardInfo use)
-    {
-
     }
 }
