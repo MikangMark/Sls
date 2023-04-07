@@ -120,10 +120,6 @@ public class Battle : MonoBehaviour
             myCard.Add(temp);                             //정보가들어간 카드오브젝트 내손에 넣기
         }
     }
-    public void UsedCard()
-    {
-
-    }
     void ReChargeEnergy(int reEnergy)
     {
         energy = reEnergy;
@@ -164,14 +160,42 @@ public class Battle : MonoBehaviour
     }
     public void Deffence(GameObject target, int value)
     {
+        switch (target.tag)
+        {
+            case "Monster":
+                target.GetComponent<Monster>().stat.shield += value;
+                break;
+
+            case "Player":
+
+                break;
+        }
 
     }
     public void Power(GameObject target, int value)
     {
+        switch (target.tag)
+        {
+            case "Monster":
+                target.GetComponent<Monster>().bufList[MonsterBuffType.POW]++;
+                break;
 
+            case "Player":
+
+                break;
+        }
     }
     public void Week(GameObject target, int value)
     {
+        switch (target.tag)
+        {
+            case "Monster":
+                target.GetComponent<Monster>().bufList[MonsterBuffType.WEAK]++;
+                break;
 
+            case "Player":
+
+                break;
+        }
     }
 }
