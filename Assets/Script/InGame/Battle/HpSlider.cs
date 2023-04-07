@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class HpSlider : MonoBehaviour
 {
     public Slider hpBar;
+    public Monster monsterStat;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,7 +14,9 @@ public class HpSlider : MonoBehaviour
         switch (gameObject.tag)
         {
             case "Monster":
-                
+                monsterStat = gameObject.GetComponent<Monster>();
+                hpBar.maxValue = monsterStat.stat.maxHp;
+                //hpBar.value = 
                 break;
             case "Player":
                 break;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class MonsterStat
 {
     public string name;
+    public int maxHp;
     public int hp;
     public int atk;
     public int def;
@@ -15,6 +16,7 @@ public class MonsterStat
     {
         name = _name;
         hp = _hp;
+        maxHp = _hp;
         atk = _atk;
         def = _def;
         img = _img;
