@@ -11,6 +11,7 @@ public class Monster : MonoBehaviour
     public List<MonsterSkill> skill;//해당몬스터가 보유중인 스킬
     public List<int> skillCord;//해당 몬스터가 보유하고있는 스킬 코드
     public MonsterManager monsterManager;
+    public Dictionary<MonsterBuffType, int> bufList;//해당 몬스터가 보유하고있는 버프/디버프 리스트 key 버프타입 value 적용된 숫자
     private void Start()
     {
 
@@ -20,6 +21,10 @@ public class Monster : MonoBehaviour
         {
             skill.Add(monsterManager.monsterInfo[monsterName].skill[i]);
         }
+        bufList = new Dictionary<MonsterBuffType, int>();
+        bufList.Add(MonsterBuffType.POW, 0);
+        bufList.Add(MonsterBuffType.WEAK, 0);
+
     }
 
 

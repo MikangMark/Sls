@@ -10,7 +10,6 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     private Vector2 clickOffset;
     private Vector3 savePos;
     private OneCard card;
-    public Battle battle;
     private CardValueExcelDataLoader cardData;
 
     private void Start()
@@ -19,7 +18,7 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         card = GetComponent<OneCard>();
-        battle = GameObject.Find("BattleScript").GetComponent<Battle>();
+        
         cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
     }
 
@@ -52,15 +51,17 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
         foreach (RaycastResult hit in results)
         {
-            if (hit.gameObject.tag.Equals("Monster"))//적에게 카드를 사용하였을때
+            if(hit.gameObject.tag.Equals("Monster")|| hit.gameObject.tag.Equals("Player"))//레이캐스트의검출된 오브젝트의 태그 검사
             {
-                //해당카드의 정보를 불러오기 -> 현제 나의 남은 에너지확인하기 
-                
-                if (battle.energy >= gameObject.GetComponent<OneCard>().thisCard.cost)
+                if (gameObject.GetComponent<OneCard>().UseThisCard(hit.gameObject))//카드가 제데로 적동됬는지 여부검사
                 {
-                    battle.energy -= gameObject.GetComponent<OneCard>().thisCard.cost;
+
                 }
-                return;
+                else//실패했으경우 실패했다는 UI 표기
+                {
+
+                }
+                
             }
         }
         rectTransform.localPosition = savePos;

@@ -9,6 +9,7 @@ public class MonsterStat
     public int atk;
     public int def;
     public Sprite img;
+    public int shield;
 
     public void InputInfo(string _name, int _hp, int _atk, int _def, Sprite _img)
     {
@@ -17,6 +18,7 @@ public class MonsterStat
         atk = _atk;
         def = _def;
         img = _img;
+        shield = 0;
     }
 }
 public class MonsterExcelDataLoader : MonoBehaviour
