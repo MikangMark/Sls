@@ -48,15 +48,31 @@ public class OneCard : MonoBehaviour
                 switch (thisCardValue.type[i])
                 {
                     case CardType.ATK:
+                        if (target.tag.Equals("Player"))
+                        {
+                            return false;
+                        }
                         battle.Attack(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
                     case CardType.DEF:
+                        if (target.tag.Equals("Monster"))
+                        {
+                            return false;
+                        }
                         battle.Deffence(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
                     case CardType.POW:
+                        if (target.tag.Equals("Monster"))
+                        {
+                            return false;
+                        }
                         battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
                     case CardType.WEAK:
+                        if (target.tag.Equals("Player"))
+                        {
+                            return false;
+                        }
                         battle.Week(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
                 }

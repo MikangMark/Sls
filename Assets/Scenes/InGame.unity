@@ -1144,7 +1144,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
   m_Value: 0.00000006301983
-  m_Size: 0.2180044
+  m_Size: 0.00000014784369
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2433,7 +2433,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.328}
   m_AnchorMax: {x: 1, y: 0.7275555}
-  m_AnchoredPosition: {x: 0, y: -0.34555}
+  m_AnchoredPosition: {x: 0, y: -0.34555054}
   m_SizeDelta: {x: 0, y: 0.69098}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1156558024
@@ -4395,7 +4395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.09900001}
-  m_AnchoredPosition: {x: 0, y: -0.29579926}
+  m_AnchoredPosition: {x: 0, y: -0.29579163}
   m_SizeDelta: {x: 0, y: -0.5916004}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4774648817234363645
@@ -4426,9 +4426,10 @@ GameObject:
   m_Component:
   - component: {fileID: 844398394266345979}
   - component: {fileID: 6990320244777106475}
+  - component: {fileID: 6990320244777106476}
   m_Layer: 0
   m_Name: Hp_Bar
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4534,6 +4535,7 @@ MonoBehaviour:
   monsterName: Slime
   stat:
     name: 
+    maxHp: 0
     hp: 0
     atk: 0
     def: 0
@@ -4820,6 +4822,22 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6990320244777106476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4802603801294566867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84d501fabc51d14d905bf13a1d18ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
+  monsterStat: {fileID: 0}
+  battle: {fileID: 0}
+  text: {fileID: 0}
 --- !u!224 &7520925216030910131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5012,13 +5030,30 @@ GameObject:
   m_Component:
   - component: {fileID: 4586842596562102040}
   - component: {fileID: 6130175272021408456}
+  - component: {fileID: 8554055749444793137}
   m_Layer: 0
   m_Name: Hp_Bar
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8554055749444793137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8554055749444793136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f84d501fabc51d14d905bf13a1d18ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpBar: {fileID: 0}
+  monsterStat: {fileID: 0}
+  battle: {fileID: 0}
+  text: {fileID: 0}
 --- !u!1 &8929064670678509580
 GameObject:
   m_ObjectHideFlags: 0

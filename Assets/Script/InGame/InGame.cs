@@ -27,6 +27,10 @@ public class InGame : Singleton<InGame>
             case 3:
                 charInfo = Character.Instance.wacher;//와쳐
                 break;
+            default:
+                charInfo = Character.Instance.ironclead;//아이언클래드
+                Debug.Log("DEFAULT");
+                break;
         }
     }
 }
