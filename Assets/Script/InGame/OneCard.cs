@@ -59,21 +59,21 @@ public class OneCard : MonoBehaviour
                         {
                             return false;
                         }
-                        battle.Deffence(target, thisCardValue.skillValue[thisCardValue.type[i]]);
+                        battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
-                    case CardType.POW:
-                        if (target.tag.Equals("Monster"))
+                    case CardType.POW://아직 카드없음
+                        /*if (target.tag.Equals("Monster"))
                         {
                             return false;
                         }
-                        battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
+                        battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);*/
                         break;
                     case CardType.WEAK:
                         if (target.tag.Equals("Player"))
                         {
                             return false;
                         }
-                        battle.Week(target, thisCardValue.skillValue[thisCardValue.type[i]]);
+                        battle.Weak(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
                 }
 

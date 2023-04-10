@@ -8,6 +8,7 @@ public class Battle : MonoBehaviour
     public int maxEnergy;
     public int energy;
     int refillEnergy;
+    int shiled;
     public Character.CharInfo stat;//전투중인 나의 스텟
     public Dictionary<PlayerBuffType, int> playerBufList;
     public List<Monster> monsters;//전투중인 적의 리스트
@@ -41,6 +42,7 @@ public class Battle : MonoBehaviour
         playerBufList.Add(PlayerBuffType.POW, 0);
         playerBufList.Add(PlayerBuffType.WEAK, 0);
         stat = InGame.Instance.charInfo;
+        shiled = 0;
         divideCard = 5;
         maxEnergy = 3;
         energy = maxEnergy;
@@ -128,52 +130,35 @@ public class Battle : MonoBehaviour
     public void Attack(GameObject target, int value)
     {
         int damage = value;
-        switch (target.tag)
+        if (playerBufList[PlayerBuffType.POW] > 0)//플레이어가 힘버프를 받고있는가
         {
-            case "Monster":
-                if (playerBufList[PlayerBuffType.POW] > 0)//플레이어가 힘버프를 받고있는가
-                {
-                    damage += playerBufList[PlayerBuffType.POW];
-                }
-                if (target.GetComponent<Monster>().bufList[MonsterBuffType.WEAK] > 0)//타겟의 몬스터가 취약 디버프를 받고있는가
-                {
-                    damage -= target.GetComponent<Monster>().bufList[MonsterBuffType.WEAK];
-                }
-                if (target.GetComponent<Monster>().stat.shield > 0)//타겟의 몬스터가 쉴드를 가지고 있는가
-                {
-                    if (target.GetComponent<Monster>().stat.shield >= damage)
-                    {
-                        target.GetComponent<Monster>().stat.shield -= damage;
-                    }
-                    else
-                    {
-                        damage -= target.GetComponent<Monster>().stat.shield;
-                        target.GetComponent<Monster>().stat.shield = 0;
-                    }
-                }
-                target.GetComponent<Monster>().stat.hp -= damage;
-                break;
-            case "Player":
-                break;
+            damage += playerBufList[PlayerBuffType.POW];
         }
-
-    }
-    public void Deffence(GameObject target, int value)
-    {
-        switch (target.tag)
+        if (target.GetComponent<Monster>().bufList[MonsterBuffType.WEAK] > 0)//타겟의 몬스터가 취약 디버프를 받고있는가
         {
-            case "Monster":
-                target.GetComponent<Monster>().stat.shield += value;
-                break;
-
-            case "Player":
-
-                break;
+            damage = damage + (int)(damage * 0.5);
         }
-
+        if (target.GetComponent<Monster>().stat.shield > 0)//타겟의 몬스터가 쉴드를 가지고 있는가
+        {
+            if (target.GetComponent<Monster>().stat.shield >= damage)
+            {
+                target.GetComponent<Monster>().stat.shield -= damage;
+            }
+            else
+            {
+                damage -= target.GetComponent<Monster>().stat.shield;
+                target.GetComponent<Monster>().stat.shield = 0;
+            }
+        }
+        target.GetComponent<Monster>().stat.hp -= damage;
     }
-    public void Power(GameObject target, int value)
+    public void Deffence(int value)
     {
+        shiled += value;
+    }
+    public void Power(GameObject target, int value)//아직 힘카드 없음
+    {
+        /*
         switch (target.tag)
         {
             case "Monster":
@@ -184,18 +169,39 @@ public class Battle : MonoBehaviour
 
                 break;
         }
+        */
     }
-    public void Week(GameObject target, int value)
+    public void Weak(GameObject target, int value)
     {
-        switch (target.tag)
+        target.GetComponent<Monster>().bufList[MonsterBuffType.WEAK]++;
+    }
+
+    public void MonsterAtk(Monster monsterObj, int value)
+    {
+        if(monsterObj.bufList[MonsterBuffType.POW] > 0)
         {
-            case "Monster":
-                target.GetComponent<Monster>().bufList[MonsterBuffType.WEAK]++;
-                break;
-
-            case "Player":
-
-                break;
+            value += monsterObj.bufList[MonsterBuffType.POW];
         }
+        if (playerBufList[PlayerBuffType.WEAK] > 0)
+        {
+            value = value + (int)(value * 0.5);
+        }
+        if (shiled > value)
+        {
+            shiled -= value;
+        }
+        else
+        {
+            int temp = value - shiled;
+            stat.hp -= temp;
+        }
+    }
+    public void MonsterDef(Monster monsterObj, int value)
+    {
+
+    }
+    public void MonsterPow(Monster monsterObj, int value)
+    {
+
     }
 }
