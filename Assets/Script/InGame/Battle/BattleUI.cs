@@ -7,6 +7,10 @@ public class BattleUI : MonoBehaviour
 {
     [SerializeField]
     private Battle battle;
+    private GameObject shieldObj;
+    [SerializeField]
+    private GameObject monsterIntentPos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,8 +18,11 @@ public class BattleUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (battle.shiled > 0)
+        {
+            shieldObj.SetActive(true);
+        }
     }
 }

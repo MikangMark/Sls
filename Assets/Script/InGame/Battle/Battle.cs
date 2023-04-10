@@ -4,11 +4,14 @@ using UnityEngine;
 public enum PlayerBuffType { DEFAULT = 0, ATK, DEF, POW, WEAK }
 public class Battle : MonoBehaviour
 {
+    enum Turn { Player = 0, EndPlayer, Enermy, EnermyEnd }
+    [SerializeField]
+    Turn thisTurn;
     int divideCard;
     public int maxEnergy;
     public int energy;
     int refillEnergy;
-    int shiled;
+    public int shiled;
     public Character.CharInfo stat;//전투중인 나의 스텟
     public Dictionary<PlayerBuffType, int> playerBufList;
     public List<Monster> monsters;//전투중인 적의 리스트
@@ -28,6 +31,7 @@ public class Battle : MonoBehaviour
         initData();
         
     }
+    
     void initData()
     {
         stat = new Character.CharInfo();
@@ -47,6 +51,7 @@ public class Battle : MonoBehaviour
         maxEnergy = 3;
         energy = maxEnergy;
         refillEnergy = maxEnergy;
+        thisTurn = Turn.Player;
         MyTurn();
     }
     void MyTurn()
@@ -55,17 +60,22 @@ public class Battle : MonoBehaviour
         CardDraw(divideCard);
         ReChargeEnergy(refillEnergy);
     }
-    public void EndMyTurn()
+    public void EndMyTurn()//턴종료눌렀을떄
     {
+        //턴종료시 플레이어디버프 카운트 감소
+        //쉴드 제거
 
+        EnemyTurn();
     }
     public void EnemyTurn()
     {
-
+        //의도대로 해당 애니매이션 실행뒤 다음 함수이동
+        EndEnemyTurn();
     }
-    public  void EndEnemyTurn()
+    public void EndEnemyTurn()
     {
-
+        //쉴드 제거, 디버프 카운트감소
+        MyTurn();
     }
     public void ShuffleDeck<T>(List<T> list)//카드 셔플
     {
@@ -198,10 +208,10 @@ public class Battle : MonoBehaviour
     }
     public void MonsterDef(Monster monsterObj, int value)
     {
-
+        monsterObj.stat.shield += value;
     }
     public void MonsterPow(Monster monsterObj, int value)
     {
-
+        monsterObj.bufList[MonsterBuffType.POW] += value;
     }
 }
