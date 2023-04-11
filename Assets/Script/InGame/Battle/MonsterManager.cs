@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum MonsterBuffType { DEFAULT = 0, ATK, DEF, POW, WEAK }
+public enum MonsterBuffType { POW = 0, WEAK }
 public class MonsterInfo
 {
     public MonsterStat stat;//몬스터의 스텟

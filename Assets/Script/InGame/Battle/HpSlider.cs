@@ -38,9 +38,11 @@ public class HpSlider : MonoBehaviour
         {
             case "Monster":
                 hpBar.value = monsterStat.stat.hp;
+                text.text = monsterStat.stat.hp + "/" + monsterStat.stat.maxHp;
                 break;
             case "Player":
                 hpBar.value = InGame.Instance.charInfo.maxHp;
+                text.text = InGame.Instance.charInfo.hp + "/" + InGame.Instance.charInfo.maxHp;
                 break;
         }
 
