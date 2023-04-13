@@ -96,9 +96,6 @@ public class Battle : MonoBehaviour
     }
     void CardDraw(int divide)//카드를 나눠줄때마다 실행
     {
-        //Debug.Log(beforUse[0].title);
-        //Debug.Log(beforUse[divide - 1].title);
-
         GameObject temp;
         for (int i = 0; i < divide; i++)
         {
