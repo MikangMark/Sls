@@ -3034,10 +3034,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   room_p: {fileID: 2897845389142475341, guid: aebe88f5ebabb9e41996230f0d939a92, type: 3}
   floor_p: {fileID: 4252180981887061462, guid: 319eb7dc3d67ed641b131f80b0cdef20, type: 3}
-  poolSize: 105
   floor_List: []
   roomObj_Parents: {fileID: 1777411931}
   floorObj_Parents: {fileID: 1777411931}
+  createRoomCount: 0
+  roomTypeRand: 
 --- !u!114 &1135833418
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,8 +12,7 @@ public class Room : MonoBehaviour
         4.
      */
 
-    [SerializeField]
-    MapNode node;
+    public MapNode node;
    
     public void SettingRoom(MapNode data)
     {

@@ -32,6 +32,8 @@ public class MapCreate : MonoBehaviour
     public MapTree mapTree;
 
     public int createRoomCount = 0;
+    public List<int> roomTypeRand = new List<int>();
+    
     //0층은 빈방과 일반적만나오게
     //8층은 보물 고정
     //14층은 휴식만나오도록
@@ -39,6 +41,14 @@ public class MapCreate : MonoBehaviour
     //8가지의 방목록중 랜덤방은 0~5까지
     void Start()
     {
+        for(int i = 0; i < 8; i++)
+        {
+            if(i==0|| i == 6|| i == 7)
+            {
+                continue;
+            }
+            roomTypeRand.Add(i);
+        }
         SetFloorObject();
         mapTree = new MapTree();
     }
@@ -49,94 +59,102 @@ public class MapCreate : MonoBehaviour
         {
             floor_List.Add(null);
         }
-        for (int i = floor; i > 0; i--)//보스방부터 시작 인덱스도 역순임
+        for (int i = floor-1; i >= 0; i--)//보스방부터 시작 인덱스도 역순임
         {
             GameObject floorObj = Instantiate(floor_p, floorObj_Parents.transform);
             floorObj.name = "Floor[" + i + "]";
             floor_List[i] = floorObj;
-            SetRoomObject(i);
+            
         }
-    }
-    void SetRoomObject(int layer)//층마다 실행
-    {
-        //1.몇개의 방을 생성 할건지 랜덤값 최소2개 ~ 최대6개까지 활성화 가능
-        //2.
-        //3.한층마다 이함수를 실행
-        
-        int childCreateNum = CreateSeed.Instance.RandNum(1, 6);//최소,최소+최대 하위방들 갯수 선정
-        GameObject roomObj = Instantiate(room_p, floor_List[layer].transform);
+        GameObject roomObj = Instantiate(room_p, floor_List[15].transform);
         MapNode temp = roomObj.GetComponent<MapNode>();
-        if (layer == 15)//보스방
-        {
-            temp.roomType = ROOMVALUE.BOSS;
-            temp.roomNum = createRoomCount;
-            temp.roomName = "[" + layer + "]" + "[0]"+ temp.roomType.ToString();
-            temp.children = new List<MapNode>();
-            temp.depth = layer;
-            temp.roomObj = roomObj;
-            mapTree.root = new MapNode(temp);
-            createRoomCount++;
-        }
-        else if(layer == 14)//휴식방
-        {
-            for(int i = 0; i < childCreateNum; i++)
-            {
-                temp.roomType = ROOMVALUE.REST;
-                temp.roomNum = createRoomCount;
-                temp.roomName = "[" + layer + "]" + "[" + i + "]" + temp.roomType.ToString();
-                temp.children = new List<MapNode>();
-                temp.depth = layer;
-                temp.roomObj = roomObj;
-                mapTree.root = new MapNode(temp);
-                createRoomCount++;
-            }
-        }
-        else if (layer == 8)//보물방
-        {
-            for (int i = 0; i < childCreateNum; i++)
-            {
-                temp.roomType = ROOMVALUE.TREASURE;
-                temp.roomNum = createRoomCount;
-                temp.roomName = "[" + layer + "]" + "[" + i + "]" + temp.roomType.ToString();
-                temp.children = new List<MapNode>();
-                temp.depth = layer;
-                temp.roomObj = roomObj;
-                mapTree.root = new MapNode(temp);
-                createRoomCount++;
-            }
-        }
-        else
-        {
-            int roomRandNum;
-            for (int i = 0; i < childCreateNum; i++)
-            {
-                temp.roomType = ROOMVALUE.TREASURE;
-                temp.roomNum = createRoomCount;
-                temp.roomName = "[" + layer + "]" + "[" + i + "]" + temp.roomType.ToString();
-                temp.children = new List<MapNode>();
-                temp.depth = layer;
-                temp.roomObj = roomObj;
-                mapTree.root = new MapNode(temp);
-                createRoomCount++;
-            }
-        }
+        temp.roomType = ROOMVALUE.BOSS;
+        temp.roomNum = createRoomCount;
+        temp.roomName = "[" + (floor - 1) + "]" + "[0]" + temp.roomType.ToString();
+        temp.children = new List<MapNode>();
+        temp.floor = floor - 1;
+        temp.roomObj = roomObj;
+        mapTree.root = new MapNode(temp);
+        createRoomCount++;
+        SetRoomObject(temp);
     }
-    private int GetRandomValue(List<int> availableValues)//중복되지않는 랜덤설정
+    void SetRoomObject(MapNode node)//층마다 실행
     {
-        // 리스트에 값이 없으면 0을 반환
-        if (availableValues.Count == 0)
+        //최상층 부터 실행(보스방부터)
+        //밑으로내려가는식으로 방생성
+        //방하나만들때마다 이스크립트를 실행
+        if (node.floor == 0||node == null)
         {
-            return -1;
+            return;
+        }
+        MapNode childNode = null;
+        int roomCount = CreateSeed.Instance.RandNum(1, 6);
+        GameObject roomObj;
+        switch (node.floor - 1)
+        {
+            case 14:
+                for(int i = 0; i < roomCount; i++)
+                {
+                    roomObj = Instantiate(room_p, floor_List[node.floor - 1].transform);
+                    childNode = roomObj.GetComponent<Room>().node;
+                    childNode.roomType = ROOMVALUE.REST;
+                    childNode.roomNum = createRoomCount;
+                    childNode.roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode.roomType.ToString();
+                    childNode.children = new List<MapNode>();
+                    childNode.floor = node.floor - 1;
+                    childNode.roomObj = roomObj;
+                }
+                break;
+            case 8:
+                for (int i = 0; i < roomCount; i++)
+                {
+                    roomObj = Instantiate(room_p, floor_List[node.floor - 1].transform);
+                    childNode = roomObj.GetComponent<Room>().node;
+                    childNode.roomType = ROOMVALUE.TREASURE;
+                    childNode.roomNum = createRoomCount;
+                    childNode.roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode.roomType.ToString();
+                    childNode.children = new List<MapNode>();
+                    childNode.floor = node.floor - 1;
+                    childNode.roomObj = roomObj;
+                }
+                break;
+            case 0:
+                for (int i = 0; i < roomCount; i++)
+                {
+                    roomObj = Instantiate(room_p, floor_List[node.floor - 1].transform);
+                    childNode = roomObj.GetComponent<Room>().node;
+                    childNode.roomType = ROOMVALUE.NOMAL;
+                    childNode.roomNum = createRoomCount;
+                    childNode.roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode.roomType.ToString();
+                    childNode.children = new List<MapNode>();
+                    childNode.floor = node.floor - 1;
+                    childNode.roomObj = roomObj;
+                }
+                break;
+            default:
+                for (int i = 0; i < roomCount; i++)
+                {
+                    roomObj = Instantiate(room_p, floor_List[node.floor - 1].transform);
+                    childNode = roomObj.GetComponent<Room>().node;
+                    childNode.roomType = (ROOMVALUE)CreateSeed.Instance.RandNum(roomTypeRand);
+                    childNode.roomNum = createRoomCount;
+                    childNode.roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode.roomType.ToString();
+                    childNode.children = new List<MapNode>();
+                    childNode.floor = node.floor - 1;
+                    childNode.roomObj = roomObj;
+                }
+                break;
         }
 
-        // 리스트에서 랜덤한 인덱스를 선택하고 그 값을 반환
-        int randomIndex = CreateSeed.Instance.RandNum(0, availableValues.Count);
-        int randomValue = availableValues[randomIndex];
-
-        // 리스트에서 해당 값을 제거하고 반환
-        availableValues.RemoveAt(randomIndex);
-        return randomValue;
+        
+        for (int i = 0; i < roomCount; i++)
+        {
+            node.children.Add(null);
+        }
+        createRoomCount++;
+        SetRoomObject(childNode);
     }
+    
     #endregion
 
     #region CreateLine V1

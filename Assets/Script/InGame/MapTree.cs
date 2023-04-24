@@ -17,7 +17,7 @@ public class MapNode//방하나당 정보
     public int roomNum;
     public string roomName; // 방 이름
     public List<MapNode> children; // 자식 방 리스트
-    public int depth;//방의 층
+    public int floor;//방의 층
     public ROOMVALUE roomType;
     public Image room_Img;
     public GameObject roomObj;
@@ -27,7 +27,7 @@ public class MapNode//방하나당 정보
         roomNum = map.roomNum;
         roomName = map.roomName;
         children = map.children;
-        depth = map.depth;
+        floor = map.floor;
         roomType = map.roomType;
         room_Img = map.room_Img;
         roomObj = map.roomObj;
@@ -49,7 +49,7 @@ public class MapNode//방하나당 정보
         roomNum = _data.roomNum;
         roomName = _data.roomName;
         children = _data.children;
-        depth = _data.depth;
+        floor = _data.floor;
         roomType = _data.roomType;
         room_Img = _data.room_Img;
         roomObj = _data.roomObj;
