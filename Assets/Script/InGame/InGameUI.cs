@@ -28,7 +28,7 @@ public class InGameUI : MonoBehaviour
         money_Tmp.text = 0.ToString();
         deckCount_Tmp.text = 0.ToString();
         //battle_Img.SetActive(false);
-        map.SetActive(false);
+        //map.SetActive(false);
         energy_Tmp.text = 0 + "/" + 0;
     }
     private void FixedUpdate()

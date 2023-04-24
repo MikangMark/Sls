@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Linq;
 
 public class CreateSeed : Singleton<CreateSeed>
 {
@@ -30,5 +31,13 @@ public class CreateSeed : Singleton<CreateSeed>
         num++;
         return Random.Range(min, minPmax);
     }
-   
+    /*
+    public static T GetRandomUniqueValue<T>(this List<T> list, T excludeValue)
+    {
+        List<T> tempList = new List<T>(list);
+        tempList.Remove(excludeValue);
+        tempList = tempList.Distinct().ToList();
+        return tempList[Random.Range(0, tempList.Count)];
+    }
+    */
 }
