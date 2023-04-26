@@ -22,7 +22,7 @@ public class MapCreate : MonoBehaviour
         각 경로는 y축으로 1만큼 증가할때 x좌표는 -1부터 1까지 랜덤하게 변하면서 올라감.
         이걸 총 6번 반복한 다음에 경로상에 있는 모든 격자점들을 모은게 결과적인 맵임.
      */
-    static int floor = 16;//0번방이랑 16번방은 1개로고정및 종류고정
+    static int floor = 16;//0번방이랑 15번방은 1개로고정및 종류고정
     public GameObject room_p;
     public GameObject floor_p;
     public List<GameObject> floor_List;
@@ -33,6 +33,7 @@ public class MapCreate : MonoBehaviour
 
     public int createRoomCount = 0;
     public List<int> roomTypeRand = new List<int>();
+    public List<int> floor2roomCount;
     
     //0층은 빈방과 일반적만나오게
     //8층은 보물 고정
@@ -51,12 +52,26 @@ public class MapCreate : MonoBehaviour
         }
         mapTree = new MapTree();
         SetFloorObject();
-        
+        floor2roomCount = new List<int>();
+        for(int i = 0; i < floor; i++)
+        {
+            if (i == floor - 1)
+            {
+                floor2roomCount.Add(1);
+            }
+            else
+            {
+                int roomCount = CreateSeed.Instance.RandNum(2, 7);
+                floor2roomCount.Add(roomCount);
+            }
+        }
+        RootCreate();
     }
     #region RoomCreate
     void SetFloorObject()
     {
-        for(int i = 0; i < floor; i++)
+        
+        for (int i = 0; i < floor; i++)
         {
             floor_List.Add(null);
         }
@@ -65,107 +80,167 @@ public class MapCreate : MonoBehaviour
             GameObject floorObj = Instantiate(floor_p, floorObj_Parents.transform);
             floorObj.name = "Floor[" + i + "]";
             floor_List[i] = floorObj;
-            
         }
-        GameObject roomObj = Instantiate(room_p, floor_List[15].transform);
-        MapNode temp = roomObj.GetComponent<Room>().node;
-        temp.roomType = ROOMVALUE.BOSS;
-        temp.roomNum = createRoomCount;
-        temp.roomName = "[" + (floor - 1) + "]" + "[0]" + temp.roomType.ToString();
-        temp.children = new List<MapNode>();
-        temp.floor = floor - 1;
-        temp.roomObj = roomObj;
-        roomObj.name = temp.roomName;
-        mapTree.root = new MapNode(temp);
-        createRoomCount++;
-        SetRoomObject(temp);
     }
-    void SetRoomObject(MapNode node)//층마다 실행
+    void RootCreate()
     {
-        //현제 노드구역
+        GameObject roomObj = Instantiate(room_p, floor_List[floor - 1].transform);
+        MapNode root = roomObj.GetComponent<Room>().node;
+        List<MapNode> childTemp = new List<MapNode>();
+        for(int i = 0; i < floor2roomCount[14]; i++)
+        {
+            childTemp.Add(null);
+        }
+        root.roomType = ROOMVALUE.BOSS;
+        root.roomNum = createRoomCount;
+        root.roomName = "[" + createRoomCount + "]" + root.roomType.ToString();
+        root.children = childTemp;
+        root.floor = floor - 1;
+        root.roomObj = roomObj;
+        roomObj.name = root.roomName;
+        mapTree.root = root;
+        createRoomCount++;
+        for (int i = 0; i < floor2roomCount[root.floor - 1]; i++)//하위 오브젝트만큼반복
+        {
+            SetRoomObject(root, childTemp[i]);//childTemp[i]빈데이터
+        }
+    }
+    void SetRoomObject(MapNode parentnode, MapNode childnode)//하위 오브젝트 생성
+    {
+        //하위오브젝트 구역
         //최상층 부터 실행(보스방부터)
         //밑으로내려가는식으로 방생성
         //방하나만들때마다 이스크립트를 실행
-        if (node.floor == 0||node == null)
+        if (parentnode.floor - 1 < 0)
         {
             return;
         }
-        List<MapNode> childNode = new List<MapNode>();
-        int roomCount = CreateSeed.Instance.RandNum(2, 7);
-        List<GameObject> roomObj = new List<GameObject>();
+        GameObject roomObj = Instantiate(room_p, floor_List[parentnode.floor - 1].transform);
+        childnode = roomObj.GetComponent<Room>().node;
+        List<MapNode> ccNode = new List<MapNode>();
+        if(parentnode.floor - 2 >= 0)
+        {
+            for (int i = 0; i < floor2roomCount[parentnode.floor - 2]; i++)
+            {
+                ccNode.Add(null);
+            }
+        }
+        
+        switch (parentnode.floor - 1)
+        {
+            case 14:
+                childnode.roomType = ROOMVALUE.REST;
+                break;
+            case 8:
+                childnode.roomType = ROOMVALUE.TREASURE;
+                break;
+            case 0:
+                childnode.roomType = ROOMVALUE.NOMAL;
+                break;
+            default:
+                childnode.roomType = (ROOMVALUE)CreateSeed.Instance.RandNum(roomTypeRand);
+                break;
+        }
+        childnode.roomNum = createRoomCount;
+        childnode.roomName = "[" + createRoomCount + "]" + childnode.roomType.ToString();
+        childnode.children = ccNode;
+        childnode.floor = parentnode.floor - 1;
+        childnode.roomObj = roomObj;
+        roomObj.name = childnode.roomName;
+        createRoomCount++;
+        for (int i = 0; i < floor2roomCount[childnode.floor - 1]; i++)//하위의 하위오브젝트만큼반복
+        {
+            SetRoomObject(childnode, ccNode[i]);//ccNode[i]빈데이터
+        }
+        /*
+        MapNode ccNode;
+        
+        GameObject roomObj;
         
         switch (node.floor - 1)//자식노드구역
         {
             case 14:
                 for(int i = 0; i < roomCount; i++)
                 {
-                    roomObj.Add(Instantiate(room_p, floor_List[node.floor - 1].transform));
-                    childNode.Add(roomObj[i].GetComponent<Room>().node);
-                    childNode[i].roomType = ROOMVALUE.REST;
-                    childNode[i].roomNum = createRoomCount;
-                    childNode[i].roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode[i].roomType.ToString();
-                    childNode[i].children = new List<MapNode>();
-                    childNode[i].floor = node.floor - 1;
-                    childNode[i].roomObj = roomObj[i];
-                    roomObj[i].name = childNode[i].roomName;
-                    node.children.Add(childNode[i]);
+                    roomObj = Instantiate(room_p, floor_List[node.floor - 1].transform);
+                    childNode = roomObj.GetComponent<Room>().node;
+                    childNode.roomType = ROOMVALUE.REST;
+                    childNode.roomNum = createRoomCount;
+                    childNode.roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode.roomType.ToString();
+                    childNode.children = new List<MapNode>();
+                    childNode.floor = node.floor - 1;
+                    childNode.roomObj = roomObj;
+                    roomObj.name = childNode.roomName;
+                    node.children.Add(childNode);
                     createRoomCount++;
-                    SetRoomObject(childNode[i]);
+                    if (childNode.floor > 0)
+                    {
+                        SetRoomObject(childNode);
+                    }
                 }
                 break;
             case 8:
                 for (int i = 0; i < roomCount; i++)
                 {
-                    roomObj.Add(Instantiate(room_p, floor_List[node.floor - 1].transform));
-                    childNode.Add(roomObj[i].GetComponent<Room>().node);
-                    childNode[i].roomType = ROOMVALUE.TREASURE;
-                    childNode[i].roomNum = createRoomCount;
-                    childNode[i].roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode[i].roomType.ToString();
-                    childNode[i].children = new List<MapNode>();
-                    childNode[i].floor = node.floor - 1;
-                    childNode[i].roomObj = roomObj[i];
-                    roomObj[i].name = childNode[i].roomName;
-                    node.children.Add(childNode[i]);
+                    roomObj = Instantiate(room_p, floor_List[node.floor - 1].transform);
+                    childNode = roomObj.GetComponent<Room>().node;
+                    childNode.roomType = ROOMVALUE.TREASURE;
+                    childNode.roomNum = createRoomCount;
+                    childNode.roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode.roomType.ToString();
+                    childNode.children = new List<MapNode>();
+                    childNode.floor = node.floor - 1;
+                    childNode.roomObj = roomObj;
+                    roomObj.name = childNode.roomName;
+                    node.children.Add(childNode);
                     createRoomCount++;
-                    SetRoomObject(childNode[i]);
+                    if (childNode.floor > 0)
+                    {
+                        SetRoomObject(childNode);
+                    }
                 }
                 break;
             case 0:
                 for (int i = 0; i < roomCount; i++)
                 {
-                    roomObj.Add(Instantiate(room_p, floor_List[node.floor - 1].transform));
-                    childNode.Add(roomObj[i].GetComponent<Room>().node);
-                    childNode[i].roomType = ROOMVALUE.NOMAL;
-                    childNode[i].roomNum = createRoomCount;
-                    childNode[i].roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode[i].roomType.ToString();
-                    childNode[i].children = new List<MapNode>();
-                    childNode[i].floor = node.floor - 1;
-                    childNode[i].roomObj = roomObj[i];
-                    roomObj[i].name = childNode[i].roomName;
-                    node.children.Add(childNode[i]);
+                    roomObj = Instantiate(room_p, floor_List[node.floor - 1].transform);
+                    childNode = roomObj.GetComponent<Room>().node;
+                    childNode.roomType = ROOMVALUE.NOMAL;
+                    childNode.roomNum = createRoomCount;
+                    childNode.roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode.roomType.ToString();
+                    childNode.children = new List<MapNode>();
+                    childNode.floor = node.floor - 1;
+                    childNode.roomObj = roomObj;
+                    roomObj.name = childNode.roomName;
+                    node.children.Add(childNode);
                     createRoomCount++;
-                    SetRoomObject(childNode[i]);
+                    if (childNode.floor > 0)
+                    {
+                        SetRoomObject(childNode);
+                    }
                 }
                 break;
             default:
                 for (int i = 0; i < roomCount; i++)
                 {
-                    roomObj.Add(Instantiate(room_p, floor_List[node.floor - 1].transform));
-                    childNode.Add(roomObj[i].GetComponent<Room>().node);
-                    childNode[i].roomType = (ROOMVALUE)CreateSeed.Instance.RandNum(roomTypeRand);
-                    childNode[i].roomNum = createRoomCount;
-                    childNode[i].roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode[i].roomType.ToString();
-                    childNode[i].children = new List<MapNode>();
-                    childNode[i].floor = node.floor - 1;
-                    childNode[i].roomObj = roomObj[i];
-                    roomObj[i].name = childNode[i].roomName;
-                    node.children.Add(childNode[i]);
+                    roomObj = Instantiate(room_p, floor_List[node.floor - 1].transform);
+                    childNode = roomObj.GetComponent<Room>().node;
+                    childNode.roomType = (ROOMVALUE)CreateSeed.Instance.RandNum(roomTypeRand);
+                    childNode.roomNum = createRoomCount;
+                    childNode.roomName = "[" + (node.floor - 1) + "]" + "[" + i + "]" + childNode.roomType.ToString();
+                    childNode.children = new List<MapNode>();
+                    childNode.floor = node.floor - 1;
+                    childNode.roomObj = roomObj;
+                    roomObj.name = childNode.roomName;
+                    node.children.Add(childNode);
                     createRoomCount++;
-                    SetRoomObject(childNode[i]);
+                    if (childNode.floor > 0)
+                    {
+                        SetRoomObject(childNode);
+                    }
                 }
                 break;
         }
-        
+        */
     }
     
     #endregion
