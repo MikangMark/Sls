@@ -1310,7 +1310,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
   m_Value: 0.000000055390284
-  m_Size: 0.19680579
+  m_Size: 0.00000013346747
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3037,8 +3037,10 @@ MonoBehaviour:
   floor_List: []
   roomObj_Parents: {fileID: 1777411931}
   floorObj_Parents: {fileID: 1777411931}
+  room_List: []
   createRoomCount: 0
   roomTypeRand: 
+  floor2roomCount: 
 --- !u!114 &1135833418
 MonoBehaviour:
   m_ObjectHideFlags: 0

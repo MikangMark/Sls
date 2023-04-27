@@ -32,6 +32,16 @@ public class MapNode//방하나당 정보
         room_Img = map.room_Img;
         roomObj = map.roomObj;
     }
+    public MapNode()
+    {
+        roomNum = 0;
+        roomName = "";
+        children = new List<MapNode>();
+        floor = 0;
+        roomType = ROOMVALUE.DEFAULT;
+        room_Img = null;
+        roomObj = null;
+    }
     // 자식 스킬 추가
     public void AddChild(MapNode child)
     {

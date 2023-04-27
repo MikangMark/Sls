@@ -13,6 +13,10 @@ public class Room : MonoBehaviour
      */
 
     public MapNode node;
+    Room()
+    {
+        node = new MapNode();
+    }
    
     public void SettingRoom(MapNode data)
     {
