@@ -17,6 +17,7 @@ public class MapNode//방하나당 정보
     public int roomNum;
     public string roomName; // 방 이름
     public List<MapNode> children; // 자식 방 리스트
+    public List<GameObject> childrenObj;
     public int floor;//방의 층
     public ROOMVALUE roomType;
     public Image room_Img;
@@ -31,12 +32,14 @@ public class MapNode//방하나당 정보
         roomType = map.roomType;
         room_Img = map.room_Img;
         roomObj = map.roomObj;
+        childrenObj = map.childrenObj;
     }
     public MapNode()
     {
         roomNum = 0;
         roomName = "";
         children = new List<MapNode>();
+        childrenObj = new List<GameObject>();
         floor = 0;
         roomType = ROOMVALUE.DEFAULT;
         room_Img = null;
@@ -63,6 +66,7 @@ public class MapNode//방하나당 정보
         roomType = _data.roomType;
         room_Img = _data.room_Img;
         roomObj = _data.roomObj;
+        childrenObj = _data.childrenObj;
     }
 }
 public class MapTree//루트스킬관리
