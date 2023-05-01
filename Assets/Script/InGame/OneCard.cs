@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class OneCard : MonoBehaviour
 {
+    [SerializeField]
     public static int value = 0;
     public CardInfo thisCard;//key
     public CardValue thisCardValue;//value
@@ -16,6 +17,7 @@ public class OneCard : MonoBehaviour
     public TextMeshProUGUI cType;
     public TextMeshProUGUI cText;
     public Image cImg;
+    
     private void Start()
     {
         cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
@@ -26,7 +28,7 @@ public class OneCard : MonoBehaviour
         cImg = GameObject.Find("CardImg" + value).GetComponent<Image>();
         battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         thisCardValue = cardData.allInfoCard[thisCard];
-        value++;
+        Debug.Log(value);
     }
     private void FixedUpdate()
     {
@@ -53,6 +55,7 @@ public class OneCard : MonoBehaviour
                             return false;
                         }
                         battle.Attack(target, thisCardValue.skillValue[thisCardValue.type[i]]);
+
                         break;
                     case CardType.DEF:
                         if (target.tag.Equals("Monster"))
@@ -62,11 +65,12 @@ public class OneCard : MonoBehaviour
                         battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
                     case CardType.POW://아직 카드없음
-                        /*if (target.tag.Equals("Monster"))
+                        if (target.tag.Equals("Monster"))
                         {
                             return false;
                         }
-                        battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);*/
+                        battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
+
                         break;
                     case CardType.WEAK:
                         if (target.tag.Equals("Player"))

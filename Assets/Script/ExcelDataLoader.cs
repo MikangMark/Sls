@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CardInfo
 {
-    public enum Type { DEFAULT = 0, ATK, SK }
+    public enum Type { DEFAULT = 0, ATK, SK , POW}
 
     public int cost;
     public string title;
@@ -53,7 +53,11 @@ public class ExcelDataLoader : MonoBehaviour
                     case "SK":
                         tType = CardInfo.Type.SK;
                         break;
+                    case "POW":
+                        tType = CardInfo.Type.POW;
+                        break;
                 }
+                
 
                 CardInfo temp = new CardInfo();
                 Texture2D[] cardImgs = Resources.LoadAll<Texture2D>("CardImg");

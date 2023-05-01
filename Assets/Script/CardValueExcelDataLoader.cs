@@ -54,15 +54,15 @@ public class CardValueExcelDataLoader : MonoBehaviour
                                 temp.type.Add(CardType.ATK);
                                 temp.skillValue.Add(CardType.ATK, int.Parse(row[j]));
                                 break;
-                            case (int)SkillType.DEF:
+                            case (int)CardType.DEF:
                                 temp.type.Add(CardType.DEF);
                                 temp.skillValue.Add(CardType.DEF, int.Parse(row[j]));
                                 break;
-                            case (int)SkillType.POW:
+                            case (int)CardType.POW:
                                 temp.type.Add(CardType.POW);
                                 temp.skillValue.Add(CardType.POW, int.Parse(row[j]));
                                 break;
-                            case (int)SkillType.WEAK:
+                            case (int)CardType.WEAK:
                                 temp.type.Add(CardType.WEAK);
                                 temp.skillValue.Add(CardType.WEAK, int.Parse(row[j]));
                                 break;

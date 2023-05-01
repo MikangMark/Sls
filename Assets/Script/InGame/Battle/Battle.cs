@@ -17,8 +17,10 @@ public class Battle : MonoBehaviour
     public List<Monster> monsters;//전투중인 적의 리스트
     List<CardInfo> battleDeck;//전투에서 사용할 나의 덱
 
-    List<CardInfo> beforUse;//뽑을 카드모음
-    List<CardInfo> afterUse;//사용한카드모음
+    public List<CardInfo> beforUse;//뽑을 카드모음
+    public List<CardInfo> afterUse;//사용한 카드모음
+    public List<CardInfo> deletCard;//소멸된 카드모음
+
     List<CardInfo> myHand;//나의 손패카드정보
     List<GameObject> myCard;//나의 손패 오브젝트
     public GameObject myCardParent;
@@ -41,6 +43,7 @@ public class Battle : MonoBehaviour
         beforUse = new List<CardInfo>(battleDeck);
         myHand = new List<CardInfo>();
         afterUse = new List<CardInfo>();
+        deletCard = new List<CardInfo>();
         myCard = new List<GameObject>();
         playerBufList = new Dictionary<PlayerBuffType, int>();
         playerBufList.Add(PlayerBuffType.POW, 0);
@@ -54,6 +57,7 @@ public class Battle : MonoBehaviour
         thisTurn = Turn.Player;
         MyTurn();
     }
+    
     void MyTurn()
     {
         ShuffleDeck(beforUse);
@@ -129,6 +133,13 @@ public class Battle : MonoBehaviour
             myCard.Add(temp);                             //정보가들어간 카드오브젝트 내손에 넣기
         }
     }
+    public void UsedCardMove(OneCard target)
+    {
+        for(int i = 0; i < myHand.Count; i++)
+        {
+            
+        }
+    }
     void ReChargeEnergy(int reEnergy)
     {
         energy = reEnergy;
@@ -165,7 +176,7 @@ public class Battle : MonoBehaviour
     }
     public void Power(GameObject target, int value)//아직 힘카드 없음
     {
-        /*
+        
         switch (target.tag)
         {
             case "Monster":
@@ -173,10 +184,10 @@ public class Battle : MonoBehaviour
                 break;
 
             case "Player":
-
+                playerBufList[PlayerBuffType.POW] += value;
                 break;
         }
-        */
+        
     }
     public void Weak(GameObject target, int value)
     {

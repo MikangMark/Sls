@@ -20,7 +20,16 @@ public class BattleUI : MonoBehaviour
     GameObject playerBufPannel;
     [SerializeField]
     List<GameObject> monsterList;
-
+    [SerializeField]
+    GameObject beforeDeck;
+    [SerializeField]
+    GameObject afterDeck;
+    [SerializeField]
+    GameObject deleteDeck;
+    [SerializeField]
+    Button closeDeck;
+    [SerializeField]
+    GameObject deckList;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +39,11 @@ public class BattleUI : MonoBehaviour
         bufUI = new List<GameObject>();
         bufUI.Add(Instantiate(bufPreFabs[0], playerBufPannel.transform));
         bufUI.Add(Instantiate(bufPreFabs[1], playerBufPannel.transform));
+        for(int i = 0;i< bufUI.Count; i++)
+        {
+            bufUI[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = 0.ToString();
+        }
+        
     }
 
     // Update is called once per frame
@@ -63,5 +77,16 @@ public class BattleUI : MonoBehaviour
             bufUI[1].SetActive(false);
         }
         shieldObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.shiled.ToString();
+        for(int i =0;i< battle.playerBufList.Count; i++)
+        {
+            bufUI[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.playerBufList[(PlayerBuffType)i].ToString();
+        }
+        beforeDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.beforUse.Count.ToString();
+        afterDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.afterUse.Count.ToString();
+        deleteDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.deletCard.Count.ToString();
+    }
+    public void OnClickExitDeckList()
+    {
+
     }
 }

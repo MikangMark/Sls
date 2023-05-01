@@ -13,6 +13,8 @@ public class Deck : Singleton<Deck>
     int defence = 4;
     [SerializeField]
     int blow = 1;
+    [SerializeField]
+    int ignition = 1;
 
     // Start is called before the first frame update
 
@@ -38,6 +40,10 @@ public class Deck : Singleton<Deck>
         for (int i = 0; i < blow; i++)
         {
             deck.Add(cardList[2]);
+        }
+        for (int i = 0; i < ignition; i++)
+        {
+            deck.Add(cardList[3]);
         }
     }
 }
