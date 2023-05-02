@@ -30,6 +30,7 @@ public class BattleUI : MonoBehaviour
     Button closeDeck;
     [SerializeField]
     GameObject deckList;
+
     // Start is called before the first frame update
     void Start()
     {

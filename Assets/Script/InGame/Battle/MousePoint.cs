@@ -21,6 +21,17 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         
         cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
     }
+    private void Update()
+    {
+        if (InGame.Instance.openDeckView)
+        {
+            GetComponent<MousePoint>().enabled = false;
+        }
+        else
+        {
+            GetComponent<MousePoint>().enabled = true;
+        }
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

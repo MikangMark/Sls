@@ -15,14 +15,13 @@ public class Battle : MonoBehaviour
     public Character.CharInfo stat;//전투중인 나의 스텟
     public Dictionary<PlayerBuffType, int> playerBufList;//플레이어 버프 리스트
     public List<Monster> monsters;//전투중인 적의 리스트
-    List<CardInfo> battleDeck;//전투에서 사용할 나의 덱
+    List<GameObject> battleDeck;//전투에서 사용할 나의 덱
 
-    public List<CardInfo> beforUse;//뽑을 카드모음
-    public List<CardInfo> afterUse;//사용한 카드모음
-    public List<CardInfo> deletCard;//소멸된 카드모음
+    public List<GameObject> beforUse;//뽑을 카드모음
+    public List<GameObject> afterUse;//사용한 카드모음
+    public List<GameObject> deletCard;//소멸된 카드모음
+    public List<GameObject> myHand;//나의 손패카드모음
 
-    List<CardInfo> myHand;//나의 손패카드정보
-    List<GameObject> myCard;//나의 손패 오브젝트
     public GameObject myCardParent;
 
     public GameObject cardPrf;
@@ -38,13 +37,12 @@ public class Battle : MonoBehaviour
     {
         stat = new Character.CharInfo();
 
-        battleDeck = new List<CardInfo>(Deck.Instance.deck);
+        battleDeck = new List<GameObject>(Deck.Instance.cardList_Obj);
 
-        beforUse = new List<CardInfo>(battleDeck);
-        myHand = new List<CardInfo>();
-        afterUse = new List<CardInfo>();
-        deletCard = new List<CardInfo>();
-        myCard = new List<GameObject>();
+        beforUse = new List<GameObject>(battleDeck);
+        myHand = new List<GameObject>();
+        afterUse = new List<GameObject>();
+        deletCard = new List<GameObject>();
         playerBufList = new Dictionary<PlayerBuffType, int>();
         playerBufList.Add(PlayerBuffType.POW, 0);
         playerBufList.Add(PlayerBuffType.WEAK, 0);
@@ -100,37 +98,36 @@ public class Battle : MonoBehaviour
     }
     void CardDraw(int divide)//카드를 나눠줄때마다 실행
     {
-        GameObject temp;
         for (int i = 0; i < divide; i++)
         {
-            myHand.Add(beforUse[i]);                                      //드로우할카드 정보 저장
-            temp = Instantiate(cardPrf);
-            temp.name = "Card[" + i + "]";
-            for(int j=0; j<temp.transform.childCount; j++)
+            GameObject temp = beforUse[i];
+            temp.GetComponent<OneCard>().code -= battleDeck.Count;
+            temp.name = "Hand_Card[" + i + "]";
+            for (int j = 0; j < temp.transform.childCount; j++)
             {
                 switch (j)
                 {
                     case 0:
-                        temp.transform.GetChild(j).name = "CostImg" + i;
-                        temp.transform.GetChild(j).GetChild(0).name = "CostText" + i;
+                        temp.transform.GetChild(j).name = "Hand_CostImg" + i;
+                        temp.transform.GetChild(j).GetChild(0).name = "Hand_CostText" + i;
                         break;
                     case 1:
-                        temp.transform.GetChild(j).name = "CardTitle" + i;
+                        temp.transform.GetChild(j).name = "Hand_CardTitle" + i;
                         break;
                     case 2:
-                        temp.transform.GetChild(j).name = "CardText" + i;
+                        temp.transform.GetChild(j).name = "Hand_CardText" + i;
                         break;
                     case 3:
-                        temp.transform.GetChild(j).name = "CardImg" + i;
+                        temp.transform.GetChild(j).name = "Hand_CardImg" + i;
                         break;
                     case 4:
-                        temp.transform.GetChild(j).name = "CardType" + i;
+                        temp.transform.GetChild(j).name = "Hand_CardType" + i;
                         break;
                 }
             }
-            temp.GetComponent<OneCard>().thisCard = myHand[i];
-            temp.transform.parent = myCardParent.transform;
-            myCard.Add(temp);                             //정보가들어간 카드오브젝트 내손에 넣기
+            myHand.Add(Instantiate(temp, myCardParent.transform));                             //정보가들어간 카드오브젝트 내손에 넣기
+
+            beforUse.RemoveAt(i);
         }
     }
     public void UsedCardMove(OneCard target)

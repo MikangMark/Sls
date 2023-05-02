@@ -8,6 +8,8 @@ public class OneCard : MonoBehaviour
 {
     [SerializeField]
     public static int value = 0;
+    [SerializeField]
+    public int code = value;
     public CardInfo thisCard;//key
     public CardValue thisCardValue;//value
     private CardValueExcelDataLoader cardData;
@@ -20,15 +22,33 @@ public class OneCard : MonoBehaviour
     
     private void Start()
     {
-        cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
-        cCost = GameObject.Find("CostText" + value).GetComponent<TextMeshProUGUI>();
-        cTitle = GameObject.Find("CardTitle" + value).GetComponent<TextMeshProUGUI>();
-        cType = GameObject.Find("CardType" + value).GetComponent<TextMeshProUGUI>();
-        cText = GameObject.Find("CardText" + value).GetComponent<TextMeshProUGUI>();
-        cImg = GameObject.Find("CardImg" + value).GetComponent<Image>();
-        battle = GameObject.Find("BattleScript").GetComponent<Battle>();
-        thisCardValue = cardData.allInfoCard[thisCard];
-        Debug.Log(value);
+        if (transform.parent.tag.Equals("Hand"))
+        {
+            cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
+            cCost = GameObject.Find("Hand_CostText" + code).GetComponent<TextMeshProUGUI>();
+            cTitle = GameObject.Find("Hand_CardTitle" + code).GetComponent<TextMeshProUGUI>();
+            cType = GameObject.Find("Hand_CardType" + code).GetComponent<TextMeshProUGUI>();
+            cText = GameObject.Find("Hand_CardText" + code).GetComponent<TextMeshProUGUI>();
+            cImg = GameObject.Find("Hand_CardImg" + code).GetComponent<Image>();
+            battle = GameObject.Find("BattleScript").GetComponent<Battle>();
+            thisCardValue = cardData.allInfoCard[thisCard];
+            value++;
+            Debug.Log(value);
+        }
+        else if(transform.parent.tag.Equals("CardView"))
+        {
+            cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
+            cCost = GameObject.Find("CostText" + code).GetComponent<TextMeshProUGUI>();
+            cTitle = GameObject.Find("CardTitle" + code).GetComponent<TextMeshProUGUI>();
+            cType = GameObject.Find("CardType" + code).GetComponent<TextMeshProUGUI>();
+            cText = GameObject.Find("CardText" + code).GetComponent<TextMeshProUGUI>();
+            cImg = GameObject.Find("CardImg" + code).GetComponent<Image>();
+            battle = GameObject.Find("BattleScript").GetComponent<Battle>();
+            thisCardValue = cardData.allInfoCard[thisCard];
+            value++;
+            Debug.Log(value);
+        }
+        
     }
     private void FixedUpdate()
     {

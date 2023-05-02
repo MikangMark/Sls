@@ -18,7 +18,17 @@ public class InGameUI : MonoBehaviour
     public GameObject map;
     public TextMeshProUGUI energy_Tmp;
 
+    [SerializeField]
+    GameObject cardPrf;
+    [SerializeField]
+    GameObject content;
 
+    [SerializeField]
+    GameObject deckList_View;
+    private void Awake()
+    {
+        CreateDeckObj();   
+    }
     private void Start()
     {
         battle = GameObject.Find("BattleScript").GetComponent<Battle>();
@@ -30,6 +40,8 @@ public class InGameUI : MonoBehaviour
         //battle_Img.SetActive(false);
         //map.SetActive(false);
         energy_Tmp.text = 0 + "/" + 0;
+        
+        deckList_View.SetActive(false);
     }
     private void FixedUpdate()
     {
@@ -38,5 +50,50 @@ public class InGameUI : MonoBehaviour
         money_Tmp.text = InGame.Instance.charInfo.money.ToString();
         deckCount_Tmp.text = Deck.Instance.deck.Count.ToString();
         energy_Tmp.text = battle.energy + "/" + battle.maxEnergy;
+    }
+
+    public void CreateDeckObj()
+    {
+        GameObject temp;
+        for (int i = 0; i < Deck.Instance.deck.Count; i++)
+        {
+            temp = Instantiate(cardPrf, content.transform);
+            temp.GetComponent<OneCard>().thisCard = Deck.Instance.deck[i];
+            temp.name = "Card[" + i + "]";
+            for (int j = 0; j < temp.transform.childCount; j++)
+            {
+                switch (j)
+                {
+                    case 0:
+                        temp.transform.GetChild(j).name = "CostImg" + i;
+                        temp.transform.GetChild(j).GetChild(0).name = "CostText" + i;
+                        break;
+                    case 1:
+                        temp.transform.GetChild(j).name = "CardTitle" + i;
+                        break;
+                    case 2:
+                        temp.transform.GetChild(j).name = "CardText" + i;
+                        break;
+                    case 3:
+                        temp.transform.GetChild(j).name = "CardImg" + i;
+                        break;
+                    case 4:
+                        temp.transform.GetChild(j).name = "CardType" + i;
+                        break;
+                }
+            }
+            Deck.Instance.cardList_Obj.Add(temp);
+        }
+    }
+
+    public void OnClickDeckView_Btn()
+    {
+        deckList_View.SetActive(true);
+        InGame.Instance.openDeckView = true;
+    }
+    public void OnClickDeckExitView_Btn()
+    {
+        deckList_View.SetActive(false);
+        InGame.Instance.openDeckView = false;
     }
 }

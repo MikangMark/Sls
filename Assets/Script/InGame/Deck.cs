@@ -15,6 +15,7 @@ public class Deck : Singleton<Deck>
     int blow = 1;
     [SerializeField]
     int ignition = 1;
+    public List<GameObject> cardList_Obj;
 
     // Start is called before the first frame update
 
@@ -29,7 +30,8 @@ public class Deck : Singleton<Deck>
         }
 
         deck = new List<CardInfo>();
-        for(int i = 0; i < attack; i++)
+        cardList_Obj = new List<GameObject>();
+        for (int i = 0; i < attack; i++)
         {
             deck.Add(cardList[0]);
         }

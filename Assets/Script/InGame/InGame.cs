@@ -5,6 +5,7 @@ using UnityEngine;
 public class InGame : Singleton<InGame>
 {
     public Character.CharInfo charInfo;
+    public bool openDeckView;
     private void Awake()
     {
         Init();
@@ -12,6 +13,7 @@ public class InGame : Singleton<InGame>
     // Start is called before the first frame update
     void Start()
     {
+        openDeckView = false;
         //charInfo = Character.Instance.ironclead;
         switch (PlayerPrefs.GetInt("CharType")) //픽창에서선텍한 캐릭
         {
