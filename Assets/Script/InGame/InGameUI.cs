@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 using CharType = Character.CharType;
 
@@ -25,6 +26,8 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     GameObject deckList_View;
+
+    bool OnDeckView = false;
     private void Awake()
     {
         CreateDeckObj();   
@@ -50,6 +53,13 @@ public class InGameUI : MonoBehaviour
         money_Tmp.text = InGame.Instance.charInfo.money.ToString();
         deckCount_Tmp.text = Deck.Instance.deck.Count.ToString();
         energy_Tmp.text = battle.energy + "/" + battle.maxEnergy;
+
+        
+    }
+    private void Update()
+    {
+        deckList_View.SetActive(OnDeckView);
+        InGame.Instance.openDeckView = OnDeckView;
     }
 
     public void CreateDeckObj()
@@ -86,14 +96,17 @@ public class InGameUI : MonoBehaviour
         }
     }
 
+    
     public void OnClickDeckView_Btn()
     {
-        deckList_View.SetActive(true);
-        InGame.Instance.openDeckView = true;
-    }
-    public void OnClickDeckExitView_Btn()
-    {
-        deckList_View.SetActive(false);
-        InGame.Instance.openDeckView = false;
+        if (OnDeckView)
+        {
+            OnDeckView = false;
+        }
+        else
+        {
+            OnDeckView = true;
+        }
+        
     }
 }

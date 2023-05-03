@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class OneCard : MonoBehaviour
 {
-    [SerializeField]
-    public static int value = 0;
-    [SerializeField]
-    public int code = value;
     public CardInfo thisCard;//key
     public CardValue thisCardValue;//value
     private CardValueExcelDataLoader cardData;
@@ -22,33 +18,15 @@ public class OneCard : MonoBehaviour
     
     private void Start()
     {
-        if (transform.parent.tag.Equals("Hand"))
+        cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
+        battle = GameObject.Find("BattleScript").GetComponent<Battle>();
+        Debug.Log(name);
+        if (!transform.parent.tag.Equals("Hand"))
         {
-            cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
-            cCost = GameObject.Find("Hand_CostText" + code).GetComponent<TextMeshProUGUI>();
-            cTitle = GameObject.Find("Hand_CardTitle" + code).GetComponent<TextMeshProUGUI>();
-            cType = GameObject.Find("Hand_CardType" + code).GetComponent<TextMeshProUGUI>();
-            cText = GameObject.Find("Hand_CardText" + code).GetComponent<TextMeshProUGUI>();
-            cImg = GameObject.Find("Hand_CardImg" + code).GetComponent<Image>();
-            battle = GameObject.Find("BattleScript").GetComponent<Battle>();
-            thisCardValue = cardData.allInfoCard[thisCard];
-            value++;
-            Debug.Log(value);
+            
         }
-        else if(transform.parent.tag.Equals("CardView"))
-        {
-            cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
-            cCost = GameObject.Find("CostText" + code).GetComponent<TextMeshProUGUI>();
-            cTitle = GameObject.Find("CardTitle" + code).GetComponent<TextMeshProUGUI>();
-            cType = GameObject.Find("CardType" + code).GetComponent<TextMeshProUGUI>();
-            cText = GameObject.Find("CardText" + code).GetComponent<TextMeshProUGUI>();
-            cImg = GameObject.Find("CardImg" + code).GetComponent<Image>();
-            battle = GameObject.Find("BattleScript").GetComponent<Battle>();
-            thisCardValue = cardData.allInfoCard[thisCard];
-            value++;
-            Debug.Log(value);
-        }
-        
+        thisCardValue = cardData.allInfoCard[thisCard];
+
     }
     private void FixedUpdate()
     {
@@ -57,6 +35,15 @@ public class OneCard : MonoBehaviour
         cType.text = thisCard.type.ToString();
         cText.text = thisCard.text.ToString();
         cImg.sprite = thisCard.cardImg;
+
+        if (InGame.Instance.openDeckView)
+        {
+            GetComponent<MousePoint>().enabled = false;
+        }
+        else
+        {
+            GetComponent<MousePoint>().enabled = true;
+        }
     }
 
     public bool UseThisCard(GameObject target)//카드사용의 성공했으면 true

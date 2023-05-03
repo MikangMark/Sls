@@ -101,30 +101,6 @@ public class Battle : MonoBehaviour
         for (int i = 0; i < divide; i++)
         {
             GameObject temp = beforUse[i];
-            temp.GetComponent<OneCard>().code -= battleDeck.Count;
-            temp.name = "Hand_Card[" + i + "]";
-            for (int j = 0; j < temp.transform.childCount; j++)
-            {
-                switch (j)
-                {
-                    case 0:
-                        temp.transform.GetChild(j).name = "Hand_CostImg" + i;
-                        temp.transform.GetChild(j).GetChild(0).name = "Hand_CostText" + i;
-                        break;
-                    case 1:
-                        temp.transform.GetChild(j).name = "Hand_CardTitle" + i;
-                        break;
-                    case 2:
-                        temp.transform.GetChild(j).name = "Hand_CardText" + i;
-                        break;
-                    case 3:
-                        temp.transform.GetChild(j).name = "Hand_CardImg" + i;
-                        break;
-                    case 4:
-                        temp.transform.GetChild(j).name = "Hand_CardType" + i;
-                        break;
-                }
-            }
             myHand.Add(Instantiate(temp, myCardParent.transform));                             //정보가들어간 카드오브젝트 내손에 넣기
 
             beforUse.RemoveAt(i);

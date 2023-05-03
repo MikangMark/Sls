@@ -791,17 +791,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159c4ff76f1db754bb186886eda74716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  code: 6
   thisCard:
     cost: 0
     title: 
     type: 0
     text: 
     cardImg: {fileID: 0}
-  cCost: {fileID: 0}
-  cTitle: {fileID: 0}
-  cType: {fileID: 0}
-  cText: {fileID: 0}
-  cImg: {fileID: 0}
+  thisCardValue:
+    cost: 0
+    type: 
+  battle: {fileID: 0}
+  cCost: {fileID: 8404524484673036966}
+  cTitle: {fileID: 8404524484414264086}
+  cType: {fileID: 1720689298674651977}
+  cText: {fileID: 8404524485127798950}
+  cImg: {fileID: 8404524484705028699}
 --- !u!114 &-6950932916337767465
 MonoBehaviour:
   m_ObjectHideFlags: 0
