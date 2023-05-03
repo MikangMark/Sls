@@ -20,11 +20,6 @@ public class OneCard : MonoBehaviour
     {
         cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
         battle = GameObject.Find("BattleScript").GetComponent<Battle>();
-        Debug.Log(name);
-        if (!transform.parent.tag.Equals("Hand"))
-        {
-            
-        }
         thisCardValue = cardData.allInfoCard[thisCard];
 
     }
@@ -62,30 +57,32 @@ public class OneCard : MonoBehaviour
                             return false;
                         }
                         battle.Attack(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-
-                        break;
+                        battle.UsedCardMove(this);
+                        return true;
                     case CardType.DEF:
                         if (target.tag.Equals("Monster"))
                         {
                             return false;
                         }
                         battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
-                        break;
+                        battle.UsedCardMove(this);
+                        return true;
                     case CardType.POW://아직 카드없음
                         if (target.tag.Equals("Monster"))
                         {
                             return false;
                         }
                         battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-
-                        break;
+                        battle.UsedCardMove(this);
+                        return true;
                     case CardType.WEAK:
                         if (target.tag.Equals("Player"))
                         {
                             return false;
                         }
                         battle.Weak(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-                        break;
+                        battle.UsedCardMove(this);
+                        return true;
                 }
 
             }

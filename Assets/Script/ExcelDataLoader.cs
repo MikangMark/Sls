@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 [System.Serializable]
-public class CardInfo
+public class CardInfo : IEquatable<CardInfo>
 {
     public enum Type { DEFAULT = 0, ATK, SK , POW}
 
@@ -12,7 +13,22 @@ public class CardInfo
     public Type type;
     public string text;
     public Sprite cardImg;
-
+    public CardInfo()
+    {
+        cost = 0;
+        title = "";
+        type = Type.DEFAULT;
+        text = "";
+        cardImg = null;
+    }
+    public CardInfo(int _cost, string _title, Type _type, string _text, Sprite _img)
+    {
+        cost = _cost;
+        title = _title;
+        type = _type;
+        text = _text;
+        cardImg = _img;
+    }
     public void InputInfo(int _cost,string _title, Type _type, string _text, Sprite _img)
     {
         cost = _cost;
@@ -20,6 +36,33 @@ public class CardInfo
         type = _type;
         text = _text;
         cardImg = _img;
+    }
+    
+    
+
+    public override int GetHashCode()
+    {
+        int hash = 17;
+        hash = hash * 23 + cost.GetHashCode();
+        hash = hash * 23 + title.GetHashCode();
+        hash = hash * 23 + type.GetHashCode();
+        hash = hash * 23 + text.GetHashCode();
+        hash = hash * 23 + cardImg.GetHashCode();
+        return hash;
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is CardInfo other)
+        {
+            return Equals(other);
+        }
+        return false;
+    }
+
+    public bool Equals(CardInfo other)
+    {
+        return Mathf.Approximately(cost, other.cost) && string.Equals(title, other.title) && Mathf.Approximately((int)type, (int)other.type) && string.Equals(text, other.text) && cardImg == other.cardImg;
     }
 }
 

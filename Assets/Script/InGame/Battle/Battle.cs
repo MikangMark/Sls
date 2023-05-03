@@ -25,6 +25,9 @@ public class Battle : MonoBehaviour
     public GameObject myCardParent;
 
     public GameObject cardPrf;
+
+    [SerializeField]
+    GameObject playerPrf;
     void OnEnable()//setactive true될때 실행
     {
         //전투시작 셋팅
@@ -102,7 +105,6 @@ public class Battle : MonoBehaviour
         {
             GameObject temp = beforUse[i];
             myHand.Add(Instantiate(temp, myCardParent.transform));                             //정보가들어간 카드오브젝트 내손에 넣기
-
             beforUse.RemoveAt(i);
         }
     }
