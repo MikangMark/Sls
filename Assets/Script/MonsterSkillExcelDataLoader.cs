@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum SkillType { DEFAULT = 0, ATK, DEF, POW, WEAK }
+public enum SkillType { ATK = 0, DEF, POW, WEAK, VULNER, IMPAIR, SLIMECARD, STEAL, RESTRAINT, CONSCIOUS }
 [System.Serializable]
 public class MonsterSkill
 {
@@ -61,6 +61,30 @@ public class MonsterSkillExcelDataLoader : MonoBehaviour
                             case (int)SkillType.WEAK:
                                 temp.type.Add(SkillType.WEAK);
                                 temp.skillValue.Add(SkillType.WEAK, int.Parse(row[j]));
+                                break;
+                            case (int)SkillType.VULNER:
+                                temp.type.Add(SkillType.VULNER);
+                                temp.skillValue.Add(SkillType.VULNER, int.Parse(row[j]));
+                                break;
+                            case (int)SkillType.IMPAIR:
+                                temp.type.Add(SkillType.IMPAIR);
+                                temp.skillValue.Add(SkillType.IMPAIR, int.Parse(row[j]));
+                                break;
+                            case (int)SkillType.SLIMECARD:
+                                temp.type.Add(SkillType.SLIMECARD);
+                                temp.skillValue.Add(SkillType.SLIMECARD, int.Parse(row[j]));
+                                break;
+                            case (int)SkillType.STEAL:
+                                temp.type.Add(SkillType.STEAL);
+                                temp.skillValue.Add(SkillType.STEAL, int.Parse(row[j]));
+                                break;
+                            case (int)SkillType.RESTRAINT:
+                                temp.type.Add(SkillType.RESTRAINT);
+                                temp.skillValue.Add(SkillType.RESTRAINT, int.Parse(row[j]));
+                                break;
+                            case (int)SkillType.CONSCIOUS:
+                                temp.type.Add(SkillType.CONSCIOUS);
+                                temp.skillValue.Add(SkillType.CONSCIOUS, int.Parse(row[j]));
                                 break;
                         }
                     }
