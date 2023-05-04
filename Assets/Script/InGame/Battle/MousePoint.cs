@@ -55,11 +55,11 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
             {
                 if (gameObject.GetComponent<OneCard>().UseThisCard(hit.gameObject))//카드가 제데로 적동됬는지 여부검사
                 {
-
+                    Debug.Log(name);
                 }
                 else//실패했으경우 실패했다는 UI 표기
                 {
-
+                    Debug.Log("코스트가없거나 올바르지않은 카드사용");
                 }
                 
             }

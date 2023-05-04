@@ -45,7 +45,7 @@ public class OneCard : MonoBehaviour
     {
         if (battle.energy >= thisCard.cost)
         {
-            battle.energy -= thisCard.cost;
+            
             //thisCardValue의 type값을 읽어 어떤카드인지 인식
             for (int i = 0; i < thisCardValue.type.Count; i++)
             {
@@ -56,6 +56,7 @@ public class OneCard : MonoBehaviour
                         {
                             return false;
                         }
+                        battle.energy -= thisCard.cost;
                         battle.Attack(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         battle.UsedCardMove(this);
                         return true;
@@ -64,6 +65,7 @@ public class OneCard : MonoBehaviour
                         {
                             return false;
                         }
+                        battle.energy -= thisCard.cost;
                         battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
                         battle.UsedCardMove(this);
                         return true;
@@ -72,6 +74,7 @@ public class OneCard : MonoBehaviour
                         {
                             return false;
                         }
+                        battle.energy -= thisCard.cost;
                         battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         battle.UsedCardMove(this);
                         return true;
@@ -80,6 +83,7 @@ public class OneCard : MonoBehaviour
                         {
                             return false;
                         }
+                        battle.energy -= thisCard.cost;
                         battle.Weak(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         battle.UsedCardMove(this);
                         return true;

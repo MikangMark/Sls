@@ -13,11 +13,13 @@ public class Monster : MonoBehaviour
     public List<int> skillCord;//해당 몬스터가 보유하고있는 스킬 코드 인스팩터에 입력되어있음
     public MonsterManager monsterManager;
     public Dictionary<MonsterBuffType, int> bufList;//해당 몬스터가 보유하고있는 버프/디버프 리스트 key 버프타입 value 적용된 숫자
+    public int shiled;
     [SerializeField]
     Intent intent;// 다음턴에행동할 의도
 
     private void Start()
     {
+        shiled = 0;
         monsterManager = GameObject.Find("DataObj").GetComponent<MonsterManager>();
         stat = monsterManager.monsterInfo[monsterName].stat;
         for(int i = 0; i < skillCord.Count; i++)

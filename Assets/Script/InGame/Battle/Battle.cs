@@ -14,7 +14,7 @@ public class Battle : MonoBehaviour
     public int shiled;
     public Character.CharInfo stat;//전투중인 나의 스텟
     public Dictionary<PlayerBuffType, int> playerBufList;//플레이어 버프 리스트
-    public List<Monster> monsters;//전투중인 적의 리스트
+    public List<GameObject> monsters;//전투중인 적의 리스트
     List<GameObject> battleDeck;//전투에서 사용할 나의 덱
 
     public List<GameObject> beforUse;//뽑을 카드모음
@@ -25,9 +25,12 @@ public class Battle : MonoBehaviour
     public GameObject myCardParent;
 
     public GameObject cardPrf;
+    public GameObject monsterPrf;
 
     [SerializeField]
     GameObject playerPrf;
+    [SerializeField]
+    GameObject playerPos;
     void OnEnable()//setactive true될때 실행
     {
         //전투시작 셋팅
@@ -39,9 +42,10 @@ public class Battle : MonoBehaviour
     void initData()
     {
         stat = new Character.CharInfo();
-
+        Instantiate(playerPrf, playerPos.transform);
         battleDeck = new List<GameObject>(Deck.Instance.cardList_Obj);
-
+        monsters = new List<GameObject>();
+        CreateEnemy();
         beforUse = new List<GameObject>(battleDeck);
         myHand = new List<GameObject>();
         afterUse = new List<GameObject>();
@@ -57,6 +61,10 @@ public class Battle : MonoBehaviour
         refillEnergy = maxEnergy;
         thisTurn = Turn.Player;
         MyTurn();
+    }
+    void CreateEnemy()
+    {
+
     }
     
     void MyTurn()
