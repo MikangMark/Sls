@@ -20,6 +20,7 @@ public class Monster : MonoBehaviour
     private void Start()
     {
         shiled = 0;
+        monsterName = name;
         monsterManager = GameObject.Find("DataObj").GetComponent<MonsterManager>();
         stat = monsterManager.monsterInfo[monsterName].stat;
         for(int i = 0; i < skillCord.Count; i++)

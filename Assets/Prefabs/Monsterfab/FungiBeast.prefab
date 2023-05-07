@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 2860313037890880125}
   - component: {fileID: 2860313037890880126}
   m_Layer: 6
-  m_Name: Monster
+  m_Name: FungiBeast
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff951ad3ade4d334e850ac4997a0acdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: Slime
+  monsterName: FungiBeast
   stat:
     name: 
     maxHp: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
     img: {fileID: 0}
     shield: 0
   skill: []
-  skillCord: 11270000122700001327000014270000
+  skillCord: 1f27000020270000
   monsterManager: {fileID: 0}
   shiled: 0
   intent: 0

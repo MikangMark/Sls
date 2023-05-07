@@ -31,6 +31,8 @@ public class Battle : MonoBehaviour
     GameObject playerPrf;
     [SerializeField]
     GameObject playerPos;
+
+    public List<string> monsterGrup;
     void OnEnable()//setactive true될때 실행
     {
         //전투시작 셋팅
@@ -64,6 +66,12 @@ public class Battle : MonoBehaviour
     }
     void CreateEnemy()
     {
+        string[] oneMonster;
+        for(int i = 0; i < monsterGrup.Count; i++)
+        {
+            oneMonster = monsterGrup[i].Split(',');
+        }
+
 
     }
     
