@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum SkillType { ATK = 0, DEF, POW, WEAK, VULNER, IMPAIR, SLIMECARD, STEAL, RESTRAINT, CONSCIOUS }
+public enum SkillType { ATK = 0, DEF, POW, WEAK, VULNER, IMPAIR, SLIMECARD, RESTRAINT, CONSCIOUS }
 [System.Serializable]
 public class MonsterSkill
 {
@@ -73,10 +73,6 @@ public class MonsterSkillExcelDataLoader : MonoBehaviour
                             case (int)SkillType.SLIMECARD:
                                 temp.type.Add(SkillType.SLIMECARD);
                                 temp.skillValue.Add(SkillType.SLIMECARD, int.Parse(row[j]));
-                                break;
-                            case (int)SkillType.STEAL:
-                                temp.type.Add(SkillType.STEAL);
-                                temp.skillValue.Add(SkillType.STEAL, int.Parse(row[j]));
                                 break;
                             case (int)SkillType.RESTRAINT:
                                 temp.type.Add(SkillType.RESTRAINT);

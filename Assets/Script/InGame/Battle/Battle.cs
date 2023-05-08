@@ -81,12 +81,14 @@ public class Battle : MonoBehaviour
     void CreateEnemy()
     {
         int temp = -1;
+        int randnum;
         for (int i = 0; i < 2; i++)
         {
-            if(temp != CreateSeed.Instance.RandNum(0, monsterGrup.Count))
+            randnum = CreateSeed.Instance.RandNum(0, monsterGrup.Count);
+            if (temp != randnum)
             {
-                temp = CreateSeed.Instance.RandNum(0, monsterGrup.Count);
-                GameObject oneMonster = Instantiate(monsterManager.monsterPfab[CreateSeed.Instance.RandNum(0, monsterGrup.Count)], monsterPos.transform);
+                temp = randnum;
+                GameObject oneMonster = Instantiate(monsterManager.monsterPfab[temp], monsterPos.transform);
                 Debug.Log(oneMonster.name);
                 monsters.Add(oneMonster);
             }

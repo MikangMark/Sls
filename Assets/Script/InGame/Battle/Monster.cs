@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Monster : MonoBehaviour
 {
-    enum Intent { DEFAULT = -1, ATK = 0, DEF, BUF, DBUF, ATK_DEF, ATK_BUF, ATK_DBUF, DEF_BUF, DEF_DBUF, BUF_DBUF};
+    enum Intent { ATK = 0, DEF, BUF, DBUF, ATK_DEF, ATK_BUF, ATK_DBUF, DEF_BUF, DEF_DBUF, BUF_DBUF};
     public string monsterName;//인스펙터에서 입력되어있는 몬스터이름
     public MonsterStat stat;//해당몬스터의 스텟
     public List<MonsterSkill> skill;//해당몬스터가 보유중인 스킬
@@ -16,7 +16,9 @@ public class Monster : MonoBehaviour
     public int weak;
     public int shiled;
     [SerializeField]
-    Intent intent;// 다음턴에행동할 의도
+    Intent intent;// 다음턴에행동할 의도\
+
+    public MonsterSkill nextSkill;
 
     private void Start()
     {
@@ -32,20 +34,14 @@ public class Monster : MonoBehaviour
         bufList = new Dictionary<MonsterBuffType, int>();
         bufList.Add(MonsterBuffType.POW, 0);
         bufList.Add(MonsterBuffType.WEAK, 0);
-        intent = Intent.DEFAULT;
+        NextUseSkill();
     }
 
-    public void NextUseSkill(int cord)
+    public void NextUseSkill()
     {
-
+        nextSkill = skill[CreateSeed.Instance.RandNum(0, skill.Count)];
     }
 
-    public int SelectRandSkill()
-    {
-
-
-        return 0;
-    }
     private void FixedUpdate()
     {
         weak = bufList[MonsterBuffType.WEAK];
