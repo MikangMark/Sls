@@ -30,7 +30,14 @@ public class BattleUI : MonoBehaviour
     Button closeDeck;
     [SerializeField]
     GameObject deckList;
-
+    [SerializeField]
+    GameObject afterUsedCardView;
+    [SerializeField]
+    GameObject beforCardView;
+    [SerializeField]
+    GameObject deleteCardView;
+    [SerializeField]
+    GameObject cardPrf;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +51,6 @@ public class BattleUI : MonoBehaviour
         {
             bufUI[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = 0.ToString();
         }
-        
     }
 
     // Update is called once per frame
@@ -85,9 +91,32 @@ public class BattleUI : MonoBehaviour
         beforeDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.beforUse.Count.ToString();
         afterDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.afterUse.Count.ToString();
         deleteDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.deletCard.Count.ToString();
+        
     }
-    public void OnClickExitDeckList()
+    public void OnClickUsedCardView()
     {
-
+        afterUsedCardView.SetActive(true);
     }
+    public void OnClickExitUsedCardView()
+    {
+        afterUsedCardView.SetActive(false);
+    }
+    public void OnClickBeforCardView()
+    {
+        beforCardView.SetActive(true);
+    }
+    public void OnClickExitBeforCardView()
+    {
+        beforCardView.SetActive(false);
+    }
+    public void OnClickDeleteCardView()
+    {
+        deleteCardView.SetActive(true);
+    }
+    public void OnClickExitDeleteCardView()
+    {
+        deleteCardView.SetActive(false);
+    }
+
+    
 }

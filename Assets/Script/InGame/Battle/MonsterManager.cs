@@ -25,6 +25,7 @@ public class MonsterManager : MonoBehaviour
 
     public Dictionary<string, MonsterInfo> monsterInfo;//모든몬스터의 스텟 및 스킬 정보 ex(슬라임,슬라임정보)
 
+    public List<GameObject> monsterPfab;//모든몬스터 프리펩
     private void Start()
     {
         monsterInfo = new Dictionary<string, MonsterInfo>();

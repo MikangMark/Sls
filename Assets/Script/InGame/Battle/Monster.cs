@@ -13,6 +13,7 @@ public class Monster : MonoBehaviour
     public List<int> skillCord;//해당 몬스터가 보유하고있는 스킬 코드 인스팩터에 입력되어있음
     public MonsterManager monsterManager;
     public Dictionary<MonsterBuffType, int> bufList;//해당 몬스터가 보유하고있는 버프/디버프 리스트 key 버프타입 value 적용된 숫자
+    public int weak;
     public int shiled;
     [SerializeField]
     Intent intent;// 다음턴에행동할 의도
@@ -20,13 +21,14 @@ public class Monster : MonoBehaviour
     private void Start()
     {
         shiled = 0;
-        monsterName = name;
+        name = monsterName;
         monsterManager = GameObject.Find("DataObj").GetComponent<MonsterManager>();
         stat = monsterManager.monsterInfo[monsterName].stat;
         for(int i = 0; i < skillCord.Count; i++)
         {
             skill.Add(monsterManager.monsterInfo[monsterName].skill[i]);
         }
+        GetComponent<Image>().sprite = stat.img;
         bufList = new Dictionary<MonsterBuffType, int>();
         bufList.Add(MonsterBuffType.POW, 0);
         bufList.Add(MonsterBuffType.WEAK, 0);
@@ -44,7 +46,10 @@ public class Monster : MonoBehaviour
 
         return 0;
     }
-
+    private void FixedUpdate()
+    {
+        weak = bufList[MonsterBuffType.WEAK];
+    }
 
     //몬스터한마리마다 이 스크립트를 소유
     //몬스터 공격수치 체력 방어수치 사용하는 몬스터이미지 의도이미지(Intent) 의도타입 사용하는스킬코드

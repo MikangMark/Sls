@@ -45,7 +45,6 @@ public class OneCard : MonoBehaviour
     {
         if (battle.energy >= thisCard.cost)
         {
-            
             //thisCardValue의 type값을 읽어 어떤카드인지 인식
             for (int i = 0; i < thisCardValue.type.Count; i++)
             {
@@ -56,37 +55,45 @@ public class OneCard : MonoBehaviour
                         {
                             return false;
                         }
-                        battle.energy -= thisCard.cost;
+                        if (i == 0)
+                        {
+                            battle.energy -= thisCard.cost;
+                        }
                         battle.Attack(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-                        battle.UsedCardMove(this);
-                        return true;
+                        break;
                     case CardType.DEF:
                         if (target.tag.Equals("Monster"))
                         {
                             return false;
                         }
-                        battle.energy -= thisCard.cost;
+                        if (i == 0)
+                        {
+                            battle.energy -= thisCard.cost;
+                        }
                         battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
-                        battle.UsedCardMove(this);
-                        return true;
+                        break;
                     case CardType.POW://아직 카드없음
                         if (target.tag.Equals("Monster"))
                         {
                             return false;
                         }
-                        battle.energy -= thisCard.cost;
+                        if (i == 0)
+                        {
+                            battle.energy -= thisCard.cost;
+                        }
                         battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-                        battle.UsedCardMove(this);
-                        return true;
+                        break;
                     case CardType.WEAK:
                         if (target.tag.Equals("Player"))
                         {
                             return false;
                         }
-                        battle.energy -= thisCard.cost;
+                        if (i == 0)
+                        {
+                            battle.energy -= thisCard.cost;
+                        }
                         battle.Weak(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-                        battle.UsedCardMove(this);
-                        return true;
+                        break;
                 }
 
             }
@@ -95,6 +102,8 @@ public class OneCard : MonoBehaviour
         {
             return false;
         }
-        return false;
+        battle.UsedCardMove(gameObject);
+        return true;
     }
+    
 }

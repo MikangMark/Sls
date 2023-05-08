@@ -24,8 +24,7 @@ public class Battle : MonoBehaviour
 
     public GameObject myCardParent;
 
-    public GameObject cardPrf;
-    public GameObject monsterPrf;
+    public MonsterManager monsterManager;
 
     [SerializeField]
     GameObject playerPrf;
@@ -33,6 +32,16 @@ public class Battle : MonoBehaviour
     GameObject playerPos;
 
     public List<string> monsterGrup;
+    public List<string[]> oneMonster;
+    [SerializeField]
+    GameObject monsterPos;
+
+    [SerializeField]
+    GameObject afterContent;
+    [SerializeField]
+    GameObject beforContent;
+    [SerializeField]
+    GameObject deleteContent;
     void OnEnable()//setactive true될때 실행
     {
         //전투시작 셋팅
@@ -47,6 +56,11 @@ public class Battle : MonoBehaviour
         Instantiate(playerPrf, playerPos.transform);
         battleDeck = new List<GameObject>(Deck.Instance.cardList_Obj);
         monsters = new List<GameObject>();
+        oneMonster = new List<string[]>();
+        for (int i = 0; i < monsterGrup.Count; i++)
+        {
+            oneMonster.Add(monsterGrup[i].Split(','));
+        }
         CreateEnemy();
         beforUse = new List<GameObject>(battleDeck);
         myHand = new List<GameObject>();
@@ -66,19 +80,29 @@ public class Battle : MonoBehaviour
     }
     void CreateEnemy()
     {
-        string[] oneMonster;
-        for(int i = 0; i < monsterGrup.Count; i++)
+        int temp = -1;
+        for (int i = 0; i < 2; i++)
         {
-            oneMonster = monsterGrup[i].Split(',');
+            if(temp != CreateSeed.Instance.RandNum(0, monsterGrup.Count))
+            {
+                temp = CreateSeed.Instance.RandNum(0, monsterGrup.Count);
+                GameObject oneMonster = Instantiate(monsterManager.monsterPfab[CreateSeed.Instance.RandNum(0, monsterGrup.Count)], monsterPos.transform);
+                Debug.Log(oneMonster.name);
+                monsters.Add(oneMonster);
+            }
+            else
+            {
+                i--;
+            }
+            
         }
-
-
     }
     
     void MyTurn()
     {
         ShuffleDeck(beforUse);
         CardDraw(divideCard);
+        CreateBeforCardObj();
         ReChargeEnergy(refillEnergy);
     }
     public void EndMyTurn()//턴종료눌렀을떄
@@ -117,18 +141,45 @@ public class Battle : MonoBehaviour
     }
     void CardDraw(int divide)//카드를 나눠줄때마다 실행
     {
-        for (int i = 0; i < divide; i++)
+        if (beforUse.Count < divide)//뽑을곳의 카드의 갯수가 뽑을카드갯수보다 작을때 실행
         {
-            GameObject temp = beforUse[i];
-            myHand.Add(Instantiate(temp, myCardParent.transform));                             //정보가들어간 카드오브젝트 내손에 넣기
-            beforUse.RemoveAt(i);
+            for (int i = 0; i < beforUse.Count; i++)
+            {
+                GameObject temp = beforUse[i];
+                myHand.Add(Instantiate(temp, myCardParent.transform));                             //정보가들어간 카드오브젝트 내손에 넣기
+                beforUse.RemoveAt(i);
+            }
+            beforUse = afterUse;
+            ShuffleDeck(beforUse);
+            beforUse.Clear();
+            for(int i=0;i< beforContent.transform.childCount; i++)
+            {
+                Destroy(beforContent.transform.GetChild(i));
+            }
+            CardDraw(divide - beforUse.Count);
+            CreateBeforCardObj();
+        }
+        else
+        {
+            for (int i = 0; i < divide; i++)
+            {
+                GameObject temp = beforUse[i];
+                myHand.Add(Instantiate(temp, myCardParent.transform));                             //정보가들어간 카드오브젝트 내손에 넣기
+                beforUse.RemoveAt(i);
+            }
         }
     }
-    public void UsedCardMove(OneCard target)
+    public void UsedCardMove(GameObject target)
     {
         for(int i = 0; i < myHand.Count; i++)
         {
-            
+            if (myHand[i] == target)
+            {
+                afterUse.Add(myHand[i]);
+                CreateAfterCardObj(myHand[i]);
+                myHand.RemoveAt(i);
+                Destroy(target);
+            }
         }
     }
     void ReChargeEnergy(int reEnergy)
@@ -182,7 +233,7 @@ public class Battle : MonoBehaviour
     }
     public void Weak(GameObject target, int value)
     {
-        target.GetComponent<Monster>().bufList[MonsterBuffType.WEAK]++;
+        target.GetComponent<Monster>().bufList[MonsterBuffType.WEAK] += value;
     }
 
     public void MonsterAtk(Monster monsterObj, int value)
@@ -212,5 +263,16 @@ public class Battle : MonoBehaviour
     public void MonsterPow(Monster monsterObj, int value)
     {
         monsterObj.bufList[MonsterBuffType.POW] += value;
+    }
+    public void CreateBeforCardObj()
+    {
+        for (int i = 0; i < beforUse.Count; i++)
+        {
+            Instantiate(beforUse[i], beforContent.transform);
+        }
+    }
+    public void CreateAfterCardObj(GameObject _card)
+    {
+        Instantiate(_card, afterContent.transform);
     }
 }

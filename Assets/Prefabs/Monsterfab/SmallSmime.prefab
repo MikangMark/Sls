@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff951ad3ade4d334e850ac4997a0acdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: SmallSmime
+  monsterName: SmallSlime
   stat:
     name: 
     maxHp: 0
