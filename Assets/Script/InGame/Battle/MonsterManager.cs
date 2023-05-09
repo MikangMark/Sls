@@ -33,9 +33,9 @@ public class MonsterManager : MonoBehaviour
         {
             MonsterInfo temp = new MonsterInfo();
             temp.stat = monsterData.monsterExelInfo[i];
-            for(int j = 0; j < skillData.monsterSkillInfo.Count; j++)
+            for(int j = 0; j < monsterPfab[i].GetComponent<Monster>().skillCord.Count; j++)
             {
-                temp.skill.Add(skillData.monsterSkillInfo[10001 + j]);
+                temp.skill.Add(skillData.monsterSkillInfo[monsterPfab[i].GetComponent<Monster>().skillCord[j]]);
             }
             
             monsterInfo.Add(monsterData.monsterExelInfo[i].name, temp);

@@ -89,7 +89,6 @@ public class Battle : MonoBehaviour
             {
                 temp = randnum;
                 GameObject oneMonster = Instantiate(monsterManager.monsterPfab[temp], monsterPos.transform);
-                Debug.Log(oneMonster.name);
                 monsters.Add(oneMonster);
             }
             else
