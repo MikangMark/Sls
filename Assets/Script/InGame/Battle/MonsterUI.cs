@@ -170,17 +170,6 @@ public class MonsterUI : MonoBehaviour//모든 몬스터의 UI컨트롤
                 }
                 monsterObj[index].transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = intendImgList[temp];
                 break;
-            case Monster.Intent.DEF_DBUF:
-                for (int i = 0; i < intendImgList.Count; i++)
-                {
-                    if (intendImgList[i].name.Equals(Monster.Intent.DEF_DBUF.ToString()))
-                    {
-                        temp = i;
-                        break;
-                    }
-                }
-                monsterObj[index].transform.GetChild(1).GetChild(0).GetComponent<Image>().sprite = intendImgList[temp];
-                break;
         }
     }
 }

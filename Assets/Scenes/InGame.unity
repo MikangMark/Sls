@@ -6051,16 +6051,16 @@ MonoBehaviour:
   pow_fab: {fileID: 4356854161809627771, guid: 1f5a37bbca6cd1e4e84dda82c669f406, type: 3}
   weak_fab: {fileID: 2914923647189601984, guid: dc221cfd56711aa4382de3c00c61eb24, type: 3}
   intendImgList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 0a37d5ecfeb43ef49ae220334c175aee, type: 3}
+  - {fileID: 21300000, guid: b51bbe1615d153a4ca4fe0e6bb181aa7, type: 3}
+  - {fileID: 21300000, guid: b3209fd2cb6c1ec48b372820332f766e, type: 3}
+  - {fileID: 21300000, guid: 9074a5433a4b6c449943b3a1dfa5bbe8, type: 3}
+  - {fileID: 21300000, guid: 57e93b63124239f45ba23bc57fbdb30e, type: 3}
+  - {fileID: 21300000, guid: cd5e2a9d43abcf74b80a13d744c16cb6, type: 3}
+  - {fileID: 21300000, guid: bb81eec9b4d83d249a1e882c3c646fc0, type: 3}
+  - {fileID: 21300000, guid: 28adf540fb875734e88ac93e2dc84201, type: 3}
+  - {fileID: 21300000, guid: ecb6bcab9ef7ac246a9c06b927dec15f, type: 3}
+  - {fileID: 21300000, guid: 7bc9d9403982cf24496f3855ef40a063, type: 3}
 --- !u!1 &1833461280
 GameObject:
   m_ObjectHideFlags: 0
