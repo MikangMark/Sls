@@ -10,10 +10,6 @@ public class MonsterUI : MonoBehaviour//모든 몬스터의 UI컨트롤
     public GameObject monsterPos;
 
     [SerializeField]
-    GameObject pow_fab;
-    [SerializeField]
-    GameObject weak_fab;
-    [SerializeField]
     List<Sprite> intendImgList;
 
     // Start is called before the first frame update

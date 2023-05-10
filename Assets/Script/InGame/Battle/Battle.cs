@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum PlayerBuffType { POW = 0, WEAK }
+public enum PlayerBuffType { POW = 0, WEAK, VULNER, IMPAIR, SLIMECARD, RESTRAINT, CONSCIOUS }
 public class Battle : MonoBehaviour
 {
     enum Turn { Player = 0, EndPlayer, Enermy, EnermyEnd }
@@ -67,8 +67,12 @@ public class Battle : MonoBehaviour
         afterUse = new List<GameObject>();
         deletCard = new List<GameObject>();
         playerBufList = new Dictionary<PlayerBuffType, int>();
-        playerBufList.Add(PlayerBuffType.POW, 0);
-        playerBufList.Add(PlayerBuffType.WEAK, 0);
+        //playerBufList.Add(PlayerBuffType.POW, 0);
+        //playerBufList.Add(PlayerBuffType.WEAK, 0);
+        for(PlayerBuffType i = PlayerBuffType.POW; i <= PlayerBuffType.CONSCIOUS; i++)
+        {
+            playerBufList.Add(i, 0);
+        }
         stat = InGame.Instance.charInfo;
         shiled = 0;
         divideCard = 5;
@@ -116,10 +120,56 @@ public class Battle : MonoBehaviour
     public void EnemyTurn()
     {
         //의도대로 해당 애니매이션 실행뒤 다음 함수이동
+        for(int i=0;i< monsters.Count; i++)
+        {
+            monsters[i].GetComponent<Monster>().PlaySkill();
+        }
         EndEnemyTurn();
     }
     public void EndEnemyTurn()
     {
+        #region 몬스터버프감소
+        for (int i = 0; i < monsters.Count; i++)
+        {
+            monsters[i].GetComponent<Monster>().shiled = 0;
+            if (monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.IMPAIR] > 0)
+            {
+                monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.IMPAIR] -= 1;
+            }
+            if (monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.RESTRAINT] > 0)
+            {
+                monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.RESTRAINT] -= 1;
+            }
+            if (monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.VULNER] > 0)
+            {
+                monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.VULNER] -= 1;
+            }
+            if (monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.WEAK] > 0)
+            {
+                monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.WEAK] -= 1;
+            }
+
+        }
+        #endregion
+        #region 플레이어버프 감소
+        shiled = 0;
+        if (playerBufList[PlayerBuffType.IMPAIR] > 0)
+        {
+            playerBufList[PlayerBuffType.IMPAIR] -= 1;
+        }
+        if (playerBufList[PlayerBuffType.RESTRAINT] > 0)
+        {
+            playerBufList[PlayerBuffType.RESTRAINT] -= 1;
+        }
+        if (playerBufList[PlayerBuffType.VULNER] > 0)
+        {
+            playerBufList[PlayerBuffType.VULNER] -= 1;
+        }
+        if (playerBufList[PlayerBuffType.WEAK] > 0)
+        {
+            playerBufList[PlayerBuffType.WEAK] -= 1;
+        }
+        #endregion
         //쉴드 제거, 디버프 카운트감소
         MyTurn();
     }

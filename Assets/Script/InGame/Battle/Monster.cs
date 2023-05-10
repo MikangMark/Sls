@@ -8,6 +8,7 @@ public class Monster : MonoBehaviour
 {
     public enum Intent { ATK = 0, DEF, BUF, DBUF, ATK_DEF, ATK_BUF, ATK_DBUF, DEF_BUF, DEF_DBUF, BUF_DBUF};
     public string monsterName;//인스펙터에서 입력되어있는 몬스터이름
+    public Battle battle;
     public MonsterStat stat;//해당몬스터의 스텟
     public List<MonsterSkill> skill;//해당몬스터가 보유중인 스킬
     public List<int> skillCord;//해당 몬스터가 보유하고있는 스킬 코드 인스팩터에 입력되어있음
@@ -22,6 +23,7 @@ public class Monster : MonoBehaviour
     {
         shiled = 0;
         name = monsterName;
+        battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         monsterManager = GameObject.Find("DataObj").GetComponent<MonsterManager>();
         stat = monsterManager.monsterInfo[monsterName].stat;
         for(int i = 0; i < skillCord.Count; i++)
@@ -30,8 +32,10 @@ public class Monster : MonoBehaviour
         }
         GetComponent<Image>().sprite = stat.img;
         bufList = new Dictionary<MonsterBuffType, int>();
-        bufList.Add(MonsterBuffType.POW, 0);
-        bufList.Add(MonsterBuffType.WEAK, 0);
+        for(MonsterBuffType i = MonsterBuffType.POW; i <= MonsterBuffType.CONSCIOUS; i++)
+        {
+            bufList.Add(i, 0);
+        }
         NextUseSkill();
     }
 
@@ -370,6 +374,69 @@ public class Monster : MonoBehaviour
         #endregion
     }
 
+    public void PlaySkill()
+    {
+        for(int i = 0;i< nextSkill.type.Count; i++)
+        {
+            switch (nextSkill.type[i])
+            {
+                case SkillType.ATK:
+                    int damage = nextSkill.skillValue[SkillType.ATK];
+                    if (bufList[MonsterBuffType.POW] > 0)
+                    {
+                        damage += bufList[MonsterBuffType.POW];
+                    }
+                    if (battle.playerBufList[PlayerBuffType.WEAK] > 0)
+                    {
+                        damage = damage + (damage / 2);
+                    }
+                    if (bufList[MonsterBuffType.IMPAIR] > 0)
+                    {
+                        damage = damage - (damage / 3);
+                    }
+                    if (battle.shiled > 0)
+                    {
+                        if (battle.shiled > damage)
+                        {
+                            battle.shiled -= damage;
+                            damage = 0;
+                        }
+                        else
+                        {
+                            damage -= battle.shiled;
+                            battle.shiled = 0;
+                        }
+                    }
+                    battle.stat.hp -= damage;
+                    break;
+                case SkillType.DEF:
+                    shiled += nextSkill.skillValue[SkillType.DEF];
+                    break;
+                case SkillType.POW:
+                    bufList[MonsterBuffType.POW] += nextSkill.skillValue[SkillType.POW];
+                    break;
+                case SkillType.WEAK:
+                    battle.playerBufList[PlayerBuffType.WEAK] += nextSkill.skillValue[SkillType.WEAK];
+                    break;
+                case SkillType.VULNER:
+                    battle.playerBufList[PlayerBuffType.VULNER] += nextSkill.skillValue[SkillType.VULNER];
+                    break;
+                case SkillType.IMPAIR:
+                    battle.playerBufList[PlayerBuffType.IMPAIR] += nextSkill.skillValue[SkillType.IMPAIR];
+                    break;
+                case SkillType.SLIMECARD:
+                    //슬라임 카드 추가
+                    break;
+                case SkillType.RESTRAINT:
+                    battle.playerBufList[PlayerBuffType.RESTRAINT] += nextSkill.skillValue[SkillType.RESTRAINT];
+                    break;
+                case SkillType.CONSCIOUS:
+                    bufList[MonsterBuffType.CONSCIOUS] += nextSkill.skillValue[SkillType.CONSCIOUS];
+                    break;
+            }
+        }
+        
+    }
     //몬스터한마리마다 이 스크립트를 소유
     //몬스터 공격수치 체력 방어수치 사용하는 몬스터이미지 의도이미지(Intent) 의도타입 사용하는스킬코드
     //몬스터마다 미리 프리펩 생성되어있음
