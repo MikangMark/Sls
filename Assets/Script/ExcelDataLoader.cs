@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CardInfo : IEquatable<CardInfo>
 {
-    public enum Type { DEFAULT = 0, ATK, SK , POW}
+    public enum Type { DEFAULT = 0, ATK, SK , POW, ABNORMAL }
 
     public int cost;
     public string title;
@@ -98,6 +98,9 @@ public class ExcelDataLoader : MonoBehaviour
                         break;
                     case "POW":
                         tType = CardInfo.Type.POW;
+                        break;
+                    case "ABNORMAL":
+                        tType = CardInfo.Type.ABNORMAL;
                         break;
                 }
                 

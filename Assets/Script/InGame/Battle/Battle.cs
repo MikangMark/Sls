@@ -42,6 +42,9 @@ public class Battle : MonoBehaviour
     GameObject beforContent;
     [SerializeField]
     GameObject deleteContent;
+
+    [SerializeField]
+    GameObject cardPrf;
     void OnEnable()//setactive true될때 실행
     {
         //전투시작 셋팅
@@ -325,5 +328,36 @@ public class Battle : MonoBehaviour
     public void CreateAfterCardObj(GameObject _card)
     {
         Instantiate(_card, afterContent.transform);
+    }
+    public void CreateSlimeCardObj()
+    {
+        //beforUse.Add(Instantiate())cardList
+        GameObject temp;
+        temp = Instantiate(cardPrf, beforContent.transform);
+        temp.GetComponent<OneCard>().thisCard = Deck.Instance.cardList[4];
+        temp.name = "Card[Slime]";
+        for (int j = 0; j < temp.transform.childCount; j++)
+        {
+            switch (j)
+            {
+                case 0:
+                    temp.transform.GetChild(j).name = "Card[Slime]_CostImg";
+                    temp.transform.GetChild(j).GetChild(0).name = "Card[Slime]_CostText";
+                    break;
+                case 1:
+                    temp.transform.GetChild(j).name = "Card[Slime]_CardTitle";
+                    break;
+                case 2:
+                    temp.transform.GetChild(j).name = "Card[Slime]_CardText";
+                    break;
+                case 3:
+                    temp.transform.GetChild(j).name = "Card[Slime]_CardImg";
+                    break;
+                case 4:
+                    temp.transform.GetChild(j).name = "Card[Slime]_CardType";
+                    break;
+            }
+        }
+        beforUse.Add(temp);
     }
 }

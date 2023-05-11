@@ -1,5 +1,6 @@
-	ATK	DEF	POW	WEAK
-1	6			
-1		5		
-2	8			2
-1			2	
+	ATK	DEF	POW	WEAK	EXTINCTION
+1	6				
+1		5			
+2	8			2	
+1			2		
+1					1

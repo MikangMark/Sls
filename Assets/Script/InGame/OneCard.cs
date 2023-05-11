@@ -72,7 +72,7 @@ public class OneCard : MonoBehaviour
                         }
                         battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
-                    case CardType.POW://아직 카드없음
+                    case CardType.POW:
                         if (target.tag.Equals("Monster"))
                         {
                             return false;

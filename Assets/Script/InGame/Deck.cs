@@ -22,7 +22,6 @@ public class Deck : Singleton<Deck>
     void Awake()
     {
         Init();
-
         cardList = new List<CardInfo>();
         for(int i = 0; i < excelData.cardInfo.Count; i++)
         {

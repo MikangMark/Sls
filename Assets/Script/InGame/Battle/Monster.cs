@@ -425,6 +425,7 @@ public class Monster : MonoBehaviour
                     battle.playerBufList[PlayerBuffType.IMPAIR] += nextSkill.skillValue[SkillType.IMPAIR];
                     break;
                 case SkillType.SLIMECARD:
+                    battle.CreateSlimeCardObj();
                     //슬라임 카드 추가
                     break;
                 case SkillType.RESTRAINT:

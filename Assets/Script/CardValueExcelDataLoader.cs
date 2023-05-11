@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum CardType { DEFAULT = 0, ATK, DEF, POW, WEAK }
+public enum CardType { DEFAULT = 0, ATK, DEF, POW, WEAK, EXTINCTION }
 
 [System.Serializable]
 public class CardValue
@@ -66,6 +66,11 @@ public class CardValueExcelDataLoader : MonoBehaviour
                                 temp.type.Add(CardType.WEAK);
                                 temp.skillValue.Add(CardType.WEAK, int.Parse(row[j]));
                                 break;
+                            case (int)CardType.EXTINCTION:
+                                temp.type.Add(CardType.EXTINCTION);
+                                temp.skillValue.Add(CardType.EXTINCTION, 0);
+                                break;
+
                         }
                     }
                 }

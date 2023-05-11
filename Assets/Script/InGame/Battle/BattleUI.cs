@@ -36,8 +36,6 @@ public class BattleUI : MonoBehaviour
     GameObject beforCardView;
     [SerializeField]
     GameObject deleteCardView;
-    [SerializeField]
-    GameObject cardPrf;
     // Start is called before the first frame update
     void Start()
     {
