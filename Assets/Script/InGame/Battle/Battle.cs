@@ -21,7 +21,6 @@ public class Battle : MonoBehaviour
     public List<GameObject> afterUse;//사용한 카드모음
     public List<GameObject> deletCard;//소멸된 카드모음
     public List<GameObject> myHand;//나의 손패카드모음
-
     public GameObject myCardParent;
 
     public MonsterManager monsterManager;
@@ -109,15 +108,22 @@ public class Battle : MonoBehaviour
     void MyTurn()
     {
         ShuffleDeck(beforUse);
-        CardDraw(divideCard);
         CreateBeforCardObj();
+        for (int i = 0; i < divideCard; i++)
+        {
+            CardDraw();
+        }
         ReChargeEnergy(refillEnergy);
     }
     public void EndMyTurn()//턴종료눌렀을떄
     {
         //턴종료시 플레이어디버프 카운트 감소
         //쉴드 제거
-
+        //가지고있는 패 전부다 버리기
+        for (int i = 0; i < myHand.Count; i++)
+        {
+            UsedCardMove(myHand[i]);
+        }
         EnemyTurn();
     }
     public void EnemyTurn()
@@ -193,48 +199,32 @@ public class Battle : MonoBehaviour
             }
         }
     }
-    void CardDraw(int divide)//카드를 나눠줄때마다 실행
+
+    void CardDraw()//카드를 나눠줄때마다 실행
     {
-        if (beforUse.Count < divide)//뽑을곳의 카드의 갯수가 뽑을카드갯수보다 작을때 실행
+        if (beforUse.Count <= 0)//뽑을곳의 카드의 갯수가 뽑을카드갯수보다 작을때 실행
         {
-            for (int i = 0; i < beforUse.Count; i++)
-            {
-                GameObject temp = beforUse[i];
-                myHand.Add(Instantiate(temp, myCardParent.transform));                             //정보가들어간 카드오브젝트 내손에 넣기
-                beforUse.RemoveAt(i);
-            }
-            beforUse = afterUse;
-            ShuffleDeck(beforUse);
             beforUse.Clear();
-            for(int i=0;i< beforContent.transform.childCount; i++)
+            beforUse = afterUse;
+            afterUse.Clear();
+            for(int i =0;i< afterContent.transform.childCount; i++)
             {
-                Destroy(beforContent.transform.GetChild(i));
+                Destroy(afterContent.transform.GetChild(i));
             }
-            CardDraw(divide - beforUse.Count);
+            ShuffleDeck(beforUse);
             CreateBeforCardObj();
         }
-        else
-        {
-            for (int i = 0; i < divide; i++)
-            {
-                GameObject temp = beforUse[i];
-                myHand.Add(Instantiate(temp, myCardParent.transform));                             //정보가들어간 카드오브젝트 내손에 넣기
-                beforUse.RemoveAt(i);
-            }
-        }
+        GameObject drawCardObj = Instantiate(beforUse[0], myCardParent.transform);
+        myHand.Add(drawCardObj);
+        beforUse.RemoveAt(0);
+        Destroy(beforContent.transform.GetChild(0).gameObject);
     }
     public void UsedCardMove(GameObject target)
     {
-        for(int i = 0; i < myHand.Count; i++)
-        {
-            if (myHand[i] == target)
-            {
-                afterUse.Add(myHand[i]);
-                CreateAfterCardObj(myHand[i]);
-                myHand.RemoveAt(i);
-                Destroy(target);
-            }
-        }
+        afterUse.Add(target);
+        CreateAfterCardObj(target);
+        myHand.RemoveAt(0);
+        Destroy(target);
     }
     void ReChargeEnergy(int reEnergy)
     {

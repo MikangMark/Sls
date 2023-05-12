@@ -6007,6 +6007,11 @@ MonoBehaviour:
   bufPreFabs:
   - {fileID: 4356854161809627771, guid: 1f5a37bbca6cd1e4e84dda82c669f406, type: 3}
   - {fileID: 2914923647189601984, guid: dc221cfd56711aa4382de3c00c61eb24, type: 3}
+  - {fileID: 935986985956754370, guid: 7be9623f9cbd0a445b430b4e768ddf2b, type: 3}
+  - {fileID: 2914923647189601984, guid: c5681f52baf419a4cb3b7b6449b6a390, type: 3}
+  - {fileID: 2914923647189601984, guid: 9b04f3be76e565f46ac6466584204c74, type: 3}
+  - {fileID: 2914923647189601984, guid: 48f4c33903a66bb458547d0b4ca679a7, type: 3}
+  - {fileID: 2914923647189601984, guid: 16e7224aecf4d5c478f1310cd8850226, type: 3}
   bufUI: []
   playerBufPannel: {fileID: 0}
   monsterList: []

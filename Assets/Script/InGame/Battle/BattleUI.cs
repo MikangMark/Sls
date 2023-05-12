@@ -43,8 +43,11 @@ public class BattleUI : MonoBehaviour
         shieldObj = GameObject.Find("Player_Shield");
         monsterList = new List<GameObject>();
         bufUI = new List<GameObject>();
-        bufUI.Add(Instantiate(bufPreFabs[0], playerBufPannel.transform));
-        bufUI.Add(Instantiate(bufPreFabs[1], playerBufPannel.transform));
+        for (int i = 0; i < bufPreFabs.Count; i++)
+        {
+            bufUI.Add(Instantiate(bufPreFabs[i], playerBufPannel.transform));
+        }
+
         for(int i = 0;i< bufUI.Count; i++)
         {
             bufUI[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = 0.ToString();
@@ -57,29 +60,26 @@ public class BattleUI : MonoBehaviour
         if (battle.shiled > 0)
         {
             shieldObj.SetActive(true);
-            
         }
         else
         {
             shieldObj.SetActive(false);
         }
 
-        if (battle.playerBufList[PlayerBuffType.POW] > 0)
+        for(int i = 0; i <= (int)PlayerBuffType.CONSCIOUS; i++)
         {
-            bufUI[0].SetActive(true);
-        }
-        else
-        {
-            bufUI[0].SetActive(false);
-        }
-
-        if (battle.playerBufList[PlayerBuffType.WEAK] > 0)
-        {
-            bufUI[1].SetActive(true);
-        }
-        else
-        {
-            bufUI[1].SetActive(false);
+            if (battle.playerBufList[(PlayerBuffType)i] > 0)
+            {
+                bufUI[i].SetActive(true);
+                if (i == (int)PlayerBuffType.SLIMECARD)
+                {
+                    bufUI[i].SetActive(false);
+                }
+            }
+            else
+            {
+                bufUI[i].SetActive(false);
+            }
         }
         shieldObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.shiled.ToString();
         for(int i =0;i< battle.playerBufList.Count; i++)
