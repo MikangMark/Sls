@@ -44,6 +44,9 @@ public class Battle : MonoBehaviour
 
     [SerializeField]
     GameObject cardPrf;
+
+    [SerializeField]
+    List<GameObject> checkList;
     void OnEnable()//setactive true될때 실행
     {
         //전투시작 셋팅
@@ -54,6 +57,7 @@ public class Battle : MonoBehaviour
     
     void initData()
     {
+        checkList = new List<GameObject>();
         stat = new Character.CharInfo();
         Instantiate(playerPrf, playerPos.transform);
         battleDeck = new List<GameObject>(Deck.Instance.cardList_Obj);
@@ -111,7 +115,7 @@ public class Battle : MonoBehaviour
         CreateBeforCardObj();
         for (int i = 0; i < divideCard; i++)
         {
-            CardDraw(i);
+            CardDraw();
         }
         ReChargeEnergy(refillEnergy);
     }
@@ -123,7 +127,6 @@ public class Battle : MonoBehaviour
         int del = myHand.Count;
         for (int i = 0; i < del; i++)
         {
-            Debug.Log(myHand.Count);
             UsedCardMove(myHand[0]);
         }
         EnemyTurn();
@@ -202,7 +205,7 @@ public class Battle : MonoBehaviour
         }
     }
 
-    void CardDraw(int _index)//카드를 나눠줄때마다 실행
+    void CardDraw()//카드를 나눠줄때마다 실행
     {
         if (beforUse.Count <= 0)//뽑을곳의 카드의 갯수가 뽑을카드갯수보다 작을때 실행
         {
@@ -219,9 +222,13 @@ public class Battle : MonoBehaviour
         GameObject drawCardObj = Instantiate(beforUse[0], myCardParent.transform);
         myHand.Add(drawCardObj);
         beforUse.RemoveAt(0);
-        Debug.Log(beforContent.transform.GetChild(0).gameObject.name);
-        
-        Destroy(beforContent.transform.GetChild(_index).gameObject);
+        DestroyImmediate(beforContent.transform.GetChild(0).gameObject);
+        //Debug.Log(beforContent.transform.childCount);
+        checkList.Clear();
+        for(int i = 0; i < beforContent.transform.childCount; i++)
+        {
+            checkList.Add(beforContent.transform.GetChild(i).gameObject);
+        }
     }
     public void UsedCardMove(GameObject target)
     {
@@ -231,7 +238,6 @@ public class Battle : MonoBehaviour
         {
             if(myHand[i] == target)
             {
-                Debug.Log(myHand[i].name);
                 myHand.RemoveAt(i);
                 break;
             }
@@ -322,8 +328,18 @@ public class Battle : MonoBehaviour
     }
     public void CreateBeforCardObj()
     {
+        Debug.Log(beforUse.Count);
+        int count = beforContent.transform.childCount;
+        for (int i=0;i< count; i++)
+        {
+            DestroyImmediate(beforContent.transform.GetChild(0).gameObject);
+        }
         for (int i = 0; i < beforUse.Count; i++)
         {
+            if (beforUse[i] == null)
+            {
+                continue;
+            }
             Instantiate(beforUse[i], beforContent.transform);
         }
     }
@@ -361,5 +377,6 @@ public class Battle : MonoBehaviour
             }
         }
         beforUse.Add(temp);
+        CreateBeforCardObj();
     }
 }
