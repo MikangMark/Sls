@@ -111,7 +111,7 @@ public class Battle : MonoBehaviour
         CreateBeforCardObj();
         for (int i = 0; i < divideCard; i++)
         {
-            CardDraw();
+            CardDraw(i);
         }
         ReChargeEnergy(refillEnergy);
     }
@@ -120,9 +120,11 @@ public class Battle : MonoBehaviour
         //턴종료시 플레이어디버프 카운트 감소
         //쉴드 제거
         //가지고있는 패 전부다 버리기
-        for (int i = 0; i < myHand.Count; i++)
+        int del = myHand.Count;
+        for (int i = 0; i < del; i++)
         {
-            UsedCardMove(myHand[i]);
+            Debug.Log(myHand.Count);
+            UsedCardMove(myHand[0]);
         }
         EnemyTurn();
     }
@@ -200,7 +202,7 @@ public class Battle : MonoBehaviour
         }
     }
 
-    void CardDraw()//카드를 나눠줄때마다 실행
+    void CardDraw(int _index)//카드를 나눠줄때마다 실행
     {
         if (beforUse.Count <= 0)//뽑을곳의 카드의 갯수가 뽑을카드갯수보다 작을때 실행
         {
@@ -217,13 +219,23 @@ public class Battle : MonoBehaviour
         GameObject drawCardObj = Instantiate(beforUse[0], myCardParent.transform);
         myHand.Add(drawCardObj);
         beforUse.RemoveAt(0);
-        Destroy(beforContent.transform.GetChild(0).gameObject);
+        Debug.Log(beforContent.transform.GetChild(0).gameObject.name);
+        
+        Destroy(beforContent.transform.GetChild(_index).gameObject);
     }
     public void UsedCardMove(GameObject target)
     {
-        afterUse.Add(target);
-        CreateAfterCardObj(target);
-        myHand.RemoveAt(0);
+        GameObject temp = CreateAfterCardObj(target);
+        afterUse.Add(temp);
+        for (int i = 0; i < myHand.Count; i++)
+        {
+            if(myHand[i] == target)
+            {
+                Debug.Log(myHand[i].name);
+                myHand.RemoveAt(i);
+                break;
+            }
+        }
         Destroy(target);
     }
     void ReChargeEnergy(int reEnergy)
@@ -315,9 +327,9 @@ public class Battle : MonoBehaviour
             Instantiate(beforUse[i], beforContent.transform);
         }
     }
-    public void CreateAfterCardObj(GameObject _card)
+    public GameObject CreateAfterCardObj(GameObject _card)
     {
-        Instantiate(_card, afterContent.transform);
+        return Instantiate(_card, afterContent.transform);
     }
     public void CreateSlimeCardObj()
     {

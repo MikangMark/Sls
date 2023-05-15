@@ -6023,6 +6023,9 @@ MonoBehaviour:
   afterUsedCardView: {fileID: 1790646638}
   beforCardView: {fileID: 605021558}
   deleteCardView: {fileID: 1590635482}
+  beforeContent: {fileID: 722189482}
+  afterContent: {fileID: 216135361}
+  deleteContent: {fileID: 1638707311}
 --- !u!4 &1821535483
 Transform:
   m_ObjectHideFlags: 0

@@ -36,6 +36,13 @@ public class BattleUI : MonoBehaviour
     GameObject beforCardView;
     [SerializeField]
     GameObject deleteCardView;
+
+    [SerializeField]
+    GameObject beforeContent;
+    [SerializeField]
+    GameObject afterContent;
+    [SerializeField]
+    GameObject deleteContent;
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +96,27 @@ public class BattleUI : MonoBehaviour
         beforeDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.beforUse.Count.ToString();
         afterDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.afterUse.Count.ToString();
         deleteDeck.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = battle.deletCard.Count.ToString();
-        
+        if (afterUsedCardView.activeSelf)
+        {
+            for(int i=0;i< afterContent.transform.childCount; i++)
+            {
+                afterContent.transform.GetChild(i).GetComponent<MousePoint>().enabled = false;
+            }
+        }
+        if (beforCardView.activeSelf)
+        {
+            for (int i = 0; i < beforeContent.transform.childCount; i++)
+            {
+                beforeContent.transform.GetChild(i).GetComponent<MousePoint>().enabled = false;
+            }
+        }
+        if (deleteCardView.activeSelf)
+        {
+            for (int i = 0; i < afterContent.transform.childCount; i++)
+            {
+                deleteContent.transform.GetChild(i).GetComponent<MousePoint>().enabled = false;
+            }
+        }
     }
     public void OnClickUsedCardView()
     {
