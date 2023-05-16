@@ -9,11 +9,12 @@ public class HpSlider : MonoBehaviour
     public Slider hpBar;
     public Monster monsterStat = null;
     public TextMeshProUGUI text;
+    public Battle battle;
     // Start is called before the first frame update
     void Start()
     {
         hpBar = gameObject.GetComponent<Slider>();
-        
+        battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         switch (gameObject.tag)
         {
             case "Monster":
@@ -42,9 +43,9 @@ public class HpSlider : MonoBehaviour
                 text.text = monsterStat.stat.hp + "/" + monsterStat.stat.maxHp;
                 break;
             case "Player":
-                hpBar.value = InGame.Instance.charInfo.hp;
-                hpBar.maxValue = InGame.Instance.charInfo.maxHp;
-                text.text = InGame.Instance.charInfo.hp + "/" + InGame.Instance.charInfo.maxHp;
+                hpBar.value = battle.stat.hp;
+                hpBar.maxValue = battle.stat.maxHp;
+                text.text = battle.stat.hp + "/" + battle.stat.maxHp;
                 break;
         }
 

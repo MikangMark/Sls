@@ -94,6 +94,13 @@ public class OneCard : MonoBehaviour
                         }
                         battle.Weak(target, thisCardValue.skillValue[thisCardValue.type[i]]);
                         break;
+                    case CardType.EXTINCTION:
+                        if (i == 0)
+                        {
+                            battle.energy -= thisCard.cost;
+                        }
+                        battle.DeleteCardMove(gameObject);
+                        return true;
                 }
 
             }

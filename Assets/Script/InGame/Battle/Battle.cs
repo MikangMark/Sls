@@ -16,6 +16,7 @@ public class Battle : MonoBehaviour
     public Dictionary<PlayerBuffType, int> playerBufList;//플레이어 버프 리스트
     public List<GameObject> monsters;//전투중인 적의 리스트
     List<GameObject> battleDeck;//전투에서 사용할 나의 덱
+    List<GameObject> abnomalDeck;//상태이상 카드 덱
 
     public List<GameObject> beforUse;//뽑을 카드모음
     public List<GameObject> afterUse;//사용한 카드모음
@@ -47,6 +48,9 @@ public class Battle : MonoBehaviour
 
     [SerializeField]
     List<GameObject> checkList;
+
+    [SerializeField]
+    GameObject slimeCardObj;
     void OnEnable()//setactive true될때 실행
     {
         //전투시작 셋팅
@@ -57,6 +61,8 @@ public class Battle : MonoBehaviour
     
     void initData()
     {
+        slimeCardObj = new GameObject();
+        abnomalDeck = new List<GameObject>();
         checkList = new List<GameObject>();
         stat = new Character.CharInfo();
         Instantiate(playerPrf, playerPos.transform);
@@ -92,10 +98,9 @@ public class Battle : MonoBehaviour
     {
         int temp = -1;
         int randnum;
-        /*for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 2; i++)
         {
             randnum = CreateSeed.Instance.RandNum(0, monsterGrup.Count);
-            Debug.Log(randnum);
             if (temp != randnum)
             {
                 temp = randnum;
@@ -107,11 +112,7 @@ public class Battle : MonoBehaviour
                 i--;
             }
             
-        }*/
-        GameObject oneMonster = Instantiate(monsterManager.monsterPfab[2], monsterPos.transform);
-        monsters.Add(oneMonster);
-        GameObject oneMonster1 = Instantiate(monsterManager.monsterPfab[4], monsterPos.transform);
-        monsters.Add(oneMonster1);
+        }
     }
     
     void MyTurn()
@@ -122,6 +123,7 @@ public class Battle : MonoBehaviour
             CardDraw();
         }
         ReChargeEnergy(refillEnergy);
+        Debug.Log(stat.hp);
     }
     public void EndMyTurn()//턴종료눌렀을떄
     {
@@ -141,6 +143,7 @@ public class Battle : MonoBehaviour
         for(int i=0;i< monsters.Count; i++)
         {
             monsters[i].GetComponent<Monster>().PlaySkill();
+            monsters[i].GetComponent<Monster>().NextUseSkill();
         }
         EndEnemyTurn();
     }
@@ -149,7 +152,7 @@ public class Battle : MonoBehaviour
         #region 몬스터버프감소
         for (int i = 0; i < monsters.Count; i++)
         {
-            monsters[i].GetComponent<Monster>().shiled = 0;
+            monsters[i].GetComponent<Monster>().stat.shield = 0;
             if (monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.IMPAIR] > 0)
             {
                 monsters[i].GetComponent<Monster>().bufList[MonsterBuffType.IMPAIR] -= 1;
@@ -211,66 +214,25 @@ public class Battle : MonoBehaviour
 
     void CardDraw()//카드를 나눠줄때마다 실행
     {
-        #region 주석
-        /*if (beforUse.Count <= 0)//뽑을곳의 카드의 갯수가 뽑을카드갯수보다 작을때 실행
+        if (beforUse.Count <= 0)
         {
             beforUse.Clear();
-            beforUse = afterUse;
-            afterUse.Clear();
-            for(int i =0;i< afterContent.transform.childCount; i++)
+            for(int i = 0; i < afterUse.Count; i++)
             {
-                DestroyImmediate(afterContent.transform.GetChild(i));
+                beforUse.Add(afterUse[i]);
             }
-            ShuffleDeck(beforUse);
-            CreateBeforCardObj();
+            afterUse.Clear();
         }
-        GameObject drawCardObj = Instantiate(beforUse[0], myCardParent.transform);
-        myHand.Add(drawCardObj);
-        beforUse.RemoveAt(0);
-        //CreateBeforCardObj();
-        int count = beforContent.transform.childCount;
-        for (int i = 0; i < count; i++)
-        {
-            DestroyImmediate(beforContent.transform.GetChild(0).gameObject);
-        }
-        for (int i = 0; i < beforUse.Count; i++)
-        {
-            Instantiate(beforUse[i], beforContent.transform);
-        }
-        DestroyImmediate(beforContent.transform.GetChild(0).gameObject);
-        //Debug.Log(beforContent.transform.childCount);
-        checkList.Clear();
-        for(int i = 0; i < beforContent.transform.childCount; i++)
-        {
-            checkList.Add(beforContent.transform.GetChild(i).gameObject);
-        }
-        */
-        #endregion
-        int count = beforContent.transform.childCount;
-        for (int i = 0; i < count; i++)
-        {
-            DestroyImmediate(beforContent.transform.GetChild(0).gameObject);
-        }
-        for (int i = 0; i < beforUse.Count; i++)
-        {
-            Instantiate(beforUse[i], beforContent.transform);
-        }
+        CreateBeforCardObj();//뽑기전카드군의 오브젝트 재생성
         GameObject drawCard = Instantiate(beforUse[0], myCardParent.transform);
         myHand.Add(drawCard);
         beforUse.RemoveAt(0);
-        //Debug.Log(beforContent.transform.childCount);
         DestroyImmediate(beforContent.transform.GetChild(0).gameObject);
-        /*for (int i = 0; i < beforContent.transform.childCount; i++)
+        checkList.Clear();
+        for (int i = 0; i < beforContent.transform.childCount; i++)
         {
-            //Debug.Log(beforContent.transform.GetChild(0).gameObject.name);
-            DestroyImmediate(beforContent.transform.GetChild(0).gameObject);
+            checkList.Add(beforContent.transform.GetChild(i).gameObject);
         }
-        for (int i = 0; i < beforUse.Count; i++)
-        {
-            beforUse[i] = Instantiate(beforUse[i], beforContent.transform);
-        }
-        
-        */
     }
     public void UsedCardMove(GameObject target)
     {
@@ -279,6 +241,20 @@ public class Battle : MonoBehaviour
         for (int i = 0; i < myHand.Count; i++)
         {
             if(myHand[i] == target)
+            {
+                myHand.RemoveAt(i);
+                break;
+            }
+        }
+        Destroy(target);
+    }
+    public void DeleteCardMove(GameObject target)
+    {
+        GameObject temp = CreateDeleteCardObj(target);
+        deletCard.Add(temp);
+        for (int i = 0; i < myHand.Count; i++)
+        {
+            if (myHand[i] == target)
             {
                 myHand.RemoveAt(i);
                 break;
@@ -384,10 +360,13 @@ public class Battle : MonoBehaviour
     {
         return Instantiate(_card, afterContent.transform);
     }
+    public GameObject CreateDeleteCardObj(GameObject _card)
+    {
+        return Instantiate(_card, deleteContent.transform);
+    }
     public void CreateSlimeCardObj()
     {
-        //beforUse.Add(Instantiate())cardList
-        GameObject temp;
+        GameObject temp = new GameObject();
         temp = Instantiate(cardPrf, beforContent.transform);
         temp.GetComponent<OneCard>().thisCard = Deck.Instance.cardList[4];
         temp.name = "Card[Slime]";
@@ -412,9 +391,9 @@ public class Battle : MonoBehaviour
                     temp.transform.GetChild(j).name = "Card[Slime]_CardType";
                     break;
             }
-        }
-        beforUse.Add(temp);
+        }//카드정보설정
+        slimeCardObj = Instantiate(temp);
+        beforUse.Add(slimeCardObj);
         ShuffleDeck(beforUse);
-        //CreateBeforCardObj();
     }
 }

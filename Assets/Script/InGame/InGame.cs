@@ -9,11 +9,8 @@ public class InGame : Singleton<InGame>
     private void Awake()
     {
         Init();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
         openDeckView = false;
+        charInfo = Character.Instance.ironclead;
         //charInfo = Character.Instance.ironclead;
         switch (PlayerPrefs.GetInt("CharType")) //픽창에서선텍한 캐릭
         {

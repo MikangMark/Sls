@@ -36,7 +36,7 @@ public class MonsterUI : MonoBehaviour//모든 몬스터의 UI컨트롤
         if (monsterStat.shiled > 0)
         {
             monsterObj[index].transform.GetChild(2).gameObject.SetActive(true);
-            monsterObj[index].transform.GetChild(3).GetComponent<TextMeshProUGUI>().text = monsterStat.shiled.ToString();
+            monsterObj[index].transform.GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = monsterStat.shiled.ToString();
         }
         else
         {

@@ -112,7 +112,7 @@ public class BattleUI : MonoBehaviour
         }
         if (deleteCardView.activeSelf)
         {
-            for (int i = 0; i < afterContent.transform.childCount; i++)
+            for (int i = 0; i < deleteContent.transform.childCount; i++)
             {
                 deleteContent.transform.GetChild(i).GetComponent<MousePoint>().enabled = false;
             }

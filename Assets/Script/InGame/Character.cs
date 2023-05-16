@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : Singleton<Character>
 {
     public enum CharType { IRONCLEAD = 0, SILENCE, DEFACT, WACHER }
+    [System.Serializable]
     public struct CharInfo
     {
         public int hp;
