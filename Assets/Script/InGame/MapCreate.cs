@@ -5,8 +5,10 @@ using System;
 using UnityEngine.UI;
 using ROOMVALUE = MapNode.ROOMVALUE;
 
+
 public class MapCreate : MonoBehaviour
 {
+
     //방의종류 8가지 미지 상인 보물 휴식 일반적 엘리트 보스 빈방
     //0.빈방, 1.일반적, 2.엘리트, 3.휴식, 4.상인, 5.미지, 6.보물, 7.보스
     //랜덤생성되는것은 보스를 제외한 6가지
@@ -42,9 +44,9 @@ public class MapCreate : MonoBehaviour
     //8가지의 방목록중 랜덤방은 0~5까지
     void Start()
     {
-        for(int i = 0; i < 8; i++)
+        for (int i = 0; i < 8; i++)
         {
-            if(i==0|| i == 6|| i == 7)
+            if (i == 0 || i == 6 || i == 7)
             {
                 continue;
             }
@@ -71,12 +73,12 @@ public class MapCreate : MonoBehaviour
     #region RoomCreate
     void SetFloorObject()
     {
-        
+
         for (int i = 0; i < floor; i++)
         {
             floor_List.Add(null);
         }
-        for (int i = floor-1; i >= 0; i--)//보스방부터 시작 인덱스도 역순임
+        for (int i = floor - 1; i >= 0; i--)//보스방부터 시작 인덱스도 역순임
         {
             GameObject floorObj = Instantiate(floor_p, floorObj_Parents.transform);
             floorObj.name = "Floor[" + i + "]";
@@ -90,7 +92,7 @@ public class MapCreate : MonoBehaviour
         temp.roomType = ROOMVALUE.BOSS;
         temp.roomNum = createRoomCount;
         temp.roomName = "[" + createRoomCount + "]" + temp.roomType.ToString();
-        
+
         temp.floor = floor - 1;
         temp.roomObj = roomObj;
         temp.children = new List<MapNode>();
@@ -115,7 +117,7 @@ public class MapCreate : MonoBehaviour
         //밑으로내려가는식으로 방생성
         //방하나만들때마다 이스크립트를 실행
         MapNode pNode = parentObj.GetComponent<Room>().node;
-        
+
         GameObject roomObj = Instantiate(room_p, floor_List[pNode.floor - 1].transform);
 
         switch (pNode.floor - 1)
@@ -139,7 +141,7 @@ public class MapCreate : MonoBehaviour
         childnode.children = new List<MapNode>();
         if (childnode.floor - 1 >= 0 && floor2roomCount[childnode.floor - 1] > 0)
         {
-            for (int i = 0; i < floor2roomCount[childnode.floor-1]; i++)
+            for (int i = 0; i < floor2roomCount[childnode.floor - 1]; i++)
             {
                 childnode.children.Add(new MapNode());
             }
@@ -153,7 +155,7 @@ public class MapCreate : MonoBehaviour
         room_List.Add(roomObj);
         roomObj.name = childnode.roomName;
         createRoomCount++;
-        if(childnode.floor - 1 > 0)
+        if (childnode.floor - 1 > 0)
         {
             for (int i = 0; i < floor2roomCount[childnode.floor - 1]; i++)//하위의 하위오브젝트만큼반복
             {
@@ -164,9 +166,9 @@ public class MapCreate : MonoBehaviour
         {
             return;
         }
-        
+
     }
-    
+
     #endregion
 
     #region CreateLine V1
@@ -193,7 +195,7 @@ public class MapCreate : MonoBehaviour
         // 선의 최소생성개수 = 현재방과 다음방의 최대값
         // 선의 최대 생성개수 = (현재방과 다음방중의 최대값)*2-1 + (현재방과 다음방의 갯수의 차)
         #endregion
-        
+
         /*int lineCount;
         int lineMin;
         int lineMax;
@@ -252,4 +254,5 @@ public class MapCreate : MonoBehaviour
     }
 
     #endregion
+
 }

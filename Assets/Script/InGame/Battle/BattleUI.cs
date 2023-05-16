@@ -43,6 +43,7 @@ public class BattleUI : MonoBehaviour
     GameObject afterContent;
     [SerializeField]
     GameObject deleteContent;
+    public TextMeshProUGUI energy_Tmp;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +60,7 @@ public class BattleUI : MonoBehaviour
         {
             bufUI[i].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = 0.ToString();
         }
+        energy_Tmp.text = 0 + "/" + 0;
     }
 
     // Update is called once per frame
@@ -117,6 +119,8 @@ public class BattleUI : MonoBehaviour
                 deleteContent.transform.GetChild(i).GetComponent<MousePoint>().enabled = false;
             }
         }
+        
+        energy_Tmp.text = battle.energy + "/" + battle.maxEnergy;
     }
     public void OnClickUsedCardView()
     {
