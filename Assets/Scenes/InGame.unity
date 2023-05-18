@@ -6050,7 +6050,7 @@ MonoBehaviour:
   beforeContent: {fileID: 722189482}
   afterContent: {fileID: 216135361}
   deleteContent: {fileID: 1638707311}
-  energy_Tmp: {fileID: 0}
+  energy_Tmp: {fileID: 1519827104}
 --- !u!4 &1821535483
 Transform:
   m_ObjectHideFlags: 0
