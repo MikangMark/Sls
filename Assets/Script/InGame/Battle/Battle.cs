@@ -220,8 +220,10 @@ public class Battle : MonoBehaviour
             for(int i = 0; i < afterUse.Count; i++)
             {
                 beforUse.Add(afterUse[i]);
+                
             }
             afterUse.Clear();
+            RebootAfterCardObj();
         }
         CreateBeforCardObj();//뽑기전카드군의 오브젝트 재생성
         GameObject drawCard = Instantiate(beforUse[0], myCardParent.transform);
@@ -356,6 +358,19 @@ public class Battle : MonoBehaviour
             Instantiate(beforUse[i], beforContent.transform);
         }
     }
+    public void RebootAfterCardObj()
+    {
+        int count = afterContent.transform.childCount;
+        for (int i = 0; i < count; i++)
+        {
+            DestroyImmediate(afterContent.transform.GetChild(0).gameObject);
+        }
+        for (int i = 0; i < afterUse.Count; i++)
+        {
+            Instantiate(afterUse[i], afterContent.transform);
+        }
+    }
+
     public GameObject CreateAfterCardObj(GameObject _card)
     {
         return Instantiate(_card, afterContent.transform);
