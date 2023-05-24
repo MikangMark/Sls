@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 7182134920097820502}
   m_Layer: 0
   m_Name: Card
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -791,7 +791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159c4ff76f1db754bb186886eda74716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  code: 6
   thisCard:
     cost: 0
     title: 

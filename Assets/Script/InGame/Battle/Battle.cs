@@ -123,7 +123,6 @@ public class Battle : MonoBehaviour
             CardDraw();
         }
         ReChargeEnergy(refillEnergy);
-        Debug.Log(stat.hp);
     }
     public void EndMyTurn()//턴종료눌렀을떄
     {
@@ -219,11 +218,12 @@ public class Battle : MonoBehaviour
             beforUse.Clear();
             for(int i = 0; i < afterUse.Count; i++)
             {
-                beforUse.Add(afterUse[i]);
+                beforUse.Add(Instantiate(afterUse[i]));
                 
             }
             afterUse.Clear();
             RebootAfterCardObj();
+            Debug.Log("------------------------");
         }
         CreateBeforCardObj();//뽑기전카드군의 오브젝트 재생성
         GameObject drawCard = Instantiate(beforUse[0], myCardParent.transform);
@@ -353,8 +353,10 @@ public class Battle : MonoBehaviour
         {
             DestroyImmediate(beforContent.transform.GetChild(0).gameObject);
         }
+        Debug.Log(beforUse.Count);
         for (int i = 0; i < beforUse.Count; i++)
         {
+            
             Instantiate(beforUse[i], beforContent.transform);
         }
     }
