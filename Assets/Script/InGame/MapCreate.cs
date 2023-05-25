@@ -32,7 +32,7 @@ public class MapCreate : MonoBehaviour
     public GameObject floorObj_Parents;
     public List<GameObject> room_List;
     public MapTree mapTree;
-
+    public GameObject bossRoom;
     public int createRoomCount = 0;
     public List<int> roomTypeRand = new List<int>();
     public List<int> floor2roomCount;
@@ -87,86 +87,47 @@ public class MapCreate : MonoBehaviour
     }
     void RootCreate()
     {
-        GameObject roomObj = Instantiate(room_p, floor_List[floor - 1].transform);
-        MapNode temp = new MapNode();
-        temp.roomType = ROOMVALUE.BOSS;
-        temp.roomNum = createRoomCount;
-        temp.roomName = "[" + createRoomCount + "]" + temp.roomType.ToString();
-
-        temp.floor = floor - 1;
-        temp.roomObj = roomObj;
-        temp.children = new List<MapNode>();
-        for (int i = 0; i < floor2roomCount[temp.floor - 1]; i++)
-        {
-            temp.children.Add(new MapNode());
-        }
-        mapTree.root = temp;
-        roomObj.name = temp.roomName;
-        roomObj.GetComponent<Room>().node = mapTree.root;
-        room_List.Add(roomObj);
-        createRoomCount++;
-        for (int i = 0; i < floor2roomCount[mapTree.root.floor - 1]; i++)//하위 오브젝트만큼반복
-        {
-            SetRoomObject(room_List[room_List.Count - 1], mapTree.root.children[i]);//temp.children[i]빈데이터
-        }
+        bossRoom = SetRoomObject(floor - 1);
     }
-    void SetRoomObject(GameObject parentObj, MapNode childnode)//하위 오브젝트 생성
+    GameObject SetRoomObject(int _index)//하위 오브젝트 생성
     {
         //하위오브젝트 구역
         //최상층 부터 실행(보스방부터)
         //밑으로내려가는식으로 방생성
         //방하나만들때마다 이스크립트를 실행
-        MapNode pNode = parentObj.GetComponent<Room>().node;
+        GameObject roomObj = Instantiate(room_p, floor_List[_index].transform);
 
-        GameObject roomObj = Instantiate(room_p, floor_List[pNode.floor - 1].transform);
-
-        switch (pNode.floor - 1)
+        switch (_index)
         {
+            case 15:
+                roomObj.GetComponent<Room>().node.roomType = ROOMVALUE.BOSS;
+                break;
             case 14:
-                childnode.roomType = ROOMVALUE.REST;
+                roomObj.GetComponent<Room>().node.roomType = ROOMVALUE.REST;
                 break;
             case 8:
-                childnode.roomType = ROOMVALUE.TREASURE;
+                roomObj.GetComponent<Room>().node.roomType = ROOMVALUE.TREASURE;
                 break;
             case 0:
-                childnode.roomType = ROOMVALUE.NOMAL;
+                roomObj.GetComponent<Room>().node.roomType = ROOMVALUE.NOMAL;
                 break;
             default:
-                childnode.roomType = (ROOMVALUE)CreateSeed.Instance.RandNum(roomTypeRand);
+                roomObj.GetComponent<Room>().node.roomType = (ROOMVALUE)CreateSeed.Instance.RandNum(roomTypeRand);
                 break;
         }
-        childnode.roomNum = createRoomCount;
-        childnode.roomName = "[" + createRoomCount + "]" + childnode.roomType.ToString();
-        childnode.floor = pNode.floor - 1;
-        childnode.children = new List<MapNode>();
-        if (childnode.floor - 1 >= 0 && floor2roomCount[childnode.floor - 1] > 0)
+        roomObj.GetComponent<Room>().node.roomNum = createRoomCount;
+        roomObj.GetComponent<Room>().node.roomName = "[" + createRoomCount + "]" + roomObj.GetComponent<Room>().node.roomType.ToString();
+        roomObj.GetComponent<Room>().node.floor = _index;
+        roomObj.GetComponent<Room>().node.children = new List<MapNode>();
+        if (_index > 0)
         {
-            for (int i = 0; i < floor2roomCount[childnode.floor - 1]; i++)
+            for (int i = 0; i < floor2roomCount[_index - 1]; i++)
             {
-                childnode.children.Add(new MapNode());
+                roomObj.GetComponent<Room>().node.children.Add(SetRoomObject(_index - 1).GetComponent<Room>().node);
             }
         }
-        else
-        {
-            return;
-        }
-        childnode.roomObj = roomObj;
-        roomObj.GetComponent<Room>().node = childnode;
-        room_List.Add(roomObj);
-        roomObj.name = childnode.roomName;
-        createRoomCount++;
-        if (childnode.floor - 1 > 0)
-        {
-            for (int i = 0; i < floor2roomCount[childnode.floor - 1]; i++)//하위의 하위오브젝트만큼반복
-            {
-                SetRoomObject(room_List[room_List.Count - 1], childnode.children[i]);//ccNode[i]빈데이터
-            }
-        }
-        else
-        {
-            return;
-        }
-
+            
+        return roomObj;
     }
 
     #endregion
