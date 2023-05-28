@@ -28,11 +28,9 @@ public class MapCreate : MonoBehaviour
     public GameObject room_p;
     public GameObject floor_p;
     public List<GameObject> floor_List;
-    public GameObject roomObj_Parents;
     public GameObject floorObj_Parents;
     public List<GameObject> room_List;
     public MapTree mapTree;
-    public GameObject bossRoom;
     public int createRoomCount = 0;
     public List<int> roomTypeRand = new List<int>();
     public List<int> floor2roomCount;
@@ -87,17 +85,23 @@ public class MapCreate : MonoBehaviour
     }
     void RootCreate()
     {
-        bossRoom = SetRoomObject(floor - 1);
+        for (int i = floor - 1; i >= 0; i--)
+        {
+            for (int j = 0; j < floor2roomCount[i]; j++)
+            {
+                SetRoomObject(i, j);
+            }
+        }
     }
-    GameObject SetRoomObject(int _index)//하위 오브젝트 생성
+    void SetRoomObject(int i, int j)//하위 오브젝트 생성
     {
         //하위오브젝트 구역
         //최상층 부터 실행(보스방부터)
         //밑으로내려가는식으로 방생성
         //방하나만들때마다 이스크립트를 실행
-        GameObject roomObj = Instantiate(room_p, floor_List[_index].transform);
+        GameObject roomObj = Instantiate(room_p, floor_List[i].transform);
 
-        switch (_index)
+        switch (i)
         {
             case 15:
                 roomObj.GetComponent<Room>().node.roomType = ROOMVALUE.BOSS;
@@ -116,104 +120,47 @@ public class MapCreate : MonoBehaviour
                 break;
         }
         roomObj.GetComponent<Room>().node.roomNum = createRoomCount;
-        roomObj.GetComponent<Room>().node.roomName = "[" + createRoomCount + "]" + roomObj.GetComponent<Room>().node.roomType.ToString();
-        roomObj.GetComponent<Room>().node.floor = _index;
+        roomObj.GetComponent<Room>().node.roomName = "[" + i + "][" + j + "]" + roomObj.GetComponent<Room>().node.roomType.ToString();
+        roomObj.GetComponent<Room>().node.floor = i;
         roomObj.GetComponent<Room>().node.children = new List<MapNode>();
-        if (_index > 0)
-        {
-            for (int i = 0; i < floor2roomCount[_index - 1]; i++)
-            {
-                roomObj.GetComponent<Room>().node.children.Add(SetRoomObject(_index - 1).GetComponent<Room>().node);
-            }
-        }
-            
-        return roomObj;
-    }
+        roomObj.name = roomObj.GetComponent<Room>().node.roomName;
+        createRoomCount++;
+        room_List.Add(roomObj);
 
-    #endregion
-
-    #region CreateLine V1
-    void CreateLine(int layer)//한층마다 실행 한층마다 생성되는 선의 갯수를 리턴
-    {
-        #region 선생성할 갯수 설정
-        #region 설명
-        //1.다음 층으로 넘어갈때 쓸수있는 선의갯수 최대 6개
-        //2.생성된 다음방은 어느방에서부터든 한방은 갈수있어야한다
-        //3. 1~3, 4~5 i층 j번방 i+1층 j-1~j+1까지 가능 한방에 최대 3개 최소1개의 선이생김
-        //4.방은 2개에서 6개사이로 생성됨
-
-        //생성하는방법
-        //1.현재층의 방의 개수를 저장하고 다음방의 갯수를 찾는다
-        // 
-        //  최소 = 현재방 다음방의 최대값
-        //  최대 = 최소의 방의 갯수에따라 달라짐
-        // ex) 현재방과 다음방의 갯수가 같을때 2n-1 (a-b = 0 2n-1)
-        // 2 2 = 3, 3 3 = 5, 4 4 = 7
-        // ex) 현재방과 다음방의 갯수의 차가 1일때 2n
-        // 2 3 = 4, 3 4 = 6, 4 5 = 8 
-        // ex) 현재방과 다음방의 갯수의 차가 2일때 2n + 1
-        // 2 4 = 5 3 5 = 7, 4 6 = 9
-        // 선의 최소생성개수 = 현재방과 다음방의 최대값
-        // 선의 최대 생성개수 = (현재방과 다음방중의 최대값)*2-1 + (현재방과 다음방의 갯수의 차)
-        #endregion
-
-        /*int lineCount;
-        int lineMin;
-        int lineMax;
-        int nowMnext = nowFloor_Count - nextFloor_Count;//now - next = nowMnext
-
-        for(int i = 0;i< room_List[layer].Count; i++)
-        {
-            if (room_List[layer][i].activeSelf == true)
-            {
-                nowFloor_Count++;
-            }
-        }
-        for (int i = 0; i < room_List[layer+1].Count; i++)
-        {
-            if (room_List[layer + 1][i].activeSelf == true)
-            {
-                nextFloor_Count++;
-            }
-        }
-
-        if (nowMnext >= 0)
-        {
-            lineMin = nowFloor_Count;
-            lineMax = nextFloor_Count * 2 - 1 + nowMnext;
-        }
-        else
-        {
-            lineMin = nextFloor_Count;
-            lineMax = nowFloor_Count * 2 - 1 + (-nowMnext);
-        }
-        lineCount = CreateSeed.Instance.RandNum(lineMin, lineMax);
-        SetLine(layer, lineCount);*/
-        #endregion
-    }
-    void SetLine(int layer, int createdLine)//갯수가 설정되면 그갯수가지고 층과층사이를 연결되도록배치
-    {
-        /*
-        1.현재층과 다음층의 갯수가 같을경우
-            같은번수의 방끼리 연결 -> 남아있는 선갯수 확인 -> 남아있는 선갯수가 있으면 현제층부터 선을 추가로 연결할 방을 랜덤으로설정하고 한번더 연결시도(n-1 or n+1번방만 가능)
-        2.현재 층과 다음층의 갯수가 다를경우
-            현재층과 다음층의 양쪽끝방끼리 이어주기 -> 남은 현재방과 다음방의 갯수를 체크
-            ->
-
-         */
     }
     #endregion
 
-    #region CreateLine V2
-    void CreateLine_V2(int layer)
+    /*
+        방은 이미 생성되어있다
+        층과 층사이의 생성되는 선의갯수는 최소3개에서 6개까지이다
+        층과 층에서 방의 갯수가 많은쪽의 방의갯수가 3이상일경우 선의 최소 갯수는 방개수가많은 층의 방개수가 된다
+        선들은 서로 교차되어서는 안된다
+        한방에서 다음방으로 연결되는 선의갯수는 3개까지 가능하다
+     */
+    void CreateLineCount(int curLayer, int nextLayer)//층과 층사이 최소로만들어야하는 선의 개수 리턴
     {
-        /*
-         * 현재층의 갯수만큼만 선생성
-         * 현재층과 다음충중 높은방의갯수를 가진층을 낮은방의갯수를 가진층으로 나눈다 
-         */
+        int minLine = 3;
+        int largeLayer;
+        int smallLayer;
+        if (curLayer >= 3 || nextLayer >= 3)
+        {
+            if (curLayer >= nextLayer)
+            {
+                largeLayer = curLayer;
+                smallLayer = nextLayer;
+                minLine = curLayer;
+            }
+            else
+            {
+                largeLayer = nextLayer;
+                smallLayer = curLayer;
+                minLine = nextLayer;
+            }
+        }
+        else//이쪽으로 오는경우 현제층과 다음층의 방의갯수가 둘다 2일 경우
+        {
 
+        }
+        
     }
-
-    #endregion
-
 }

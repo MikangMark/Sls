@@ -20,7 +20,7 @@ public class MapNode//방하나당 정보
     public List<GameObject> childrenObj;
     public int floor;//방의 층
     public ROOMVALUE roomType;
-    public Image room_Img;
+    public Sprite room_Img;
     public GameObject roomObj;
 
     public MapNode(MapNode map)
