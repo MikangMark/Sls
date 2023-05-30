@@ -67,6 +67,10 @@ public class MapCreate : MonoBehaviour
             }
         }
         RootCreate();
+        for(int i = floor - 1; i > 0; i--)
+        {
+            CreateLine(i, i - 1);
+        }
     }
     #region RoomCreate
     void SetFloorObject()
@@ -137,30 +141,44 @@ public class MapCreate : MonoBehaviour
         선들은 서로 교차되어서는 안된다
         한방에서 다음방으로 연결되는 선의갯수는 3개까지 가능하다
      */
-    void CreateLineCount(int curLayer, int nextLayer)//층과 층사이 최소로만들어야하는 선의 개수 리턴
+    void CreateLine(int curLayer, int nextLayer)
     {
         int minLine = 3;
         int largeLayer;
         int smallLayer;
-        if (curLayer >= 3 || nextLayer >= 3)
+        int q;
+        if (curLayer >= nextLayer)
         {
-            if (curLayer >= nextLayer)
-            {
-                largeLayer = curLayer;
-                smallLayer = nextLayer;
-                minLine = curLayer;
-            }
-            else
-            {
-                largeLayer = nextLayer;
-                smallLayer = curLayer;
-                minLine = nextLayer;
-            }
+            largeLayer = curLayer;
+            smallLayer = nextLayer;
+            minLine = curLayer;
         }
-        else//이쪽으로 오는경우 현제층과 다음층의 방의갯수가 둘다 2일 경우
+        else
         {
+            largeLayer = nextLayer;
+            smallLayer = curLayer;
+            minLine = nextLayer;
+        }
+        q = largeLayer / smallLayer;
+        switch (q)
+        {
+            case 1:
+                //0번 부터 생성
+                break;
+            case 2:
+                //0번다음에 *2
+                break;
+            case 3:
+                //0번다음에 *3
+                break;
+            default:
+                Debug.Log("Error");
+                break;
+        }
 
-        }
-        
+    }
+    void RealLine(GameObject paret, GameObject child)
+    {
+
     }
 }

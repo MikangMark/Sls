@@ -12,11 +12,23 @@ public class Room : MonoBehaviour
         3.이방 다음과 연결될 방의 정보(들)->다음방과 연결될 방정보들을 받아서 선연결
         4.
      */
-
+    public Button mapBtn;
     public MapNode node;
+    public EnterRoom enterRoom;
+
+    public List<GameObject> paretRooms;
+    public List<GameObject> childRooms;
     Room()
     {
         node = new MapNode();
+    }
+    private void Start()
+    {
+        paretRooms = new List<GameObject>();
+        childRooms = new List<GameObject>();
+        enterRoom = gameObject.GetComponent<EnterRoom>();
+        mapBtn = gameObject.GetComponent<Button>();
+        mapBtn.onClick.AddListener(enterRoom.OnClickRoomBtn);
     }
     private void Update()
     {

@@ -16,7 +16,12 @@ public class InGameUI : MonoBehaviour
     public TextMeshProUGUI deckCount_Tmp;
     public GameObject battle_Img;
     public GameObject map;
-    
+
+    public GameObject battleField;
+    public GameObject battleScript;
+    public GameObject battleUI;
+
+    public List<GameObject> battleControll;
 
     [SerializeField]
     GameObject cardPrf;
@@ -29,7 +34,12 @@ public class InGameUI : MonoBehaviour
     bool OnDeckView = false;
     private void Awake()
     {
-        CreateDeckObj();   
+        CreateDeckObj();
+        battleControll = new List<GameObject>();
+        battleControll.Add(battleField);
+        battleControll.Add(battleScript);
+        battleControll.Add(battleUI);
+        BattleTurnOff();
     }
     private void Start()
     {
@@ -50,16 +60,28 @@ public class InGameUI : MonoBehaviour
         hp_Tmp.text = InGame.Instance.charInfo.hp + "/" + InGame.Instance.charInfo.maxHp;
         money_Tmp.text = InGame.Instance.charInfo.money.ToString();
         deckCount_Tmp.text = Deck.Instance.deck.Count.ToString();
-        
-
-        
     }
     private void Update()
     {
         deckList_View.SetActive(OnDeckView);
         InGame.Instance.openDeckView = OnDeckView;
     }
-
+    public void BattleTurnOn()
+    {
+        for (int i = 0; i < battleControll.Count; i++)
+        {
+            battleControll[i].SetActive(true);
+        }
+        map.SetActive(false);
+    }
+    public void BattleTurnOff()
+    {
+        for (int i = 0; i < battleControll.Count; i++)
+        {
+            battleControll[i].SetActive(false);
+        }
+        map.SetActive(true);
+    }
     public void CreateDeckObj()
     {
         GameObject temp;
