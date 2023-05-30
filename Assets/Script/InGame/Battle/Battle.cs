@@ -51,14 +51,21 @@ public class Battle : MonoBehaviour
 
     [SerializeField]
     GameObject slimeCardObj;
+
+    public bool thisActive = false;
     void OnEnable()//setactive true될때 실행
     {
+        thisActive = true;
         //전투시작 셋팅
         //1.덱불러오기 -> 에너지셋팅 -> 캐릭스텟 불러오기
         initData();
         
     }
-    
+    private void OnDisable()
+    {
+        thisActive = false;
+    }
+
     void initData()
     {
         slimeCardObj = new GameObject();

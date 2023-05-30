@@ -69,7 +69,7 @@ public class MapCreate : MonoBehaviour
         RootCreate();
         for(int i = floor - 1; i > 0; i--)
         {
-            CreateLine(i, i - 1);
+            //CreateLine(i, i - 1);
         }
     }
     #region RoomCreate

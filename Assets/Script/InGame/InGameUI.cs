@@ -16,6 +16,7 @@ public class InGameUI : MonoBehaviour
     public TextMeshProUGUI deckCount_Tmp;
     public GameObject battle_Img;
     public GameObject map;
+    public Battle battle;
 
     public GameObject battleField;
     public GameObject battleScript;
@@ -30,6 +31,8 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     GameObject deckList_View;
+
+    bool mapActive = true;
 
     bool OnDeckView = false;
     private void Awake()
@@ -68,19 +71,21 @@ public class InGameUI : MonoBehaviour
     }
     public void BattleTurnOn()
     {
+        mapActive = false;
         for (int i = 0; i < battleControll.Count; i++)
         {
-            battleControll[i].SetActive(true);
+            battleControll[i].SetActive(!mapActive);
         }
-        map.SetActive(false);
+        map.SetActive(mapActive);
     }
     public void BattleTurnOff()
     {
+        mapActive = true;
         for (int i = 0; i < battleControll.Count; i++)
         {
-            battleControll[i].SetActive(false);
+            battleControll[i].SetActive(!mapActive);
         }
-        map.SetActive(true);
+        map.SetActive(mapActive);
     }
     public void CreateDeckObj()
     {
@@ -115,8 +120,6 @@ public class InGameUI : MonoBehaviour
             Deck.Instance.cardList_Obj.Add(temp);
         }
     }
-
-    
     public void OnClickDeckView_Btn()
     {
         if (OnDeckView)
@@ -128,5 +131,21 @@ public class InGameUI : MonoBehaviour
             OnDeckView = true;
         }
         
+    }
+
+    public void OnClickMapView_Btn()
+    {
+        if (battle.thisActive)
+        {
+            if (mapActive)
+            {
+                mapActive = false;
+            }
+            else
+            {
+                mapActive = true;
+            }
+            map.SetActive(mapActive);
+        }
     }
 }
