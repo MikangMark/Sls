@@ -69,7 +69,7 @@ public class MapCreate : MonoBehaviour
         RootCreate();
         for(int i = floor - 1; i > 0; i--)
         {
-            //CreateLine(i, i - 1);
+            CreateLine(i, i - 1);
         }
     }
     #region RoomCreate
@@ -147,38 +147,47 @@ public class MapCreate : MonoBehaviour
         int largeLayer;
         int smallLayer;
         int q;
-        if (curLayer >= nextLayer)
+        if (floor2roomCount[curLayer] >= floor2roomCount[nextLayer])
         {
             largeLayer = curLayer;
             smallLayer = nextLayer;
-            minLine = curLayer;
+            if(minLine< floor2roomCount[largeLayer])
+            {
+                minLine = floor2roomCount[largeLayer];
+            }
         }
         else
         {
             largeLayer = nextLayer;
             smallLayer = curLayer;
-            minLine = nextLayer;
+            if (minLine < floor2roomCount[largeLayer])
+            {
+                minLine = floor2roomCount[largeLayer];
+            }
         }
-        q = largeLayer / smallLayer;
-        switch (q)
+        q = floor2roomCount[largeLayer] / floor2roomCount[smallLayer];
+        if (floor2roomCount[smallLayer] == 1)
         {
-            case 1:
-                //0번 부터 생성
-                break;
-            case 2:
-                //0번다음에 *2
-                break;
-            case 3:
-                //0번다음에 *3
-                break;
-            default:
-                Debug.Log("Error");
-                break;
+            floor_List[smallLayer].transform.GetChild(0).gameObject.GetComponent<LineScript>().target.Add(floor_List[largeLayer].transform.GetChild(0).gameObject);
         }
-
+        else
+        {
+            for (int i = 0; i < floor2roomCount[smallLayer]; i++)
+            {
+                floor_List[smallLayer].transform.GetChild(i).gameObject.GetComponent<LineScript>().target.Add(floor_List[largeLayer].transform.GetChild(i * q).gameObject);
+            }
+        }
+        
     }
-    void RealLine(GameObject paret, GameObject child)
+    bool CheckAllCreateLine()
     {
+        for(int i = 0; i < floor_List.Count; i++)
+        {
+            for(int j = 0; j < floor_List[i].transform.childCount; j++)
+            {
 
+            }
+        }
+        return true;
     }
 }
