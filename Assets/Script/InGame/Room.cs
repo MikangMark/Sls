@@ -18,14 +18,16 @@ public class Room : MonoBehaviour
 
     public List<GameObject> paretRooms;
     public List<GameObject> childRooms;
+
+    public bool activeRoom = false;
     Room()
     {
         node = new MapNode();
+        paretRooms = new List<GameObject>();
+        childRooms = new List<GameObject>();
     }
     private void Start()
     {
-        paretRooms = new List<GameObject>();
-        childRooms = new List<GameObject>();
         enterRoom = gameObject.GetComponent<EnterRoom>();
         mapBtn = gameObject.GetComponent<Button>();
         mapBtn.onClick.AddListener(enterRoom.OnClickRoomBtn);
@@ -61,7 +63,7 @@ public class Room : MonoBehaviour
                 GetComponent<Image>().sprite = node.room_Img = Resources.Load<Sprite>("MapUI/event");
                 break;
         }
-
+        gameObject.GetComponent<Button>().enabled = activeRoom;
     }
 
     public void SettingRoom(MapNode data)

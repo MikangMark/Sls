@@ -146,6 +146,8 @@ public class MapCreate : MonoBehaviour
         int minLine = 3;
         int largeLayer;
         int smallLayer;
+        int createline = 0;
+        int maxLine = 6;
         int q;
         if (floor2roomCount[curLayer] >= floor2roomCount[nextLayer])
         {
@@ -165,29 +167,72 @@ public class MapCreate : MonoBehaviour
                 minLine = floor2roomCount[largeLayer];
             }
         }
+        if (floor2roomCount[curLayer] == 2)
+        {
+            if (floor2roomCount[nextLayer] == 2)
+            {
+                maxLine = 3;
+            }
+            else if (floor2roomCount[nextLayer] == 3)
+            {
+                maxLine = 4;
+            }
+        }
+        else if (floor2roomCount[curLayer] == 3)
+        {
+            if (floor2roomCount[nextLayer] == 3)
+            {
+                maxLine = 5;
+            }
+        }
+        if (floor2roomCount[nextLayer] == 2)
+        {
+            if (floor2roomCount[curLayer] == 2)
+            {
+                maxLine = 3;
+            }
+            else if (floor2roomCount[curLayer] == 3)
+            {
+                maxLine = 4;
+            }
+        }
+        else if (floor2roomCount[nextLayer] == 3)
+        {
+            if (floor2roomCount[curLayer] == 3)
+            {
+                maxLine = 5;
+            }
+        }
+        createline = CreateSeed.Instance.RandNum(minLine, maxLine);
         q = floor2roomCount[largeLayer] / floor2roomCount[smallLayer];
         if (floor2roomCount[smallLayer] == 1)
         {
             floor_List[smallLayer].transform.GetChild(0).gameObject.GetComponent<LineScript>().target.Add(floor_List[largeLayer].transform.GetChild(0).gameObject);
+            floor_List[largeLayer].transform.GetChild(0).gameObject.GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(0).gameObject);
+            floor_List[smallLayer].transform.GetChild(0).gameObject.GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(0).gameObject);
+            createline--;
         }
         else
         {
             for (int i = 0; i < floor2roomCount[smallLayer]; i++)
             {
                 floor_List[smallLayer].transform.GetChild(i).gameObject.GetComponent<LineScript>().target.Add(floor_List[largeLayer].transform.GetChild(i * q).gameObject);
+                if (smallLayer < largeLayer)
+                {
+                    floor_List[largeLayer].transform.GetChild(i * q).gameObject.GetComponent<Room>().childRooms.Add(floor_List[smallLayer].transform.GetChild(i).gameObject);
+                    floor_List[smallLayer].transform.GetChild(i).gameObject.GetComponent<Room>().paretRooms.Add(floor_List[largeLayer].transform.GetChild(i * q).gameObject);
+                }
+                else
+                {
+                    floor_List[smallLayer].transform.GetChild(i).gameObject.GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(i * q).gameObject);
+                    floor_List[largeLayer].transform.GetChild(i * q).gameObject.GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(i).gameObject);
+                }
+                createline--;
             }
         }
-        
-    }
-    bool CheckAllCreateLine()
-    {
-        for(int i = 0; i < floor_List.Count; i++)
+        if (createline > 0)
         {
-            for(int j = 0; j < floor_List[i].transform.childCount; j++)
-            {
 
-            }
         }
-        return true;
     }
 }

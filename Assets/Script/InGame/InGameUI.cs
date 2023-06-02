@@ -24,6 +24,8 @@ public class InGameUI : MonoBehaviour
 
     public List<GameObject> battleControll;
 
+    public GameObject mainBattleField;
+
     [SerializeField]
     GameObject cardPrf;
     [SerializeField]
@@ -146,6 +148,7 @@ public class InGameUI : MonoBehaviour
                 mapActive = true;
             }
             map.SetActive(mapActive);
+            mainBattleField.SetActive(!mapActive);
         }
     }
 }

@@ -7,12 +7,20 @@ public class LineScript : MonoBehaviour
 	public List<GameObject> target;//연결할 오브젝트 
 	public List<LineRenderer> lineObj;//라인렌더러 오브젝트
 	public LineRenderer linePfab;
+	public Texture2D tile;
 	private void Start()
 	{
 		StartCoroutine(CreateLine());
 	}
-
-	IEnumerator CreateLine()
+    private void Update()
+    {
+		for(int i = 0; i < lineObj.Count; i++)
+        {
+			lineObj[i].SetPosition(0, transform.position);
+			lineObj[i].SetPosition(1, target[i].transform.position);
+		}
+	}
+    IEnumerator CreateLine()
 	{
 		yield return null;
 
@@ -34,8 +42,4 @@ public class LineScript : MonoBehaviour
 			line.SetPosition(1, target[i].transform.position);
 		}
 	}
-	public void AddTarget(GameObject _target)
-    {
-		target.Add(_target);
-    }
 }
