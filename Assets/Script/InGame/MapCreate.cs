@@ -71,6 +71,7 @@ public class MapCreate : MonoBehaviour
         {
             CreateLine(i, i - 1);
         }
+
     }
     #region RoomCreate
     void SetFloorObject()
@@ -230,9 +231,66 @@ public class MapCreate : MonoBehaviour
                 createline--;
             }
         }
-        if (createline > 0)
+        for(int i = 0; i < floor_List[largeLayer].transform.childCount; i++)
         {
 
+            if(floor2roomCount[curLayer] > floor2roomCount[nextLayer])//¿ª»ï°¢
+            {
+                if(floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Count < 1)
+                {
+                    switch (q)
+                    {
+                        case 1:
+                            floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                            floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                            floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject.GetComponent<Room>().paretRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                            break;
+                        case 2:
+                            if (floor2roomCount[smallLayer] == 2)
+                            {
+                                //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 2 + i % 2).gameObject);
+                            }
+                            else if (floor2roomCount[smallLayer] == 3)
+                            {
+                                //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 3 + i % 3).gameObject);
+                            }
+                            break;
+                        case 3:
+                            break;
+                    }
+
+                }
+            }
+            else//Á¤»ï°¢
+            {
+                if (floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().paretRooms.Count < 1)
+                {
+                    switch (q)
+                    {
+                        case 1:
+                            //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                            break;
+                        case 2:
+                            if (floor2roomCount[smallLayer] == 2)
+                            {
+                                //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 2 + i % 2).gameObject);
+                            }
+                            else if (floor2roomCount[smallLayer] == 3)
+                            {
+                                //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 3 + i % 3).gameObject);
+                            }
+                            break;
+                        case 3:
+                            break;
+                    }
+
+                }
+            }
         }
+    }
+
+    void SubLineCreate(int curLayer, int nextLayer)
+    {
+
     }
 }

@@ -16,7 +16,9 @@ public class MapNode//방하나당 정보
     }
     public int roomNum;
     public string roomName; // 방 이름
+    [HideInInspector]
     public List<MapNode> children; // 자식 방 리스트
+    [HideInInspector]
     public List<MapNode> parent;//부모방 리스트
     public List<GameObject> childrenObj;
     public int floor;//방의 층
