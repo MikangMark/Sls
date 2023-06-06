@@ -4,9 +4,6 @@ using UnityEngine;
 public enum PlayerBuffType { POW = 0, WEAK, VULNER, IMPAIR, SLIMECARD, RESTRAINT, CONSCIOUS }
 public class Battle : MonoBehaviour
 {
-    enum Turn { Player = 0, EndPlayer, Enermy, EnermyEnd }
-    [SerializeField]
-    Turn thisTurn;
     int divideCard;
     public int maxEnergy;
     public int energy;
@@ -53,6 +50,8 @@ public class Battle : MonoBehaviour
     GameObject slimeCardObj;
 
     public bool thisActive = false;
+
+    public bool clear = false;
     void OnEnable()//setactive true될때 실행
     {
         thisActive = true;
@@ -65,7 +64,10 @@ public class Battle : MonoBehaviour
     {
         thisActive = false;
     }
-
+    private void Update()
+    {
+        EndBattle();
+    }
     void initData()
     {
         slimeCardObj = new GameObject();
@@ -99,7 +101,6 @@ public class Battle : MonoBehaviour
         maxEnergy = 3;
         energy = maxEnergy;
         refillEnergy = maxEnergy;
-        thisTurn = Turn.Player;
         MyTurn();
     }
     void CreateEnemy()
@@ -375,5 +376,21 @@ public class Battle : MonoBehaviour
         }//카드정보설정
         beforUse.Add(temp);
         ShuffleDeck(beforUse);
+    }
+    public void EndBattle()//업데이트 체크
+    {
+
+        if (stat.hp > 0)
+        {
+            clear = true;
+        }
+        else
+        {
+            clear = false;
+        }
+        if (clear)
+        {
+
+        }
     }
 }

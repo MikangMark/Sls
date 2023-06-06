@@ -36,7 +36,7 @@ public class LineScript : MonoBehaviour
 			LineRenderer line = Instantiate<LineRenderer>(linePfab, transform);
 			line.name = "[" + GetComponent<Room>().node.roomName + "]2Line[" + target[i].GetComponent<Room>().node.roomName + "]";
 			lineObj.Add(line);
-
+			
 			line.useWorldSpace = true;
 			line.SetPosition(0, transform.position);
 			line.SetPosition(1, target[i].transform.position);

@@ -17,6 +17,8 @@ public class Monster : MonoBehaviour
     public int shiled;
     public Intent intent;// 다음턴에행동할 의도\
 
+    public bool alive = true;
+
     public MonsterSkill nextSkill;
 
     private void Start()

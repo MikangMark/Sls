@@ -154,7 +154,7 @@ public class MapCreate : MonoBehaviour
         {
             largeLayer = curLayer;
             smallLayer = nextLayer;
-            if(minLine< floor2roomCount[largeLayer])
+            if (minLine < floor2roomCount[largeLayer])
             {
                 minLine = floor2roomCount[largeLayer];
             }
@@ -208,10 +208,14 @@ public class MapCreate : MonoBehaviour
         q = floor2roomCount[largeLayer] / floor2roomCount[smallLayer];
         if (floor2roomCount[smallLayer] == 1)
         {
-            floor_List[smallLayer].transform.GetChild(0).gameObject.GetComponent<LineScript>().target.Add(floor_List[largeLayer].transform.GetChild(0).gameObject);
-            floor_List[largeLayer].transform.GetChild(0).gameObject.GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(0).gameObject);
-            floor_List[smallLayer].transform.GetChild(0).gameObject.GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(0).gameObject);
-            createline--;
+            for (int i = 0; i < floor2roomCount[largeLayer]; i++)
+            {
+                floor_List[smallLayer].transform.GetChild(0).gameObject.GetComponent<LineScript>().target.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                floor_List[largeLayer].transform.GetChild(i).gameObject.GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(0).gameObject);
+                floor_List[smallLayer].transform.GetChild(0).gameObject.GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                createline--;
+            }
+
         }
         else
         {
@@ -231,12 +235,12 @@ public class MapCreate : MonoBehaviour
                 createline--;
             }
         }
-        for(int i = 0; i < floor_List[largeLayer].transform.childCount; i++)
+        for (int i = 0; i < floor_List[largeLayer].transform.childCount; i++)
         {
 
-            if(floor2roomCount[curLayer] > floor2roomCount[nextLayer])//¿ª»ï°¢
+            if (floor2roomCount[curLayer] > floor2roomCount[nextLayer])//¿ª»ï°¢
             {
-                if(floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Count < 1)
+                if (floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Count < 1)
                 {
                     switch (q)
                     {
@@ -244,53 +248,95 @@ public class MapCreate : MonoBehaviour
                             floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
                             floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
                             floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject.GetComponent<Room>().paretRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                            createline--;
                             break;
                         case 2:
-                            if (floor2roomCount[smallLayer] == 2)
+                            if (floor_List[smallLayer].transform.childCount == 2)
                             {
-                                //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 2 + i % 2).gameObject);
+                                if (i == 4)
+                                {
+                                    floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                                    floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                                    floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).GetComponent<Room>().paretRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                                    createline--;
+                                }
+                                else
+                                {
+                                    floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / q).gameObject);
+                                    floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Add(floor_List[smallLayer].transform.GetChild(i / q).gameObject);
+                                    floor_List[smallLayer].transform.GetChild(i / q).GetComponent<Room>().paretRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                                    createline--;
+                                }
+
                             }
-                            else if (floor2roomCount[smallLayer] == 3)
+                            else if (floor_List[smallLayer].transform.childCount == 3)
                             {
-                                //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 3 + i % 3).gameObject);
+                                floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / q).gameObject);
+                                floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Add(floor_List[smallLayer].transform.GetChild(i / q).gameObject);
+                                floor_List[smallLayer].transform.GetChild(i / q).GetComponent<Room>().paretRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                                createline--;
                             }
                             break;
                         case 3:
+                            floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / q).gameObject);
+                            floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().childRooms.Add(floor_List[smallLayer].transform.GetChild(i / q).gameObject);
+                            floor_List[smallLayer].transform.GetChild(i / q).GetComponent<Room>().paretRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                            createline--;
                             break;
                     }
 
                 }
             }
-            else//Á¤»ï°¢
+            else if (floor2roomCount[curLayer] < floor2roomCount[nextLayer])//Á¤»ï°¢
             {
                 if (floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().paretRooms.Count < 1)
                 {
                     switch (q)
                     {
                         case 1:
-                            //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                            floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                            floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                            floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                            createline--;
                             break;
                         case 2:
-                            if (floor2roomCount[smallLayer] == 2)
+                            if (floor_List[smallLayer].transform.childCount == 2)
                             {
-                                //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 2 + i % 2).gameObject);
+                                if (i == 4)
+                                {
+                                    floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                                    floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).gameObject);
+                                    floor_List[smallLayer].transform.GetChild(floor_List[smallLayer].transform.childCount - 1).GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                                    createline--;
+                                }
+                                else
+                                {
+                                    floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 2).gameObject);
+                                    floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(i / 2).gameObject);
+                                    floor_List[smallLayer].transform.GetChild(i / 2).GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                                    createline--;
+                                }
+
                             }
-                            else if (floor2roomCount[smallLayer] == 3)
+                            else if (floor_List[smallLayer].transform.childCount == 3)
                             {
-                                //floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 3 + i % 3).gameObject);
+                                floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 2).gameObject);
+                                floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(i / 2).gameObject);
+                                floor_List[smallLayer].transform.GetChild(i / 2).GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                                createline--;
                             }
                             break;
                         case 3:
+                            floor_List[largeLayer].transform.GetChild(i).GetComponent<LineScript>().target.Add(floor_List[smallLayer].transform.GetChild(i / 3).gameObject);
+                            floor_List[largeLayer].transform.GetChild(i).GetComponent<Room>().paretRooms.Add(floor_List[smallLayer].transform.GetChild(i / 3).gameObject);
+                            floor_List[smallLayer].transform.GetChild(i / 3).GetComponent<Room>().childRooms.Add(floor_List[largeLayer].transform.GetChild(i).gameObject);
+                            createline--;
                             break;
                     }
 
                 }
             }
         }
-    }
-
-    void SubLineCreate(int curLayer, int nextLayer)
-    {
-
+        Debug.Log(createline);
     }
 }

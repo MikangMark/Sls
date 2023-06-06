@@ -6,6 +6,7 @@ public class InGame : Singleton<InGame>
 {
     public Character.CharInfo charInfo;
     public bool openDeckView;
+    public int currentFloor = 0;
     private void Awake()
     {
         Init();

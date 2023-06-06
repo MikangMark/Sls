@@ -3554,6 +3554,7 @@ MonoBehaviour:
     money: 0
     charType: 0
   openDeckView: 0
+  currentFloor: 0
 --- !u!4 &1135833416
 Transform:
   m_ObjectHideFlags: 0
@@ -7390,7 +7391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6855754b815d016459e598bc6b3781aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisTurn: 0
   maxEnergy: 0
   energy: 0
   shiled: 0
@@ -7423,6 +7423,7 @@ MonoBehaviour:
   checkList: []
   slimeCardObj: {fileID: 0}
   thisActive: 0
+  clear: 0
 --- !u!4 &2104963838
 Transform:
   m_ObjectHideFlags: 0

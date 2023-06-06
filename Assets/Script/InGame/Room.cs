@@ -63,6 +63,14 @@ public class Room : MonoBehaviour
                 GetComponent<Image>().sprite = node.room_Img = Resources.Load<Sprite>("MapUI/event");
                 break;
         }
+        if (node.floor == InGame.Instance.currentFloor)
+        {
+            activeRoom = true;
+        }
+        else
+        {
+            activeRoom = false;
+        }
         gameObject.GetComponent<Button>().enabled = activeRoom;
     }
 
