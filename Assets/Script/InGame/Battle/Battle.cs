@@ -4,6 +4,7 @@ using UnityEngine;
 public enum PlayerBuffType { POW = 0, WEAK, VULNER, IMPAIR, SLIMECARD, RESTRAINT, CONSCIOUS }
 public class Battle : MonoBehaviour
 {
+    enum BattleResult { Win = 0, Lose }
     int divideCard;
     public int maxEnergy;
     public int energy;
@@ -64,9 +65,12 @@ public class Battle : MonoBehaviour
     {
         thisActive = false;
     }
-    private void Update()
+    private void FixedUpdate()
     {
-        EndBattle();
+        if (EndBattle())
+        {
+            InGame.Instance.currentFloor++;
+        }
     }
     void initData()
     {
@@ -377,20 +381,43 @@ public class Battle : MonoBehaviour
         beforUse.Add(temp);
         ShuffleDeck(beforUse);
     }
-    public void EndBattle()//업데이트 체크
+    public bool EndBattle()//업데이트 체크
     {
-
+        bool playerCheck = false;
+        List<bool> monsterCheck = new List<bool>();
         if (stat.hp > 0)
         {
-            clear = true;
+            playerCheck = true;
         }
         else
         {
-            clear = false;
+            playerCheck = false;
         }
-        if (clear)
+        for (int i = 0; i < monsters.Count; i++)
         {
-
+            monsterCheck.Add(false);
         }
+        for (int i = 0; i < monsters.Count; i++)
+        {
+            if (monsters[i].GetComponent<Monster>().stat.hp > 0)
+            {
+                monsterCheck[i] = true;
+            }
+            else
+            {
+                monsterCheck[i] = false;
+            }
+        }
+        for(int i = 0; i < monsterCheck.Count; i++){
+            if(monsterCheck[i]== true && playerCheck == true)
+            {
+                return true;
+            }
+            else if (monsterCheck[i])
+            {
+
+            }
+        }
+        return true;
     }
 }
