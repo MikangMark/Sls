@@ -12,7 +12,6 @@ public class EnterRoom : MonoBehaviour
     }
     public void OnClickRoomBtn()
     {
-        Debug.Log(gameObject.name);
         if(gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.ELITE|| gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.NOMAL)
         {
             inGameUI.BattleTurnOn();

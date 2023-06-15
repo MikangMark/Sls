@@ -11,15 +11,11 @@ public class BattleUI : MonoBehaviour
     [SerializeField]
     private GameObject shieldObj;
     [SerializeField]
-    private GameObject monsterIntentPos;
-    [SerializeField]
     List<GameObject> bufPreFabs;//0.Èû 1.Ãë¾à
     [SerializeField]
     List<GameObject> bufUI;//0.Èû 1.Ãë¾à
     [SerializeField]
     GameObject playerBufPannel;
-    [SerializeField]
-    List<GameObject> monsterList;
     [SerializeField]
     GameObject beforeDeck;
     [SerializeField]
@@ -45,11 +41,10 @@ public class BattleUI : MonoBehaviour
     GameObject deleteContent;
     public TextMeshProUGUI energy_Tmp;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         playerBufPannel = GameObject.Find("Player_Buf_Pannel");
         shieldObj = GameObject.Find("Player_Shield");
-        monsterList = new List<GameObject>();
         bufUI = new List<GameObject>();
         for (int i = 0; i < bufPreFabs.Count; i++)
         {
@@ -146,6 +141,4 @@ public class BattleUI : MonoBehaviour
     {
         deleteCardView.SetActive(false);
     }
-
-    
 }

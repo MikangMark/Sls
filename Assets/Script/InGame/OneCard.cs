@@ -19,9 +19,11 @@ public class OneCard : MonoBehaviour
     private void Start()
     {
         cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
-        battle = GameObject.Find("BattleScript").GetComponent<Battle>();
+        if(GameObject.Find("BattleScript") != null)
+        {
+            battle = GameObject.Find("BattleScript").GetComponent<Battle>();
+        }
         thisCardValue = cardData.allInfoCard[thisCard];
-
     }
     private void FixedUpdate()
     {

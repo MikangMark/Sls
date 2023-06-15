@@ -337,6 +337,5 @@ public class MapCreate : MonoBehaviour
                 }
             }
         }
-        Debug.Log(createline);
     }
 }

@@ -7,6 +7,11 @@ public class InGame : Singleton<InGame>
     public Character.CharInfo charInfo;
     public bool openDeckView;
     public int currentFloor = 0;
+
+    public int rewardGold;
+    public int rewardrewardCardGroup;
+    public List<List<CardInfo>> rewardCards;
+
     private void Awake()
     {
         Init();
@@ -31,6 +36,21 @@ public class InGame : Singleton<InGame>
                 charInfo = Character.Instance.ironclead;//아이언클래드
                 Debug.Log("DEFAULT");
                 break;
+        }
+    }
+    private void Start()
+    {
+        rewardGold = CreateSeed.Instance.RandNum(50, 100);
+        rewardrewardCardGroup = CreateSeed.Instance.RandNum(1, 2);
+        rewardCards = new List<List<CardInfo>>();
+        for (int i = 0; i < rewardrewardCardGroup; i++)
+        {
+            rewardCards.Add(new List<CardInfo>());
+            for (int j = 0; j < 3; j++)
+            {
+                int cardnumRand = CreateSeed.Instance.RandNum(0, Deck.Instance.cardList.Count - 1);
+                rewardCards[i].Add(Deck.Instance.cardList[cardnumRand]);
+            }
         }
     }
 }

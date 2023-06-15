@@ -43,16 +43,15 @@ public class Battle : MonoBehaviour
 
     [SerializeField]
     GameObject cardPrf;
-
-    [SerializeField]
-    List<GameObject> checkList;
-
-    [SerializeField]
-    GameObject slimeCardObj;
-
     public bool thisActive = false;
 
     public bool clear = false;
+
+
+    
+
+
+    BattleResult result;
     void OnEnable()//setactive true될때 실행
     {
         thisActive = true;
@@ -63,25 +62,36 @@ public class Battle : MonoBehaviour
     }
     private void OnDisable()
     {
+        InGame.Instance.currentFloor++;
+        ClearData();
         thisActive = false;
+    }
+    private void Update()
+    {
+        DieMonster();
+        
     }
     private void FixedUpdate()
     {
+        InGame.Instance.charInfo.hp = stat.hp;
         if (EndBattle())
         {
-            InGame.Instance.currentFloor++;
+            thisActive = false;
         }
+
     }
+
     void initData()
     {
-        slimeCardObj = new GameObject();
+        
         abnomalDeck = new List<GameObject>();
-        checkList = new List<GameObject>();
         stat = new Character.CharInfo();
         Instantiate(playerPrf, playerPos.transform);
         battleDeck = new List<GameObject>(Deck.Instance.cardList_Obj);
         monsters = new List<GameObject>();
         oneMonster = new List<string[]>();
+        beforUse = new List<GameObject>();
+        
         for (int i = 0; i < monsterGrup.Count; i++)
         {
             oneMonster.Add(monsterGrup[i].Split(','));
@@ -107,6 +117,38 @@ public class Battle : MonoBehaviour
         refillEnergy = maxEnergy;
         MyTurn();
     }
+    void ClearData()
+    {
+        abnomalDeck = null;
+        if(playerPos.transform.GetChild(0).gameObject != null)
+        {
+            Destroy(playerPos.transform.GetChild(0).gameObject);
+        }
+        battleDeck = null;
+        monsters = null;
+        oneMonster = null;
+        for (int i = 0; i < beforContent.transform.childCount; i++)
+        {
+            Destroy(beforContent.transform.GetChild(i).gameObject);
+        }
+        beforUse = null;
+        for(int i = 0; i < afterContent.transform.childCount; i++)
+        {
+            Destroy(afterContent.transform.GetChild(i).gameObject);
+        }
+        afterUse = null;
+        for (int i = 0; i < myCardParent.transform.childCount; i++)
+        {
+            Destroy(myCardParent.transform.GetChild(i).gameObject);
+        }
+        myHand = null;
+        for (int i = 0; i < deleteContent.transform.childCount; i++)
+        {
+            Destroy(deleteContent.transform.GetChild(i).gameObject);
+        }
+        deletCard = null;
+        playerBufList = null;
+    }
     void CreateEnemy()
     {
         int temp = -1;
@@ -129,6 +171,11 @@ public class Battle : MonoBehaviour
     }
     void MyTurn()
     {
+        for(int i = 0; i < playerBufList.Count; i++)
+        {
+            Debug.Log(((PlayerBuffType)i).ToString() + playerBufList[(PlayerBuffType)i].ToString());
+        }
+        Debug.Log("--------------------");
         ShuffleDeck(beforUse);
         for (int i = 0; i < divideCard; i++)
         {
@@ -381,9 +428,20 @@ public class Battle : MonoBehaviour
         beforUse.Add(temp);
         ShuffleDeck(beforUse);
     }
+    void DieMonster()
+    {
+        for(int i = 0; i < monsters.Count; i++)
+        {
+            if (monsters[i].GetComponent<Monster>().stat.hp <= 0)
+            {
+                monsters[i].SetActive(false);
+            }
+        }
+    }
     public bool EndBattle()//업데이트 체크
     {
         bool playerCheck = false;
+        bool isEnd = false;
         List<bool> monsterCheck = new List<bool>();
         if (stat.hp > 0)
         {
@@ -408,16 +466,34 @@ public class Battle : MonoBehaviour
                 monsterCheck[i] = false;
             }
         }
-        for(int i = 0; i < monsterCheck.Count; i++){
-            if(monsterCheck[i]== true && playerCheck == true)
-            {
-                return true;
-            }
-            else if (monsterCheck[i])
-            {
 
+        for(int i = 0; i < monsterCheck.Count; i++){
+            if(monsterCheck[i]== true)
+            {
+                isEnd = false;
+                result = BattleResult.Lose;
+                break;
+            }
+            else
+            {
+                result = BattleResult.Win;
+                isEnd = true;
+                if (i == monsterCheck.Count - 1)
+                {
+                    return isEnd;
+                }
             }
         }
-        return true;
+        if (playerCheck == false)
+        {
+            result = BattleResult.Lose;
+            isEnd = true;
+        }
+        else
+        {
+            result = BattleResult.Win;
+            isEnd = false;
+        }
+        return isEnd;
     }
 }

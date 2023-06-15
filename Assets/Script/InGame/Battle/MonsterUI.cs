@@ -13,7 +13,7 @@ public class MonsterUI : MonoBehaviour//모든 몬스터의 UI컨트롤
     List<Sprite> intendImgList;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         monsterObj = new List<GameObject>();
         for (int i=0; i < monsterPos.transform.childCount; i++)

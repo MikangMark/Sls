@@ -34,9 +34,17 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     GameObject deckList_View;
 
+    [SerializeField]
+    GameObject reward_View;
+
+    [SerializeField]
+    List<GameObject> reward_Btn;
+
     bool mapActive = true;
 
     bool OnDeckView = false;
+    bool battleActive = false;
+    bool same = false;
     private void Awake()
     {
         CreateDeckObj();
@@ -70,6 +78,22 @@ public class InGameUI : MonoBehaviour
     {
         deckList_View.SetActive(OnDeckView);
         InGame.Instance.openDeckView = OnDeckView;
+        if (same != battle.thisActive)
+        {
+            BattleActive();
+        }
+        same = battle.thisActive;
+    }
+    void BattleActive()
+    {
+        if (battle.thisActive)
+        {
+            BattleTurnOn();
+        }
+        else
+        {
+            BattleTurnOff();
+        }
     }
     public void BattleTurnOn()
     {
@@ -150,5 +174,26 @@ public class InGameUI : MonoBehaviour
             map.SetActive(mapActive);
             mainBattleField.SetActive(!mapActive);
         }
+    }
+
+    public void TurnRewardView()
+    {
+        if (reward_View.activeSelf)
+        {
+            reward_View.SetActive(false);
+        }
+        else
+        {
+            reward_View.SetActive(true);
+        }
+    }
+
+    public void SetRewardView()
+    {
+        for(int i = 0; i < reward_Btn.Count; i++)
+        {
+            reward_Btn[i].SetActive(false);
+        }
+
     }
 }
