@@ -9,7 +9,7 @@ public class InGame : Singleton<InGame>
     public int currentFloor = 0;
 
     public int rewardGold;
-    public int rewardrewardCardGroup;
+    public int rewardCardGroup;
     public List<List<CardInfo>> rewardCards;
 
     private void Awake()
@@ -41,9 +41,9 @@ public class InGame : Singleton<InGame>
     private void Start()
     {
         rewardGold = CreateSeed.Instance.RandNum(50, 100);
-        rewardrewardCardGroup = CreateSeed.Instance.RandNum(1, 2);
+        rewardCardGroup = CreateSeed.Instance.RandNum(1, 2);
         rewardCards = new List<List<CardInfo>>();
-        for (int i = 0; i < rewardrewardCardGroup; i++)
+        for (int i = 0; i < rewardCardGroup; i++)
         {
             rewardCards.Add(new List<CardInfo>());
             for (int j = 0; j < 3; j++)

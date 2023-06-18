@@ -24,6 +24,11 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (gameObject.transform.parent.gameObject.tag.Equals("Reward"))
+        {
+
+            return;
+        }
         // 마우스 클릭 이벤트가 발생한 위치를 UI 요소의 부모 객체의 좌표계로 변환합니다.
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out Vector2 localMousePosition);
         savePos = rectTransform.localPosition;

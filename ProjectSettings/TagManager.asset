@@ -8,6 +8,7 @@ TagManager:
   - CardView
   - Hand
   - Card
+  - Reward
   layers:
   - Default
   - TransparentFX

@@ -194,6 +194,19 @@ public class InGameUI : MonoBehaviour
         {
             reward_Btn[i].SetActive(false);
         }
+        for(int i = 0; i < InGame.Instance.rewardCardGroup + 1; i++)
+        {
+            reward_Btn[i].SetActive(true);
+            if (i == 0)
+            {
+                reward_Btn[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = InGame.Instance.rewardGold + "G";
+                //reward_Btn[i].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("BossCardReward");
+                reward_Btn[i].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("gold");
+            }
+            else
+            {
 
+            }
+        }
     }
 }
