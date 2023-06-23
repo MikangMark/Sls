@@ -8,6 +8,7 @@ public class OneCard : MonoBehaviour
 {
     public CardInfo thisCard;//key
     public CardValue thisCardValue;//value
+    [SerializeField]
     private CardValueExcelDataLoader cardData;
     public Battle battle;
     public TextMeshProUGUI cCost;
@@ -23,26 +24,41 @@ public class OneCard : MonoBehaviour
         {
             battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         }
-        thisCardValue = cardData.allInfoCard[thisCard];
+        if (!gameObject.transform.parent.tag.Equals("Reward"))
+        {
+            thisCardValue = cardData.allInfoCard[thisCard];
+        }
     }
     private void FixedUpdate()
     {
-        cCost.text = thisCard.cost.ToString();
-        cTitle.text = thisCard.title.ToString();
-        cType.text = thisCard.type.ToString();
-        cText.text = thisCard.text.ToString();
-        cImg.sprite = thisCard.cardImg;
+        if(thisCardValue != null)
+        {
+            cCost.text = thisCard.cost.ToString();
+            cTitle.text = thisCard.title.ToString();
+            cType.text = thisCard.type.ToString();
+            cText.text = thisCard.text.ToString();
+            cImg.sprite = thisCard.cardImg;
 
-        if (InGame.Instance.openDeckView)
-        {
-            GetComponent<MousePoint>().enabled = false;
+            if (!gameObject.transform.parent.tag.Equals("Reward"))
+            {
+                if (InGame.Instance.openDeckView)
+                {
+                    GetComponent<MousePoint>().enabled = false;
+                }
+                else
+                {
+                    GetComponent<MousePoint>().enabled = true;
+                }
+            }
         }
-        else
-        {
-            GetComponent<MousePoint>().enabled = true;
-        }
+        
     }
-
+    public void SetCard(CardInfo _card)
+    {
+        cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
+        thisCard = _card;
+        thisCardValue = cardData.allInfoCard[_card];
+    }
     public bool UseThisCard(GameObject target)//카드사용의 성공했으면 true
     {
         if (battle.energy >= thisCard.cost)

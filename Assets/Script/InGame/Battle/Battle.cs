@@ -4,7 +4,7 @@ using UnityEngine;
 public enum PlayerBuffType { POW = 0, WEAK, VULNER, IMPAIR, SLIMECARD, RESTRAINT, CONSCIOUS }
 public class Battle : MonoBehaviour
 {
-    enum BattleResult { Win = 0, Lose }
+    public enum BattleResult { Win = 0, Lose }
     int divideCard;
     public int maxEnergy;
     public int energy;
@@ -46,12 +46,8 @@ public class Battle : MonoBehaviour
     public bool thisActive = false;
 
     public bool clear = false;
+    public BattleResult result;
 
-
-    
-
-
-    BattleResult result;
     void OnEnable()//setactive true될때 실행
     {
         thisActive = true;
@@ -173,9 +169,9 @@ public class Battle : MonoBehaviour
     {
         for(int i = 0; i < playerBufList.Count; i++)
         {
-            Debug.Log(((PlayerBuffType)i).ToString() + playerBufList[(PlayerBuffType)i].ToString());
+            //Debug.Log(((PlayerBuffType)i).ToString() + playerBufList[(PlayerBuffType)i].ToString());
         }
-        Debug.Log("--------------------");
+        //Debug.Log("--------------------");
         ShuffleDeck(beforUse);
         for (int i = 0; i < divideCard; i++)
         {
@@ -331,16 +327,16 @@ public class Battle : MonoBehaviour
         {
             damage = damage + (int)(damage * 0.5);
         }
-        if (target.GetComponent<Monster>().stat.shield > 0)//타겟의 몬스터가 쉴드를 가지고 있는가
+        if (target.GetComponent<Monster>().shiled > 0)//타겟의 몬스터가 쉴드를 가지고 있는가
         {
-            if (target.GetComponent<Monster>().stat.shield >= damage)
+            if (target.GetComponent<Monster>().shiled >= damage)
             {
-                target.GetComponent<Monster>().stat.shield -= damage;
+                target.GetComponent<Monster>().shiled -= damage;
             }
             else
             {
-                damage -= target.GetComponent<Monster>().stat.shield;
-                target.GetComponent<Monster>().stat.shield = 0;
+                damage -= target.GetComponent<Monster>().shiled;
+                target.GetComponent<Monster>().shiled = 0;
             }
         }
         target.GetComponent<Monster>().stat.hp -= damage;

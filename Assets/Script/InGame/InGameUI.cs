@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using UnityEngine.SceneManagement;
 using CharType = Character.CharType;
 
 public class InGameUI : MonoBehaviour
@@ -38,7 +39,26 @@ public class InGameUI : MonoBehaviour
     GameObject reward_View;
 
     [SerializeField]
+    GameObject lose_View;
+
+    [SerializeField]
     List<GameObject> reward_Btn;
+
+    [SerializeField]
+    GameObject rewardCard_Parent;
+
+    [SerializeField]
+    List<GameObject> rewardCards;
+
+    public GameObject selectedReward;
+
+    [SerializeField]
+    GameObject allRewardParent;
+
+    [SerializeField]
+    GameObject rewardOutBtn;
+
+    public bool is_Reward = false;
 
     bool mapActive = true;
 
@@ -61,11 +81,11 @@ public class InGameUI : MonoBehaviour
         hp_Tmp.text = 0 + "/" + 0;
         money_Tmp.text = 0.ToString();
         deckCount_Tmp.text = 0.ToString();
-        //battle_Img.SetActive(false);
-        //map.SetActive(false);
-        
-        
+        lose_View.SetActive(false);
+        reward_View.SetActive(false);
         deckList_View.SetActive(false);
+        rewardCard_Parent.SetActive(false);
+        rewardOutBtn.SetActive(false);
     }
     private void FixedUpdate()
     {
@@ -83,6 +103,11 @@ public class InGameUI : MonoBehaviour
             BattleActive();
         }
         same = battle.thisActive;
+
+        if (CheckGetAllReward())
+        {
+            rewardOutBtn.SetActive(true);
+        }
     }
     void BattleActive()
     {
@@ -92,6 +117,16 @@ public class InGameUI : MonoBehaviour
         }
         else
         {
+            if(battle.result == Battle.BattleResult.Win)
+            {
+                TurnRewardView();
+                InGame.Instance.SetReward();
+            }
+            else
+            {
+                Debug.Log("Lose");
+                lose_View.SetActive(true);
+            }
             BattleTurnOff();
         }
     }
@@ -184,6 +219,7 @@ public class InGameUI : MonoBehaviour
         }
         else
         {
+            SetRewardView();
             reward_View.SetActive(true);
         }
     }
@@ -200,13 +236,58 @@ public class InGameUI : MonoBehaviour
             if (i == 0)
             {
                 reward_Btn[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = InGame.Instance.rewardGold + "G";
-                //reward_Btn[i].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("BossCardReward");
                 reward_Btn[i].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("gold");
+                reward_Btn[i].GetComponent<Button>().onClick.AddListener(() => reward_Btn[i].GetComponent<RewardBtn>().OnClickGetReward_Gold());
+                reward_Btn[i].tag = "RewardGold";
+                reward_Btn[i].name = reward_Btn[i].tag;
             }
             else
             {
-
+                reward_Btn[i].transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().text = "덱에 카드를 추가";
+                reward_Btn[i].transform.GetChild(1).gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>("BossCardReward");
+                reward_Btn[i].GetComponent<Button>().onClick.AddListener(reward_Btn[i].GetComponent<RewardBtn>().OnClickGetReward_Cards);
             }
         }
+    }
+    public void OnClickCardReward()
+    {
+        rewardCard_Parent.SetActive(true);
+    }
+
+    public void OnClickMoveMainScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void SetRewardCards(int group_index)
+    {
+        for(int i=0;i< InGame.Instance.rewardCards.Count; i++)
+        {
+            for(int j=0;j< InGame.Instance.rewardCards[i].Count; j++)
+            {
+                Debug.Log(InGame.Instance.rewardCards[i][j].title);
+            }
+        }
+        for (int j = 0; j < 3; j++)
+        {
+            Debug.Log(rewardCard_Parent.transform.GetChild(j).gameObject.name);
+            rewardCard_Parent.transform.GetChild(j).GetComponent<OneCard>().SetCard(InGame.Instance.rewardCards[group_index][j]);
+        }
+    }
+
+    bool CheckGetAllReward()
+    {
+        for(int i=0;i< allRewardParent.transform.childCount; i++)
+        {
+            if (allRewardParent.transform.GetChild(i).gameObject.activeSelf)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void OnClickRewardOutBtn()
+    {
+        TurnRewardView();
     }
 }

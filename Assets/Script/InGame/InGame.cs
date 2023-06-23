@@ -34,14 +34,18 @@ public class InGame : Singleton<InGame>
                 break;
             default:
                 charInfo = Character.Instance.ironclead;//아이언클래드
-                Debug.Log("DEFAULT");
                 break;
         }
     }
     private void Start()
     {
+        SetReward();
+    }
+
+    public void SetReward()
+    {
         rewardGold = CreateSeed.Instance.RandNum(50, 100);
-        rewardCardGroup = CreateSeed.Instance.RandNum(1, 2);
+        rewardCardGroup = CreateSeed.Instance.RandNum(1, 3);
         rewardCards = new List<List<CardInfo>>();
         for (int i = 0; i < rewardCardGroup; i++)
         {
@@ -49,8 +53,17 @@ public class InGame : Singleton<InGame>
             for (int j = 0; j < 3; j++)
             {
                 int cardnumRand = CreateSeed.Instance.RandNum(0, Deck.Instance.cardList.Count - 1);
-                rewardCards[i].Add(Deck.Instance.cardList[cardnumRand]);
+                if(cardnumRand == 4)
+                {
+                    j--;
+                }
+                else
+                {
+                    rewardCards[i].Add(Deck.Instance.cardList[cardnumRand]);
+                }
             }
         }
     }
+
+
 }

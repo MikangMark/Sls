@@ -9,6 +9,8 @@ TagManager:
   - Hand
   - Card
   - Reward
+  - RewardGold
+  - RewardCard
   layers:
   - Default
   - TransparentFX

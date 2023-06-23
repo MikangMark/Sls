@@ -17,6 +17,11 @@ public class Deck : Singleton<Deck>
     int ignition = 1;
     public List<GameObject> cardList_Obj;
 
+    [SerializeField]
+    GameObject cardPrf;
+    [SerializeField]
+    GameObject content;
+
     // Start is called before the first frame update
 
     void Awake()
@@ -46,5 +51,37 @@ public class Deck : Singleton<Deck>
         {
             deck.Add(cardList[3]);
         }
+    }
+
+    public void AddDeck(CardInfo info)
+    {
+        deck.Add(info);
+        GameObject temp;
+        temp = Instantiate(cardPrf, content.transform);
+        temp.GetComponent<OneCard>().thisCard = info;
+        temp.name = "Card[" + (deck.Count - 1) + "]";
+        for (int j = 0; j < temp.transform.childCount; j++)
+        {
+            switch (j)
+            {
+                case 0:
+                    temp.transform.GetChild(j).name = "CostImg" + (deck.Count - 1);
+                    temp.transform.GetChild(j).GetChild(0).name = "CostText" + (deck.Count - 1);
+                    break;
+                case 1:
+                    temp.transform.GetChild(j).name = "CardTitle" + (deck.Count - 1);
+                    break;
+                case 2:
+                    temp.transform.GetChild(j).name = "CardText" + (deck.Count - 1);
+                    break;
+                case 3:
+                    temp.transform.GetChild(j).name = "CardImg" + (deck.Count - 1);
+                    break;
+                case 4:
+                    temp.transform.GetChild(j).name = "CardType" + (deck.Count - 1);
+                    break;
+            }
+        }
+        cardList_Obj.Add(temp);
     }
 }
