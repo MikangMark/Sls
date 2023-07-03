@@ -2787,6 +2787,7 @@ GameObject:
   - component: {fileID: 485337162}
   - component: {fileID: 485337161}
   - component: {fileID: 485337160}
+  - component: {fileID: 485337165}
   m_Layer: 0
   m_Name: ExcelData
   m_TagString: Untagged
@@ -2837,11 +2838,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9639e8a3df5a38e45a24e4becba13a65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardInfo: []
-  cardText:
-  - {fileID: 4900000, guid: aa3fad7df3cace344806d4045530ff29, type: 3}
-  lineSize: 0
-  rowSize: 0
+  cardInfo:
+  - index: 0
+    cost: 1
+    title: "\uD0C0\uACA9"
+    cardType: 1
+    type: 1
+    subType: 0
+    text: "\uD53C\uD574\uB97C 6 \uC90D\uB2C8\uB2E4."
+    cardImg: {fileID: 0}
+  - index: 0
+    cost: 1
+    title: "\uC218\uBE44"
+    cardType: 2
+    type: 2
+    subType: 0
+    text: "\uBC29\uC5B4\uB3C4\uB97C 5 \uC5BB\uC2B5\uB2C8\uB2E4."
+    cardImg: {fileID: 0}
+  - index: 0
+    cost: 2
+    title: "\uAC15\uD0C0"
+    cardType: 1
+    type: 1
+    subType: 4
+    text: "\uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4.\uCDE8\uC57D\uC744 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+    cardImg: {fileID: 0}
+  - index: 0
+    cost: 1
+    title: "\uBC1C\uD654"
+    cardType: 3
+    type: 3
+    subType: 0
+    text: "\uD798\uC744 2 \uC5BB\uC2B5\uB2C8\uB2E4."
+    cardImg: {fileID: 0}
+  - index: 0
+    cost: 1
+    title: "\uC810\uC561\uD22C\uC131\uC774"
+    cardType: 4
+    type: 5
+    subType: 0
+    text: "\uC18C\uBA78"
+    cardImg: {fileID: 0}
 --- !u!114 &485337163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2874,6 +2911,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &485337165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46025ec2744d6fc428a0a4d2efccbbb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  associatedSheet: 1kbzvps0KvAC3zMgQ5Nxwv6LqO03YXApiDKaLSL-KMEQ
+  associatedWorksheet: CardStat
+  items: []
+  dataLoader: {fileID: 0}
+  Names:
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &506785148
 GameObject:
   m_ObjectHideFlags: 0
@@ -12175,9 +12234,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisCard:
+    index: 0
     cost: 0
     title: 
+    cardType: 0
     type: 0
+    subType: 0
     text: 
     cardImg: {fileID: 0}
   thisCardValue:
@@ -12203,9 +12265,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisCard:
+    index: 0
     cost: 0
     title: 
+    cardType: 0
     type: 0
+    subType: 0
     text: 
     cardImg: {fileID: 0}
   thisCardValue:
@@ -12231,9 +12296,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisCard:
+    index: 0
     cost: 0
     title: 
+    cardType: 0
     type: 0
+    subType: 0
     text: 
     cardImg: {fileID: 0}
   thisCardValue:

@@ -35,7 +35,7 @@ public class OneCard : MonoBehaviour
         {
             cCost.text = thisCard.cost.ToString();
             cTitle.text = thisCard.title.ToString();
-            cType.text = thisCard.type.ToString();
+            cType.text = thisCard.cardType.ToString();
             cText.text = thisCard.text.ToString();
             cImg.sprite = thisCard.cardImg;
 

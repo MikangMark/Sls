@@ -6,34 +6,51 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CardInfo : IEquatable<CardInfo>
 {
-    public enum Type { DEFAULT = 0, ATK, SK , POW, ABNORMAL }
+    public enum CardType { DEFAULT = 0, ATK, SK , POW, ABNORMAL }
+    public enum Type { DEFAULT = 0, ATK, DEF, POW, WEAK, EXTINCTION }
 
+    public int index;
     public int cost;
     public string title;
+    public CardType cardType;
     public Type type;
+    public Type subType;
+    public Dictionary<Type, int> skillValue;
     public string text;
     public Sprite cardImg;
     public CardInfo()
     {
+        index = 0;
         cost = 0;
         title = "";
+        cardType = CardType.DEFAULT;
         type = Type.DEFAULT;
+        subType = Type.DEFAULT;
+        skillValue = new Dictionary<Type, int>();
         text = "";
         cardImg = null;
     }
-    public CardInfo(int _cost, string _title, Type _type, string _text, Sprite _img)
+    public CardInfo(int _index,int _cost, string _title, CardType _type, Type _Type, Type _subType, Dictionary<Type, int> _skillValue, string _text, Sprite _img)
     {
+        index = _index;
         cost = _cost;
         title = _title;
-        type = _type;
+        cardType = _type;
+        type = _Type;
+        subType = _subType;
+        skillValue = _skillValue;
         text = _text;
         cardImg = _img;
     }
-    public void InputInfo(int _cost,string _title, Type _type, string _text, Sprite _img)
+    public void InputInfo(int _index, int _cost, string _title, CardType _type, Type _Type, Type _subType, Dictionary<Type, int> _skillValue, string _text, Sprite _img)
     {
+        index = _index;
         cost = _cost;
         title = _title;
-        type = _type;
+        cardType = _type;
+        type = _Type;
+        subType = _subType;
+        skillValue = _skillValue;
         text = _text;
         cardImg = _img;
     }
@@ -45,7 +62,7 @@ public class CardInfo : IEquatable<CardInfo>
         int hash = 17;
         hash = hash * 23 + cost.GetHashCode();
         hash = hash * 23 + title.GetHashCode();
-        hash = hash * 23 + type.GetHashCode();
+        hash = hash * 23 + cardType.GetHashCode();
         hash = hash * 23 + text.GetHashCode();
         hash = hash * 23 + cardImg.GetHashCode();
         return hash;
@@ -62,64 +79,17 @@ public class CardInfo : IEquatable<CardInfo>
 
     public bool Equals(CardInfo other)
     {
-        return Mathf.Approximately(cost, other.cost) && string.Equals(title, other.title) && Mathf.Approximately((int)type, (int)other.type) && string.Equals(text, other.text) && cardImg == other.cardImg;
+        return Mathf.Approximately(cost, other.cost) && string.Equals(title, other.title) && Mathf.Approximately((int)cardType, (int)other.cardType) && string.Equals(text, other.text) && cardImg == other.cardImg;
     }
 }
 
 public class ExcelDataLoader : MonoBehaviour
 {
     public List<CardInfo> cardInfo;//전체 카드목록
-    public List<TextAsset> cardText;
-    public int lineSize, rowSize;
-
-    private void Awake()
+    public CardData cardData;
+    private void Start()
     {
-        for(int f = 0; f < cardText.Count; f++)//파일 단위
-        {
-            TextAsset data = cardText[f];
-            string currentText = cardText[f].text.Substring(0, cardText[f].text.Length - 1);
-            string[] line = currentText.Split('\n');
-            lineSize = line.Length;
-            rowSize = line[0].Split('\t').Length;
-            // 데이터 파싱
-            string[] rows = data.text.Split(new char[] { '\n' });
-            
-            for (int i = 0; i < lineSize; i++)
-            {
-                string[] row = line[i].Split('\t');
-                CardInfo.Type tType = CardInfo.Type.DEFAULT;
-                switch (row[2])
-                {
-                    case "ATK":
-                        tType = CardInfo.Type.ATK;
-                        break;
-                    case "SK":
-                        tType = CardInfo.Type.SK;
-                        break;
-                    case "POW":
-                        tType = CardInfo.Type.POW;
-                        break;
-                    case "ABNORMAL":
-                        tType = CardInfo.Type.ABNORMAL;
-                        break;
-                }
-                
-
-                CardInfo temp = new CardInfo();
-                Texture2D[] cardImgs = Resources.LoadAll<Texture2D>("CardImg");
-                Sprite sprite = null;
-                for (int j = 0; j < cardImgs.Length; j++)
-                {
-                    if (cardImgs[j].name.Equals(row[1]))
-                    {
-                        sprite = Sprite.Create(cardImgs[j], new Rect(0, 0, cardImgs[j].width, cardImgs[j].height), Vector2.zero);
-                        sprite.name = cardImgs[j].name;
-                    }
-                }
-                temp.InputInfo(int.Parse(row[0]), row[1], tType, row[3], sprite);
-                cardInfo.Add(temp);
-            }
-        }
+        cardInfo = cardData.items;
     }
         //public CardInfo SearchCardType(Type _)
         
