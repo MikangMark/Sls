@@ -6,8 +6,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CardInfo : IEquatable<CardInfo>
 {
-    public enum CardType { DEFAULT = 0, ATK, SK , POW, ABNORMAL }
-    public enum Type { DEFAULT = 0, ATK, DEF, POW, WEAK, EXTINCTION }
+    public enum CardType { DEFAULT = 0, ATK, SK , POW, ABNORMAL }//POW 파워카드
+    public enum Type { DEFAULT = 0, ATK, DEF, POW, WEAK, EXTINCTION }//POW 힘버프
 
     public int index;
     public int cost;

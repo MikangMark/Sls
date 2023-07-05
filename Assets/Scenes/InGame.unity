@@ -2783,7 +2783,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 485337164}
-  - component: {fileID: 485337163}
   - component: {fileID: 485337162}
   - component: {fileID: 485337161}
   - component: {fileID: 485337160}
@@ -2879,23 +2878,7 @@ MonoBehaviour:
     subType: 0
     text: "\uC18C\uBA78"
     cardImg: {fileID: 0}
---- !u!114 &485337163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485337159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e002c4aaf8e5b0b4ab5ad327d6882236, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardValueInfo: []
-  cardValueText: {fileID: 4900000, guid: 66f5e3482e5033d4d8167d23b87d6404, type: 3}
-  lineSize: 0
-  rowSize: 0
-  excelData: {fileID: 485337162}
+  cardData: {fileID: 485337165}
 --- !u!4 &485337164
 Transform:
   m_ObjectHideFlags: 0
@@ -2928,11 +2911,11 @@ MonoBehaviour:
   items: []
   dataLoader: {fileID: 0}
   Names:
-  - 
-  - 
-  - 
-  - 
-  - 
+  - 10001
+  - 10002
+  - 10003
+  - 10004
+  - 10005
 --- !u!1 &506785148
 GameObject:
   m_ObjectHideFlags: 0

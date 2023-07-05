@@ -10,7 +10,7 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     private Vector2 clickOffset;
     private Vector3 savePos;
     private OneCard card;
-    private CardValueExcelDataLoader cardData;
+    private ExcelDataLoader cardData;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         canvasGroup = GetComponent<CanvasGroup>();
         card = GetComponent<OneCard>();
         
-        cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
+        cardData = GameObject.Find("ExcelData").GetComponent<ExcelDataLoader>();
     }
 
     public void OnPointerDown(PointerEventData eventData)

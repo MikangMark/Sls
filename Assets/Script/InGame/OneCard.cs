@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class OneCard : MonoBehaviour
 {
     public CardInfo thisCard;//key
-    public CardValue thisCardValue;//value
+    //public CardValue thisCardValue;//value
     [SerializeField]
-    private CardValueExcelDataLoader cardData;
+    private ExcelDataLoader cardData;
     public Battle battle;
     public TextMeshProUGUI cCost;
     public TextMeshProUGUI cTitle;
@@ -19,109 +19,277 @@ public class OneCard : MonoBehaviour
     
     private void Start()
     {
-        cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
+        cardData = GameObject.Find("ExcelData").GetComponent<ExcelDataLoader>();
         if(GameObject.Find("BattleScript") != null)
         {
             battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         }
-        if (!gameObject.transform.parent.tag.Equals("Reward"))
-        {
-            thisCardValue = cardData.allInfoCard[thisCard];
-        }
     }
     private void FixedUpdate()
     {
-        if(thisCardValue != null)
-        {
-            cCost.text = thisCard.cost.ToString();
-            cTitle.text = thisCard.title.ToString();
-            cType.text = thisCard.cardType.ToString();
-            cText.text = thisCard.text.ToString();
-            cImg.sprite = thisCard.cardImg;
+        cCost.text = thisCard.cost.ToString();
+        cTitle.text = thisCard.title.ToString();
+        cType.text = thisCard.cardType.ToString();
+        cText.text = thisCard.text.ToString();
+        cImg.sprite = thisCard.cardImg;
 
-            if (!gameObject.transform.parent.tag.Equals("Reward"))
+        if (!gameObject.transform.parent.tag.Equals("Reward"))
+        {
+            if (InGame.Instance.openDeckView)
             {
-                if (InGame.Instance.openDeckView)
-                {
-                    GetComponent<MousePoint>().enabled = false;
-                }
-                else
-                {
-                    GetComponent<MousePoint>().enabled = true;
-                }
+                GetComponent<MousePoint>().enabled = false;
+            }
+            else
+            {
+                GetComponent<MousePoint>().enabled = true;
             }
         }
-        
     }
     public void SetCard(CardInfo _card)
     {
-        cardData = GameObject.Find("ExcelData").GetComponent<CardValueExcelDataLoader>();
+        cardData = GameObject.Find("ExcelData").GetComponent<ExcelDataLoader>();
         thisCard = _card;
-        thisCardValue = cardData.allInfoCard[_card];
+        //thisCardValue = cardData.allInfoCard[_card];
     }
     public bool UseThisCard(GameObject target)//카드사용의 성공했으면 true
     {
+        int value = 0;
         if (battle.energy >= thisCard.cost)
         {
-            //thisCardValue의 type값을 읽어 어떤카드인지 인식
-            for (int i = 0; i < thisCardValue.type.Count; i++)
+            switch (target.tag)
             {
-                switch (thisCardValue.type[i])
-                {
-                    case CardType.ATK:
-                        if (target.tag.Equals("Player"))
-                        {
+                case "Player":
+                    switch (thisCard.cardType) 
+                    {
+                        case CardInfo.CardType.DEFAULT:
                             return false;
-                        }
-                        if (i == 0)
-                        {
-                            battle.energy -= thisCard.cost;
-                        }
-                        battle.Attack(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-                        break;
-                    case CardType.DEF:
-                        if (target.tag.Equals("Monster"))
-                        {
+                        case CardInfo.CardType.ATK:
                             return false;
-                        }
-                        if (i == 0)
-                        {
-                            battle.energy -= thisCard.cost;
-                        }
-                        battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
-                        break;
-                    case CardType.POW:
-                        if (target.tag.Equals("Monster"))
-                        {
+                        case CardInfo.CardType.SK:
+                            CardInfo.Type[] sk_Temp = null;
+                            if (thisCard.subType == CardInfo.Type.DEFAULT)
+                            {
+                                sk_Temp = new CardInfo.Type[1];
+                                sk_Temp[0] = thisCard.type;
+                            }
+                            else
+                            {
+                                sk_Temp = new CardInfo.Type[2];
+                                sk_Temp[0] = thisCard.type;
+                                sk_Temp[1] = thisCard.subType;
+                            }
+                            for(int i = 0; i < sk_Temp.Length; i++)
+                            {
+                                switch (sk_Temp[i])
+                                {
+                                    case CardInfo.Type.DEFAULT:
+                                        return false;
+                                    case CardInfo.Type.ATK:
+                                        return false;
+                                    case CardInfo.Type.DEF:
+                                        value = thisCard.skillValue[CardInfo.Type.DEF];
+                                        if (battle.playerBufList[PlayerBuffType.IMPAIR] > 0)
+                                        {
+                                            value = value - (int)(value / 3);
+                                        }
+                                        battle.Deffence(value);
+                                        break;
+                                    case CardInfo.Type.POW:
+                                        battle.Power(target, thisCard.skillValue[CardInfo.Type.POW]);
+                                        break;
+                                    case CardInfo.Type.WEAK:
+                                        return false;
+                                    case CardInfo.Type.EXTINCTION:
+                                        return false;
+                                }
+                            }
+                            break;
+                        case CardInfo.CardType.POW:
+                            CardInfo.Type[] pow_Temp = null;
+                            if (thisCard.subType == CardInfo.Type.DEFAULT)
+                            {
+                                pow_Temp = new CardInfo.Type[1];
+                                pow_Temp[0] = thisCard.type;
+                            }
+                            else
+                            {
+                                pow_Temp = new CardInfo.Type[2];
+                                pow_Temp[0] = thisCard.type;
+                                pow_Temp[1] = thisCard.subType;
+                            }
+                            for (int i = 0; i < pow_Temp.Length; i++)
+                            {
+                                switch (pow_Temp[i])
+                                {
+                                    case CardInfo.Type.DEFAULT:
+                                        return false;
+                                    case CardInfo.Type.ATK:
+                                        return false;
+                                    case CardInfo.Type.DEF:
+                                        return false;
+                                    case CardInfo.Type.POW:
+                                        battle.Power(target, thisCard.skillValue[CardInfo.Type.POW]);
+                                        break;
+                                    case CardInfo.Type.WEAK:
+                                        battle.Weak(target, thisCard.skillValue[CardInfo.Type.WEAK]);
+                                        break;
+                                    case CardInfo.Type.EXTINCTION:
+                                        return false;
+                                }
+                            }
+                            
+                            break;
+                        case CardInfo.CardType.ABNORMAL:
+                            switch (thisCard.type)
+                            {
+                                case CardInfo.Type.DEFAULT:
+                                    return false;
+                                case CardInfo.Type.ATK:
+                                    return false;
+                                case CardInfo.Type.DEF:
+                                    return false;
+                                case CardInfo.Type.POW:
+                                    return false;
+                                case CardInfo.Type.WEAK:
+                                    return false;
+                                case CardInfo.Type.EXTINCTION:
+                                    battle.energy -= thisCard.cost;
+                                    battle.DeleteCardMove(gameObject);
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case "Monster":
+                    switch (thisCard.cardType)
+                    {
+                        case CardInfo.CardType.DEFAULT:
                             return false;
-                        }
-                        if (i == 0)
-                        {
-                            battle.energy -= thisCard.cost;
-                        }
-                        battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-                        break;
-                    case CardType.WEAK:
-                        if (target.tag.Equals("Player"))
-                        {
+                        case CardInfo.CardType.ATK:
                             return false;
-                        }
-                        if (i == 0)
-                        {
-                            battle.energy -= thisCard.cost;
-                        }
-                        battle.Weak(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-                        break;
-                    case CardType.EXTINCTION:
-                        if (i == 0)
-                        {
-                            battle.energy -= thisCard.cost;
-                        }
-                        battle.DeleteCardMove(gameObject);
-                        return true;
-                }
-
+                        case CardInfo.CardType.SK:
+                            CardInfo.Type[] sk_Temp = null;
+                            if (thisCard.subType == CardInfo.Type.DEFAULT)
+                            {
+                                sk_Temp = new CardInfo.Type[1];
+                                sk_Temp[0] = thisCard.type;
+                            }
+                            else
+                            {
+                                sk_Temp = new CardInfo.Type[2];
+                                sk_Temp[0] = thisCard.type;
+                                sk_Temp[1] = thisCard.subType;
+                            }
+                            for (int i = 0; i < sk_Temp.Length; i++)
+                            {
+                                switch (sk_Temp[i])
+                                {
+                                    case CardInfo.Type.DEFAULT:
+                                        return false;
+                                    case CardInfo.Type.ATK:
+                                        return false;
+                                    case CardInfo.Type.DEF:
+                                        value = thisCard.skillValue[CardInfo.Type.DEF];
+                                        if (battle.playerBufList[PlayerBuffType.IMPAIR] > 0)
+                                        {
+                                            value = value - (int)(value / 3);
+                                        }
+                                        battle.Deffence(value);
+                                        break;
+                                    case CardInfo.Type.POW:
+                                        return false;
+                                    case CardInfo.Type.WEAK:
+                                        battle.Weak(target, thisCard.skillValue[CardInfo.Type.WEAK]);
+                                        break;
+                                    case CardInfo.Type.EXTINCTION:
+                                        return false;
+                                }
+                            }
+                            break;
+                        case CardInfo.CardType.POW:
+                            return false;
+                        case CardInfo.CardType.ABNORMAL:
+                            switch (thisCard.type)
+                            {
+                                case CardInfo.Type.DEFAULT:
+                                    return false;
+                                case CardInfo.Type.ATK:
+                                    return false;
+                                case CardInfo.Type.DEF:
+                                    return false;
+                                case CardInfo.Type.POW:
+                                    return false;
+                                case CardInfo.Type.WEAK:
+                                    return false;
+                                case CardInfo.Type.EXTINCTION:
+                                    battle.energy -= thisCard.cost;
+                                    battle.DeleteCardMove(gameObject);
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
             }
+            #region LastVersion
+            //for (int i = 0; i < thisCardValue.type.Count; i++)
+            //{
+            //    switch (thisCardValue.type[i])
+            //    {
+            //        case CardType.ATK:
+            //            if (target.tag.Equals("Player"))
+            //            {
+            //                return false;
+            //            }
+            //            if (i == 0)
+            //            {
+            //                battle.energy -= thisCard.cost;
+            //            }
+            //            battle.Attack(target, thisCardValue.skillValue[thisCardValue.type[i]]);
+            //            break;
+            //        case CardType.DEF:
+            //            if (target.tag.Equals("Monster"))
+            //            {
+            //                return false;
+            //            }
+            //            if (i == 0)
+            //            {
+            //                battle.energy -= thisCard.cost;
+            //            }
+            //            battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
+            //            break;
+            //        case CardType.POW:
+            //            if (target.tag.Equals("Monster"))
+            //            {
+            //                return false;
+            //            }
+            //            if (i == 0)
+            //            {
+            //                battle.energy -= thisCard.cost;
+            //            }
+            //            battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
+            //            break;
+            //        case CardType.WEAK:
+            //            if (target.tag.Equals("Player"))
+            //            {
+            //                return false;
+            //            }
+            //            if (i == 0)
+            //            {
+            //                battle.energy -= thisCard.cost;
+            //            }
+            //            battle.Weak(target, thisCardValue.skillValue[thisCardValue.type[i]]);
+            //            break;
+            //        case CardType.EXTINCTION:
+            //            if (i == 0)
+            //            {
+            //                battle.energy -= thisCard.cost;
+            //            }
+            //            battle.DeleteCardMove(gameObject);
+            //            return true;
+            //    }
+
+            //}
+            #endregion
         }
         else
         {
