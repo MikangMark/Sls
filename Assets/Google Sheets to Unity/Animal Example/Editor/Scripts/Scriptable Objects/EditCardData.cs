@@ -9,7 +9,7 @@ using GoogleSheetsToUnity.ThirdPary;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-public class TestData : ScriptableObject
+public class EditCardData : ScriptableObject
 {
     public string associatedSheet = "";
     public string associatedWorksheet = "";
@@ -23,7 +23,7 @@ public class TestData : ScriptableObject
     {
         CardInfo temp;
         temp = new CardInfo();
-        for (int i = 1; i < list.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
             switch (list[i].columnId)
             {
@@ -56,6 +56,7 @@ public class TestData : ScriptableObject
                     break;
                 case "NAME":
                     temp.title = list[i].value;
+                    temp.cardImg = Resources.Load<Sprite>("CardImg/" + temp.title);
                     break;
                 case "TEXT":
                     temp.text = list[i].value;
@@ -67,14 +68,14 @@ public class TestData : ScriptableObject
 
 }
 
-[CustomEditor(typeof(TestData))]
+[CustomEditor(typeof(EditCardData))]
 public class DataEditor : Editor
 {
-    TestData data;
+    EditCardData data;
 
     void OnEnable()
     {
-        data = (TestData)target;
+        data = (EditCardData)target;
         data.dataLoader = GameObject.Find("ExcelData").GetComponent<ExcelDataLoader>();
     }
     public override void OnInspectorGUI()

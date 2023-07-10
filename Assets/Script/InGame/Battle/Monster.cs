@@ -9,9 +9,7 @@ public class Monster : MonoBehaviour
     public enum Intent { ATK = 0, DEF, BUF, DBUF, ATK_DEF, ATK_BUF, ATK_DBUF, DEF_BUF, DEF_DBUF, BUF_DBUF};
     public string monsterName;//인스펙터에서 입력되어있는 몬스터이름
     public Battle battle;
-    public MonsterStat stat;//해당몬스터의 스텟
-    public List<MonsterSkill> skill;//해당몬스터가 보유중인 스킬
-    public List<int> skillCord;//해당 몬스터가 보유하고있는 스킬 코드 인스팩터에 입력되어있음
+    public MonsterStat stat;//해당몬스터의 스텟및 스킬정보
     public MonsterManager monsterManager;
     public Dictionary<MonsterBuffType, int> bufList;//해당 몬스터가 보유하고있는 버프/디버프 리스트 key 버프타입 value 적용된 숫자
     public int shiled;
@@ -27,11 +25,7 @@ public class Monster : MonoBehaviour
         name = monsterName;
         battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         monsterManager = GameObject.Find("DataObj").GetComponent<MonsterManager>();
-        stat = monsterManager.monsterInfo[monsterName].stat;
-        for(int i = 0; i < skillCord.Count; i++)
-        {
-            skill.Add(monsterManager.monsterInfo[monsterName].skill[i]);
-        }
+        stat = monsterManager.SearchMonsterStat(monsterName);
         GetComponent<Image>().sprite = stat.img;
         bufList = new Dictionary<MonsterBuffType, int>();
         for(MonsterBuffType i = MonsterBuffType.POW; i <= MonsterBuffType.CONSCIOUS; i++)
@@ -43,7 +37,7 @@ public class Monster : MonoBehaviour
 
     public void NextUseSkill()
     {
-        nextSkill = skill[CreateSeed.Instance.RandNum(0, skill.Count)];
+        nextSkill = stat.skillList[CreateSeed.Instance.RandNum(0, stat.skillList.Count)];
         #region 의도 타입하드코딩
         if (nextSkill.type.Count > 1)
         {

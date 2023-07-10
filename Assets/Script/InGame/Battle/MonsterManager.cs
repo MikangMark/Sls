@@ -3,42 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum MonsterBuffType { POW = 0, WEAK, VULNER, IMPAIR, SLIMECARD, RESTRAINT, CONSCIOUS }
-public class MonsterInfo
-{
-    public MonsterStat stat;//몬스터의 스텟
-    public List<MonsterSkill> skill;//사용하는 스킬 리스트
-    public List<int> skillCord;//사용할 스킬 코드 입력 인스펙터창에서 입력 받음
-
-    public MonsterInfo()
-    {
-        stat = new MonsterStat();
-        skill = new List<MonsterSkill>();
-        skillCord = new List<int>();
-    }
-    
-}
 public class MonsterManager : MonoBehaviour
 {
     //모든몬스터의 정보저장
-    public MonsterExcelDataLoader monsterData;
+    public MonsterExcelDataLoader monsterExcelData;
     public MonsterSkillExcelDataLoader skillData;
 
-    public Dictionary<string, MonsterInfo> monsterInfo;//모든몬스터의 스텟 및 스킬 정보 ex(슬라임,슬라임정보)
+    public List<MonsterStat> spac;//모든몬스터의 스텟 및 스킬 정보 ex(슬라임,슬라임정보)
 
     public List<GameObject> monsterPfab;//모든몬스터 프리펩
     private void Start()
     {
-        monsterInfo = new Dictionary<string, MonsterInfo>();
-        for(int i = 0; i < monsterData.monsterExelInfo.Count; i++)
+        spac = new List<MonsterStat>();
+        for(int i=0;i< monsterExcelData.monsterExelInfo.Count; i++)
         {
-            MonsterInfo temp = new MonsterInfo();
-            temp.stat = monsterData.monsterExelInfo[i];
-            for(int j = 0; j < monsterPfab[i].GetComponent<Monster>().skillCord.Count; j++)
+            spac.Add(monsterExcelData.monsterExelInfo[i]);
+        }
+        for (int i = 0; i < monsterExcelData.monsterExelInfo.Count; i++)
+        {
+            MonsterStat temp = new MonsterStat();
+            temp = monsterExcelData.monsterExelInfo[i];
+            for(int j = 0; j < monsterPfab[i].GetComponent<Monster>().stat.skillList.Count; j++)
             {
-                temp.skill.Add(skillData.monsterSkillInfo[monsterPfab[i].GetComponent<Monster>().skillCord[j]]);
+                //temp.skillList.Add(skillData.monsterSkillInfo[monsterPfab[i].GetComponent<Monster>().skillList[j]);
             }
             
-            monsterInfo.Add(monsterData.monsterExelInfo[i].name, temp);
+            //monsterInfo.Add(monsterExcelData.monsterExelInfo[i].name, temp);
         }
+    }
+
+    public MonsterStat SearchMonsterStat(string name)
+    {
+        for(int i = 0; i < spac.Count; i++)
+        {
+            if (spac[i].name.Equals(name))
+            {
+                return spac[i];
+            }
+        }
+        return null;
     }
 }

@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888613a94c08e484fa05ebe9a0f3c7b4, type: 3}
+  m_Name: EditMonsterSkillData
+  m_EditorClassIdentifier: 
+  associatedSheet: 1kbzvps0KvAC3zMgQ5Nxwv6LqO03YXApiDKaLSL-KMEQ
+  associatedWorksheet: MonsterSkill
+  items:
+  - index: 101
+    name: "\uACF5\uBC8C\uB808"
+    type: 01000000
+  - index: 102
+    name: "\uACF5\uBC8C\uB808"
+    type: 03000000
+  - index: 103
+    name: "\uACF5\uBC8C\uB808"
+    type: 05000000
+  - index: 104
+    name: "\uC18C\uD615\uC2AC\uB77C\uC784"
+    type: 01000000
+  - index: 105
+    name: "\uC911\uD615\uC2AC\uB77C\uC784"
+    type: 01000000
+  - index: 106
+    name: "\uC911\uD615\uC2AC\uB77C\uC784"
+    type: 0600000007000000
+  - index: 107
+    name: "\uB300\uD615\uC2AC\uB77C\uC784"
+    type: 010000000600000007000000
+  - index: 108
+    name: "\uD131\uBC8C\uB808"
+    type: 01000000
+  - index: 109
+    name: "\uD131\uBC8C\uB808"
+    type: 0100000002000000
+  - index: 110
+    name: "\uD131\uBC8C\uB808"
+    type: 0200000003000000
+  - index: 111
+    name: "\uB178\uC608\uC0C1\uC778"
+    type: 01000000
+  - index: 112
+    name: "\uB178\uC608\uC0C1\uC778"
+    type: 0100000005000000
+  - index: 113
+    name: "\uB178\uC608\uC0C1\uC778"
+    type: 0100000004000000
+  - index: 114
+    name: "\uB178\uC608\uC0C1\uC778"
+    type: 08000000
+  - index: 115
+    name: "\uAD11\uC2E0\uC790"
+    type: 09000000
+  - index: 116
+    name: "\uAD11\uC2E0\uC790"
+    type: 01000000
+  - index: 117
+    name: "\uB3D9\uBB3C\uD558\uCD08"
+    type: 01000000
+  - index: 118
+    name: "\uB3D9\uBB3C\uD558\uCD08"
+    type: 03000000
+  monsterSkillDataLoader: {fileID: 0}
+  Names:
+  - 101
+  - 102
+  - 103
+  - 104
+  - 105
+  - 106
+  - 107
+  - 108
+  - 109
+  - 110
+  - 111
+  - 112
+  - 113
+  - 114
+  - 115
+  - 116
+  - 117
+  - 118
+  editMonster: {fileID: 11400000, guid: 67570d147a448d84594e248d0457c29c, type: 2}

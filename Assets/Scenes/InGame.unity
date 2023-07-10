@@ -2787,6 +2787,8 @@ GameObject:
   - component: {fileID: 485337161}
   - component: {fileID: 485337160}
   - component: {fileID: 485337165}
+  - component: {fileID: 485337166}
+  - component: {fileID: 485337167}
   m_Layer: 0
   m_Name: ExcelData
   m_TagString: Untagged
@@ -2806,9 +2808,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115cd90ddfc2e4f4ebd8d30ad6036594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterSkillText: {fileID: 4900000, guid: 4ea6846a9aa80a54e962dfaef453ff79, type: 3}
-  lineSize: 0
-  rowSize: 0
+  monsterSkillInfo:
+  - index: 101
+    name: "\uACF5\uBC8C\uB808"
+    type: 01000000
+  - index: 102
+    name: "\uACF5\uBC8C\uB808"
+    type: 03000000
+  - index: 103
+    name: "\uACF5\uBC8C\uB808"
+    type: 05000000
+  - index: 104
+    name: "\uC18C\uD615\uC2AC\uB77C\uC784"
+    type: 01000000
+  - index: 105
+    name: "\uC911\uD615\uC2AC\uB77C\uC784"
+    type: 01000000
+  - index: 106
+    name: "\uC911\uD615\uC2AC\uB77C\uC784"
+    type: 0600000007000000
+  - index: 107
+    name: "\uB300\uD615\uC2AC\uB77C\uC784"
+    type: 010000000600000007000000
+  - index: 108
+    name: "\uD131\uBC8C\uB808"
+    type: 01000000
+  - index: 109
+    name: "\uD131\uBC8C\uB808"
+    type: 0100000002000000
+  - index: 110
+    name: "\uD131\uBC8C\uB808"
+    type: 0200000003000000
+  - index: 111
+    name: "\uB178\uC608\uC0C1\uC778"
+    type: 01000000
+  - index: 112
+    name: "\uB178\uC608\uC0C1\uC778"
+    type: 0100000005000000
+  - index: 113
+    name: "\uB178\uC608\uC0C1\uC778"
+    type: 0100000004000000
+  - index: 114
+    name: "\uB178\uC608\uC0C1\uC778"
+    type: 08000000
+  - index: 115
+    name: "\uAD11\uC2E0\uC790"
+    type: 09000000
+  - index: 116
+    name: "\uAD11\uC2E0\uC790"
+    type: 01000000
+  - index: 117
+    name: "\uB3D9\uBB3C\uD558\uCD08"
+    type: 01000000
+  - index: 118
+    name: "\uB3D9\uBB3C\uD558\uCD08"
+    type: 03000000
+  monsterSkillData: {fileID: 485337167}
 --- !u!114 &485337161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2821,10 +2876,110 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9ea747d88d5ea46bf6ce0415ae2308, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterExelInfo: []
-  monsterText: {fileID: 4900000, guid: 47d6cd5c14487ae4fa401a079e1c5e63, type: 3}
-  lineSize: 0
-  rowSize: 0
+  monsterExelInfo:
+  - name: "\uACF5\uBC8C\uB808"
+    maxHp: 13
+    hp: 13
+    img: {fileID: 21300000, guid: d743fa1e21f9ad8419d6a1bc215b7ff8, type: 3}
+    shield: 0
+    skillList:
+    - index: 101
+      name: "\uACF5\uBC8C\uB808"
+      type: 01000000
+    - index: 102
+      name: "\uACF5\uBC8C\uB808"
+      type: 03000000
+    - index: 103
+      name: "\uACF5\uBC8C\uB808"
+      type: 05000000
+  - name: "\uB300\uD615\uC2AC\uB77C\uC784"
+    maxHp: 64
+    hp: 64
+    img: {fileID: 21300000, guid: 471b8f9c72deacc40a58895cc7613935, type: 3}
+    shield: 0
+    skillList:
+    - index: 107
+      name: "\uB300\uD615\uC2AC\uB77C\uC784"
+      type: 010000000600000007000000
+  - name: "\uC911\uD615\uC2AC\uB77C\uC784"
+    maxHp: 28
+    hp: 28
+    img: {fileID: 21300000, guid: bc8132ed4be9d4d44a856ad4957bd8db, type: 3}
+    shield: 0
+    skillList:
+    - index: 105
+      name: "\uC911\uD615\uC2AC\uB77C\uC784"
+      type: 01000000
+    - index: 106
+      name: "\uC911\uD615\uC2AC\uB77C\uC784"
+      type: 0600000007000000
+  - name: "\uC18C\uD615\uC2AC\uB77C\uC784"
+    maxHp: 10
+    hp: 10
+    img: {fileID: 21300000, guid: 4ddf9cb4ede3f9f489ddf7962b8d0bd3, type: 3}
+    shield: 0
+    skillList:
+    - index: 104
+      name: "\uC18C\uD615\uC2AC\uB77C\uC784"
+      type: 01000000
+  - name: "\uD131\uBC8C\uB808"
+    maxHp: 40
+    hp: 40
+    img: {fileID: 21300000, guid: 8be1361a80105504290e1b183cef4c62, type: 3}
+    shield: 0
+    skillList:
+    - index: 108
+      name: "\uD131\uBC8C\uB808"
+      type: 01000000
+    - index: 109
+      name: "\uD131\uBC8C\uB808"
+      type: 0100000002000000
+    - index: 110
+      name: "\uD131\uBC8C\uB808"
+      type: 0200000003000000
+  - name: "\uB178\uC608\uC0C1\uC778"
+    maxHp: 46
+    hp: 46
+    img: {fileID: 21300000, guid: 16f2ee647e4b63d43b50e69671be35d3, type: 3}
+    shield: 0
+    skillList:
+    - index: 111
+      name: "\uB178\uC608\uC0C1\uC778"
+      type: 01000000
+    - index: 112
+      name: "\uB178\uC608\uC0C1\uC778"
+      type: 0100000005000000
+    - index: 113
+      name: "\uB178\uC608\uC0C1\uC778"
+      type: 0100000004000000
+    - index: 114
+      name: "\uB178\uC608\uC0C1\uC778"
+      type: 08000000
+  - name: "\uAD11\uC2E0\uC790"
+    maxHp: 48
+    hp: 48
+    img: {fileID: 21300000, guid: 253dc0123a4b7c441a447efd0873e6e6, type: 3}
+    shield: 0
+    skillList:
+    - index: 115
+      name: "\uAD11\uC2E0\uC790"
+      type: 09000000
+    - index: 116
+      name: "\uAD11\uC2E0\uC790"
+      type: 01000000
+  - name: "\uB3D9\uBB3C\uD558\uCD08"
+    maxHp: 22
+    hp: 22
+    img: {fileID: 21300000, guid: b5212ff1992f4324ebbf163c108eff81, type: 3}
+    shield: 0
+    skillList:
+    - index: 117
+      name: "\uB3D9\uBB3C\uD558\uCD08"
+      type: 01000000
+    - index: 118
+      name: "\uB3D9\uBB3C\uD558\uCD08"
+      type: 03000000
+  monsterData: {fileID: 485337166}
 --- !u!114 &485337162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2838,46 +2993,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardInfo:
-  - index: 0
+  - index: 10001
     cost: 1
     title: "\uD0C0\uACA9"
     cardType: 1
     type: 1
     subType: 0
     text: "\uD53C\uD574\uB97C 6 \uC90D\uB2C8\uB2E4."
-    cardImg: {fileID: 0}
-  - index: 0
+    cardImg: {fileID: 21300000, guid: 7adc8551ab063a745aa99ef627623f20, type: 3}
+  - index: 10002
     cost: 1
     title: "\uC218\uBE44"
     cardType: 2
     type: 2
     subType: 0
     text: "\uBC29\uC5B4\uB3C4\uB97C 5 \uC5BB\uC2B5\uB2C8\uB2E4."
-    cardImg: {fileID: 0}
-  - index: 0
+    cardImg: {fileID: 21300000, guid: c3ef1c3c548abe244bd2f7c0291e1029, type: 3}
+  - index: 10003
     cost: 2
     title: "\uAC15\uD0C0"
     cardType: 1
     type: 1
     subType: 4
     text: "\uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4.\uCDE8\uC57D\uC744 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
-    cardImg: {fileID: 0}
-  - index: 0
+    cardImg: {fileID: 21300000, guid: faa17427716770a41a72bb6afd6afa0d, type: 3}
+  - index: 10004
     cost: 1
     title: "\uBC1C\uD654"
     cardType: 3
     type: 3
     subType: 0
     text: "\uD798\uC744 2 \uC5BB\uC2B5\uB2C8\uB2E4."
-    cardImg: {fileID: 0}
-  - index: 0
+    cardImg: {fileID: 21300000, guid: 7748baef8fd221c458ae925a1eeda2db, type: 3}
+  - index: 10005
     cost: 1
     title: "\uC810\uC561\uD22C\uC131\uC774"
     cardType: 4
     type: 5
     subType: 0
     text: "\uC18C\uBA78"
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 21300000, guid: 6435ddecce546f043a85ba1049a878a1, type: 3}
   cardData: {fileID: 485337165}
 --- !u!4 &485337164
 Transform:
@@ -2909,13 +3064,74 @@ MonoBehaviour:
   associatedSheet: 1kbzvps0KvAC3zMgQ5Nxwv6LqO03YXApiDKaLSL-KMEQ
   associatedWorksheet: CardStat
   items: []
-  dataLoader: {fileID: 0}
+  dataLoader: {fileID: 485337162}
   Names:
   - 10001
   - 10002
   - 10003
   - 10004
   - 10005
+--- !u!114 &485337166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596ba79a5bde91c4f883db0262c29ed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  associatedSheet: 1kbzvps0KvAC3zMgQ5Nxwv6LqO03YXApiDKaLSL-KMEQ
+  associatedWorksheet: Monster
+  items: []
+  monsterDataLoader: {fileID: 485337161}
+  Names:
+  - "\uACF5\uBC8C\uB808"
+  - "\uB300\uD615\uC2AC\uB77C\uC784"
+  - "\uC911\uD615\uC2AC\uB77C\uC784"
+  - "\uC18C\uD615\uC2AC\uB77C\uC784"
+  - "\uD131\uBC8C\uB808"
+  - "\uB178\uC608\uC0C1\uC778"
+  - "\uAD11\uC2E0\uC790"
+  - "\uB3D9\uBB3C\uD558\uCD08"
+--- !u!114 &485337167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa7e252531b4ecf418ff369004cc20e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  associatedSheet: 1kbzvps0KvAC3zMgQ5Nxwv6LqO03YXApiDKaLSL-KMEQ
+  associatedWorksheet: MonsterSkill
+  items: []
+  monsterSkillDataLoader: {fileID: 485337160}
+  Names:
+  - 101
+  - 102
+  - 103
+  - 104
+  - 105
+  - 106
+  - 107
+  - 108
+  - 109
+  - 110
+  - 111
+  - 112
+  - 113
+  - 114
+  - 115
+  - 116
+  - 117
+  - 118
+  monsterData: {fileID: 485337166}
 --- !u!1 &506785148
 GameObject:
   m_ObjectHideFlags: 0
@@ -6107,8 +6323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40c3eeb5bcffda4c961f9489fead8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterData: {fileID: 485337161}
+  monsterExcelData: {fileID: 0}
   skillData: {fileID: 485337160}
+  spac: []
   monsterPfab:
   - {fileID: 4687109361979084020, guid: 8d85756c29e383d46a7280134dc01214, type: 3}
   - {fileID: 4687109361979084020, guid: 5fd817d8b184e6c47a46e5b23032fa5c, type: 3}
@@ -11120,12 +11337,12 @@ MonoBehaviour:
   playerPrf: {fileID: 4274204796203613436, guid: 332ab39a3321a8b4899a9ffabf4ae7d8, type: 3}
   playerPos: {fileID: 824189969}
   monsterGrup:
-  - Louse,Louse
-  - SmallSlime,SmallSlime,SmallSlime,SmallSlime,SmallSlime
-  - BigSlime,Slime
-  - JawWorm,FungiBeast
-  - Cultist
-  - Slaver
+  - "\uACF5\uBC8C\uB808,\uACF5\uBC8C\uB808"
+  - "\uC18C\uD615\uC2AC\uB77C\uC784,\uC18C\uD615\uC2AC\uB77C\uC784,\uC18C\uD615\uC2AC\uB77C\uC784,\uC18C\uD615\uC2AC\uB77C\uC784,\uC18C\uD615\uC2AC\uB77C\uC784"
+  - "\uB300\uD615\uC2AC\uB77C\uC784,\uC911\uD615\uC2AC\uB77C\uC784"
+  - "\uD131\uBC8C\uB808,\uB3D9\uBB3C\uD558\uCD08"
+  - "\uAD11\uC2E0\uC790"
+  - "\uB178\uC608\uC0C1\uC778"
   monsterPos: {fileID: 1156558022}
   afterContent: {fileID: 216135361}
   beforContent: {fileID: 722189482}
@@ -12225,9 +12442,6 @@ MonoBehaviour:
     subType: 0
     text: 
     cardImg: {fileID: 0}
-  thisCardValue:
-    cost: 0
-    type: 
   cardData: {fileID: 0}
   battle: {fileID: 0}
   cCost: {fileID: 8404524484921345979}
@@ -12256,9 +12470,6 @@ MonoBehaviour:
     subType: 0
     text: 
     cardImg: {fileID: 0}
-  thisCardValue:
-    cost: 0
-    type: 
   cardData: {fileID: 0}
   battle: {fileID: 0}
   cCost: {fileID: 8404524484226349496}
@@ -12287,9 +12498,6 @@ MonoBehaviour:
     subType: 0
     text: 
     cardImg: {fileID: 0}
-  thisCardValue:
-    cost: 0
-    type: 
   cardData: {fileID: 0}
   battle: {fileID: 0}
   cCost: {fileID: 8404524484505549422}

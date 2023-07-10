@@ -15,7 +15,6 @@ public class CardData : MonoBehaviour
     public string associatedWorksheet = "";
 
     public List<CardInfo> items = new List<CardInfo>();
-    [HideInInspector]
     public ExcelDataLoader dataLoader;
     public List<string> Names = new List<string>();
 
@@ -50,6 +49,7 @@ public class CardData : MonoBehaviour
                     break;
                 case "NAME":
                     temp.title = list[i].value;
+                    temp.cardImg = Resources.Load<Sprite>("CardImg/" + temp.title);
                     break;
                 case "TEXT":
                     temp.text = list[i].value;

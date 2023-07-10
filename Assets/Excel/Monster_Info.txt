@@ -1,9 +1,0 @@
-Name	Hp	Atk	Def	Img
-Louse	13	6	0	공벌레
-BIgSlime	64	16	0	대형슬라임
-Slime	28	8	0	중형슬라임
-SmallSlime	10	5	0	소형슬라임
-JawWorm	40	11	0	턱벌레
-Slaver	46	13	0	노예상인
-Cultist	48	6	0	광신자
-FungiBeast	22	6	0	동물하초

@@ -90,6 +90,7 @@ public class ExcelDataLoader : MonoBehaviour
     private void Start()
     {
         cardInfo = cardData.items;
+        
     }
         //public CardInfo SearchCardType(Type _)
         

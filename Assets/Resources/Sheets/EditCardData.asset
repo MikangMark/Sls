@@ -10,51 +10,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26b098d2f15d8d544a3b286d97986e20, type: 3}
-  m_Name: TestData
+  m_Name: EditCardData
   m_EditorClassIdentifier: 
   associatedSheet: 1kbzvps0KvAC3zMgQ5Nxwv6LqO03YXApiDKaLSL-KMEQ
   associatedWorksheet: CardStat
   items:
-  - index: 0
+  - index: 10001
     cost: 1
     title: "\uD0C0\uACA9"
     cardType: 1
     type: 1
     subType: 0
     text: "\uD53C\uD574\uB97C 6 \uC90D\uB2C8\uB2E4."
-    cardImg: {fileID: 0}
-  - index: 0
+    cardImg: {fileID: 21300000, guid: 7adc8551ab063a745aa99ef627623f20, type: 3}
+  - index: 10002
     cost: 1
     title: "\uC218\uBE44"
     cardType: 2
     type: 2
     subType: 0
     text: "\uBC29\uC5B4\uB3C4\uB97C 5 \uC5BB\uC2B5\uB2C8\uB2E4."
-    cardImg: {fileID: 0}
-  - index: 0
+    cardImg: {fileID: 21300000, guid: c3ef1c3c548abe244bd2f7c0291e1029, type: 3}
+  - index: 10003
     cost: 2
     title: "\uAC15\uD0C0"
     cardType: 1
     type: 1
     subType: 4
     text: "\uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4.\uCDE8\uC57D\uC744 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
-    cardImg: {fileID: 0}
-  - index: 0
+    cardImg: {fileID: 21300000, guid: faa17427716770a41a72bb6afd6afa0d, type: 3}
+  - index: 10004
     cost: 1
     title: "\uBC1C\uD654"
     cardType: 3
     type: 3
     subType: 0
     text: "\uD798\uC744 2 \uC5BB\uC2B5\uB2C8\uB2E4."
-    cardImg: {fileID: 0}
-  - index: 0
+    cardImg: {fileID: 21300000, guid: 7748baef8fd221c458ae925a1eeda2db, type: 3}
+  - index: 10005
     cost: 1
     title: "\uC810\uC561\uD22C\uC131\uC774"
     cardType: 4
     type: 5
     subType: 0
     text: "\uC18C\uBA78"
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 21300000, guid: 6435ddecce546f043a85ba1049a878a1, type: 3}
   dataLoader: {fileID: 0}
   Names:
   - 10001
