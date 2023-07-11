@@ -19,17 +19,6 @@ public class MonsterManager : MonoBehaviour
         {
             spac.Add(monsterExcelData.monsterExelInfo[i]);
         }
-        for (int i = 0; i < monsterExcelData.monsterExelInfo.Count; i++)
-        {
-            MonsterStat temp = new MonsterStat();
-            temp = monsterExcelData.monsterExelInfo[i];
-            for(int j = 0; j < monsterPfab[i].GetComponent<Monster>().stat.skillList.Count; j++)
-            {
-                //temp.skillList.Add(skillData.monsterSkillInfo[monsterPfab[i].GetComponent<Monster>().skillList[j]);
-            }
-            
-            //monsterInfo.Add(monsterExcelData.monsterExelInfo[i].name, temp);
-        }
     }
 
     public MonsterStat SearchMonsterStat(string name)

@@ -2195,6 +2195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room_Type: 4
+  map: {fileID: 1135833417}
 --- !u!1 &389217377
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,8 +2788,11 @@ GameObject:
   - component: {fileID: 485337161}
   - component: {fileID: 485337160}
   - component: {fileID: 485337165}
+  - component: {fileID: 485337170}
   - component: {fileID: 485337166}
+  - component: {fileID: 485337168}
   - component: {fileID: 485337167}
+  - component: {fileID: 485337169}
   m_Layer: 0
   m_Name: ExcelData
   m_TagString: Untagged
@@ -3132,6 +3136,45 @@ MonoBehaviour:
   - 117
   - 118
   monsterData: {fileID: 485337166}
+--- !u!114 &485337168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 870dd0ea8cc33de489d23350a0f6cd70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 485337166}
+--- !u!114 &485337169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337f3dc431bc0c540912e36f800372c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 485337167}
+--- !u!114 &485337170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485337159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab14db9b3ae5c64e88e74ccfbb8f598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 485337165}
 --- !u!1 &506785148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3485,8 +3528,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1461743103}
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
-  m_Value: -0.000000027695139
-  m_Size: 0.19680578
+  m_Value: -0.000000055390284
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5286,6 +5329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room_Type: 5
+  map: {fileID: 1135833417}
 --- !u!1 &1004008575
 GameObject:
   m_ObjectHideFlags: 0
@@ -5863,6 +5907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room_Type: 2
+  map: {fileID: 1135833417}
 --- !u!1 &1077013239
 GameObject:
   m_ObjectHideFlags: 0
@@ -6323,7 +6368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40c3eeb5bcffda4c961f9489fead8ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterExcelData: {fileID: 0}
+  monsterExcelData: {fileID: 485337161}
   skillData: {fileID: 485337160}
   spac: []
   monsterPfab:
@@ -6426,6 +6471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room_Type: 6
+  map: {fileID: 1135833417}
 --- !u!1 &1156558022
 GameObject:
   m_ObjectHideFlags: 0
@@ -6890,6 +6936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room_Type: 3
+  map: {fileID: 1135833417}
 --- !u!1 &1257431227
 GameObject:
   m_ObjectHideFlags: 0
@@ -8555,6 +8602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room_Type: 1
+  map: {fileID: 1135833417}
 --- !u!1 &1577858044
 GameObject:
   m_ObjectHideFlags: 0
@@ -9269,10 +9317,10 @@ RectTransform:
   m_Father: {fileID: 1767136067}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1374, y: 0}
-  m_SizeDelta: {x: 512, y: 1004.1}
+  m_AnchorMin: {x: 0.71524996, y: 0.070333324}
+  m_AnchorMax: {x: 0.9813543, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2, y: 0.099975586}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1722731885
 MonoBehaviour:

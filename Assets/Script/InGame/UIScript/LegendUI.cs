@@ -7,20 +7,14 @@ using UnityEngine.UI;
 public class LegendUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public MapNode.ROOMVALUE room_Type;
-
-    Room[] all;
-    private void Start()
-    {
-        all = FindObjectsOfType<Room>();
-        Debug.Log(room_Type);
-    }
+    public MapCreate map;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        for(int i = 0; i < all.Length; i++)
+        for(int i = 0; i < map.room_List.Count; i++)
         {
-            if(room_Type == all[i].node.roomType)
+            if(room_Type == map.room_List[i].GetComponent<Room>().node.roomType)
             {
-                all[i].gameObject.GetComponent<Image>().color = Color.white;
+                map.room_List[i].GetComponent<Image>().color = Color.white;
             }
         }
 
@@ -28,12 +22,11 @@ public class LegendUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        for (int i = 0; i < all.Length; i++)
+        for (int i = 0; i < map.room_List.Count; i++)
         {
-            if (room_Type == all[i].node.roomType)
+            if (room_Type == map.room_List[i].GetComponent<Room>().node.roomType)
             {
-                all[i].gameObject.GetComponent<Image>().color = Color.black;
-                
+                map.room_List[i].GetComponent<Image>().color = Color.black;
             }
         }
     }
