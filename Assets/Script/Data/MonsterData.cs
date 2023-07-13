@@ -28,6 +28,7 @@ public class MonsterData : MonoBehaviour
             {
                 case "NAME":
                     temp.name = list[i].value;
+                    temp.img = Resources.Load<Sprite>("MonsterImg/" + list[i].value);
                     break;
                 case "HP":
                     temp.maxHp = int.Parse(list[i].value);
@@ -35,9 +36,6 @@ public class MonsterData : MonoBehaviour
                     break;
                 case "SHIELD":
                     temp.shield = int.Parse(list[i].value);
-                    break;
-                case "IMG":
-                    temp.img = Resources.Load<Sprite>("MonsterImg/" + list[i].value);
                     break;
             }
         }

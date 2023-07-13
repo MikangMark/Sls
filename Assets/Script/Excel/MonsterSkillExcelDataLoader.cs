@@ -20,7 +20,7 @@ public class MonsterSkillExcelDataLoader : MonoBehaviour
 {
     public List<MonsterSkill> monsterSkillInfo;
     public MonsterSkillData monsterSkillData;
-    private void Start()
+    private void Awake()
     {
         monsterSkillInfo = monsterSkillData.items;
     }

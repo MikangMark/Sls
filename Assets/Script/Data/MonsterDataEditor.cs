@@ -8,7 +8,8 @@ using UnityEngine.Events;
 public class MonsterDataEditor : MonoBehaviour
 {
     public MonsterData data;
-    void Start()
+    public MonsterExcelDataLoader monsterExcelDataLoader;
+    void Awake()
     {
         UpdateStats(UpdateMethodOne);
     }
@@ -25,6 +26,6 @@ public class MonsterDataEditor : MonoBehaviour
             data.UpdateStats(ss.rows[dataName], dataName);
         }
         data.monsterDataLoader.monsterExelInfo = data.items;
-
+        monsterExcelDataLoader.monsterExelInfo = data.items;
     }
 }

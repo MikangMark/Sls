@@ -14,11 +14,7 @@ public class MonsterManager : MonoBehaviour
     public List<GameObject> monsterPfab;//모든몬스터 프리펩
     private void Start()
     {
-        spac = new List<MonsterStat>();
-        for(int i=0;i< monsterExcelData.monsterExelInfo.Count; i++)
-        {
-            spac.Add(monsterExcelData.monsterExelInfo[i]);
-        }
+        spac = monsterExcelData.monsterExelInfo;
     }
 
     public MonsterStat SearchMonsterStat(string name)

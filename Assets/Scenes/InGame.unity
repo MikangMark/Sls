@@ -3149,6 +3149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 485337166}
+  monsterExcelDataLoader: {fileID: 485337161}
 --- !u!114 &485337169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3528,7 +3529,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1461743103}
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
-  m_Value: -0.000000055390284
+  m_Value: -0.000000027695139
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:

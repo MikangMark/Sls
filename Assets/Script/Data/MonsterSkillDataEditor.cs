@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class MonsterSkillDataEditor : MonoBehaviour
 {
     public MonsterSkillData data;
-    void Start()
+    void Awake()
     {
         UpdateStats(UpdateMethodOne);
     }

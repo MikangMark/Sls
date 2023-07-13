@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class DataEditor : MonoBehaviour
 {
     public CardData data;
-    void Start()
+    void Awake()
     {
         UpdateStats(UpdateMethodOne);
     }

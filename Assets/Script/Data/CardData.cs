@@ -22,7 +22,7 @@ public class CardData : MonoBehaviour
     {
         CardInfo temp;
         temp = new CardInfo();
-        for (int i = 1; i < list.Count; i++)
+        for (int i = 0; i < list.Count; i++)
         {
             switch (list[i].columnId)
             {
@@ -39,12 +39,20 @@ public class CardData : MonoBehaviour
                     System.Enum.TryParse(list[i].value, out temp.type);
                     break;
                 case "TYPE_SUB":
+                    if (list[i].value.Equals(""))
+                    {
+                        break;
+                    }
                     System.Enum.TryParse(list[i].value, out temp.subType);
                     break;
                 case "VALUE":
                     temp.skillValue.Add(temp.type, int.Parse(list[i].value));
                     break;
                 case "VALUE_SUB":
+                    if (list[i].value.Equals(""))
+                    {
+                        break;
+                    }
                     temp.skillValue.Add(temp.subType, int.Parse(list[i].value));
                     break;
                 case "NAME":

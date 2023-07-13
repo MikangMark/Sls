@@ -39,7 +39,7 @@ public class MonsterExcelDataLoader : MonoBehaviour
 {
     public List<MonsterStat> monsterExelInfo;
     public MonsterData monsterData;
-    private void Start()
+    private void Awake()
     {
         monsterExelInfo = monsterData.items;
     }
