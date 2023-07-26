@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class EnterRoom : MonoBehaviour
 {
     [SerializeField]
@@ -12,9 +12,13 @@ public class EnterRoom : MonoBehaviour
     }
     public void OnClickRoomBtn()
     {
-        if(gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.ELITE|| gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.NOMAL)
+        if (!inGameUI.battle.thisActive)
         {
-            inGameUI.BattleTurnOn();
+            if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.ELITE || gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.NOMAL)
+            {
+                Instantiate(inGameUI.clearCircle, gameObject.transform);
+                inGameUI.BattleTurnOn();
+            }
         }
     }
 }

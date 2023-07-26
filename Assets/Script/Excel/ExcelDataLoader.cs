@@ -87,7 +87,7 @@ public class ExcelDataLoader : MonoBehaviour
 {
     public List<CardInfo> cardInfo;//전체 카드목록
     public CardData cardData;
-    private void Awake()
+    private void Start()
     {
         cardInfo = cardData.items;
         

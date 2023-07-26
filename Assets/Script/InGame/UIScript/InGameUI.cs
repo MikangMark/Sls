@@ -27,6 +27,8 @@ public class InGameUI : MonoBehaviour
 
     public GameObject mainBattleField;
 
+    public GameObject clearCircle;
+
     [SerializeField]
     GameObject cardPrf;
     [SerializeField]

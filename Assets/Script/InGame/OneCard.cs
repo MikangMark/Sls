@@ -166,7 +166,8 @@ public class OneCard : MonoBehaviour
                         case CardInfo.CardType.DEFAULT:
                             return false;
                         case CardInfo.CardType.ATK:
-                            return false;
+                            battle.Attack(target, thisCard.skillValue[CardInfo.Type.ATK]);
+                            return true;
                         case CardInfo.CardType.SK:
                             CardInfo.Type[] sk_Temp = null;
                             if (thisCard.subType == CardInfo.Type.DEFAULT)

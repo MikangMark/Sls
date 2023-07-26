@@ -38,7 +38,6 @@ public class Room : MonoBehaviour
         {
             case MapNode.ROOMVALUE.BOSS:
                 GetComponent<Image>().sprite = node.room_Img = Resources.Load<Sprite>("MapUI/hexaghost");
-                
                 break;
             case MapNode.ROOMVALUE.DEFAULT:
                 break;

@@ -6814,6 +6814,7 @@ MonoBehaviour:
   battleUI: {fileID: 1821535481}
   battleControll: []
   mainBattleField: {fileID: 1100642147}
+  clearCircle: {fileID: 5451304268556373965, guid: a21f02f850d0fbf458d1714de2bf7ed9, type: 3}
   cardPrf: {fileID: 8404524485185627855, guid: 274ecc3cb6c732e4d85faa89a2c1c36e, type: 3}
   content: {fileID: 745563488}
   deckList_View: {fileID: 1042278142}

@@ -52,6 +52,10 @@ public class Deck : Singleton<Deck>
             deck.Add(cardList[3]);
         }
     }
+    private void Start()
+    {
+        
+    }
 
     public void AddDeck(CardInfo info)
     {
