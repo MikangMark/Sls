@@ -3176,6 +3176,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 485337165}
+  excelDataLoader: {fileID: 485337162}
+  deck: {fileID: 450481976}
+  inGameUI: {fileID: 1219828952}
 --- !u!1 &506785148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3529,7 +3532,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1461743103}
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
-  m_Value: -0.000000027695139
+  m_Value: -0.000000055390284
   m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:

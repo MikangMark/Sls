@@ -7,14 +7,10 @@ public class Deck : Singleton<Deck>
     public ExcelDataLoader excelData;
     public List<CardInfo> cardList;
     public List<CardInfo> deck;
-    [SerializeField]
-    int attack = 5;
-    [SerializeField]
-    int defence = 4;
-    [SerializeField]
-    int blow = 1;
-    [SerializeField]
-    int ignition = 1;
+    public int attack = 5;
+    public int defence = 4;
+    public int blow = 1;
+    public int ignition = 1;
     public List<GameObject> cardList_Obj;
 
     [SerializeField]
@@ -27,8 +23,19 @@ public class Deck : Singleton<Deck>
     void Awake()
     {
         Init();
+        //excelData.InitSettingCardDatas();
+        
+    }
+    private void Start()
+    {
+        //excelData.InitSettingCardDatas();
+        //InitDeck_Info();
+    }
+
+    public void InitDeck_Info()
+    {
         cardList = new List<CardInfo>();
-        for(int i = 0; i < excelData.cardInfo.Count; i++)
+        for (int i = 0; i < excelData.cardInfo.Count; i++)
         {
             cardList.Add(excelData.cardInfo[i]);
         }
@@ -51,10 +58,6 @@ public class Deck : Singleton<Deck>
         {
             deck.Add(cardList[3]);
         }
-    }
-    private void Start()
-    {
-        
     }
 
     public void AddDeck(CardInfo info)

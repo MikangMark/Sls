@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class OneCard : MonoBehaviour
 {
@@ -51,14 +52,37 @@ public class OneCard : MonoBehaviour
         thisCard = _card;
         //thisCardValue = cardData.allInfoCard[_card];
     }
+
+    protected List<Action<GameObject>> m_CallFNList = new List<Action<GameObject>>();
+
+
+    protected void Call_PlayerDedefaultFN(GameObject target )
+    {
+
+    }
+    void InitSettings()
+    {
+        m_CallFNList = new List<Action<GameObject>>((int)CardInfo.CardType.MAX);
+
+        m_CallFNList[(int)CardInfo.CardType.DEFAULT] = Call_PlayerDedefaultFN;
+        m_CallFNList[(int)CardInfo.CardType.ATK] = null;
+    }
+
+
     public bool UseThisCard(GameObject target)//카드사용의 성공했으면 true
     {
+
         int value = 0;
         if (battle.energy >= thisCard.cost)
         {
             switch (target.tag)
             {
                 case "Player":
+                    //if(m_CallFNList[(int)thisCard.cardType] != null )
+                    //{
+                    //    m_CallFNList[(int)thisCard.cardType](target);
+                    //}
+                    
                     switch (thisCard.cardType) 
                     {
                         case CardInfo.CardType.DEFAULT:

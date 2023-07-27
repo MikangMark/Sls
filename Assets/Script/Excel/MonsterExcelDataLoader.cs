@@ -43,6 +43,10 @@ public class MonsterExcelDataLoader : MonoBehaviour
     {
         monsterExelInfo = monsterData.items;
     }
+    public void InitSettingMonsterDatas()
+    {
+        monsterExelInfo = monsterData.items;
+    }
     // Start is called before the first frame update
     
 }

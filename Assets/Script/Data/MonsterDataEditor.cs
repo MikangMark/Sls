@@ -27,5 +27,6 @@ public class MonsterDataEditor : MonoBehaviour
         }
         data.monsterDataLoader.monsterExelInfo = data.items;
         monsterExcelDataLoader.monsterExelInfo = data.items;
+        data.monsterDataLoader.InitSettingMonsterDatas();
     }
 }

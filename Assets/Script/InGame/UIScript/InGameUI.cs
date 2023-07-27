@@ -69,7 +69,7 @@ public class InGameUI : MonoBehaviour
     bool same = false;
     private void Awake()
     {
-        CreateDeckObj();
+        
         battleControll = new List<GameObject>();
         battleControll.Add(battleField);
         battleControll.Add(battleScript);
@@ -78,6 +78,7 @@ public class InGameUI : MonoBehaviour
     }
     private void Start()
     {
+        //CreateDeckObj();
         playerName_Tmp.text = "플레이어이름";
         charType_Tmp.text = "캐릭터이름";
         hp_Tmp.text = 0 + "/" + 0;
@@ -181,6 +182,7 @@ public class InGameUI : MonoBehaviour
                 }
             }
             Deck.Instance.cardList_Obj.Add(temp);
+
         }
     }
     public void OnClickDeckView_Btn()

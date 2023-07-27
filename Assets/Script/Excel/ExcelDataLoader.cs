@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class CardInfo : IEquatable<CardInfo>
 {
-    public enum CardType { DEFAULT = 0, ATK, SK , POW, ABNORMAL }//POW 파워카드
+    public enum CardType { DEFAULT = 0, ATK, SK , POW, ABNORMAL, MAX }//POW 파워카드
     public enum Type { DEFAULT = 0, ATK, DEF, POW, WEAK, EXTINCTION }//POW 힘버프
 
     public int index;
@@ -87,11 +87,14 @@ public class ExcelDataLoader : MonoBehaviour
 {
     public List<CardInfo> cardInfo;//전체 카드목록
     public CardData cardData;
-    private void Start()
+
+    public void InitSettingCardDatas()
     {
-        cardInfo = cardData.items;
+        if (cardData.items.Count != 0)
+        {
+            cardInfo = cardData.items;
+        }
         
     }
-        //public CardInfo SearchCardType(Type _)
         
 }

@@ -39,7 +39,7 @@ public class InGame : Singleton<InGame>
     }
     private void Start()
     {
-        SetReward();
+        //SetReward();
     }
 
     public void SetReward()

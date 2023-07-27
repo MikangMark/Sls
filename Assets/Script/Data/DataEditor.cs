@@ -8,6 +8,9 @@ using UnityEngine.Events;
 public class DataEditor : MonoBehaviour
 {
     public CardData data;
+    public ExcelDataLoader excelDataLoader;
+    public Deck deck;
+    public InGameUI inGameUI;
     void Awake()
     {
         UpdateStats(UpdateMethodOne);
@@ -25,6 +28,10 @@ public class DataEditor : MonoBehaviour
             data.UpdateStats(ss.rows[dataName], dataName);
         }
         data.dataLoader.cardInfo = data.items;
-
+        
+        data.dataLoader.InitSettingCardDatas();
+        deck.InitDeck_Info();
+        inGameUI.CreateDeckObj();
+        InGame.Instance.SetReward();
     }
 }

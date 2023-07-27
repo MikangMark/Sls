@@ -95,7 +95,10 @@ public class Battle : MonoBehaviour
         CreateEnemy();
         for(int i = 0; i < battleDeck.Count; i++)
         {
-            beforUse.Add(Instantiate(battleDeck[i], beforContent.transform));
+            var copyobj = Instantiate(battleDeck[i], beforContent.transform);
+            copyobj.GetComponent<OneCard>().thisCard.skillValue = battleDeck[i].GetComponent<OneCard>().thisCard.skillValue;
+            beforUse.Add(copyobj);
+            
         }
         myHand = new List<GameObject>();
         afterUse = new List<GameObject>();
