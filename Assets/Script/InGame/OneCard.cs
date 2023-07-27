@@ -190,8 +190,9 @@ public class OneCard : MonoBehaviour
                         case CardInfo.CardType.DEFAULT:
                             return false;
                         case CardInfo.CardType.ATK:
+                            battle.energy -= thisCard.cost;
                             battle.Attack(target, thisCard.skillValue[CardInfo.Type.ATK]);
-                            return true;
+                            break;
                         case CardInfo.CardType.SK:
                             CardInfo.Type[] sk_Temp = null;
                             if (thisCard.subType == CardInfo.Type.DEFAULT)
@@ -205,6 +206,7 @@ public class OneCard : MonoBehaviour
                                 sk_Temp[0] = thisCard.type;
                                 sk_Temp[1] = thisCard.subType;
                             }
+                            battle.energy -= thisCard.cost;
                             for (int i = 0; i < sk_Temp.Length; i++)
                             {
                                 switch (sk_Temp[i])

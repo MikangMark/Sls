@@ -25,6 +25,6 @@ public class MonsterSkillDataEditor : MonoBehaviour
             data.UpdateStats(ss.rows[dataName], dataName);
         }
         data.monsterSkillDataLoader.monsterSkillInfo = data.items;
-
+        data.monsterSkillDataLoader.InitSetMonsterSkillDatas();
     }
 }

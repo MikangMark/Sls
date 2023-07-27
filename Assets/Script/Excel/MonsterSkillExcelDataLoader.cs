@@ -24,4 +24,8 @@ public class MonsterSkillExcelDataLoader : MonoBehaviour
     {
         monsterSkillInfo = monsterSkillData.items;
     }
+    public void InitSetMonsterSkillDatas()
+    {
+        monsterSkillInfo = monsterSkillData.items;
+    }
 }
