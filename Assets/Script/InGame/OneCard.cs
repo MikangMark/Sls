@@ -102,7 +102,8 @@ public class OneCard : MonoBehaviour
                                 sk_Temp[0] = thisCard.type;
                                 sk_Temp[1] = thisCard.subType;
                             }
-                            for(int i = 0; i < sk_Temp.Length; i++)
+                            battle.energy -= thisCard.cost;
+                            for (int i = 0; i < sk_Temp.Length; i++)
                             {
                                 switch (sk_Temp[i])
                                 {
@@ -141,6 +142,7 @@ public class OneCard : MonoBehaviour
                                 pow_Temp[0] = thisCard.type;
                                 pow_Temp[1] = thisCard.subType;
                             }
+                            battle.energy -= thisCard.cost;
                             for (int i = 0; i < pow_Temp.Length; i++)
                             {
                                 switch (pow_Temp[i])
