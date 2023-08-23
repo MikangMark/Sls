@@ -41,17 +41,11 @@ public class MonsterExcelDataLoader : MonoBehaviour
     public MonsterData monsterData;
     private void Awake()
     {
-        //if (monsterData.items[0].skillList.Count != 0)
-        //{
-        //    monsterExelInfo = monsterData.items;
-        //}
+        monsterExelInfo = monsterData.items;
     }
     public void InitSettingMonsterDatas()
     {
-        if (monsterData.items[0].skillList.Count != 0)
-        {
-            monsterExelInfo = monsterData.items;
-        }
+        monsterExelInfo = monsterData.items;
     }
     // Start is called before the first frame update
     
