@@ -30,6 +30,19 @@ public class EditCardData : ScriptableObject
                 case "INDEX":
                     temp.index = int.Parse(list[i].value);
                     break;
+                case "COUNT":
+                    temp.count = int.Parse(list[i].value);
+                    break;
+                case "RAND":
+                    if(list[i].value == "TRUE")
+                    {
+                        temp.randomTarget = true;
+                    }
+                    else
+                    {
+                        temp.randomTarget = false;
+                    }
+                    break;
                 case "COST":
                     temp.cost = int.Parse(list[i].value);
                     break;

@@ -11,12 +11,14 @@ public class CardInfo : IEquatable<CardInfo>
 
     public int index;
     public int cost;
+    public int count;
     public string title;
     public CardType cardType;
     public Type type;
     public Type subType;
     public Dictionary<Type, int> skillValue;
     public string text;
+    public bool randomTarget;
     public Sprite cardImg;
     public CardInfo()
     {
@@ -30,7 +32,7 @@ public class CardInfo : IEquatable<CardInfo>
         text = "";
         cardImg = null;
     }
-    public CardInfo(int _index,int _cost, string _title, CardType _type, Type _Type, Type _subType, Dictionary<Type, int> _skillValue, string _text, Sprite _img)
+    public CardInfo(int _index,int _cost, int _count, string _title, CardType _type, Type _Type, Type _subType, Dictionary<Type, int> _skillValue, string _text,bool _randomTarget, Sprite _img)
     {
         index = _index;
         cost = _cost;
@@ -41,8 +43,10 @@ public class CardInfo : IEquatable<CardInfo>
         skillValue = _skillValue;
         text = _text;
         cardImg = _img;
+        count = _count;
+        randomTarget = _randomTarget;
     }
-    public void InputInfo(int _index, int _cost, string _title, CardType _type, Type _Type, Type _subType, Dictionary<Type, int> _skillValue, string _text, Sprite _img)
+    public void InputInfo(int _index, int _cost, string _title, int _count, CardType _type, Type _Type, Type _subType, Dictionary<Type, int> _skillValue, string _text, bool _randomTarget, Sprite _img)
     {
         index = _index;
         cost = _cost;
@@ -53,6 +57,8 @@ public class CardInfo : IEquatable<CardInfo>
         skillValue = _skillValue;
         text = _text;
         cardImg = _img;
+        count = _count;
+        randomTarget = _randomTarget;
     }
     
     

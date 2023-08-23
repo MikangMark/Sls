@@ -29,6 +29,19 @@ public class CardData : MonoBehaviour
                 case "INDEX":
                     temp.index = int.Parse(list[i].value);
                     break;
+                case "COUNT":
+                    temp.count = int.Parse(list[i].value);
+                    break;
+                case "RAND":
+                    if (list[i].value == "TRUE")
+                    {
+                        temp.randomTarget = true;
+                    }
+                    else
+                    {
+                        temp.randomTarget = false;
+                    }
+                    break;
                 case "COST":
                     temp.cost = int.Parse(list[i].value);
                     break;
@@ -39,21 +52,19 @@ public class CardData : MonoBehaviour
                     System.Enum.TryParse(list[i].value, out temp.type);
                     break;
                 case "TYPE_SUB":
-                    if (list[i].value.Equals(""))
+                    if (list[i].value.Length > 0)
                     {
-                        break;
+                        System.Enum.TryParse(list[i].value, out temp.subType);
                     }
-                    System.Enum.TryParse(list[i].value, out temp.subType);
                     break;
                 case "VALUE":
                     temp.skillValue.Add(temp.type, int.Parse(list[i].value));
                     break;
                 case "VALUE_SUB":
-                    if (list[i].value.Equals(""))
+                    if (list[i].value.Length > 0)
                     {
-                        break;
+                        temp.skillValue.Add(temp.subType, int.Parse(list[i].value));
                     }
-                    temp.skillValue.Add(temp.subType, int.Parse(list[i].value));
                     break;
                 case "NAME":
                     temp.title = list[i].value;

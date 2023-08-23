@@ -30,6 +30,11 @@ public class InGameUI : MonoBehaviour
     public GameObject clearCircle;
 
     [SerializeField]
+    GameObject shopBtn;
+    [SerializeField]
+    GameObject exitShopBtn;
+
+    [SerializeField]
     GameObject cardPrf;
     [SerializeField]
     GameObject content;
@@ -60,6 +65,9 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     GameObject rewardOutBtn;
 
+    [SerializeField]
+    GameObject shop;
+
     public bool is_Reward = false;
 
     bool mapActive = true;
@@ -89,6 +97,7 @@ public class InGameUI : MonoBehaviour
         deckList_View.SetActive(false);
         rewardCard_Parent.SetActive(false);
         rewardOutBtn.SetActive(false);
+        shop.SetActive(false);
     }
     private void FixedUpdate()
     {
@@ -184,6 +193,15 @@ public class InGameUI : MonoBehaviour
             Deck.Instance.cardList_Obj.Add(temp);
 
         }
+    }
+    public void ShopEnter()
+    {
+        shop.SetActive(true);
+    }
+
+    void ShopListInit()
+    {
+        
     }
     public void OnClickDeckView_Btn()
     {

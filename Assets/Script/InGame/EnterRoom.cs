@@ -19,6 +19,11 @@ public class EnterRoom : MonoBehaviour
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
                 inGameUI.BattleTurnOn();
             }
+            if(gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.SHOP)
+            {
+                Instantiate(inGameUI.clearCircle, gameObject.transform);
+                inGameUI.ShopEnter();
+            }
         }
     }
 }
