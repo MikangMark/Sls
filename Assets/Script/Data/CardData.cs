@@ -73,6 +73,9 @@ public class CardData : MonoBehaviour
                 case "TEXT":
                     temp.text = list[i].value;
                     break;
+                case "SHOP":
+                    temp.shop = int.Parse(list[i].value);
+                    break;
             }
         }
         items.Add(temp);

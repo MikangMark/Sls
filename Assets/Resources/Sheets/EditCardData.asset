@@ -25,6 +25,7 @@ MonoBehaviour:
     text: "\uD53C\uD574\uB97C 6 \uC90D\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 7adc8551ab063a745aa99ef627623f20, type: 3}
+    shop: 0
   - index: 10002
     cost: 1
     count: 1
@@ -35,6 +36,7 @@ MonoBehaviour:
     text: "\uBC29\uC5B4\uB3C4\uB97C 5 \uC5BB\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: c3ef1c3c548abe244bd2f7c0291e1029, type: 3}
+    shop: 0
   - index: 10003
     cost: 2
     count: 1
@@ -45,6 +47,7 @@ MonoBehaviour:
     text: "\uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4.\uCDE8\uC57D\uC744 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: faa17427716770a41a72bb6afd6afa0d, type: 3}
+    shop: 60
   - index: 10004
     cost: 1
     count: 1
@@ -55,6 +58,7 @@ MonoBehaviour:
     text: "\uD798\uC744 2 \uC5BB\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 7748baef8fd221c458ae925a1eeda2db, type: 3}
+    shop: 70
   - index: 10005
     cost: 1
     count: 0
@@ -65,6 +69,7 @@ MonoBehaviour:
     text: "\uC18C\uBA78"
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 6435ddecce546f043a85ba1049a878a1, type: 3}
+    shop: 0
   - index: 10006
     cost: 0
     count: 1
@@ -77,6 +82,7 @@ MonoBehaviour:
       \uD53C\uD574\uB97C 14 \uC90D\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 863b5ab3dd0639643ad262914116a5d0, type: 3}
+    shop: 70
   - index: 10007
     cost: 1
     count: 1
@@ -88,6 +94,7 @@ MonoBehaviour:
       \uBD80\uC0C1 \uC744 \uC11E\uC5B4 \uB123\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: ffac48a7909a0ce4389c73926a23206b, type: 3}
+    shop: 85
   - index: 10008
     cost: 2
     count: 1
@@ -99,6 +106,7 @@ MonoBehaviour:
       3\uBC30\uB85C \uC801\uC6A9\uB429\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 9995bb970d18a8e4193a511dc2e89c79, type: 3}
+    shop: 85
   - index: 10009
     cost: 0
     count: 1
@@ -110,6 +118,7 @@ MonoBehaviour:
       \uB54C \uD798\uC744 2 \uC783\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: d4bb73b48c681e446a7dd844a907d7f3, type: 3}
+    shop: 50
   - index: 10010
     cost: 1
     count: 1
@@ -120,6 +129,7 @@ MonoBehaviour:
     text: "\uD604\uC7AC \uBC29\uC5B4\uB3C4\uB9CC\uD07C \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 648f51f313740de49bd18c9008e62062, type: 3}
+    shop: 65
   - index: 10011
     cost: 1
     count: 1
@@ -132,6 +142,7 @@ MonoBehaviour:
       \uB9E8 \uC704\uC5D0 \uB193\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 5ed458ce76cbe684e8ebd00728c75645, type: 3}
+    shop: 60
   - index: 10012
     cost: 1
     count: 3
@@ -143,6 +154,7 @@ MonoBehaviour:
       3 \uBC88\uC90D\uB2C8\uB2E4."
     randomTarget: 1
     cardImg: {fileID: 21300000, guid: 56fffef65a0d3c9438e3fd42df50ef82, type: 3}
+    shop: 70
   - index: 10013
     cost: 0
     count: 1
@@ -155,6 +167,7 @@ MonoBehaviour:
       \uB123\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 9e603f1a94d7e7d448b5b839cfbf6cd6, type: 3}
+    shop: 70
   - index: 10014
     cost: 2
     count: 1
@@ -167,6 +180,7 @@ MonoBehaviour:
       \uD558\uB098\uB2F9 \uD53C\uD574\uB7C9\uC774 2 \uC99D\uAC00 \uD569\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: b24cc78f4f595be47a050ef191c9e1db, type: 3}
+    shop: 75
   - index: 10015
     cost: 1
     count: 2
@@ -177,6 +191,7 @@ MonoBehaviour:
     text: "\uD53C\uD574\uB97C 5\uB9CC\uD07C 2 \uBC88\uC90D\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: d1e5d4a5fe9bee24e90bc3ec40b5ede5, type: 3}
+    shop: 75
   - index: 10016
     cost: 0
     count: 1
@@ -189,6 +204,7 @@ MonoBehaviour:
       \uC18C\uBA78."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: b5dcf1a4821e70346bdcbe993d07eb80, type: 3}
+    shop: 65
   - index: 10017
     cost: 1
     count: 1
@@ -199,6 +215,7 @@ MonoBehaviour:
     text: "\uC801 \uC804\uCCB4\uC5D0\uAC8C \uD53C\uD574\uB97C 8 \uC90D\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: bc6f475b0302cb34f9b6decca5dfd18e, type: 3}
+    shop: 80
   - index: 10018
     cost: 1
     count: 1
@@ -210,6 +227,7 @@ MonoBehaviour:
       \uCE74\uB4DC\uB97C 1 \uC7A5 \uC18C\uBA78\uC2DC\uD0B5\uB2C8\uB2E4"
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: ac591ba09e64a6f4fbc8fcad8dcde9cf, type: 3}
+    shop: 65
   - index: 10019
     cost: 1
     count: 1
@@ -221,6 +239,7 @@ MonoBehaviour:
       1 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: d522f376a82f2754db9f2e0b27ca3772, type: 3}
+    shop: 70
   - index: 10020
     cost: 1
     count: 1
@@ -232,6 +251,7 @@ MonoBehaviour:
       5 \uC90D\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 69327089b442e6d49b70e005e05b91ab, type: 3}
+    shop: 65
   - index: 10021
     cost: 2
     count: 1
@@ -242,6 +262,7 @@ MonoBehaviour:
     text: "\uD53C\uD574\uB97C 12 \uC90D\uB2C8\uB2E4. \uC57D\uD654\uB97C 2 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 1eda697853346d64d97da05ec9aea376, type: 3}
+    shop: 70
   - index: 10022
     cost: 1
     count: 1
@@ -252,6 +273,7 @@ MonoBehaviour:
     text: "\uD53C\uD574\uB97C 9 \uC90D\uB2C8\uB2E4. \uCE74\uB4DC\uB97C 1 \uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 0}
+    shop: 75
   - index: 10023
     cost: 1
     count: 1
@@ -263,6 +285,7 @@ MonoBehaviour:
       1\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: 0182af3e78966f64eb28bbaa06ba1b8e, type: 3}
+    shop: 70
   - index: 10024
     cost: 1
     count: 1
@@ -274,6 +297,7 @@ MonoBehaviour:
       \uC18C\uBA78 \uB418\uBA74 2 \uB9C8\uB098\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
     cardImg: {fileID: 21300000, guid: a3a052713287d4d4ca820b8fcbdd7ab9, type: 3}
+    shop: 65
   dataLoader: {fileID: 0}
   Names:
   - 10001
