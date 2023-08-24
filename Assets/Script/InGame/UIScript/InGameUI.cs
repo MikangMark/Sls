@@ -33,6 +33,8 @@ public class InGameUI : MonoBehaviour
     GameObject shopBtn;
     [SerializeField]
     GameObject exitShopBtn;
+    [SerializeField]
+    GameObject exitShopListBtn;
 
     [SerializeField]
     GameObject cardPrf;
@@ -67,6 +69,8 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     GameObject shop;
+    [SerializeField]
+    GameObject shopList;
 
     public bool is_Reward = false;
 
@@ -197,8 +201,30 @@ public class InGameUI : MonoBehaviour
     public void ShopEnter()
     {
         shop.SetActive(true);
+        shopBtn.SetActive(true);
+        exitShopBtn.SetActive(false);
+        exitShopListBtn.SetActive(false);
+        shopList.SetActive(false);
     }
-
+    public void OnClickEnterShopBtn()
+    {
+        shopList.SetActive(true);
+        shopBtn.SetActive(false);
+        exitShopListBtn.SetActive(true);
+        exitShopBtn.SetActive(false);
+    }
+    public void OnClickExitShopListBtn()
+    {
+        exitShopListBtn.SetActive(false);
+        shopList.SetActive(false);
+        shopBtn.SetActive(true);
+        exitShopBtn.SetActive(true);
+    }
+    public void OnClickExitShopBtn()
+    {
+        InGame.Instance.currentFloor++;
+        shop.SetActive(false);
+    }
     void ShopListInit()
     {
         

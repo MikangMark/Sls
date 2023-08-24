@@ -45,6 +45,10 @@ public class OneCard : MonoBehaviour
                 GetComponent<MousePoint>().enabled = true;
             }
         }
+        if (gameObject.transform.parent.tag.Equals("Shop"))
+        {
+            GetComponent<MousePoint>().enabled = false;
+        }
     }
     public void SetCard(CardInfo _card)
     {

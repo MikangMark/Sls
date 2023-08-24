@@ -12,6 +12,7 @@ TagManager:
   - RewardGold
   - RewardCard
   - Legend
+  - Shop
   layers:
   - Default
   - TransparentFX
