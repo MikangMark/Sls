@@ -198,6 +198,7 @@ public class InGameUI : MonoBehaviour
 
         }
     }
+    
     public void ShopEnter()
     {
         shop.SetActive(true);
