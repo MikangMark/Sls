@@ -24,7 +24,7 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (gameObject.transform.parent.gameObject.tag.Equals("Reward"))
+        if (gameObject.transform.parent.gameObject.tag.Equals("Reward")||gameObject.transform.parent.gameObject.tag.Equals("DisCardView"))
         {
 
             return;
@@ -39,6 +39,11 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (gameObject.transform.parent.gameObject.tag.Equals("Reward") || gameObject.transform.parent.gameObject.tag.Equals("DisCardView"))
+        {
+
+            return;
+        }
         // 마우스 드래그 이벤트가 발생한 위치를 UI 요소의 부모 객체의 좌표계로 변환합니다.
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out Vector2 localMousePosition);
 
@@ -48,6 +53,11 @@ public class MousePoint : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (gameObject.transform.parent.gameObject.tag.Equals("Reward") || gameObject.transform.parent.gameObject.tag.Equals("DisCardView"))
+        {
+
+            return;
+        }
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
         pointerEventData.position = Input.mousePosition;
         List<RaycastResult> results = new List<RaycastResult>();

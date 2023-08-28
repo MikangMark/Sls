@@ -13,7 +13,7 @@ public class Battle : MonoBehaviour
     public Character.CharInfo stat;//전투중인 나의 스텟
     public Dictionary<PlayerBuffType, int> playerBufList;//플레이어 버프 리스트
     public List<GameObject> monsters;//전투중인 적의 리스트
-    List<GameObject> battleDeck;//전투에서 사용할 나의 덱
+    public List<GameObject> battleDeck;//전투에서 사용할 나의 덱
     List<GameObject> abnomalDeck;//상태이상 카드 덱
 
     public List<GameObject> beforUse;//뽑을 카드모음

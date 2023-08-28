@@ -13,6 +13,7 @@ TagManager:
   - RewardCard
   - Legend
   - Shop
+  - DisCardView
   layers:
   - Default
   - TransparentFX

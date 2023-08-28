@@ -70,6 +70,7 @@ public class Room : MonoBehaviour
         {
             activeRoom = false;
         }
+        //activeRoom = true;
         gameObject.GetComponent<Button>().enabled = activeRoom;
     }
 

@@ -5,6 +5,8 @@ using TMPro;
 
 public class ShopScript : MonoBehaviour
 {
+    [SerializeField]
+    Battle battle;
     public List<GameObject> shopList;
     public GameObject cardPrf;
     [SerializeField]
@@ -17,6 +19,11 @@ public class ShopScript : MonoBehaviour
     int discardPay;
     [SerializeField]
     TextMeshProUGUI disCardPayText;
+
+    [SerializeField]
+    CardInfo disCardTarget;
+    [SerializeField]
+    GameObject disCardWarringView;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -81,7 +88,22 @@ public class ShopScript : MonoBehaviour
     }
     public void DisCardViewBtn()
     {
-        shopping.SetActive(false);
         disCardView.SetActive(true);
+    }
+    public void SetDisCardTarget(CardInfo target)
+    {
+        disCardTarget = target;
+    }
+    public void OnClickYesDisCard()
+    {
+        if(disCardTarget != null)
+        {//ÀÛ¾÷
+            //battle.battleDeck
+            disCardWarringView.SetActive(false);
+        }
+    }
+    public void OnClickNoDisCard()
+    {
+        disCardWarringView.SetActive(false);
     }
 }

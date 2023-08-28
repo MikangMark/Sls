@@ -71,6 +71,8 @@ public class InGameUI : MonoBehaviour
     GameObject shop;
     [SerializeField]
     GameObject shopList;
+    [SerializeField]
+    GameObject disCardView;
 
     public bool is_Reward = false;
 
@@ -338,5 +340,10 @@ public class InGameUI : MonoBehaviour
     public void OnClickRewardOutBtn()
     {
         TurnRewardView();
+    }
+
+    public void OnClickExitDisCardView()
+    {
+        disCardView.SetActive(false);
     }
 }

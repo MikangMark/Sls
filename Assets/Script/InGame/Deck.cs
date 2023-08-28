@@ -91,4 +91,15 @@ public class Deck : Singleton<Deck>
         }
         cardList_Obj.Add(temp);
     }
+
+    public void DisCardDeck(CardInfo target)
+    {
+        for(int i=0;i< deck.Count; i++)
+        {
+            if(deck[i] == target)
+            {
+                deck.RemoveAt(i);
+            }
+        }
+    }
 }

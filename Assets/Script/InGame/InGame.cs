@@ -12,6 +12,8 @@ public class InGame : Singleton<InGame>
     public int rewardCardGroup;
     public List<List<CardInfo>> rewardCards;
 
+    public GameObject disCardWarringWiew;
+    public ShopScript shopscript;
     private void Awake()
     {
         Init();

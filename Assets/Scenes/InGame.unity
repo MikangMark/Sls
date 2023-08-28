@@ -709,7 +709,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 61263824}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1004008579}
+        m_TargetAssemblyTypeName: ShopScript, Assembly-CSharp
+        m_MethodName: OnClickNoDisCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &61263824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2343,7 +2355,6 @@ RectTransform:
   m_Children:
   - {fileID: 1812361967}
   - {fileID: 987456946}
-  - {fileID: 1001005343}
   m_Father: {fileID: 1004008576}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2764,6 +2775,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288405640}
   m_CullTransparentMesh: 1
+--- !u!1 &294461697
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 294461699}
+  - component: {fileID: 294461698}
+  m_Layer: 0
+  m_Name: InGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &294461698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294461697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b873535a2f85146be540525d2b6bb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charInfo:
+    hp: 0
+    maxHp: 0
+    money: 0
+    charType: 0
+  openDeckView: 0
+  currentFloor: 0
+  rewardGold: 95
+  rewardCardGroup: 1
+  disCardWarringWiew: {fileID: 1071978772}
+  shopscript: {fileID: 1004008579}
+--- !u!4 &294461699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294461697}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &299260876
 GameObject:
   m_ObjectHideFlags: 0
@@ -5262,7 +5328,7 @@ GameObject:
   - component: {fileID: 486207038}
   - component: {fileID: 486207037}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: WarringText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5738,8 +5804,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1461743103}
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
-  m_Value: -0.000000027695139
-  m_Size: 0.19680578
+  m_Value: -0.000000055390284
+  m_Size: 0.19680579
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6800,7 +6866,7 @@ GameObject:
   - component: {fileID: 691922133}
   m_Layer: 0
   m_Name: Content
-  m_TagString: CardView
+  m_TagString: DisCardView
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9046,10 +9112,10 @@ RectTransform:
   m_Father: {fileID: 227632179}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -826.7869, y: -316.07983}
-  m_SizeDelta: {x: 266.4261, y: 87.8403}
+  m_AnchorMin: {x: 0, y: 0.14}
+  m_AnchorMax: {x: 0.13700001, y: 0.22800002}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &987456947
 MonoBehaviour:
@@ -9097,7 +9163,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1219828952}
         m_TargetAssemblyTypeName: InGameUI, Assembly-CSharp
-        m_MethodName: OnClickDeckView_Btn
+        m_MethodName: OnClickExitDisCardView
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9305,7 +9371,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001005342}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9314,8 +9380,8 @@ RectTransform:
   - {fileID: 486207036}
   - {fileID: 1185906203}
   - {fileID: 61263822}
-  m_Father: {fileID: 227632179}
-  m_RootOrder: 2
+  m_Father: {fileID: 1071978773}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36900002, y: 0.19500001}
   m_AnchorMax: {x: 0.63100004, y: 0.892}
@@ -9470,7 +9536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1004008576
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9488,6 +9554,7 @@ RectTransform:
   - {fileID: 48595903}
   - {fileID: 370896379}
   - {fileID: 227632179}
+  - {fileID: 1071978773}
   m_Father: {fileID: 2023159409}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9546,6 +9613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62f25c5d60e20547b56cc92eb6a99ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battle: {fileID: 2104963837}
   shopList:
   - {fileID: 2172073208839776868}
   - {fileID: 2125947518}
@@ -9554,12 +9622,25 @@ MonoBehaviour:
   - {fileID: 1286934479}
   - {fileID: 2004119642}
   - {fileID: 1776791369}
-  cardPrf: {fileID: 8404524485185627855, guid: 274ecc3cb6c732e4d85faa89a2c1c36e, type: 3}
+  cardPrf: {fileID: 8404524485185627855, guid: 4679ce98058f7a84b9a5459812811baf, type: 3}
   shopping: {fileID: 1031882631}
   disConten: {fileID: 691922131}
   disCardView: {fileID: 227632178}
   discardPay: 75
   disCardPayText: {fileID: 1561994043}
+  disCardTarget:
+    index: 0
+    cost: 0
+    count: 0
+    title: 
+    cardType: 0
+    type: 0
+    subType: 0
+    text: 
+    randomTarget: 0
+    cardImg: {fileID: 0}
+    shop: 0
+  disCardWarringView: {fileID: 1071978772}
 --- !u!1 &1014582762
 GameObject:
   m_ObjectHideFlags: 0
@@ -10324,6 +10405,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061844943}
   m_CullTransparentMesh: 1
+--- !u!1 &1071978772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1071978773}
+  - component: {fileID: 1071978775}
+  - component: {fileID: 1071978774}
+  m_Layer: 0
+  m_Name: DisCardWarringView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1071978773
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071978772}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000798, y: 1.0000798, z: 1.0000798}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1001005343}
+  m_Father: {fileID: 1004008576}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.92274076}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1071978774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071978772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7882353}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1071978775
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071978772}
+  m_CullTransparentMesh: 1
 --- !u!1 &1077013239
 GameObject:
   m_ObjectHideFlags: 0
@@ -11062,6 +11220,8 @@ MonoBehaviour:
   currentFloor: 0
   rewardGold: 0
   rewardCardGroup: 0
+  disCardWarringWiew: {fileID: 0}
+  shopscript: {fileID: 0}
 --- !u!4 &1135833416
 Transform:
   m_ObjectHideFlags: 0
@@ -11563,7 +11723,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.040000003, y: 0.08056033}
   m_AnchorMax: {x: 0.5, y: 0.18668099}
-  m_AnchoredPosition: {x: -0.0025003, y: 0}
+  m_AnchoredPosition: {x: -0.0025024414, y: 0}
   m_SizeDelta: {x: -0.0049744, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1185906204
@@ -11609,7 +11769,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1185906205}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1004008579}
+        m_TargetAssemblyTypeName: ShopScript, Assembly-CSharp
+        m_MethodName: OnClickYesDisCard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1185906205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11965,7 +12137,6 @@ MonoBehaviour:
   exitShopListBtn: {fileID: 370896378}
   cardPrf: {fileID: 8404524485185627855, guid: 274ecc3cb6c732e4d85faa89a2c1c36e, type: 3}
   content: {fileID: 745563488}
-  disConten: {fileID: 691922131}
   deckList_View: {fileID: 1042278142}
   reward_View: {fileID: 950115803}
   lose_View: {fileID: 1730377917}
@@ -11982,6 +12153,7 @@ MonoBehaviour:
   rewardOutBtn: {fileID: 887863836}
   shop: {fileID: 1004008575}
   shopList: {fileID: 1031882631}
+  disCardView: {fileID: 227632178}
   is_Reward: 0
 --- !u!4 &1219828953
 Transform:
@@ -16306,6 +16478,51 @@ MonoBehaviour:
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 1
   m_ConstraintCount: 5
+--- !u!1 &1652746170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1652746172}
+  - component: {fileID: 1652746171}
+  m_Layer: 0
+  m_Name: CreateSeed
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1652746171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652746170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 671c2b4a852bc634780cd1771b899f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentSeed: 0
+--- !u!4 &1652746172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1652746170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1654424467
 GameObject:
   m_ObjectHideFlags: 0
@@ -20736,6 +20953,7 @@ MonoBehaviour:
     money: 0
     charType: 0
   monsters: []
+  battleDeck: []
   beforUse: []
   afterUse: []
   deletCard: []
