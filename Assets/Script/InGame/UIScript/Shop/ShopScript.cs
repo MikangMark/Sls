@@ -5,8 +5,6 @@ using TMPro;
 
 public class ShopScript : MonoBehaviour
 {
-    [SerializeField]
-    Battle battle;
     public List<GameObject> shopList;
     public GameObject cardPrf;
     [SerializeField]
@@ -24,6 +22,9 @@ public class ShopScript : MonoBehaviour
     CardInfo disCardTarget;
     [SerializeField]
     GameObject disCardWarringView;
+
+    [SerializeField]
+    GameObject content;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -97,8 +98,24 @@ public class ShopScript : MonoBehaviour
     public void OnClickYesDisCard()
     {
         if(disCardTarget != null)
-        {//작업
-            //battle.battleDeck
+        {
+            for(int i = 0; i < Deck.Instance.deck.Count; i++)
+            {
+                if(Deck.Instance.deck[i] == disCardTarget)
+                {
+                    Deck.Instance.deck.RemoveAt(i);
+                    Deck.Instance.cardList_Obj.RemoveAt(i);
+                    for(int j=0;j< disConten.transform.childCount; j++)
+                    {
+                        if(disConten.transform.GetChild(j).GetComponent<OneCard>().thisCard == disCardTarget)
+                        {
+                            Destroy(disConten.transform.GetChild(j).gameObject);
+                            //작업
+                            //setactive(false)되어있는 오브젝트접근
+                        }
+                    }
+                }
+            }
             disCardWarringView.SetActive(false);
         }
     }
