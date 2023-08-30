@@ -97,6 +97,7 @@ public class ShopScript : MonoBehaviour
     }
     public void OnClickYesDisCard()
     {
+        Debug.Log(content.transform.childCount);
         if(disCardTarget != null)
         {
             for(int i = 0; i < Deck.Instance.deck.Count; i++)
@@ -104,16 +105,23 @@ public class ShopScript : MonoBehaviour
                 if(Deck.Instance.deck[i] == disCardTarget)
                 {
                     Deck.Instance.deck.RemoveAt(i);
-                    Deck.Instance.cardList_Obj.RemoveAt(i);
+                    //Deck.Instance.cardList_Obj.RemoveAt(i);
                     for(int j=0;j< disConten.transform.childCount; j++)
                     {
                         if(disConten.transform.GetChild(j).GetComponent<OneCard>().thisCard == disCardTarget)
                         {
                             Destroy(disConten.transform.GetChild(j).gameObject);
-                            //작업
-                            //setactive(false)되어있는 오브젝트접근
+                        }
+                        
+                    }
+                    for (int j = 0; j < content.transform.childCount; j++)
+                    {
+                        if (content.transform.GetChild(j).GetComponent<OneCard>().thisCard == disCardTarget)
+                        {
+                            Destroy(content.transform.GetChild(j).gameObject);
                         }
                     }
+                    //for(int j = 0;j<InGame.Instance.re)
                 }
             }
             disCardWarringView.SetActive(false);
