@@ -200,6 +200,44 @@ public class InGameUI : MonoBehaviour
 
         }
     }
+    public void ResetCardView()
+    {
+        for (int i = content.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(content.transform.GetChild(i).gameObject);
+        }
+        GameObject temp;
+        for (int i = 0; i < Deck.Instance.deck.Count; i++)
+        {
+            temp = Instantiate(cardPrf, content.transform);
+            temp.GetComponent<OneCard>().thisCard = Deck.Instance.deck[i];
+            temp.name = "Card[" + i + "]";
+            for (int j = 0; j < temp.transform.childCount; j++)
+            {
+                switch (j)
+                {
+                    case 0:
+                        temp.transform.GetChild(j).name = "CostImg" + i;
+                        temp.transform.GetChild(j).GetChild(0).name = "CostText" + i;
+                        break;
+                    case 1:
+                        temp.transform.GetChild(j).name = "CardTitle" + i;
+                        break;
+                    case 2:
+                        temp.transform.GetChild(j).name = "CardText" + i;
+                        break;
+                    case 3:
+                        temp.transform.GetChild(j).name = "CardImg" + i;
+                        break;
+                    case 4:
+                        temp.transform.GetChild(j).name = "CardType" + i;
+                        break;
+                }
+            }
+            Deck.Instance.cardList_Obj.Add(temp);
+
+        }
+    }
     
     public void ShopEnter()
     {
