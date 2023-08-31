@@ -2815,6 +2815,8 @@ MonoBehaviour:
   rewardCardGroup: 1
   disCardWarringWiew: {fileID: 1071978772}
   shopscript: {fileID: 1004008579}
+  playerPrefsKey: SavedPlayerStat
+  saveMapFloorKey: SavedClearMap
 --- !u!4 &294461699
 Transform:
   m_ObjectHideFlags: 0
@@ -4743,6 +4745,8 @@ MonoBehaviour:
     name: "\uB3D9\uBB3C\uD558\uCD08"
     type: 03000000
   monsterSkillData: {fileID: 485337167}
+  savedMonsterSKillKey: SavedMonsterSkill
+  monsterskill: 
 --- !u!114 &485337161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4859,6 +4863,7 @@ MonoBehaviour:
       name: "\uB3D9\uBB3C\uD558\uCD08"
       type: 03000000
   monsterData: {fileID: 485337166}
+  savedMonsterStatKey: SavedMonsterStat
 --- !u!114 &485337162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11222,6 +11227,8 @@ MonoBehaviour:
   rewardCardGroup: 0
   disCardWarringWiew: {fileID: 0}
   shopscript: {fileID: 0}
+  playerPrefsKey: SavedPlayerStat
+  saveMapFloorKey: SavedClearMap
 --- !u!4 &1135833416
 Transform:
   m_ObjectHideFlags: 0

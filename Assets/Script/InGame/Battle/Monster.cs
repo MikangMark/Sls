@@ -38,6 +38,8 @@ public class Monster : MonoBehaviour
     public void NextUseSkill()
     {
         nextSkill = stat.skillList[CreateSeed.Instance.RandNum(0, stat.skillList.Count)];
+        
+        
         #region 의도 타입하드코딩
         if (nextSkill.type.Count > 1)
         {

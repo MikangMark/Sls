@@ -39,14 +39,42 @@ public class MonsterExcelDataLoader : MonoBehaviour
 {
     public List<MonsterStat> monsterExelInfo;
     public MonsterData monsterData;
+
+    public string savedMonsterStatKey = "SavedMonsterStat";
     private void Awake()
     {
         monsterExelInfo = monsterData.items;
+        SaveCardList();
     }
     public void InitSettingMonsterDatas()
     {
         monsterExelInfo = monsterData.items;
+        if (monsterExelInfo == null)
+        {
+            LoadCardList();
+        }
     }
     // Start is called before the first frame update
-    
+    public void SaveCardList()
+    {
+        string json = JsonUtility.ToJson(new SerializableList<MonsterStat> { items = monsterExelInfo });
+        PlayerPrefs.SetString(savedMonsterStatKey, json);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadCardList()
+    {
+        if (PlayerPrefs.HasKey(savedMonsterStatKey))
+        {
+            string json = PlayerPrefs.GetString(savedMonsterStatKey);
+            SerializableList<MonsterStat> serializableList = JsonUtility.FromJson<SerializableList<MonsterStat>>(json);
+            monsterExelInfo = serializableList.items;
+        }
+    }
+
+    [System.Serializable]
+    private class SerializableList<T>
+    {
+        public List<T> items = new List<T>();
+    }
 }

@@ -14,6 +14,9 @@ public class InGame : Singleton<InGame>
 
     public GameObject disCardWarringWiew;
     public ShopScript shopscript;
+
+    public string playerPrefsKey = "SavedPlayerStat";
+    public string saveMapFloorKey = "SavedClearMap";
     private void Awake()
     {
         Init();
@@ -38,9 +41,11 @@ public class InGame : Singleton<InGame>
                 charInfo = Character.Instance.ironclead;//아이언클래드
                 break;
         }
+        SavePlayerData();
     }
     private void Start()
     {
+        LoadPlayerData();
         //SetReward();
     }
 
@@ -67,5 +72,21 @@ public class InGame : Singleton<InGame>
         }
     }
 
+    public void SavePlayerData()
+    {
+        string json = JsonUtility.ToJson(charInfo);
+        PlayerPrefs.SetString(playerPrefsKey, json);
+        PlayerPrefs.Save();
+        PlayerPrefs.SetInt(saveMapFloorKey, currentFloor);
+    }
 
+    public void LoadPlayerData()
+    {
+        if (PlayerPrefs.HasKey(playerPrefsKey))
+        {
+            string json = PlayerPrefs.GetString(playerPrefsKey);
+            charInfo = JsonUtility.FromJson<Character.CharInfo>(json);
+        }
+        currentFloor = PlayerPrefs.GetInt(saveMapFloorKey);
+    }
 }
