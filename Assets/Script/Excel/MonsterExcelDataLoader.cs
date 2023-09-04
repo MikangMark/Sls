@@ -43,26 +43,33 @@ public class MonsterExcelDataLoader : MonoBehaviour
     public string savedMonsterStatKey = "SavedMonsterStat";
     private void Awake()
     {
-        monsterExelInfo = monsterData.items;
-        SaveCardList();
+        if (monsterExelInfo[0].skillList.Count == 0)
+        {
+            monsterExelInfo = monsterData.items;
+        }
+        
+        SaveMonsterList();
     }
     public void InitSettingMonsterDatas()
     {
-        monsterExelInfo = monsterData.items;
+        if (monsterExelInfo[0].skillList.Count == 0)
+        {
+            monsterExelInfo = monsterData.items;
+        }
         if (monsterExelInfo == null)
         {
-            LoadCardList();
+            LoadMonseterList();
         }
     }
     // Start is called before the first frame update
-    public void SaveCardList()
+    public void SaveMonsterList()
     {
         string json = JsonUtility.ToJson(new SerializableList<MonsterStat> { items = monsterExelInfo });
         PlayerPrefs.SetString(savedMonsterStatKey, json);
         PlayerPrefs.Save();
     }
 
-    public void LoadCardList()
+    public void LoadMonseterList()
     {
         if (PlayerPrefs.HasKey(savedMonsterStatKey))
         {

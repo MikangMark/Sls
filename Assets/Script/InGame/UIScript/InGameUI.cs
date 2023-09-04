@@ -79,10 +79,7 @@ public class InGameUI : MonoBehaviour
     bool mapActive = true;
 
     bool OnDeckView = false;
-    bool battleActive = false;
     bool same = false;
-
-    int count = 0;
     private void Awake()
     {
         
@@ -234,7 +231,6 @@ public class InGameUI : MonoBehaviour
         if (OnDeckView)
         {
             OnDeckView = false;
-            count = 0;
         }
         else
         {

@@ -107,6 +107,13 @@ public class MonsterSkillData : MonoBehaviour
                     break;
             }
         }
+        SetMonsterSkill(temp);
+        items.Add(temp);
+        InGame.Instance.monsterSkillReading = true;
+    }
+
+    public void SetMonsterSkill(MonsterSkill temp)
+    {
         for (int i = 0; i < monsterData.items.Count; i++)
         {
             if (monsterData.items[i].name.Equals(temp.name))
@@ -114,7 +121,5 @@ public class MonsterSkillData : MonoBehaviour
                 monsterData.items[i].skillList.Add(temp);
             }
         }
-        items.Add(temp);
     }
-
 }

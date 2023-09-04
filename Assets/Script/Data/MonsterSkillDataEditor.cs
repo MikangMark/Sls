@@ -26,5 +26,6 @@ public class MonsterSkillDataEditor : MonoBehaviour
         }
         data.monsterSkillDataLoader.monsterSkillInfo = data.items;
         data.monsterSkillDataLoader.InitSetMonsterSkillDatas();
+        InGame.Instance.monsterSkillReading = true;
     }
 }

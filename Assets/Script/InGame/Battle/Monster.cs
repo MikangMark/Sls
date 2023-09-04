@@ -19,12 +19,26 @@ public class Monster : MonoBehaviour
 
     public MonsterSkill nextSkill;
 
+    [SerializeField]
+    MonsterSkillData monsterSkillData;
+
     private void Start()
     {
         shiled = 0;
         name = monsterName;
         battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         monsterManager = GameObject.Find("DataObj").GetComponent<MonsterManager>();
+
+        if (stat.skillList.Count == 0)
+        {
+            Debug.Log("스킬없음");
+            if(InGame.Instance.monsterSkillReading == false)
+            {
+                Start();
+                return;
+            }
+        }
+
         stat = monsterManager.SearchMonsterStat(monsterName);
         GetComponent<Image>().sprite = stat.img;
         bufList = new Dictionary<MonsterBuffType, int>();
@@ -37,6 +51,7 @@ public class Monster : MonoBehaviour
 
     public void NextUseSkill()
     {
+        
         nextSkill = stat.skillList[CreateSeed.Instance.RandNum(0, stat.skillList.Count)];
         
         

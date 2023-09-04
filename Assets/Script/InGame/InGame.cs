@@ -17,6 +17,8 @@ public class InGame : Singleton<InGame>
 
     public string playerPrefsKey = "SavedPlayerStat";
     public string saveMapFloorKey = "SavedClearMap";
+
+    public bool monsterSkillReading = false;
     private void Awake()
     {
         Init();

@@ -101,6 +101,7 @@ public class Battle : MonoBehaviour
         {
             oneMonster.Add(monsterGrup[i].Split(','));
         }
+
         CreateEnemy();
         for(int i = 0; i < battleDeck.Count; i++)
         {
@@ -170,11 +171,6 @@ public class Battle : MonoBehaviour
                 temp = randnum;
                 GameObject oneMonster = Instantiate(monsterManager.monsterPfab[temp], monsterPos.transform);
                 monsters.Add(oneMonster);
-
-                //monsterManager.monsterPfab[temp].GetComponent<Monster>();
-                //Monster clonemon = Instantiate<Monster>(monsterManager.monsterPfab[temp].GetComponent<Monster>()
-                //    , monsterPos.transform);
-                //monstersList.Add(clonemon);
             }
             else
             {
@@ -189,7 +185,6 @@ public class Battle : MonoBehaviour
         {
             //Debug.Log(((PlayerBuffType)i).ToString() + playerBufList[(PlayerBuffType)i].ToString());
         }
-        //Debug.Log("--------------------");
         ShuffleDeck(beforUse);
         for (int i = 0; i < divideCard; i++)
         {

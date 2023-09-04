@@ -27,7 +27,7 @@ public class MonsterSkillExcelDataLoader : MonoBehaviour
         monsterSkillInfo = monsterSkillData.items;
         if (monsterSkillInfo == null)
         {
-            LoadCardList();
+            LoadSkillList();
         }
     }
     public void InitSetMonsterSkillDatas()
@@ -35,19 +35,19 @@ public class MonsterSkillExcelDataLoader : MonoBehaviour
         monsterSkillInfo = monsterSkillData.items;
         if(monsterSkillInfo != null)
         {
-            SaveCardList();
+            SaveSkillList();
         }
 
 
     }
-    public void SaveCardList()
+    public void SaveSkillList()
     {
         string json = JsonUtility.ToJson(new SerializableList<MonsterSkill> { items = monsterSkillInfo });
         PlayerPrefs.SetString(savedMonsterSKillKey, json);
         PlayerPrefs.Save();
     }
 
-    public void LoadCardList()
+    public void LoadSkillList()
     {
         if (PlayerPrefs.HasKey(savedMonsterSKillKey))
         {
