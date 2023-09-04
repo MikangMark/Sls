@@ -88,7 +88,7 @@ public class EditCardData : ScriptableObject
 public class DataEditor : Editor
 {
     EditCardData data;
-
+    public const string savedCardKey = "SavedCardKey";
     void OnEnable()
     {
         data = (EditCardData)target;
@@ -120,7 +120,51 @@ public class DataEditor : Editor
         }
         data.dataLoader.cardInfo = data.items;
         EditorUtility.SetDirty(target);
-
+        SaveCardList();
+    }
+    public void SaveCardList()
+    {
+        Debug.Log("카드정보저장");
+        string json = JsonUtility.ToJson(new SerializableList<CardInfo> { items = data.items });
+        PlayerPrefs.SetString(savedCardKey, json);
+        PlayerPrefs.Save();
+        LoadCardList();
+    }
+    
+    public void LoadCardList()
+    {
+        if (PlayerPrefs.HasKey(savedCardKey))
+        {
+            string json = PlayerPrefs.GetString(savedCardKey);
+            SerializableList<CardInfo> serializableList = JsonUtility.FromJson<SerializableList<CardInfo>>(json);
+            data.items = serializableList.items;
+            for(int i = 0; i < data.items.Count; i++)
+            {
+                Debug.Log(data.items[i].title);
+                Debug.Log(data.items[i].type.ToString());
+                Debug.Log(data.items[i].skillValue[data.items[i].type]);
+            }
+        }
     }
 
+    public void TestLoadCardInfo()
+    {
+        if (PlayerPrefs.HasKey(savedCardKey))
+        {
+            string json = PlayerPrefs.GetString(savedCardKey);
+            SerializableList<CardInfo> serializableList = JsonUtility.FromJson<SerializableList<CardInfo>>(json);
+            data.items = serializableList.items;
+            for (int i = 0; i < data.items.Count; i++)
+            {
+                Debug.Log(data.items[i].title);
+                
+            }
+        }
+    }
+
+    [System.Serializable]
+    public class SerializableList<T>
+    {
+        public List<T> items = new List<T>();
+    }
 }

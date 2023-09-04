@@ -98,7 +98,7 @@ public class ExcelDataLoader : MonoBehaviour
     public List<CardInfo> cardInfo;//전체 카드목록
     public CardData cardData;
 
-    public const string savedCardKey = "SavedCardKey";
+    
 
 
     public void InitSettingCardDatas()
@@ -106,34 +106,8 @@ public class ExcelDataLoader : MonoBehaviour
         if (cardData.items.Count != 0)
         {
             cardInfo = cardData.items;
-            SaveCardList();
-        }
-        else
-        {
-            LoadCardList();
         }
         
     }
-    public void SaveCardList()
-    {
-        string json = JsonUtility.ToJson(new SerializableList<CardInfo> { items = cardInfo });
-        PlayerPrefs.SetString(savedCardKey, json);
-        PlayerPrefs.Save();
-    }
-
-    public void LoadCardList()
-    {
-        if (PlayerPrefs.HasKey(savedCardKey))
-        {
-            string json = PlayerPrefs.GetString(savedCardKey);
-            SerializableList<CardInfo> serializableList = JsonUtility.FromJson<SerializableList<CardInfo>>(json);
-            cardInfo = serializableList.items;
-        }
-    }
-
-    [System.Serializable]
-    public class SerializableList<T>
-    {
-        public List<T> items = new List<T>();
-    }
+    
 }

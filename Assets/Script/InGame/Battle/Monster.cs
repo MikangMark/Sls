@@ -29,17 +29,15 @@ public class Monster : MonoBehaviour
         battle = GameObject.Find("BattleScript").GetComponent<Battle>();
         monsterManager = GameObject.Find("DataObj").GetComponent<MonsterManager>();
 
-        if (stat.skillList.Count == 0)
+        stat = monsterManager.SearchMonsterStat(monsterName);
+        for (int j = 0; j < monsterManager.skillData.monsterSkillInfo.Count; j++)
         {
-            Debug.Log("스킬없음");
-            if(InGame.Instance.monsterSkillReading == false)
+            if (monsterName == monsterManager.skillData.monsterSkillInfo[j].name)
             {
-                Start();
-                return;
+                //stat.skillList = null;
+                stat.AddSkill(monsterManager.skillData.monsterSkillInfo[j]);
             }
         }
-
-        stat = monsterManager.SearchMonsterStat(monsterName);
         GetComponent<Image>().sprite = stat.img;
         bufList = new Dictionary<MonsterBuffType, int>();
         for(MonsterBuffType i = MonsterBuffType.POW; i <= MonsterBuffType.CONSCIOUS; i++)
@@ -51,10 +49,10 @@ public class Monster : MonoBehaviour
 
     public void NextUseSkill()
     {
-        
-        nextSkill = stat.skillList[CreateSeed.Instance.RandNum(0, stat.skillList.Count)];
-        
-        
+
+        SetNextSkill();
+
+
         #region 의도 타입하드코딩
         if (nextSkill.type.Count > 1)
         {
@@ -385,6 +383,10 @@ public class Monster : MonoBehaviour
 
         }
         #endregion
+    }
+    public void SetNextSkill()
+    {
+        nextSkill = stat.skillList[CreateSeed.Instance.RandNum(0, stat.skillList.Count)];
     }
 
     public void PlaySkill()

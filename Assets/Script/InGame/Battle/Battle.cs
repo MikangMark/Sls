@@ -170,6 +170,7 @@ public class Battle : MonoBehaviour
             {
                 temp = randnum;
                 GameObject oneMonster = Instantiate(monsterManager.monsterPfab[temp], monsterPos.transform);
+                
                 monsters.Add(oneMonster);
             }
             else

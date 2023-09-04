@@ -56,10 +56,11 @@ public class MonsterSkillExcelDataLoader : MonoBehaviour
             monsterSkillInfo = serializableList.items;
         }
     }
-
     [System.Serializable]
     private class SerializableList<T>
     {
         public List<T> items = new List<T>();
     }
+
+
 }
