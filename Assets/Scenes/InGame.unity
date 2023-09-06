@@ -2817,6 +2817,7 @@ MonoBehaviour:
   shopscript: {fileID: 1004008579}
   playerPrefsKey: SavedPlayerStat
   saveMapFloorKey: SavedClearMap
+  monsterSkillReading: 0
 --- !u!4 &294461699
 Transform:
   m_ObjectHideFlags: 0
@@ -5134,7 +5135,7 @@ MonoBehaviour:
     subType: 0
     text: "\uD53C\uD574\uB97C 9 \uC90D\uB2C8\uB2E4. \uCE74\uB4DC\uB97C 1 \uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
     randomTarget: 0
-    cardImg: {fileID: 0}
+    cardImg: {fileID: 21300000, guid: a178b5318718b664ea3e755ce9a86411, type: 3}
     shop: 75
   - index: 10023
     cost: 1
@@ -5809,8 +5810,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1461743103}
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
-  m_Value: -0.000000055390284
-  m_Size: 0
+  m_Value: -0.000000027695139
+  m_Size: 0.19680578
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11229,6 +11230,7 @@ MonoBehaviour:
   shopscript: {fileID: 0}
   playerPrefsKey: SavedPlayerStat
   saveMapFloorKey: SavedClearMap
+  monsterSkillReading: 0
 --- !u!4 &1135833416
 Transform:
   m_ObjectHideFlags: 0
@@ -20960,6 +20962,7 @@ MonoBehaviour:
     money: 0
     charType: 0
   monsters: []
+  monstersList: []
   battleDeck: []
   beforUse: []
   afterUse: []

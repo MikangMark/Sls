@@ -121,7 +121,157 @@ public class DataEditor : Editor
         data.dataLoader.cardInfo = data.items;
         EditorUtility.SetDirty(target);
         SaveCardList();
+        LoadCardList();
     }
+    private void SaveCardList()
+    {
+        // 카드 리스트를 직렬화하여 문자열로 저장
+        string json = SerializeCardList(data.items);
+
+        // PlayerPrefs에 저장
+        PlayerPrefs.SetString(savedCardKey, json);
+
+        // 변경사항을 바로 저장
+        PlayerPrefs.Save();
+    }
+
+    private void LoadCardList()
+    {
+        // PlayerPrefs에서 JSON 문자열 불러오기
+        string json = PlayerPrefs.GetString(savedCardKey);
+
+        if (!string.IsNullOrEmpty(json))
+        {
+            // JSON 문자열을 역직렬화하여 카드 리스트로 변환
+            data.items = DeserializeCardList(json);
+
+        }
+    }
+
+    // 카드 리스트에 카드 추가 예제
+    public void AddToCardList(CardInfo cardInfo)
+    {
+        // 중복 카드 체크 (인덱스로 판별)
+        if (!data.items.Contains(cardInfo))
+        {
+            data.items.Add(cardInfo);
+
+            // 변경사항을 저장
+            SaveCardList();
+        }
+    }
+
+    // 카드 리스트에서 카드 제거 예제
+    public void RemoveFromCardList(CardInfo cardInfo)
+    {
+        if (data.items.Contains(cardInfo))
+        {
+            data.items.Remove(cardInfo);
+
+            // 변경사항을 저장
+            SaveCardList();
+        }
+    }
+
+    // 카드 리스트를 직렬화하는 함수
+    private string SerializeCardList(List<CardInfo> cardList)
+    {
+        List<CardInfoSerializable> serializableList = new List<CardInfoSerializable>();
+        foreach (var cardInfo in cardList)
+        {
+            serializableList.Add(new CardInfoSerializable(cardInfo));
+        }
+
+        return JsonUtility.ToJson(serializableList);
+    }
+
+    // 직렬화된 문자열을 카드 리스트로 역직렬화하는 함수
+    private List<CardInfo> DeserializeCardList(string json)
+    {
+        List<CardInfoSerializable> serializableList = JsonUtility.FromJson<List<CardInfoSerializable>>(json);
+        List<CardInfo> cardList = new List<CardInfo>();
+
+        foreach (var serializable in serializableList)
+        {
+            cardList.Add(serializable.ToCardInfo());
+        }
+
+        return cardList;
+    }
+    [Serializable]
+    private class CardInfoSerializable
+    {
+        public int index;
+        public int cost;
+        public int count;
+        public string title;
+        public CardInfo.CardType cardType;
+        public CardInfo.Type type;
+        public CardInfo.Type subType;
+        public List<SerializableKeyValuePair<CardInfo.Type, int>> skillValue = new List<SerializableKeyValuePair<CardInfo.Type, int>>();
+        public string text;
+        public bool randomTarget;
+        public int shop;
+
+        public CardInfoSerializable(CardInfo cardInfo)
+        {
+            this.index = cardInfo.index;
+            this.cost = cardInfo.cost;
+            this.count = cardInfo.count;
+            this.title = cardInfo.title;
+            this.cardType = cardInfo.cardType;
+            this.type = cardInfo.type;
+            this.subType = cardInfo.subType;
+            this.text = cardInfo.text;
+            this.randomTarget = cardInfo.randomTarget;
+            this.shop = cardInfo.shop;
+
+            foreach (var kvp in cardInfo.skillValue)
+            {
+                skillValue.Add(new SerializableKeyValuePair<CardInfo.Type, int>(kvp.Key, kvp.Value));
+            }
+        }
+
+        public CardInfo ToCardInfo()
+        {
+            CardInfo cardInfo = new CardInfo
+            {
+                index = this.index,
+                cost = this.cost,
+                count = this.count,
+                title = this.title,
+                cardType = this.cardType,
+                type = this.type,
+                subType = this.subType,
+                text = this.text,
+                randomTarget = this.randomTarget,
+                shop = this.shop,
+                skillValue = new Dictionary<CardInfo.Type, int>()
+            };
+
+            foreach (var kvp in skillValue)
+            {
+                cardInfo.skillValue.Add(kvp.Key, kvp.Value);
+            }
+
+            return cardInfo;
+        }
+    }
+
+    [Serializable]
+    private class SerializableKeyValuePair<TKey, TValue>
+    {
+        public TKey Key;
+        public TValue Value;
+
+        public SerializableKeyValuePair(TKey key, TValue value)
+        {
+            Key = key;
+            Value = value;
+        }
+    }
+    #region 1차 플레이어프리펩
+    /*
     public void SaveCardList()
     {
         Debug.Log("카드정보저장");
@@ -167,4 +317,6 @@ public class DataEditor : Editor
     {
         public List<T> items = new List<T>();
     }
+    */
+    #endregion
 }
