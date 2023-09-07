@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   associatedSheet: 1kbzvps0KvAC3zMgQ5Nxwv6LqO03YXApiDKaLSL-KMEQ
   associatedWorksheet: Monster
+  monsterSkillEditor: {fileID: 11400000, guid: 5e8e2fae9d7d05d43addd51a03cd30a8, type: 2}
   items:
   - name: "\uACF5\uBC8C\uB808"
     maxHp: 13

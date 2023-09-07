@@ -124,11 +124,13 @@ public class EditMonsterSkillData : ScriptableObject
 public class MonsterSkillDataEditor : Editor
 {
     EditMonsterSkillData data;
-
+    public string savedMonsterSKillKey = "SavedMonsterSkill";
+    public string monsterskill;
     void OnEnable()
     {
         data = (EditMonsterSkillData)target;
         data.monsterSkillDataLoader = GameObject.Find("ExcelData").GetComponent<MonsterSkillExcelDataLoader>();
+        
     }
     public override void OnInspectorGUI()
     {
@@ -156,7 +158,173 @@ public class MonsterSkillDataEditor : Editor
         }
         data.monsterSkillDataLoader.monsterSkillInfo = data.items;
         EditorUtility.SetDirty(target);
+        SaveMonsterSkillList();
+        LoadMonsterSkillList();
+    }
+    private void SaveMonsterSkillList()
+    {
+        // 카드 리스트를 직렬화하여 문자열로 저장
+        string json = SerializeMonsterSkillList(data.items);
 
+        // PlayerPrefs에 저장
+        PlayerPrefs.SetString(savedMonsterSKillKey, json);
+        //Debug.Log("Save : " + json);
+        // 변경사항을 바로 저장
+        PlayerPrefs.Save();
     }
 
+    private void LoadMonsterSkillList()
+    {
+        // PlayerPrefs에서 JSON 문자열 불러오기
+        string json = PlayerPrefs.GetString(savedMonsterSKillKey);
+        //Debug.Log("Load : " + json);
+        if (!string.IsNullOrEmpty(json))
+        {
+            // JSON 문자열을 역직렬화하여 카드 리스트로 변환
+            data.items = DeserializeCardList(json);
+
+        }
+    }
+    #region 추가삭제기능 현제안씀
+    //// 카드 리스트에 카드 추가 예제
+    //public void AddToCardList(CardInfo cardInfo)
+    //{
+    //    // 중복 카드 체크 (인덱스로 판별)
+    //    if (!data.items.Contains(cardInfo))
+    //    {
+    //        data.items.Add(cardInfo);
+
+    //        // 변경사항을 저장
+    //        SaveCardList();
+    //    }
+    //}
+
+    //// 카드 리스트에서 카드 제거 예제
+    //public void RemoveFromCardList(CardInfo cardInfo)
+    //{
+    //    if (data.items.Contains(cardInfo))
+    //    {
+    //        data.items.Remove(cardInfo);
+
+    //        // 변경사항을 저장
+    //        SaveCardList();
+    //    }
+    //}
+    #endregion
+
+
+    [System.Serializable]
+    private class ListSerilizeObj
+    {
+        public List<MonsterSkillInfoSerializable> serializableList = new List<MonsterSkillInfoSerializable>();
+    }
+
+    // 카드 리스트를 직렬화하는 함수
+    private string SerializeMonsterSkillList(List<MonsterSkill> cardList)
+    {
+        ListSerilizeObj obj = new ListSerilizeObj();
+        List<MonsterSkillInfoSerializable> serializableList = obj.serializableList;// new List<CardInfoSerializable>();
+        foreach (var cardInfo in cardList)
+        {
+            serializableList.Add(new MonsterSkillInfoSerializable(cardInfo));
+        }
+        string str = JsonUtility.ToJson(obj);
+        Debug.Log($"Passing Json: {str}");
+        return str;
+    }
+
+    // 직렬화된 문자열을 카드 리스트로 역직렬화하는 함수
+    private List<MonsterSkill> DeserializeCardList(string json)
+    {
+        ListSerilizeObj obj = JsonUtility.FromJson<ListSerilizeObj>(json);
+
+        List<MonsterSkill> monsterSkillList = new List<MonsterSkill>();
+
+        foreach (var serializable in obj.serializableList)
+        {
+            monsterSkillList.Add(serializable.ToMonsterSkillInfo());
+        }
+
+        return monsterSkillList;
+    }
+
+
+    public class MonsterJson : MonsterSkill
+    {
+        public List<SerializableKeyValuePair<SkillType, int>> Dict2List = new List<SerializableKeyValuePair<SkillType, int>>();
+
+
+        public MonsterJson(MonsterSkill monsterSkillInfo)
+        {
+            this.index = monsterSkillInfo.index;
+            this.name = monsterSkillInfo.name;
+            this.type = monsterSkillInfo.type;
+
+            AdjustList();
+        }
+
+        public void AdjustList()
+        {
+            foreach (var kvp in skillValue)
+            {
+                Dict2List.Add(new SerializableKeyValuePair<SkillType, int>(kvp.Key, kvp.Value));
+            }
+
+        }
+    }
+
+
+    [Serializable]
+    private class MonsterSkillInfoSerializable
+    {
+        public int index;
+        public string name;
+        public List<SkillType> type;
+        public List<SerializableKeyValuePair<SkillType, int>> skillValue = new List<SerializableKeyValuePair<SkillType, int>>();
+
+        public MonsterSkillInfoSerializable(MonsterSkill monsterSkillInfo)
+        {
+            this.index = monsterSkillInfo.index;
+            this.name = monsterSkillInfo.name;
+            this.type = monsterSkillInfo.type;
+
+
+            foreach (var kvp in monsterSkillInfo.skillValue)
+            {
+                //kvp.Key = cardInfo.skillValue
+                skillValue.Add(new SerializableKeyValuePair<SkillType, int>(kvp.Key, kvp.Value));
+            }
+        }
+
+        public MonsterSkill ToMonsterSkillInfo()
+        {
+            MonsterSkill monsterSkillInfo = new MonsterSkill
+            {
+                index = this.index,
+                name = this.name,
+                type = this.type,
+                skillValue = new Dictionary<SkillType, int>()
+            };
+
+            foreach (var kvp in skillValue)
+            {
+                monsterSkillInfo.skillValue.Add(kvp.Key, kvp.Value);
+            }
+
+            return monsterSkillInfo;
+        }
+    }
+
+    [Serializable]
+    public class SerializableKeyValuePair<TKey, TValue>
+    {
+        public TKey Key;
+        public TValue Value;
+
+        public SerializableKeyValuePair(TKey key, TValue value)
+        {
+            Key = key;
+            Value = value;
+        }
+    }
 }

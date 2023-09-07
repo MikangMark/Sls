@@ -130,7 +130,7 @@ public class DataEditor : Editor
 
         // PlayerPrefs에 저장
         PlayerPrefs.SetString(savedCardKey, json);
-
+        //Debug.Log("Save : " + json);
         // 변경사항을 바로 저장
         PlayerPrefs.Save();
     }
@@ -139,7 +139,7 @@ public class DataEditor : Editor
     {
         // PlayerPrefs에서 JSON 문자열 불러오기
         string json = PlayerPrefs.GetString(savedCardKey);
-
+        //Debug.Log("Load : " + json);
         if (!string.IsNullOrEmpty(json))
         {
             // JSON 문자열을 역직렬화하여 카드 리스트로 변환
@@ -147,51 +147,62 @@ public class DataEditor : Editor
 
         }
     }
+    #region 추가삭제기능 현제안씀
+    //// 카드 리스트에 카드 추가 예제
+    //public void AddToCardList(CardInfo cardInfo)
+    //{
+    //    // 중복 카드 체크 (인덱스로 판별)
+    //    if (!data.items.Contains(cardInfo))
+    //    {
+    //        data.items.Add(cardInfo);
 
-    // 카드 리스트에 카드 추가 예제
-    public void AddToCardList(CardInfo cardInfo)
+    //        // 변경사항을 저장
+    //        SaveCardList();
+    //    }
+    //}
+
+    //// 카드 리스트에서 카드 제거 예제
+    //public void RemoveFromCardList(CardInfo cardInfo)
+    //{
+    //    if (data.items.Contains(cardInfo))
+    //    {
+    //        data.items.Remove(cardInfo);
+
+    //        // 변경사항을 저장
+    //        SaveCardList();
+    //    }
+    //}
+    #endregion
+
+
+    [System.Serializable]
+    private class ListSerilizeObj
     {
-        // 중복 카드 체크 (인덱스로 판별)
-        if (!data.items.Contains(cardInfo))
-        {
-            data.items.Add(cardInfo);
-
-            // 변경사항을 저장
-            SaveCardList();
-        }
-    }
-
-    // 카드 리스트에서 카드 제거 예제
-    public void RemoveFromCardList(CardInfo cardInfo)
-    {
-        if (data.items.Contains(cardInfo))
-        {
-            data.items.Remove(cardInfo);
-
-            // 변경사항을 저장
-            SaveCardList();
-        }
+        public List<CardInfoSerializable> serializableList = new List<CardInfoSerializable>();
     }
 
     // 카드 리스트를 직렬화하는 함수
     private string SerializeCardList(List<CardInfo> cardList)
     {
-        List<CardInfoSerializable> serializableList = new List<CardInfoSerializable>();
+        ListSerilizeObj obj = new ListSerilizeObj();
+        List<CardInfoSerializable> serializableList = obj.serializableList;// new List<CardInfoSerializable>();
         foreach (var cardInfo in cardList)
         {
             serializableList.Add(new CardInfoSerializable(cardInfo));
         }
-
-        return JsonUtility.ToJson(serializableList);
+        string str = JsonUtility.ToJson(obj);
+        Debug.Log( $"Passing Json: {str}");
+        return str;
     }
 
     // 직렬화된 문자열을 카드 리스트로 역직렬화하는 함수
     private List<CardInfo> DeserializeCardList(string json)
     {
-        List<CardInfoSerializable> serializableList = JsonUtility.FromJson<List<CardInfoSerializable>>(json);
+        ListSerilizeObj obj = JsonUtility.FromJson<ListSerilizeObj>(json);
+
         List<CardInfo> cardList = new List<CardInfo>();
 
-        foreach (var serializable in serializableList)
+        foreach (var serializable in obj.serializableList)
         {
             cardList.Add(serializable.ToCardInfo());
         }
@@ -226,8 +237,10 @@ public class DataEditor : Editor
             this.randomTarget = cardInfo.randomTarget;
             this.shop = cardInfo.shop;
 
+            
             foreach (var kvp in cardInfo.skillValue)
             {
+                //kvp.Key = cardInfo.skillValue
                 skillValue.Add(new SerializableKeyValuePair<CardInfo.Type, int>(kvp.Key, kvp.Value));
             }
         }
