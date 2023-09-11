@@ -19,9 +19,6 @@ public class Monster : MonoBehaviour
 
     public MonsterSkill nextSkill;
 
-    [SerializeField]
-    MonsterSkillData monsterSkillData;
-
     private void Start()
     {
         shiled = 0;
@@ -50,7 +47,7 @@ public class Monster : MonoBehaviour
     public void NextUseSkill()
     {
 
-        SetNextSkill();
+        nextSkill = stat.skillList[CreateSeed.Instance.RandNum(0, stat.skillList.Count)];
 
 
         #region 의도 타입하드코딩
@@ -383,10 +380,6 @@ public class Monster : MonoBehaviour
 
         }
         #endregion
-    }
-    public void SetNextSkill()
-    {
-        nextSkill = stat.skillList[CreateSeed.Instance.RandNum(0, stat.skillList.Count)];
     }
 
     public void PlaySkill()

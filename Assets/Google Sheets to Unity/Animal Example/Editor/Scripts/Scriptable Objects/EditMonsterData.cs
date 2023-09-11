@@ -41,6 +41,7 @@ public class EditMonsterData : ScriptableObject
                     break;
             }
         }
+
         items.Add(temp);
     }
 
@@ -119,6 +120,7 @@ public class MonsterDataEditor : Editor
             data.items = DeserializeMonsterList(json);
 
         }
+        Debug.Log(data.items[0].skillList[0].skillValue[SkillType.ATK]);
     }
     #region 추가삭제기능 현제안씀
     //// 카드 리스트에 카드 추가 예제
