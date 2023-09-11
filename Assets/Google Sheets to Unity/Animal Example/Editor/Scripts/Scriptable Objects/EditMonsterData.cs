@@ -50,7 +50,6 @@ public class EditMonsterData : ScriptableObject
 public class MonsterDataEditor : Editor
 {
     EditMonsterData data;
-    
     const string savedMonsterKey = "SavedMonster";
     void OnEnable()
     {
@@ -76,6 +75,7 @@ public class MonsterDataEditor : Editor
 
     void UpdateMethodOne(GstuSpreadSheet ss)
     {
+
         data.items.Clear();
         foreach (string dataName in data.Names)
         {
@@ -89,11 +89,11 @@ public class MonsterDataEditor : Editor
     private void SaveMonsterList()
     {
         // 카드 리스트를 직렬화하여 문자열로 저장
-        for(int i = 0; i < data.items.Count; i++)
+        for (int i = 0; i < data.items.Count; i++)
         {
-            for(int j = 0; j < data.monsterSkillEditor.items.Count; j++)
+            for (int j = 0; j < data.monsterSkillEditor.items.Count; j++)
             {
-                if(data.items[i].name == data.monsterSkillEditor.items[j].name)
+                if (data.items[i].name == data.monsterSkillEditor.items[j].name)
                 {
                     data.items[i].AddSkill(data.monsterSkillEditor.items[j]);
                 }
@@ -169,21 +169,26 @@ public class MonsterDataEditor : Editor
     }
 
     // 직렬화된 문자열을 카드 리스트로 역직렬화하는 함수
-    private List<MonsterStat> DeserializeMonsterList(string json)
+    private List<MonsterStat> DeserializeMonsterList(string json)//string값에는 스킬벨류있음
     {
         ListSerilizeObj obj = JsonUtility.FromJson<ListSerilizeObj>(json);
 
         List<MonsterStat> monsterList = new List<MonsterStat>();
 
-        foreach (var serializable in obj.serializableList)
+        for (int i = 0; i < obj.serializableList.Count; i++)
         {
-            monsterList.Add(serializable.ToMonsterInfo());
+            var serializable = obj.serializableList[i];
+            monsterList.Add(serializable.ToMonsterInfo(obj.serializableList[i].skillValue));
         }
+        //foreach (var serializable in obj.serializableList)
+        //{
+        //    monsterList.Add(serializable.ToMonsterInfo());
+        //}
 
         return monsterList;
     }
     [Serializable]
-    private class MonsterInfoSerializable
+    public class MonsterInfoSerializable
     {
         public string name;
         public int maxHp;
@@ -202,16 +207,16 @@ public class MonsterDataEditor : Editor
             this.skillList = monsterInfo.skillList;
             foreach (var kvp in monsterInfo.skillList)
             {
-                foreach(var tt in kvp.skillValue)
+                foreach (var tt in kvp.skillValue)
                 {
-                    skillValue.Add(new SerializableKeyValuePair<SkillType, int>(tt.Key, tt.Value));
+                    this.skillValue.Add(new SerializableKeyValuePair<SkillType, int>(tt.Key, tt.Value));
                 }
                 //kvp.Key = cardInfo.skillValue
-                
+
             }
         }
 
-        public MonsterStat ToMonsterInfo()
+        public MonsterStat ToMonsterInfo(List<SerializableKeyValuePair<SkillType, int>> skillValue)
         {
             MonsterStat monsterInfo = new MonsterStat
             {
@@ -222,29 +227,24 @@ public class MonsterDataEditor : Editor
                 shield = this.shield,
                 skillList = this.skillList
             };
-
-            foreach (var kvp in monsterInfo.skillList)
+            for (int i = 0; i < monsterInfo.skillList.Count; i++)
             {
-                foreach (var tt in kvp.skillValue)
-                {
-                    kvp.skillValue.Add(tt.Key, tt.Value);
-                }
-                monsterInfo.skillList.Add(kvp);
+                monsterInfo.skillList[i].skillValue.Add(skillValue[i].Key, skillValue[i].Value);
             }
             return monsterInfo;
         }
-    }
 
-    [Serializable]
-    private class SerializableKeyValuePair<TKey, TValue>
-    {
-        public TKey Key;
-        public TValue Value;
-
-        public SerializableKeyValuePair(TKey key, TValue value)
+        [Serializable]
+        public class SerializableKeyValuePair<TKey, TValue>
         {
-            Key = key;
-            Value = value;
+            public TKey Key;
+            public TValue Value;
+
+            public SerializableKeyValuePair(TKey key, TValue value)
+            {
+                Key = key;
+                Value = value;
+            }
         }
     }
 }
