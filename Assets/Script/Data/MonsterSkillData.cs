@@ -122,4 +122,6 @@ public class MonsterSkillData : MonoBehaviour
             }
         }
     }
+
+    
 }

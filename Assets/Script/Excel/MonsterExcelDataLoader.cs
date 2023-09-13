@@ -84,4 +84,21 @@ public class MonsterExcelDataLoader : MonoBehaviour
     {
         public List<T> items = new List<T>();
     }
+
+    public void CompairSkillValue(MonsterSkill target)
+    {
+        for (int i = 0; i < monsterData.items.Count; i++)
+        {
+            if (monsterData.items[i].name == target.name)
+            {
+                for (int j = 0; j < monsterData.items[i].skillList.Count; j++)
+                {
+                    if (target.name == monsterData.items[i].skillList[j].name)
+                    {
+                        target = monsterData.items[i].skillList[j];
+                    }
+                }
+            }
+        }
+    }
 }
