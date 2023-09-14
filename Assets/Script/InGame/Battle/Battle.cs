@@ -208,27 +208,10 @@ public class Battle : MonoBehaviour
     public void EnemyTurn()
     {
         //의도대로 해당 애니매이션 실행뒤 다음 함수이동
-        for(int i=0;i< monsters.Count; i++)
+        
+        for (int i=0;i< monsters.Count; i++)
         {
-            try
-            {
-                for(int j=0;j< monsters[i].GetComponent<Monster>().stat.skillList.Count; j++)
-                {
-                    if (monsters[i].GetComponent<Monster>().stat.skillList[j].skillValue[0] == 0)
-                    {
-                        monsterManager.monsterExcelData.CompairSkillValue(monsters[i].GetComponent<Monster>().stat.skillList[j]);
-                    }
-                }
-                
-            }
-            catch
-            {
-                for (int j = 0; j < monsters[i].GetComponent<Monster>().stat.skillList.Count; j++)
-                {
-                    
-                    monsterManager.monsterExcelData.CompairSkillValue(monsters[i].GetComponent<Monster>().stat.skillList[j]);
-                }
-            }
+            monsterManager.monsterExcelData.CompairMonsterSkillValue(monsters[i].GetComponent<Monster>());
             monsters[i].GetComponent<Monster>().PlaySkill();
             monsters[i].GetComponent<Monster>().NextUseSkill();
         }

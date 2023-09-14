@@ -39,6 +39,7 @@ public class MonsterExcelDataLoader : MonoBehaviour
 {
     public List<MonsterStat> monsterExelInfo;
     public MonsterData monsterData;
+    public MonsterSkillData monsterSkillData;
 
     public string savedMonsterStatKey = "SavedMonsterStat";
     private void Awake()
@@ -85,19 +86,23 @@ public class MonsterExcelDataLoader : MonoBehaviour
         public List<T> items = new List<T>();
     }
 
-    public void CompairSkillValue(MonsterSkill target)
+    public void CompairMonsterSkillValue(Monster target)
     {
-        for (int i = 0; i < monsterData.items.Count; i++)
+        target.stat.skillList.Clear();
+        for (int i = 0; i < monsterSkillData.items.Count; i++)
         {
-            if (monsterData.items[i].name == target.name)
+            if (monsterSkillData.items[i].name == target.name)
             {
-                for (int j = 0; j < monsterData.items[i].skillList.Count; j++)
-                {
-                    if (target.name == monsterData.items[i].skillList[j].name)
-                    {
-                        target = monsterData.items[i].skillList[j];
-                    }
-                }
+                
+                target.stat.skillList.Add(monsterSkillData.items[i]);
+            }
+            
+        }
+        for (int i = 0; i < monsterSkillData.items.Count; i++)
+        {
+            if (target.nextSkill.index == monsterSkillData.items[i].index)
+            {
+                target.nextSkill = monsterSkillData.items[i];
             }
         }
     }

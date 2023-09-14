@@ -27,12 +27,14 @@ public class Monster : MonoBehaviour
         monsterManager = GameObject.Find("DataObj").GetComponent<MonsterManager>();
 
         stat = monsterManager.SearchMonsterStat(monsterName);
-        for (int j = 0; j < monsterManager.skillData.monsterSkillInfo.Count; j++)
+        //stat.skillList = null;
+        stat.skillList.Clear();
+        for (int i = 0; i < monsterManager.skillData.monsterSkillInfo.Count; i++)
         {
-            if (monsterName == monsterManager.skillData.monsterSkillInfo[j].name)
+            if (monsterName == monsterManager.skillData.monsterSkillInfo[i].name)
             {
                 //stat.skillList = null;
-                stat.AddSkill(monsterManager.skillData.monsterSkillInfo[j]);
+                stat.AddSkill(monsterManager.skillData.monsterSkillInfo[i]);
             }
         }
         GetComponent<Image>().sprite = stat.img;
