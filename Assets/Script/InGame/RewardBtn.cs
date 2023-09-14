@@ -26,7 +26,8 @@ public class RewardBtn : MonoBehaviour
         inGameUI.OnClickCardReward();
         inGameUI.selectedReward = gameObject;
         char[] index = gameObject.name.ToCharArray();
-        inGameUI.SetRewardCards(int.Parse(index[14].ToString()) - 1);
+        Debug.Log(gameObject.name);
+        inGameUI.SetRewardCards(int.Parse(index[14].ToString()) - 1);//몇번째그룹에있는 카드를 보여줄건지 판별
         
     }
 }

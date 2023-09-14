@@ -11,6 +11,7 @@ public class InGame : Singleton<InGame>
     public int rewardGold;
     public int rewardCardGroup;
     public List<List<CardInfo>> rewardCards;
+    public List<int> rewardCardsIndex = new List<int>();
 
     public GameObject disCardWarringWiew;
     public ShopScript shopscript;
@@ -62,8 +63,10 @@ public class InGame : Singleton<InGame>
             for (int j = 0; j < 3; j++)
             {
                 int cardnumRand = CreateSeed.Instance.RandNum(0, Deck.Instance.cardList.Count - 1);
-                if(cardnumRand == 4)
+                rewardCardsIndex.Add(cardnumRand);
+                if (cardnumRand == 4)//슬라임카드
                 {
+                    rewardCardsIndex.RemoveAt(rewardCardsIndex.Count - 1);
                     j--;
                 }
                 else
@@ -91,4 +94,6 @@ public class InGame : Singleton<InGame>
         }
         currentFloor = PlayerPrefs.GetInt(saveMapFloorKey);
     }
+
+    
 }

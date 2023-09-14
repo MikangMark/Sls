@@ -305,17 +305,10 @@ public class InGameUI : MonoBehaviour
     }
     public void SetRewardCards(int group_index)
     {
-        for(int i=0;i< InGame.Instance.rewardCards.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
-            for(int j=0;j< InGame.Instance.rewardCards[i].Count; j++)
-            {
-                Debug.Log(InGame.Instance.rewardCards[i][j].title);
-            }
-        }
-        for (int j = 0; j < 3; j++)
-        {
-            Debug.Log(rewardCard_Parent.transform.GetChild(j).gameObject.name);
-            rewardCard_Parent.transform.GetChild(j).GetComponent<OneCard>().SetCard(InGame.Instance.rewardCards[group_index][j]);
+            rewardCard_Parent.transform.GetChild(i).GetComponent<OneCard>().SetCard(InGame.Instance.rewardCards[group_index][i]);
+            Debug.Log(InGame.Instance.rewardCards[group_index][i].index);
         }
     }
 

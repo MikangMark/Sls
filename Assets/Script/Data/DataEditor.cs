@@ -32,6 +32,6 @@ public class DataEditor : MonoBehaviour
         data.dataLoader.InitSettingCardDatas();
         deck.InitDeck_Info();
         inGameUI.CreateDeckObj();
-        InGame.Instance.SetReward();
+        //InGame.Instance.SetReward();
     }
 }

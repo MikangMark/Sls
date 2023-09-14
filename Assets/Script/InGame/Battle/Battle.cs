@@ -76,7 +76,11 @@ public class Battle : MonoBehaviour
         }
 
     }
-
+    public void OnClickEditorHealBtn()
+    {
+        stat.hp = InGame.Instance.charInfo.maxHp;
+        Debug.Log("³Í Á×Áö¾Ê¾Æ!");
+    }
     public void SetEnable(bool p_flag)
     {
         if( p_flag)
