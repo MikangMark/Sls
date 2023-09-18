@@ -48,6 +48,7 @@ public class InGame : Singleton<InGame>
     }
     private void Start()
     {
+        rewardCardGroup = CreateSeed.Instance.RandNum(1, 3);
         LoadPlayerData();
         //SetReward();
     }
@@ -55,7 +56,7 @@ public class InGame : Singleton<InGame>
     public void SetReward()
     {
         rewardGold = CreateSeed.Instance.RandNum(50, 100);
-        rewardCardGroup = CreateSeed.Instance.RandNum(1, 3);
+        
         rewardCards = new List<List<CardInfo>>();
         for (int i = 0; i < rewardCardGroup; i++)
         {

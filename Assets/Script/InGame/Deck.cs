@@ -23,13 +23,6 @@ public class Deck : Singleton<Deck>
     void Awake()
     {
         Init();
-        //excelData.InitSettingCardDatas();
-        
-    }
-    private void Start()
-    {
-        //excelData.InitSettingCardDatas();
-        //InitDeck_Info();
     }
 
     public void InitDeck_Info()

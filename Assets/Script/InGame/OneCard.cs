@@ -82,11 +82,6 @@ public class OneCard : MonoBehaviour
             switch (target.tag)
             {
                 case "Player":
-                    //if(m_CallFNList[(int)thisCard.cardType] != null )
-                    //{
-                    //    m_CallFNList[(int)thisCard.cardType](target);
-                    //}
-                    
                     switch (thisCard.cardType) 
                     {
                         case CardInfo.CardType.DEFAULT:
@@ -253,76 +248,17 @@ public class OneCard : MonoBehaviour
                                 case CardInfo.Type.POW:
                                     return false;
                                 case CardInfo.Type.WEAK:
+                                    battle.Weak(target, thisCard.skillValue[CardInfo.Type.WEAK]);
                                     return false;
                                 case CardInfo.Type.EXTINCTION:
                                     battle.energy -= thisCard.cost;
                                     battle.DeleteCardMove(gameObject);
                                     break;
                             }
-                            break;
+                            return true;
                     }
                     break;
             }
-            #region LastVersion
-            //for (int i = 0; i < thisCardValue.type.Count; i++)
-            //{
-            //    switch (thisCardValue.type[i])
-            //    {
-            //        case CardType.ATK:
-            //            if (target.tag.Equals("Player"))
-            //            {
-            //                return false;
-            //            }
-            //            if (i == 0)
-            //            {
-            //                battle.energy -= thisCard.cost;
-            //            }
-            //            battle.Attack(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-            //            break;
-            //        case CardType.DEF:
-            //            if (target.tag.Equals("Monster"))
-            //            {
-            //                return false;
-            //            }
-            //            if (i == 0)
-            //            {
-            //                battle.energy -= thisCard.cost;
-            //            }
-            //            battle.Deffence(thisCardValue.skillValue[thisCardValue.type[i]]);
-            //            break;
-            //        case CardType.POW:
-            //            if (target.tag.Equals("Monster"))
-            //            {
-            //                return false;
-            //            }
-            //            if (i == 0)
-            //            {
-            //                battle.energy -= thisCard.cost;
-            //            }
-            //            battle.Power(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-            //            break;
-            //        case CardType.WEAK:
-            //            if (target.tag.Equals("Player"))
-            //            {
-            //                return false;
-            //            }
-            //            if (i == 0)
-            //            {
-            //                battle.energy -= thisCard.cost;
-            //            }
-            //            battle.Weak(target, thisCardValue.skillValue[thisCardValue.type[i]]);
-            //            break;
-            //        case CardType.EXTINCTION:
-            //            if (i == 0)
-            //            {
-            //                battle.energy -= thisCard.cost;
-            //            }
-            //            battle.DeleteCardMove(gameObject);
-            //            return true;
-            //    }
-
-            //}
-            #endregion
         }
         else
         {

@@ -9,6 +9,7 @@ public class RewardMouse : MonoBehaviour
     InGameUI inGameUI;
     public void SelectRewardCard()
     {
+        Debug.Log(gameObject.name);
         Debug.Log(gameObject.GetComponent<OneCard>().thisCard.title);
         Deck.Instance.AddDeck(gameObject.GetComponent<OneCard>().thisCard);
         gameObject.transform.parent.gameObject.SetActive(false);

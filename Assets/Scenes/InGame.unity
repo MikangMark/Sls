@@ -1416,7 +1416,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8404524484408820692}
+      - m_Target: {fileID: 8404524485084659208}
         m_TargetAssemblyTypeName: RewardMouse, Assembly-CSharp
         m_MethodName: SelectRewardCard
         m_Mode: 1
@@ -2812,7 +2812,7 @@ MonoBehaviour:
   openDeckView: 0
   currentFloor: 0
   rewardGold: 58
-  rewardCardGroup: 2
+  rewardCardGroup: 0
   rewardCardsIndex: 
   disCardWarringWiew: {fileID: 1071978772}
   shopscript: {fileID: 1004008579}
@@ -5946,7 +5946,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
   m_Value: -0.000000055390284
-  m_Size: 0
+  m_Size: 0.19680579
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11430,7 +11430,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1135833416}
-  - component: {fileID: 1135833415}
   - component: {fileID: 1135833414}
   - component: {fileID: 1135833417}
   - component: {fileID: 1135833418}
@@ -11474,33 +11473,6 @@ MonoBehaviour:
     maxHp: 0
     money: 0
     charType: 0
---- !u!114 &1135833415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1135833413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71b873535a2f85146be540525d2b6bb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  charInfo:
-    hp: 0
-    maxHp: 0
-    money: 0
-    charType: 0
-  openDeckView: 0
-  currentFloor: 0
-  rewardGold: 0
-  rewardCardGroup: 0
-  rewardCardsIndex: 
-  disCardWarringWiew: {fileID: 0}
-  shopscript: {fileID: 0}
-  playerPrefsKey: SavedPlayerStat
-  saveMapFloorKey: SavedClearMap
-  monsterSkillReading: 0
 --- !u!4 &1135833416
 Transform:
   m_ObjectHideFlags: 0
@@ -16513,7 +16485,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8404524484408820692}
+      - m_Target: {fileID: 8404524484806049236}
         m_TargetAssemblyTypeName: RewardMouse, Assembly-CSharp
         m_MethodName: SelectRewardCard
         m_Mode: 1
@@ -23793,7 +23765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f84cd08dd1a063409ba1630351e3675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameUI: {fileID: 0}
+  inGameUI: {fileID: 1219828952}
 --- !u!114 &3389990431543301274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24470,7 +24442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f84cd08dd1a063409ba1630351e3675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameUI: {fileID: 0}
+  inGameUI: {fileID: 1219828952}
 --- !u!114 &4918961727329024256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24483,7 +24455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f84cd08dd1a063409ba1630351e3675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameUI: {fileID: 0}
+  inGameUI: {fileID: 1219828952}
 --- !u!114 &4918961727696145226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24496,7 +24468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f84cd08dd1a063409ba1630351e3675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameUI: {fileID: 0}
+  inGameUI: {fileID: 1219828952}
 --- !u!114 &4918961728485227663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24509,7 +24481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f84cd08dd1a063409ba1630351e3675, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inGameUI: {fileID: 0}
+  inGameUI: {fileID: 1219828952}
 --- !u!114 &5057472090121659465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25833,7 +25805,7 @@ GameObject:
   - component: {fileID: 2921389647932165519}
   - component: {fileID: 8404524484408820692}
   m_Layer: 0
-  m_Name: Card
+  m_Name: Card (0)
   m_TagString: RewardCard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

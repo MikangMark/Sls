@@ -13,7 +13,7 @@ public class Battle : MonoBehaviour
     public Character.CharInfo stat;//전투중인 나의 스텟
     public Dictionary<PlayerBuffType, int> playerBufList;//플레이어 버프 리스트
     public List<GameObject> monsters;//전투중인 적의 리스트
-    public List<Monster> monstersList;
+    //public List<Monster> monstersList;
     public List<GameObject> battleDeck;//전투에서 사용할 나의 덱
     List<GameObject> abnomalDeck;//상태이상 카드 덱
 
@@ -72,6 +72,7 @@ public class Battle : MonoBehaviour
         InGame.Instance.charInfo.hp = stat.hp;
         if (EndBattle())
         {
+            
             thisActive = false;
         }
 
@@ -91,13 +92,19 @@ public class Battle : MonoBehaviour
 
     void initData()
     {
-        
+        for(int i=0;i< Deck.Instance.cardList_Obj.Count; i++)
+        {
+            if(Deck.Instance.cardList_Obj[i] == null)
+            {
+                Deck.Instance.cardList_Obj.RemoveAt(i);
+            }
+        }
         abnomalDeck = new List<GameObject>();
         stat = new Character.CharInfo();
         Instantiate(playerPrf, playerPos.transform);
         battleDeck = new List<GameObject>(Deck.Instance.cardList_Obj);
         monsters = new List<GameObject>();
-        monstersList = new List<Monster>();
+        //monstersList = new List<Monster>();
         oneMonster = new List<string[]>();
         beforUse = new List<GameObject>();
         
@@ -133,13 +140,21 @@ public class Battle : MonoBehaviour
     void ClearData()
     {
         abnomalDeck = null;
-        if(playerPos.transform.GetChild(0).gameObject != null)
+        for (int i = 0; i < monsters.Count; i++)
+        {
+            monsters[i].GetComponent<Monster>().stat.hp = monsters[i].GetComponent<Monster>().stat.maxHp;
+        }
+        for (int i = monsters.Count; i > 0; i--)
+        {
+            Destroy(monsters[i-1]);
+        }
+        if (playerPos.transform.GetChild(0).gameObject != null)
         {
             Destroy(playerPos.transform.GetChild(0).gameObject);
         }
         battleDeck = null;
         monsters = null;
-        monstersList = null;
+        //monstersList = null;
         oneMonster = null;
         for (int i = 0; i < beforContent.transform.childCount; i++)
         {
@@ -186,10 +201,6 @@ public class Battle : MonoBehaviour
     }
     void MyTurn()
     {
-        for(int i = 0; i < playerBufList.Count; i++)
-        {
-            //Debug.Log(((PlayerBuffType)i).ToString() + playerBufList[(PlayerBuffType)i].ToString());
-        }
         ShuffleDeck(beforUse);
         for (int i = 0; i < divideCard; i++)
         {

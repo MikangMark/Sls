@@ -10,7 +10,6 @@ public class ShopDisCardClick : MonoBehaviour, IPointerClickHandler
     OneCard thisCard;
     [SerializeField]
     GameObject disCardWarringView;
-    int onece = 0;
     void Start()
     {
         thisCard = gameObject.GetComponent<OneCard>();
