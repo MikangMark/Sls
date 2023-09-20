@@ -372,11 +372,15 @@ public class Battle : MonoBehaviour
         }
         target.GetComponent<Monster>().stat.hp -= damage;
     }
-    public void Deffence(int value)
+    public void Deffence(GameObject target,int value)
     {
+        if (playerBufList[PlayerBuffType.IMPAIR] > 0)
+        {
+            value = value - (int)(value / 3);
+        }
         shiled += value;
     }
-    public void Power(GameObject target, int value)//아직 힘카드 없음
+    public void Power(GameObject target, int value)
     {
         
         switch (target.tag)
