@@ -380,6 +380,10 @@ public class Battle : MonoBehaviour
         }
         shiled += value;
     }
+    public void Vulner(GameObject target, int value)
+    {
+        playerBufList[PlayerBuffType.VULNER] += value;
+    }
     public void Power(GameObject target, int value)
     {
         

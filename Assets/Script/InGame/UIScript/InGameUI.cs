@@ -74,6 +74,9 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     GameObject disCardView;
 
+    [SerializeField]
+    GameObject rest;
+
     public bool is_Reward = false;
 
     bool mapActive = true;
@@ -103,6 +106,7 @@ public class InGameUI : MonoBehaviour
         rewardCard_Parent.SetActive(false);
         rewardOutBtn.SetActive(false);
         shop.SetActive(false);
+        rest.SetActive(false);
     }
     private void FixedUpdate()
     {
@@ -206,6 +210,11 @@ public class InGameUI : MonoBehaviour
         exitShopBtn.SetActive(false);
         exitShopListBtn.SetActive(false);
         shopList.SetActive(false);
+    }
+
+    public void RestEnter()
+    {
+        rest.SetActive(true);
     }
     public void OnClickEnterShopBtn()
     {
