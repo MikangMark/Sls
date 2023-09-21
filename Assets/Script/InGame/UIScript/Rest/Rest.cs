@@ -10,21 +10,20 @@ public class Rest : MonoBehaviour
     [SerializeField]
     Button restBtn;
 
-    public void OnCLickRestBtn()
+    public void OnClickRestBtn()
     {
         float heal = 0.15f;
-        int realHp = InGame.Instance.charInfo.hp;
         int maxHp = InGame.Instance.charInfo.maxHp;
-        if (realHp >= maxHp)
+        if (InGame.Instance.charInfo.hp >= maxHp)
         {
             Debug.Log("이미 최대체력입니다");
         }
         else
         {
-            realHp += (int)(maxHp * heal);
-            if (realHp > maxHp)
+            InGame.Instance.charInfo.hp += (int)(maxHp * heal);
+            if (InGame.Instance.charInfo.hp > maxHp)
             {
-                realHp = maxHp;
+                InGame.Instance.charInfo.hp = maxHp;
             }
             Debug.Log("체력을회복했습니다");
             restBtn.interactable = false;
@@ -33,6 +32,7 @@ public class Rest : MonoBehaviour
 
     public void OnClickNextRestBtn()
     {
+        InGame.Instance.currentFloor++;
         restBtn.interactable = true;
         restObj.SetActive(false);
     }

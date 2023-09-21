@@ -29,6 +29,11 @@ public class EnterRoom : MonoBehaviour
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
                 inGameUI.RestEnter();
             }
+            if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.UNKNOWN)
+            {
+                Instantiate(inGameUI.clearCircle, gameObject.transform);
+                inGameUI.UnkownEnter();
+            }
         }
     }
 }

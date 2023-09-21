@@ -211,6 +211,10 @@ public class InGameUI : MonoBehaviour
         exitShopListBtn.SetActive(false);
         shopList.SetActive(false);
     }
+    public void UnkownEnter()
+    {
+        UnknownManager.Instance.ActiveSelectUnknown(CreateSeed.Instance.RandNum(0, 4));
+    }
 
     public void RestEnter()
     {
