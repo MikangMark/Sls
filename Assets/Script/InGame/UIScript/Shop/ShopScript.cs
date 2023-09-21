@@ -89,7 +89,15 @@ public class ShopScript : MonoBehaviour
     }
     public void DisCardViewBtn()
     {
-        disCardView.SetActive(true);
+        if (InGame.Instance.charInfo.money >= 75)
+        {
+            disCardView.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("소지금 부족");
+        }
+        
     }
     public void SetDisCardTarget(CardInfo target)
     {
@@ -98,14 +106,18 @@ public class ShopScript : MonoBehaviour
     public void OnClickYesDisCard()
     {
         Debug.Log(content.transform.childCount);
-        if(disCardTarget != null)
+        if (InGame.Instance.charInfo.money < 75)
+        {
+            Debug.Log("소지금 부족");
+            return;
+        }
+        if (disCardTarget != null)
         {
             for(int i = 0; i < Deck.Instance.deck.Count; i++)
             {
                 if(Deck.Instance.deck[i] == disCardTarget)
                 {
                     Deck.Instance.deck.RemoveAt(i);
-                    //Deck.Instance.cardList_Obj.RemoveAt(i);
                     for(int j=0;j< disConten.transform.childCount; j++)
                     {
                         if(disConten.transform.GetChild(j).GetComponent<OneCard>().thisCard == disCardTarget)
@@ -121,9 +133,9 @@ public class ShopScript : MonoBehaviour
                             Destroy(content.transform.GetChild(j).gameObject);
                         }
                     }
-                    //for(int j = 0;j<InGame.Instance.re)
                 }
             }
+            InGame.Instance.charInfo.money -= 75;
             disCardWarringView.SetActive(false);
         }
     }
