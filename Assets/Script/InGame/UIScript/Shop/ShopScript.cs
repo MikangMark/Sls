@@ -83,8 +83,6 @@ public class ShopScript : MonoBehaviour
                         break;
                 }
             }
-            //Deck.Instance.cardList_Obj.Add(temp);
-
         }
     }
     public void DisCardViewBtn()

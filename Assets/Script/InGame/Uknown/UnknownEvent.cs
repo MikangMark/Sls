@@ -15,10 +15,15 @@ public class UnknownEvent : MonoBehaviour
     int cleric_GetHp_Per = 25;
     [SerializeField]
     int cleric_Purification_Pay = 50;
+    [SerializeField]
+    GameObject buttonList_Goop;
+    [SerializeField]
+    GameObject buttonList_Cleric;
     // Start is called before the first frame update
 
     [SerializeField]
     GameObject exitBtn;
+
     private void Start()
     {
         exitBtn.SetActive(false);
@@ -55,17 +60,19 @@ public class UnknownEvent : MonoBehaviour
     }
     public void DeleteCard()
     {
-
+        UnknownManager.Instance.unknownDisCard.DisCardViewBtn();
     }
 
     public void World_Of_Goop_GetGold()
     {
         ChangeGold_fixedValue(wog_GetGold);
         ChangeHp_PercentageValue(wog_lostHp_Per);
+        exitBtn.SetActive(true);
     }
     public void World_Of_Goop_LostGold()
     {
         ChangeGold_fixedValue(CreateSeed.Instance.RandNum(20, 50));
+        exitBtn.SetActive(true);
     }
 
     public void The_Cleric_Heal()
@@ -81,6 +88,7 @@ public class UnknownEvent : MonoBehaviour
 
     public void The_Cleric_Leave()
     {
+        buttonList_Cleric.SetActive(false);
         exitBtn.SetActive(true);
     }
 }

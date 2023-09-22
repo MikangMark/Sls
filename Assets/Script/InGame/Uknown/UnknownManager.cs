@@ -8,6 +8,7 @@ public class UnknownManager : Singleton<UnknownManager>
     GameObject unknownParent;
     [SerializeField]
     List<GameObject> unknownList;
+    public UnknownDisCard unknownDisCard;
     // Start is called before the first frame update
     void Start()
     {
