@@ -15,10 +15,21 @@ public class UnknownEvent : MonoBehaviour
     int cleric_GetHp_Per = 25;
     [SerializeField]
     int cleric_Purification_Pay = 50;
+
+    [SerializeField]
+    int wing_Statue_lostHp = 7;
+
+    [SerializeField]
+    int joust_Betting = 50;
+
     [SerializeField]
     GameObject buttonList_Goop;
     [SerializeField]
     GameObject buttonList_Cleric;
+    [SerializeField]
+    GameObject buttonList_Wing;
+    [SerializeField]
+    GameObject buttonList_Joust;
     // Start is called before the first frame update
 
     [SerializeField]
@@ -90,5 +101,72 @@ public class UnknownEvent : MonoBehaviour
     {
         buttonList_Cleric.SetActive(false);
         exitBtn.SetActive(true);
+    }
+
+    public void Wing_Statue_Pray()
+    {
+        ChangeHp_fixedValue(wing_Statue_lostHp);
+        DeleteCard();
+    }
+
+    public void Wing_Statue_Broken()
+    {
+        ChangeGold_fixedValue(CreateSeed.Instance.RandNum(50, 80));
+    }
+
+    public void Wing_Statue_Leave()
+    {
+        buttonList_Wing.SetActive(false);
+        exitBtn.SetActive(true);
+    }
+
+    public void Joust_Betting(int index)//0=killer,1=master
+    {
+        int persent = 0;
+        bool win;
+        int killerGold = 100;
+        int masterGold = 250;
+        if (index == 0)
+        {
+            persent = 70;
+            
+        }
+        else
+        {
+            persent = 30;
+        }
+        win = CreateSeed.Instance.Roulelet_Per(persent);
+        if (win)
+        {
+            if(index == 0)
+            {
+                ChangeGold_fixedValue(killerGold);
+            }
+            else
+            {
+                ChangeGold_fixedValue(masterGold);
+            }
+            
+        }
+        else
+        {
+            Debug.Log("µ·À» ÀÒ¾ú½À´Ï´Ù.....");
+        }
+        exitBtn.SetActive(true);
+    }
+
+    public void SelectCard()
+    {
+
+    }
+
+    public void Library_Read()
+    {
+
+    }
+
+    public void Library_Sleep()
+    {
+
     }
 }

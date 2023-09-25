@@ -53,4 +53,20 @@ public class CreateSeed : Singleton<CreateSeed>
         availableValues.RemoveAt(randomIndex);
         return randomValue;
     }
+
+    public bool Roulelet_Per(int persent)//ex)50%70
+    {
+        if (persent == 0)
+        {
+            return false;
+        }
+        if (RandNum(0, 100) <= persent)//100
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
