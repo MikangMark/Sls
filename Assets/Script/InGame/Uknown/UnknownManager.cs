@@ -2,29 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnknownManager : Singleton<UnknownManager>
+public class UnknownManager : MonoBehaviour
 {
     [SerializeField]
     GameObject unknownParent;
     [SerializeField]
     List<GameObject> unknownList;
     public UnknownDisCard unknownDisCard;
-    // Start is called before the first frame update
     void Start()
     {
-        Init();
-
-        for(int i = 0; i < unknownParent.transform.childCount; i++)
+        for(int i = 0; i < unknownList.Count; i++)
         {
-            unknownList.Add(unknownParent.transform.GetChild(i).gameObject);
-            unknownParent.transform.GetChild(i).gameObject.SetActive(false);
+            unknownList[i].SetActive(false);
         }
         unknownParent.SetActive(false);
 
     }
     public void ActiveSelectUnknown(int index)
     {
-        for(int i = 0; i < unknownList.Count; i++)
+        unknownParent.SetActive(true);
+        for (int i = 0; i < unknownList.Count; i++)
         {
             if (i == index)
             {

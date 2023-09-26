@@ -9,10 +9,13 @@ public class UnknownDisCardClick : MonoBehaviour, IPointerClickHandler
     OneCard thisCard;
     [SerializeField]
     GameObject disCardWarringView;
+
+    [SerializeField]
+    UnknownManager unknownManager;
     void Start()
     {
         thisCard = gameObject.GetComponent<OneCard>();
-        unknown = UnknownManager.Instance.unknownDisCard;
+        unknown = GameObject.Find("UknownScript").GetComponent<UnknownManager>().unknownDisCard;
         disCardWarringView = InGame.Instance.disCardWarringWiew;
         disCardWarringView.SetActive(false);
     }

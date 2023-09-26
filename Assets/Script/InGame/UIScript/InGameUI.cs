@@ -76,6 +76,8 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField]
     GameObject rest;
+    [SerializeField]
+    UnknownManager unknownManager;
 
     public bool is_Reward = false;
 
@@ -213,7 +215,7 @@ public class InGameUI : MonoBehaviour
     }
     public void UnkownEnter()
     {
-        UnknownManager.Instance.ActiveSelectUnknown(CreateSeed.Instance.RandNum(0, 4));
+        unknownManager.ActiveSelectUnknown(CreateSeed.Instance.RandNum(0, 4));
     }
 
     public void RestEnter()

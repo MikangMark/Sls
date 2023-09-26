@@ -82,6 +82,14 @@ public class Battle : MonoBehaviour
         stat.hp = InGame.Instance.charInfo.maxHp;
         Debug.Log("³Í Á×Áö¾Ê¾Æ!");
     }
+    public void OnClickEditorKillMonsterBtn()
+    {
+        for(int i = 0; i < monsters.Count; i++)
+        {
+            monsters[i].GetComponent<Monster>().stat.hp = 0;
+        }
+        Debug.Log("Àü¿ø»ç¸Á");
+    }
     public void SetEnable(bool p_flag)
     {
         if( p_flag)

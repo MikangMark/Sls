@@ -7,20 +7,22 @@ public class UnknownEvent : MonoBehaviour
     [SerializeField]
     int wog_GetGold = 75;
     [SerializeField]
-    int wog_lostHp_Per = 15;
+    int wog_lostHp_Per = -15;
 
     [SerializeField]
     int cleric_HealPay = 35;
     [SerializeField]
     int cleric_GetHp_Per = 25;
     [SerializeField]
-    int cleric_Purification_Pay = 50;
+    int cleric_Purification_Pay = -50;
 
     [SerializeField]
-    int wing_Statue_lostHp = 7;
+    int wing_Statue_lostHp = -7;
 
     [SerializeField]
     int joust_Betting = 50;
+    [SerializeField]
+    int library_HealPer = 33;
 
     [SerializeField]
     GameObject buttonList_Goop;
@@ -30,10 +32,18 @@ public class UnknownEvent : MonoBehaviour
     GameObject buttonList_Wing;
     [SerializeField]
     GameObject buttonList_Joust;
+    [SerializeField]
+    GameObject buttonList_Library;
     // Start is called before the first frame update
 
     [SerializeField]
     GameObject exitBtn;
+
+    [SerializeField]
+    UnknownManager unknownManager;
+
+    [SerializeField]
+    GameObject getCardView;
 
     private void Start()
     {
@@ -65,24 +75,23 @@ public class UnknownEvent : MonoBehaviour
             InGame.Instance.charInfo.money = 0;
         }
     }
-    public void GetCard()
-    {
-
-    }
     public void DeleteCard()
     {
-        UnknownManager.Instance.unknownDisCard.DisCardViewBtn();
+        unknownManager.unknownDisCard.DisCardViewBtn();
+        unknownManager.unknownDisCard.CreateDisCardDeckObj();
     }
 
     public void World_Of_Goop_GetGold()
     {
         ChangeGold_fixedValue(wog_GetGold);
         ChangeHp_PercentageValue(wog_lostHp_Per);
+        buttonList_Goop.SetActive(false);
         exitBtn.SetActive(true);
     }
     public void World_Of_Goop_LostGold()
     {
         ChangeGold_fixedValue(CreateSeed.Instance.RandNum(20, 50));
+        buttonList_Goop.SetActive(false);
         exitBtn.SetActive(true);
     }
 
@@ -90,11 +99,13 @@ public class UnknownEvent : MonoBehaviour
     {
         ChangeGold_fixedValue(cleric_HealPay * -1);
         ChangeHp_PercentageValue(cleric_GetHp_Per);
+        The_Cleric_Leave();
     }
     public void The_Cleric_Purification()
     {
-        ChangeGold_fixedValue(cleric_Purification_Pay * -1);
+        ChangeGold_fixedValue(cleric_Purification_Pay);
         DeleteCard();
+        The_Cleric_Leave();
     }
 
     public void The_Cleric_Leave()
@@ -107,11 +118,13 @@ public class UnknownEvent : MonoBehaviour
     {
         ChangeHp_fixedValue(wing_Statue_lostHp);
         DeleteCard();
+        Wing_Statue_Leave();
     }
 
     public void Wing_Statue_Broken()
     {
         ChangeGold_fixedValue(CreateSeed.Instance.RandNum(50, 80));
+        Wing_Statue_Leave();
     }
 
     public void Wing_Statue_Leave()
@@ -152,21 +165,26 @@ public class UnknownEvent : MonoBehaviour
         {
             Debug.Log("µ·À» ÀÒ¾ú½À´Ï´Ù.....");
         }
+        buttonList_Joust.SetActive(false);
         exitBtn.SetActive(true);
     }
 
     public void SelectCard()
     {
-
+        getCardView.SetActive(true);
     }
 
     public void Library_Read()
     {
-
+        SelectCard();
+        buttonList_Library.SetActive(false);
+        exitBtn.SetActive(true);
     }
 
     public void Library_Sleep()
     {
-
+        ChangeHp_PercentageValue(library_HealPer);
+        buttonList_Library.SetActive(false);
+        exitBtn.SetActive(true);
     }
 }
