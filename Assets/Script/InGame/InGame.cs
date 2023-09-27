@@ -16,6 +16,8 @@ public class InGame : Singleton<InGame>
     public GameObject disCardWarringWiew;
     public ShopScript shopscript;
 
+    public GameObject UnknownDisCardWarringWiew;
+
     public string playerPrefsKey = "SavedPlayerStat";
     public string saveMapFloorKey = "SavedClearMap";
 

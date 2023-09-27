@@ -121,6 +121,7 @@ public class ShopScript : MonoBehaviour
                         if(disConten.transform.GetChild(j).GetComponent<OneCard>().thisCard == disCardTarget)
                         {
                             Destroy(disConten.transform.GetChild(j).gameObject);
+                            break;
                         }
                         
                     }
@@ -129,9 +130,12 @@ public class ShopScript : MonoBehaviour
                         if (content.transform.GetChild(j).GetComponent<OneCard>().thisCard == disCardTarget)
                         {
                             Destroy(content.transform.GetChild(j).gameObject);
+                            break;
                         }
                     }
+
                 }
+                
             }
             InGame.Instance.charInfo.money -= 75;
             disCardWarringView.SetActive(false);

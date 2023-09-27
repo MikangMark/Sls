@@ -7,20 +7,17 @@ public class UnknownEvent : MonoBehaviour
     [SerializeField]
     int wog_GetGold = 75;
     [SerializeField]
-    int wog_lostHp_Per = -15;
+    int wog_lostHp_Per = 15;
 
     [SerializeField]
     int cleric_HealPay = 35;
     [SerializeField]
     int cleric_GetHp_Per = 25;
     [SerializeField]
-    int cleric_Purification_Pay = -50;
+    int cleric_Purification_Pay = 50;
 
     [SerializeField]
-    int wing_Statue_lostHp = -7;
-
-    [SerializeField]
-    int joust_Betting = 50;
+    int wing_Statue_lostHp = 7;
     [SerializeField]
     int library_HealPer = 33;
 
@@ -49,7 +46,14 @@ public class UnknownEvent : MonoBehaviour
     {
         exitBtn.SetActive(false);
     }
-
+    public void ClearBtn()
+    {
+        buttonList_Goop.SetActive(true);
+        buttonList_Cleric.SetActive(true);
+        buttonList_Wing.SetActive(true);
+        buttonList_Joust.SetActive(true);
+        buttonList_Library.SetActive(true);
+    }
     public void ChangeHp_fixedValue(int _hp)
     {
         InGame.Instance.charInfo.hp += _hp;
@@ -57,7 +61,8 @@ public class UnknownEvent : MonoBehaviour
     }
     public void ChangeHp_PercentageValue(int _hp)
     {
-        InGame.Instance.charInfo.hp += InGame.Instance.charInfo.maxHp * _hp;
+        InGame.Instance.charInfo.hp += (int)(InGame.Instance.charInfo.maxHp * (_hp * 0.01));
+        Debug.Log($"감소할hp:{_hp},현제hp:{InGame.Instance.charInfo.hp}");
         breakthroughHp();
     }
     void breakthroughHp()
@@ -81,59 +86,59 @@ public class UnknownEvent : MonoBehaviour
         unknownManager.unknownDisCard.CreateDisCardDeckObj();
     }
 
-    public void World_Of_Goop_GetGold()
+    public void World_Of_Goop_GetGold()//Btn
     {
         ChangeGold_fixedValue(wog_GetGold);
-        ChangeHp_PercentageValue(wog_lostHp_Per);
+        ChangeHp_PercentageValue(wog_lostHp_Per * -1);
         buttonList_Goop.SetActive(false);
         exitBtn.SetActive(true);
     }
-    public void World_Of_Goop_LostGold()
+    public void World_Of_Goop_LostGold()//Btn
     {
         ChangeGold_fixedValue(CreateSeed.Instance.RandNum(20, 50));
         buttonList_Goop.SetActive(false);
         exitBtn.SetActive(true);
     }
 
-    public void The_Cleric_Heal()
+    public void The_Cleric_Heal()//Btn
     {
         ChangeGold_fixedValue(cleric_HealPay * -1);
         ChangeHp_PercentageValue(cleric_GetHp_Per);
         The_Cleric_Leave();
     }
-    public void The_Cleric_Purification()
+    public void The_Cleric_Purification()//Btn
     {
-        ChangeGold_fixedValue(cleric_Purification_Pay);
+        ChangeGold_fixedValue(cleric_Purification_Pay * -1);
         DeleteCard();
         The_Cleric_Leave();
     }
 
-    public void The_Cleric_Leave()
+    public void The_Cleric_Leave()//Btn
     {
         buttonList_Cleric.SetActive(false);
         exitBtn.SetActive(true);
     }
 
-    public void Wing_Statue_Pray()
+    public void Wing_Statue_Pray()//Btn
     {
-        ChangeHp_fixedValue(wing_Statue_lostHp);
+        ChangeHp_fixedValue(wing_Statue_lostHp*-1);
         DeleteCard();
         Wing_Statue_Leave();
     }
 
-    public void Wing_Statue_Broken()
+    public void Wing_Statue_Broken()//Btn
     {
         ChangeGold_fixedValue(CreateSeed.Instance.RandNum(50, 80));
         Wing_Statue_Leave();
     }
 
-    public void Wing_Statue_Leave()
+    public void Wing_Statue_Leave()//Btn
     {
         buttonList_Wing.SetActive(false);
         exitBtn.SetActive(true);
     }
 
-    public void Joust_Betting(int index)//0=killer,1=master
+    public void Joust_Betting(int index)//0=killer,1=master//Btn
     {
         int persent = 0;
         bool win;
@@ -174,14 +179,14 @@ public class UnknownEvent : MonoBehaviour
         getCardView.SetActive(true);
     }
 
-    public void Library_Read()
+    public void Library_Read()//Btn
     {
         SelectCard();
         buttonList_Library.SetActive(false);
         exitBtn.SetActive(true);
     }
 
-    public void Library_Sleep()
+    public void Library_Sleep()//Btn
     {
         ChangeHp_PercentageValue(library_HealPer);
         buttonList_Library.SetActive(false);

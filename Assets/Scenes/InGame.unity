@@ -6243,6 +6243,7 @@ MonoBehaviour:
   rewardCardsIndex: 
   disCardWarringWiew: {fileID: 1071978772}
   shopscript: {fileID: 1004008579}
+  UnknownDisCardWarringWiew: {fileID: 1079037945}
   playerPrefsKey: SavedPlayerStat
   saveMapFloorKey: SavedClearMap
   monsterSkillReading: 1
@@ -12197,8 +12198,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1461743103}
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
-  m_Value: -0.000000027695139
-  m_Size: 0.19680578
+  m_Value: -0.000000055390284
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13371,6 +13372,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2121107521}
         m_TargetAssemblyTypeName: UnknownManager, Assembly-CSharp
         m_MethodName: ExitUnknown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2121107523}
+        m_TargetAssemblyTypeName: UnknownEvent, Assembly-CSharp
+        m_MethodName: ClearBtn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -48508,7 +48521,6 @@ MonoBehaviour:
   cleric_GetHp_Per: 25
   cleric_Purification_Pay: 35
   wing_Statue_lostHp: 7
-  joust_Betting: 50
   library_HealPer: 33
   buttonList_Goop: {fileID: 1945484852}
   buttonList_Cleric: {fileID: 111125955}

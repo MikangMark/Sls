@@ -131,5 +131,5 @@ public class OneCard : MonoBehaviour
         }
         return true;
     }
-    
+
 }
