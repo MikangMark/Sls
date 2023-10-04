@@ -111,6 +111,7 @@ public class InGameUI : MonoBehaviour
         shop.SetActive(false);
         rest.SetActive(false);
         treasureView.SetActive(false);
+        InGame.Instance.relicInfoUi.SetActive(false);
     }
     private void FixedUpdate()
     {

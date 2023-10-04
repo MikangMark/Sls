@@ -12498,7 +12498,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1461743102}
   m_Direction: 2
   m_Value: -0.000000027695139
-  m_Size: 0.19680578
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -17042,12 +17042,12 @@ GameObject:
   - component: {fileID: 752946361}
   - component: {fileID: 752946360}
   m_Layer: 0
-  m_Name: TreasureRoom
+  m_Name: TreasureRoomBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &752946359
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19402,7 +19402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &905490847
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21354,10 +21354,10 @@ RectTransform:
   m_Father: {fileID: 1633932837}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -150}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957668919
 MonoBehaviour:
@@ -25173,10 +25173,10 @@ RectTransform:
   m_Father: {fileID: 1633932837}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1091392830
 MonoBehaviour:
@@ -27688,7 +27688,6 @@ GameObject:
   - component: {fileID: 1219828953}
   - component: {fileID: 1219828952}
   - component: {fileID: 1219828954}
-  - component: {fileID: 1219828955}
   m_Layer: 0
   m_Name: InGameUI
   m_TagString: Untagged
@@ -27785,18 +27784,6 @@ MonoBehaviour:
   - {fileID: 1168054092}
   - {fileID: 1667608829}
   treasureBackGround: {fileID: 1849764405}
---- !u!114 &1219828955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1219828951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3636dc50ca3747049a6ceb8766206762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1225641736
 GameObject:
   m_ObjectHideFlags: 0
@@ -36860,7 +36847,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1633932837
 RectTransform:
   m_ObjectHideFlags: 0
@@ -49235,7 +49222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8849538844347918033, guid: e5d50854db640a849972dd5b557205b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -536.4305
+      value: -536.43024
       objectReference: {fileID: 0}
     - target: {fileID: 8849538844347918033, guid: e5d50854db640a849972dd5b557205b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -54135,30 +54122,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -186.02501
       objectReference: {fileID: 0}
-    - target: {fileID: 6408653132518204531, guid: 1efcf3e084e4a6b40bc9d8f6b986cc47, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6408653132518204531, guid: 1efcf3e084e4a6b40bc9d8f6b986cc47, type: 3}
-      propertyPath: relicInfoUi
-      value: 
-      objectReference: {fileID: 1781409690}
-    - target: {fileID: 6408653133023248930, guid: 1efcf3e084e4a6b40bc9d8f6b986cc47, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6408653133023248930, guid: 1efcf3e084e4a6b40bc9d8f6b986cc47, type: 3}
-      propertyPath: relicInfoUi
-      value: 
-      objectReference: {fileID: 1781409690}
-    - target: {fileID: 6408653133067072988, guid: 1efcf3e084e4a6b40bc9d8f6b986cc47, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6408653133067072988, guid: 1efcf3e084e4a6b40bc9d8f6b986cc47, type: 3}
-      propertyPath: relicInfoUi
-      value: 
-      objectReference: {fileID: 1781409690}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1efcf3e084e4a6b40bc9d8f6b986cc47, type: 3}
 --- !u!224 &6420941157206486070

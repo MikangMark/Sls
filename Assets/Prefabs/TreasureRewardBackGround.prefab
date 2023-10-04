@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6005758364357069198}
   - component: {fileID: 6005758364357069199}
   - component: {fileID: 6005758364357069200}
-  - component: {fileID: 6408653133023248930}
   m_Layer: 0
   m_Name: RelicRewardButton (1)
   m_TagString: RelicBtn
@@ -162,19 +161,6 @@ MonoBehaviour:
   img: {fileID: 6005758364933931152}
   effectText: {fileID: 0}
   infoText: {fileID: 0}
---- !u!114 &6408653133023248930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6005758364357069197}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3636dc50ca3747049a6ceb8766206762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relicInfoUi: {fileID: 0}
 --- !u!1 &6005758364386386053
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,7 +252,6 @@ GameObject:
   - component: {fileID: 6005758364417932904}
   - component: {fileID: 6005758364417932905}
   - component: {fileID: 6005758364417932906}
-  - component: {fileID: 6408653133067072988}
   m_Layer: 0
   m_Name: RelicRewardButton (0)
   m_TagString: RelicBtn
@@ -415,19 +400,6 @@ MonoBehaviour:
   img: {fileID: 6005758365332482973}
   effectText: {fileID: 0}
   infoText: {fileID: 0}
---- !u!114 &6408653133067072988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6005758364417932903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3636dc50ca3747049a6ceb8766206762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relicInfoUi: {fileID: 0}
 --- !u!1 &6005758364467749915
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,7 +654,6 @@ GameObject:
   - component: {fileID: 6005758364933369793}
   - component: {fileID: 6005758364933369406}
   - component: {fileID: 6005758364933369795}
-  - component: {fileID: 6408653132518204531}
   m_Layer: 0
   m_Name: RelicRewardButton (2)
   m_TagString: RelicBtn
@@ -831,19 +802,6 @@ MonoBehaviour:
   img: {fileID: 6005758365243246242}
   effectText: {fileID: 0}
   infoText: {fileID: 0}
---- !u!114 &6408653132518204531
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6005758364933369404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3636dc50ca3747049a6ceb8766206762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  relicInfoUi: {fileID: 0}
 --- !u!1 &6005758364933931150
 GameObject:
   m_ObjectHideFlags: 0
