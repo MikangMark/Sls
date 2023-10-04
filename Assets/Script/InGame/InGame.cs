@@ -22,6 +22,12 @@ public class InGame : Singleton<InGame>
     public string saveMapFloorKey = "SavedClearMap";
 
     public bool monsterSkillReading = false;
+
+    public RelicExcelDataLoader relicExcelDataLoader;
+    public List<Relic> treasureRewardList;
+    public GameObject relicInfoUi;
+    public List<GameObject> haveRelicList;
+    public List<int> relicIndexList;
     private void Awake()
     {
         Init();
@@ -52,7 +58,22 @@ public class InGame : Singleton<InGame>
     {
         rewardCardGroup = CreateSeed.Instance.RandNum(1, 3);
         LoadPlayerData();
+        haveRelicList = new List<GameObject>();
+        relicIndexList = new List<int>();
         //SetReward();
+    }
+
+    public void ClearRelicReward()
+    {
+        treasureRewardList.Clear();
+    }
+    public void SetTreasureRelic()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            relicIndexList.Add(CreateSeed.Instance.RandNum(0, relicExcelDataLoader.relicInfo.Count - 1));
+            treasureRewardList.Add(relicExcelDataLoader.relicInfo[relicIndexList[i]]);
+        }
     }
 
     public void SetReward()

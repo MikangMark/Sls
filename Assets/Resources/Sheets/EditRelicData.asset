@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703ec604d3d78364a8c55566e8d45452, type: 3}
+  m_Name: EditRelicData
+  m_EditorClassIdentifier: 
+  associatedSheet: 1kbzvps0KvAC3zMgQ5Nxwv6LqO03YXApiDKaLSL-KMEQ
+  associatedWorksheet: Relic
+  items:
+  - index: 1001
+    title: "\uACE0\uB300\uC758 \uCC28 \uC138\uD2B8"
+    target: 0
+    relicTag: 0
+    value: 2
+    text: "\uD734\uC2DD \uC7A5\uC18C\uB97C \uAC70\uCE5C \uB2E4\uC74C \uC804\uD22C\uC758
+      \uCCAB \uD134\uC5D0 2\uC758 \uC5D0\uB108\uC9C0\uB97C \uC5BB\uC2B5\uB2C8\uB2E4."
+    infoText: "\uBC24\uC5D0 \uC0C1\uCF8C\uD55C \uD734\uC2DD\uC744 \uC990\uAE30\uAE30
+      \uC704\uD574 \uD544\uC694\uD55C \uAC83\uC785\uB2C8\uB2E4."
+    img: {fileID: 21300000, guid: 1aa0ba008045e124280758d6a4da9176, type: 3}
+  - index: 1002
+    title: "\uACE4\uCDA9\uBC15\uC81C"
+    target: 1
+    relicTag: 1
+    value: 0.25
+    text: "\uC5D8\uB9AC\uD2B8 \uBC29\uC758 \uC801\uB4E4\uC774 25% \uC801\uC740 HP\uB97C
+      \uC9C0\uB2D9\uB2C8\uB2E4."
+    infoText: "\uC774 \uACE4\uCDA9\uC740 \uD2B9\uD788 \uD070 \uC801\uC744 \uC704\uCD95\uC2DC\uD0A4\uB294
+      \uAE30\uC6B4\uC744 \uBFDC\uC5B4\uB0BC \uC218 \uC788\uC5C8\uB358 \uAC83\uC73C\uB85C
+      \uBCF4\uC785\uB2C8\uB2E4."
+    img: {fileID: 21300000, guid: f73e31547a7a1a046affaf21a15b0645, type: 3}
+  - index: 1003
+    title: "\uAD6C\uC2AC \uC8FC\uBA38\uB2C8"
+    target: 1
+    relicTag: 2
+    value: 1
+    text: "\uC804\uD22C \uC2DC\uC791 \uC2DC \uC801 \uC804\uCCB4\uC5D0\uAC8C \uCDE8\uC57D\uC744
+      1 \uBD80\uC5EC\uD569\uB2C8\uB2E4."
+    infoText: "\uB3C4\uC2DC\uC5D0\uC11C \uD55C \uB54C \uC778\uAE30 \uC788\uB358 \uC7A5\uB09C\uAC10\uC785\uB2C8\uB2E4.\uC801\uC758
+      \uADE0\uD615\uC744 \uBB34\uB108\uB728\uB9AC\uAE30 \uC88B\uC2B5\uB2C8\uB2E4."
+    img: {fileID: 21300000, guid: aba36d6375f9e9f4a9f560c065adb51d, type: 3}
+  - index: 1004
+    title: "\uAE08\uAC15\uC800"
+    target: 0
+    relicTag: 2
+    value: 1
+    text: "\uD798\uC744 1 \uC5BB\uC740 \uCC44\uB85C \uC804\uD22C\uB97C \uC2DC\uC791\uD569\uB2C8\uB2E4."
+    infoText: "\uBA85\uC608\uB85C\uC6B4 \uC804\uD22C\uB97C \uD55C \uC804\uC0AC\uC5D0\uAC8C
+      \uC8FC\uC5B4\uC9C4 \uC7A5\uC2DD\uC6A9 \uC720\uBB3C\uC785\uB2C8\uB2E4."
+    img: {fileID: 21300000, guid: a9729c7cd502f524a80f2392a0dc7a89, type: 3}
+  - index: 1005
+    title: "\uB2FB"
+    target: 0
+    relicTag: 3
+    value: 10
+    text: "\uC804\uD22C \uC2DC\uC791\uC2DC \uBC29\uC5B4\uB3C4\uB97C 10 \uC5BB\uC2B5\uB2C8\uB2E4."
+    infoText: "\uC774 \uC7A5\uC2E0\uAD6C\uB97C \uC7A1\uACE0 \uC788\uC73C\uBA74 \uB2F9\uC2E0\uC740
+      \uC548\uC815\uAC10\uC744 \uB290\uB08D\uB2C8\uB2E4."
+    img: {fileID: 21300000, guid: daeb5317ee951524bbf40f53f58c4f91, type: 3}
+  - index: 1006
+    title: "\uB538\uAE30"
+    target: 0
+    relicTag: 1
+    value: 7
+    text: "\uCD5C\uB300 \uCCB4\uB825 +7."
+    infoText: "\"\uC815\uB9D0 \uB9DB\uC788\uAD70\uC694! \uC5ED\uBCD1\uC774 \uB3CC\uC558\uB358
+      \uC774\uB798\uB85C \uC774\uB807\uAC8C \uB9DB\uC788\uB294 \uAC83\uC740 \uBCF8
+      \uC801\uC774 \uC5C6\uC5B4\uC694.\" -\uB79C\uC704\uB4DC"
+    img: {fileID: 21300000, guid: 0d7bc8ebd9ccb7547b12c7d0f9b2235a, type: 3}
+  - index: 1007
+    title: "\uBB3C\uACE0\uAE30 \uB3C4\uC790\uAE30"
+    target: 0
+    relicTag: 4
+    value: 9
+    text: "\uB371\uC5D0 \uCE74\uB4DC\uB97C \uCD94\uAC00\uD560 \uB54C\uB9C8\uB2E4
+      9 \uACE8\uB4DC\uB97C \uD68D\uB4DD\uD569\uB2C8\uB2E4."
+    infoText: "\uC138\uC2EC\uD558\uAC8C \uC0C9\uCE60\uB41C \uBB3C\uACE0\uAE30\uB4E4\uC740,
+      \uD589\uC6B4\uC744 \uBD88\uB7EC\uC628\uB2E4\uBA70 \uBAA8\uC154\uC9C0\uACE0
+      \uC788\uC5C8\uC2B5\uB2C8\uB2E4."
+    img: {fileID: 21300000, guid: 0dfb1cb80941a304d8150c9257ca6dd5, type: 3}
+  - index: 1008
+    title: "\uBBF8\uC18C\uC9D3\uB294 \uAC00\uBA74"
+    target: 0
+    relicTag: 5
+    value: 50
+    text: "\uC0C1\uC778\uC758 \uCE74\uB4DC \uC81C\uAC70 \uBE44\uC6A9\uC774 50\uACE8\uB4DC\uB85C
+      \uACE0\uC815\uB429\uB2C8\uB2E4."
+    infoText: "\uC0C1\uC778\uC774 \uC0AC\uC6A9\uD55C \uAC00\uBA74\uC785\uB2C8\uB2E4.
+      \uADF8\uB294 \uC608\uBE44\uD488\uC744 \uAC00\uC9C0\uACE0 \uC788\uB294 \uBAA8\uC591\uC785\uB2C8\uB2E4\u2026"
+    img: {fileID: 21300000, guid: b18b4f512a19c5f43bb8caae785700ae, type: 3}
+  - index: 1009
+    title: "\uBC31\uB144\uD37C\uC990"
+    target: 0
+    relicTag: 6
+    value: 3
+    text: "\uB9E4 \uC804\uD22C\uC5D0\uC11C \uCC98\uC74C \uD53C\uD574\uB97C \uC785\uC744
+      \uB54C \uCE74\uB4DC\uB97C 3\uC7A5 \uBF51\uC2B5\uB2C8\uB2E4."
+    infoText: "\uD37C\uC990\uC744 \uD478\uB294 \uC21C\uAC04 \uB2F9\uC2E0\uC758 \uAC00\uC2B4\uC5D0
+      \uAC15\uD55C \uC628\uAE30\uAC00 \uB290\uAEF4\uC9D1\uB2C8\uB2E4."
+    img: {fileID: 21300000, guid: faa9cd8bb47a68d40ae6ec4dccdb00be, type: 3}
+  - index: 1010
+    title: "\uBCD1\uBC95\uC11C"
+    target: 0
+    relicTag: 0
+    value: 1
+    text: "\uD55C \uD134 \uB3D9\uC548 \uACF5\uACA9 \uCE74\uB4DC\uB97C \uC0AC\uC6A9\uD558\uC9C0
+      \uC54A\uC73C\uBA74 \uB2E4\uC74C \uD134\uC5D0 1\uC758 \uC5D0\uB108\uC9C0\uB97C
+      \uCD94\uAC00\uB85C \uC5BB\uC2B5\uB2C8\uB2E4."
+    infoText: "\uC774 \uACE0\uB300\uC758 \uC6D0\uACE0\uB294 \uACFC\uAC70 \uC2DC\uB300\uC758
+      \uC9C0\uD61C\uB97C \uB2F4\uACE0 \uC788\uC2B5\uB2C8\uB2E4"
+    img: {fileID: 21300000, guid: f593149cb3eab4b4ca748efba22702b0, type: 3}
+  relicDataLoader: {fileID: 0}
+  Names:
+  - 1001
+  - 1002
+  - 1003
+  - 1004
+  - 1005
+  - 1006
+  - 1007
+  - 1008
+  - 1009
+  - 1010

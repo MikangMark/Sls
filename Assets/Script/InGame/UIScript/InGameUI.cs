@@ -50,8 +50,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField]
     GameObject lose_View;
 
-    [SerializeField]
-    List<GameObject> reward_Btn;
+    public List<GameObject> reward_Btn;
 
     [SerializeField]
     GameObject rewardCard_Parent;
@@ -78,6 +77,8 @@ public class InGameUI : MonoBehaviour
     GameObject rest;
     [SerializeField]
     UnknownManager unknownManager;
+    [SerializeField]
+    GameObject treasureView;
 
     public bool is_Reward = false;
 
@@ -109,6 +110,7 @@ public class InGameUI : MonoBehaviour
         rewardOutBtn.SetActive(false);
         shop.SetActive(false);
         rest.SetActive(false);
+        treasureView.SetActive(false);
     }
     private void FixedUpdate()
     {
@@ -204,6 +206,10 @@ public class InGameUI : MonoBehaviour
             Deck.Instance.cardList_Obj.Add(temp);
 
         }
+    }
+    public void TreasureEnter()
+    {
+        treasureView.SetActive(true);
     }
     public void ShopEnter()
     {

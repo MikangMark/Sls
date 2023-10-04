@@ -15,6 +15,9 @@ TagManager:
   - Shop
   - DisCardView
   - Unknown
+  - Relic
+  - RelicBtn
+  - RelicInfo
   layers:
   - Default
   - TransparentFX

@@ -19,7 +19,7 @@ public class RewardBtn : MonoBehaviour
     public void OnClickGetReward_Gold()
     {
         InGame.Instance.charInfo.money += InGame.Instance.rewardGold;
-        GameObject.Find("RewardGold").SetActive(false);
+        inGameUI.reward_Btn[0].SetActive(false);
     }
     public void OnClickGetReward_Cards()
     {

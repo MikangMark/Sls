@@ -14,7 +14,7 @@ public class EnterRoom : MonoBehaviour
     {
         if (!inGameUI.battle.thisActive)
         {
-            if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.ELITE || gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.NOMAL)
+            if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.ELITE || gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.NOMAL || gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.BOSS)
             {
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
                 inGameUI.BattleTurnOn();
@@ -33,6 +33,11 @@ public class EnterRoom : MonoBehaviour
             {
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
                 inGameUI.UnkownEnter();
+            }
+            if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.TREASURE)
+            {
+                Instantiate(inGameUI.clearCircle, gameObject.transform);
+                inGameUI.TreasureEnter();
             }
         }
     }
