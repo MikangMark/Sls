@@ -17,26 +17,31 @@ public class EnterRoom : MonoBehaviour
             if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.ELITE || gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.NOMAL || gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.BOSS)
             {
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
+                InGame.Instance.lastRoomTag = "Battle";
                 inGameUI.BattleTurnOn();
             }
             if(gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.SHOP)
             {
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
+                InGame.Instance.lastRoomTag = "SHOP";
                 inGameUI.ShopEnter();
             }
             if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.REST)
             {
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
+                InGame.Instance.lastRoomTag = "REST";
                 inGameUI.RestEnter();
             }
             if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.UNKNOWN)
             {
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
+                InGame.Instance.lastRoomTag = "UNKNOWN";
                 inGameUI.UnkownEnter();
             }
             if (gameObject.GetComponent<Room>().node.roomType == MapNode.ROOMVALUE.TREASURE)
             {
                 Instantiate(inGameUI.clearCircle, gameObject.transform);
+                InGame.Instance.lastRoomTag = "TREASURE";
                 inGameUI.TreasureEnter();
             }
         }

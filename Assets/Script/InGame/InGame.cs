@@ -28,6 +28,11 @@ public class InGame : Singleton<InGame>
     public GameObject relicInfoUi;
     public List<GameObject> haveRelicList;
     public List<int> relicIndexList;
+
+    public string lastRoomTag;
+
+    delegate void RelicDelegate();
+    RelicDelegate[] relicDelegates = new RelicDelegate[10];
     private void Awake()
     {
         Init();
@@ -60,6 +65,17 @@ public class InGame : Singleton<InGame>
         LoadPlayerData();
         haveRelicList = new List<GameObject>();
         relicIndexList = new List<int>();
+        
+        relicDelegates[0] = AncientTeaSet;
+        relicDelegates[1] = PreservedInsect;
+        relicDelegates[2] = BagOfMarbles;
+        relicDelegates[3] = Vajra;
+        relicDelegates[4] = Anchor;
+        relicDelegates[5] = Strawberry;
+        relicDelegates[6] = CeramicFish;
+        relicDelegates[7] = SmilingMask;
+        relicDelegates[8] = CentennialPuzzle;
+        relicDelegates[9] = ArtOfWar;
         //SetReward();
     }
 
@@ -119,5 +135,71 @@ public class InGame : Singleton<InGame>
         currentFloor = PlayerPrefs.GetInt(saveMapFloorKey);
     }
 
-    
+    public void RelicActive()
+    {
+        for(int i = 0; i < haveRelicList.Count; i++)
+        {
+            SearchToIndexRelic(haveRelicList[i]);
+        }
+    }
+    public void SearchToIndexRelic(GameObject _relic)
+    {
+        for(int i = 0; i < haveRelicList.Count; i++)
+        {
+            
+        }
+    }
+
+    #region 유물함수
+
+    public void AncientTeaSet()//고대의 차 세트
+    {
+
+    }
+
+    public void PreservedInsect()//곤충박제
+    {
+
+    }
+
+    public void BagOfMarbles()//구슬 주머니
+    {
+
+    }
+
+    public void Vajra()//금강저
+    {
+
+    }
+
+    public void Anchor()//닻
+    {
+
+    }
+
+    public void Strawberry()//딸기
+    {
+
+    }
+
+    public void CeramicFish()//물고기 도자기
+    {
+
+    }
+
+    public void SmilingMask()//미소짓는 가면
+    {
+
+    }
+
+    public void CentennialPuzzle()//백년퍼즐
+    {
+
+    }
+
+    public void ArtOfWar()//병법서
+    {
+
+    }
+    #endregion
 }

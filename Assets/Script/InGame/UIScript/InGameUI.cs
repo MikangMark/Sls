@@ -222,7 +222,7 @@ public class InGameUI : MonoBehaviour
     }
     public void UnkownEnter()
     {
-        unknownManager.ActiveSelectUnknown(CreateSeed.Instance.RandNum(0, 4));
+        unknownManager.ActiveSelectUnknown(Random.Range(0, 4));
     }
 
     public void RestEnter()
